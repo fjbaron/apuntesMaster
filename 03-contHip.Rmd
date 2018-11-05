@@ -1,3 +1,18 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load("tidyverse", "ggplot2", "haven", "bookdown", "knitr", "kableExtra","stargazer", "tableone","sjPlot","sjlabelled","sjmisc","gridExtra" )
+options(stringsAsFactors=F,digits=2)
+source("tablasDeArticulo_v2.R")
+theme_set(theme_minimal())
+```
+
+
 #Contrastes de hipótesis
 
 Aunque gran parte de la investigación médica esta relacionada con la recogida de datos con propósito descriptivo, otra buena parte lo está con la recolección de información con el plan de responder a cuestiones puntuales, es decir, contrastes de hipótesis.
@@ -5,14 +20,62 @@ Aunque gran parte de la investigación médica esta relacionada con la recogida 
 Las técnicas de contrastes de hipótesis están muy vinculadas a las de cálculo de intervalos de confianza, como mencionábamos al hablar de estos últimos. Aunque la aproximación es diferente:
 
 -	Al hacer un intervalo de confianza establecemos una región donde esperamos que esté el valor del parámetro.
+
 -	Al hacer un contraste de hipótesis establecemos posibles valores para unos parámetros y calculamos la probabilidad de que se obtengan muestras tan discrepantes o más que la obtenida, bajo la suposición de que la hipótesis es cierta. Si dicha probabilidad es muy baja (por debajo de una cantidad denominada nivel de significación) la hipótesis es rechazada.
 
-Vamos a ilustrarlo retomando un ejemplo del tema de intervalos de confianza. Supongamos que con un método tradicional, los pacientes afirman no sufrir trastornos con un tratamiento en el 50% de los casos, pero con un nuevo tratamiento probado sobre 80 personas, 60 afirman no haberlos sufrido. Previamente habíamos calculado que un intervalo de confianza al 95% sería que hay un 75% de individuos sin trastornos con un margen de error de 9.6%. Este intervalo parece indicarnos que el tratamiento es preferible ya que claramente ofrece resultados mejores (el valor 50% no está contenido en el intervalo de confianza).
+Vamos a ilustrarlo retomando el ejemplo del tema anterior de intervalos de confianza. Descargue la base de datos [2poblaciones-Mismotrabajo-DiferenteNutricion.sav](datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav) y observemos las primeras líneas:
 
-En términos de contraste de hipótesis resolveríamos la cuestión con cálculos muy parecidos pero se enunciaría de otra manera. Diríamos que si fuese cierta la hipótesis de que el nuevo tratamiento provoca trastornos con frecuencia similar al 50%, la muestra obtenida sería muy improbable. Lo que nos llevaría a rechazar dicha hipótesis, con un nivel de significación del 100%-95%=5%. Como se aprecia, tiene una interpretación clínica más inmediata el resolver una cuestión con un intervalo de confianza que con un contraste de hipótesis. Será mejor hacerlo así donde se pueda.
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+df=read_sav("datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav", user_na=FALSE) %>% haven::as_factor()
+```
+
+```{r}
+df %>% head()  %>% knitr::kable(booktabs=T)
+```
+
+Exploremos los intervalos de confianza de las medias de cada grupo. En *SPSS* recordamos que se obtenían en el menú "_Analizar - Estadística discriptiva - Explorar_", colocando las variables numéricas en el campo _Dependientes_ y el Grupo en el campo _Factor_. Los valores que nos interesan son:
+
+
+```{r}
+vNumericas=names(df) %>% setdiff("Grupo")
+df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
+                                columnas = c("ic1","ic2")) %>% 
+  knitr::kable( booktabs = T, 
+                col.names=c("Variable",
+                        "ic(min)","ic(max)",
+                        "ic(min)","ic(max)")) %>%
+  add_header_above(c(" " = 1, "Tanger" = 2, "Málaga" = 2))
+
+```
+
+Si pretendemos contrastar la hipótesis (no muy interesante) de si el Colesterol medio en la población de la que se han obtenidos las muestras en Tánger es 190, la respuesta que elegiríamos es **NO**, dado que 190 no forma parte del intervalo dende _casi seguro_ esperamos encontrar la media. Los datos indican que la media allí es inferior.
+
+Análogamente, en Málaga podríamos decir que la media de la población _casi seguro_ que no es 190. Los datos apuntan a que la media es superior.
+
+
+```{r}
+resumen=df %>% gather(Variable,Valor,-Grupo) %>% 
+  group_by(Grupo,Variable) %>% 
+  summarise(Media=mean(Valor),
+                n=length(Valor),
+               IC=sd(Valor)/sqrt(n)*qt(0.975,n-1))
+ggplot(resumen %>% filter(Variable=="Colesterol"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-IC,ymax=Media+IC),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab("Colesterol")+
+  geom_hline(yintercept=190,lty=2)
+```
+
+
+En término de contrastes de hipótesis diríamos que *tenemos evidencia estadísticamente significativa* de que tanto en Málaga como en Tanger la media de colesterol de las poblaciones donde se han extraído las muestras no es 190, con un *nivel de significación* del 5%. Este nivel de significación hace el papel de probabilidad de observar unas muestras tan extañas como las observadas si la media fuese 190.
+
+
 
 ## ¿Qué es una hipótesis?
-Las hipótesis que se contrastan hay que entenderlas como una declaración, no como una pregunta a responder. No se formulan como la cuestión “¿El tratamiento tiene efecto?”. Se formulan bien como “El tratamiento no tiene efecto” o como “el tratamiento sí tiene efecto”. A una hipótesis que traduce las ideas de “no hay efecto”, “no hay relación”, “los resultados en los grupos son similares”, se la denomina hipótesis nula. La hipótesis alternativa es la que se deduce al rechazar a la primera.
+Las hipótesis que se contrastan hay que entenderlas como una declaración, no como una pregunta a responder. No se formulan como la cuestión “¿El tratamiento tiene efecto?”. Se formulan bien como “El tratamiento no tiene efecto” o como “el tratamiento sí tiene efecto”. 
+
+- A una hipótesis que traduce las ideas de “no hay efecto”, “no hay relación”, “los resultados en los grupos son similares”, se la denomina **hipótesis nula**. 
+
+- La hipótesis alternativa es la que se aceptará cuando los datos nos inviten a rechazar la nula.
 
 Las hipótesis se formularán normalmente como una declaración sobre una o más poblaciones, especialmente sobre sus parámetros. Ejemplos de hipótesis pueden ser:
 
@@ -24,9 +87,10 @@ Las hipótesis se formularán normalmente como una declaración sobre una o más
 
 -	 Al tratar de identificar factores de riesgo para el desarrollo de una enfermedad podríamos estar interesados en saber si fumar es uno de ellos. Para ello podríamos realizar una regresión logística y contrastar si la “odds ratio” es igual a uno, lo que equivale a decir que no es un factor de riesgo.
 
-En todo contraste de hipótesis se enfrenta la denominada hipótesis nula (“no efecto”), frente a la hipótesis alternativa, que la niega. La hipótesis nula puede interpretarse como aquella que normalmente sería aceptada mientras los datos no indiquen otra cosa. Cuando los datos se muestran contrarios a la hipótesis nula a la vez que favorables a la hipótesis alternativa, se rechaza la nula y se acepta la alternativa. El mecanismo no puede ser más simple, pero hay que tener cuidado con interpretarlo bien, pues pueden esconderse trampas de no emplearse con atención.
 
-Un contraste se declara como estadísticamente significativo, cuando a partir de los resultados muestrales concluimos que se rechaza la hipótesis nula.
+En todo contraste de hipótesis se enfrenta la denominada **hipótesis nula** (“no efecto”), frente a la **hipótesis alternativa**, que la niega. La hipótesis nula puede interpretarse como aquella que normalmente sería aceptada mientras los datos no indiquen otra cosa. Cuando los datos se muestran contrarios a la hipótesis nula a la vez que favorables a la hipótesis alternativa, se rechaza la nula y se acepta la alternativa. El mecanismo no puede ser más simple, pero hay que tener cuidado con interpretarlo bien, pues pueden esconderse trampas de no emplearse con atención.
+
+Un contraste se declara como **estadísticamente significativo**, cuando a partir de los resultados muestrales concluimos que se *rechaza la hipótesis nula*.
 
 En los capítulos siguientes trataremos contrastes de hipótesis de frecuente uso en la ciencia médica, indicando en cada caso la hipótesis nula y la alternativa.
 

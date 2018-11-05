@@ -1,3 +1,19 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load("tidyverse", "ggplot2", "haven", "bookdown", "knitr", "kableExtra","stargazer", "tableone","sjPlot","sjlabelled","sjmisc","gridExtra" )
+options(stringsAsFactors=F,digits=2)
+source("tablasDeArticulo_v2.R")
+theme_set(theme_minimal())
+
+```
+
+
 #Intervalos de confianza
 
 Un problema habitual es el de estimar parámetros que ayuden a caracterizar una variable. Por ejemplo el porcentaje de individuos que mejora ante un cierto tratamiento, o el tiempo medio que tarda un anestésico en hacer efecto. 
@@ -36,8 +52,109 @@ Es fácil confundir desviación típica con error típico. Ambos hablan de la di
 
 ###Ejemplo de intervalos de confianza y errores estándar {-}
 
-```{r}
-  
+Se consideran dos grupos de individuos que desmpeñan un trabajo similar, pero que siguen una forma de alimentación muy diferente. Están formados por albañiles de Málaga y Tánger. Descargue la base de datos [2poblaciones-Mismotrabajo-DiferenteNutricion.sav](datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav). Las primeras líneas tienen el siguiente aspecto:
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+df=read_sav("datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav", user_na=FALSE) %>% haven::as_factor()
 ```
+
+```{r}
+df %>% head()  %>% knitr::kable(booktabs=T)
+```
+
+
+Si usa SPSS en el menú "_Analizar - Estadística discriptiva - Explorar_", colocando las variables numéricas en el campo _Dependientes_ y el Grupo en el campo _Factor_ puede obtener información para construir estos resultados:
+
+
+```{r, fig.height=10, fig.width=8}
+grid.arrange(
+sjp.grpfrq(df$Colesterol, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$Trigliceridos, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$Glucemia, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$PAS, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$PAD, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$Peso, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$Talla, df$Grupo, type="boxplot",ylim = c(1.50,1.90)),
+sjp.grpfrq(df$Consumo, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$Gasto, df$Grupo, type="boxplot"), ncol=3)
+```
+
+Visualmente se aprecia que los individuos de _Grupo==Málaga_ siendo de _Talla_ similar, presentan mayor _Consumo de energía_ y similar _Gasto_. Se observa en ellos mayores valores de _Colesterol, Trigliceridos, Glucemia y Peso_, y valores similares de _Presión arterial_.
+
+Los intervalos de confianza y errores estándar podrían mostrarse en una tabla como sigue:
+
+```{r}
+vNumericas=names(df) %>% setdiff("Grupo")
+df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
+                                columnas = c("media","dt","et","ic1","ic2")) %>% 
+  knitr::kable( booktabs = T, 
+                col.names=c("Variable",
+                        "media","dt","et","ic(min)","ic(max)",
+                        "media","dt","et","ic(min)","ic(max)")) %>%
+  add_header_above(c(" " = 1, "Tanger" = 5, "Málaga" = 5)) %>%
+  kable_styling(font_size = 9)
+
+```
+
+En la tabla anterior vemos para cada grupo no solo la media y desviación típica de cada grupo (que nos da una idea de donde se sitúan los individuos de cada grupo), sino un la precisión con la que se ha estimado la media de cada grupo (en forma de error estándar e intervalo de confianza al 95%). 
+
+Realmente no es esta la forma habitual de presentar los resultados en una publicación científica. Normalmente queremos mostrar como es la precisión de nuestras estimaciones, y el intervalo de confianza se muestra más bien para la diferencia que hay entre los dos grupos. Hay que esperar a ver la **prueba t-student** para ver como construir la tabla habitual:
+
+```{r}
+
+df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
+                                columnas = c("n","mediaet","p.t","ci95")) %>% 
+  knitr::kable( booktabs = T, 
+                col.names=c("Variable",
+                        "n","media±et", 
+                        "n","media±et",
+                        "p dif.","ic95% dif.")) %>%
+  add_header_above(c(" " = 1, "Tanger" = 2, "Málaga" = 2," "=2))
+
+```
+
+
+```{r}
+
+resumen=df %>% gather(Variable,Valor,-Grupo) %>% group_by(Grupo,Variable) %>% summarise(Media=mean(Valor),n=length(Valor),ET=sd(Valor)/sqrt(n))
+```
+```{r}
+grid.arrange(
+ggplot(resumen %>% filter(Variable=="Colesterol"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
+  geom_point( size=4, shape=21, fill="white")+ylab("Colesterol"),
+ggplot(resumen %>% filter(Variable=="Trigliceridos"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
+  geom_point( size=4, shape=21, fill="white")+ylab("Triglicéridos"),
+ggplot(resumen %>% filter(Variable=="Glucemia"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
+  geom_point( size=4, shape=21, fill="white")+ylab("Glucemia"),
+ggplot(resumen %>% filter(Variable=="Peso"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
+  geom_point( size=4, shape=21, fill="white")+ylab("Peso"),nrow=2)
+```
+
+
+Las barras ocupan mucho espacio y no permiten apreciar bien las diferencias. Personalmente pienso que es mejor mostrar solo los intervalos formados por las medias y el error típico como sigue:
+```{r}
+grid.arrange(
+ggplot(resumen %>% filter(Variable=="Colesterol"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab("Colesterol"),
+ggplot(resumen %>% filter(Variable=="Trigliceridos"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab("Triglicéridos"),
+ggplot(resumen %>% filter(Variable=="Glucemia"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab("Glucemia"),
+ggplot(resumen %>% filter(Variable=="Peso"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab("Peso"),nrow=2)
+```
+
 
 

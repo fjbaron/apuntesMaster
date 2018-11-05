@@ -1,3 +1,6 @@
+
+
+
 #Intervalos de confianza
 
 Un problema habitual es el de estimar parámetros que ayuden a caracterizar una variable. Por ejemplo el porcentaje de individuos que mejora ante un cierto tratamiento, o el tiempo medio que tarda un anestésico en hacer efecto. 
@@ -29,36 +32,462 @@ puede enunciarse de forma más clara en forma de intervalo de confianza:
 >	La proporción de pacientes que mejoró fue del 0.75, siendo el intervalo de confianza al 95% 0.69---0.81 .
 
 
-Lo anterior se deduce de que para distribuciones normales  tenemos que alrededor del valor central y en un radio de 2 y 2.5 desviaciones típicas tenemos aproximadamente una masa de probabilidad del 95% y 99% respectivamente, que son los valores usados habitualmente como niveles de confianza.
+Es fácil confundir desviación típica con error típico. Ambos hablan de la dispersión en torno a un valor central y se usan en distribuciones aproximadamente normales. Peo el segundo se utiliza  solo en el contexto de estimar un valor a partir de una muestra.
 
-## Intervalo de confianza para una proporción
-Raro será que veamos alguna vez un estudio donde se pregunta a los individuos si les gusta determinado producto y nos encontremos como respuesta simplemente el porcentaje de satisfechos. Como hemos mencionado anteriormente en la respuesta esperaríamos encontrar un margen de error, a ser posible pequeño (indicador de que la muestra es representativa) y con un nivel de confianza alto, por ejemplo 95%. 
-
-Para poder dar una respuesta es necesario calcular el error estándar. Si la muestra es suficientemente grande (más de 50 individuos por ejemplo), y el porcentaje a estimar, π, no es muy extremo (cercano al 0% o al 100%), la distribución del estimador de la proporción, p, es aproximadamente normal. El error estándar puede ser aproximado mediante:
- 
-
-Ejemplo: Se preguntó a 80 pacientes si habían sufrido algún trastorno tras seguir un tratamiento, de los cuales 60 (p=60/80=3/4=75%) dijeron que no. La muestra es grande y no esperamos que el porcentaje real en caso de haber sido extendido a muchos más pacientes sea muy diferente. Por tanto el error estándar es:
- 
-Podemos decir, pues, que el 75% de los individuos no mencionaron haber sufrido trastornos, con un margen de error de  . La confianza es del 95%.
-
-1.3 Intervalo de confianza para una media
-Otra caso muy común es el de estimar el valor medio de una variable numérica. Como sabemos la media es interesante como medida de centralización cuando la distribución de la misma es más o menos normal. En este caso el error estándar se puede aproximar con:
- 
-En este caso, incluso podemos hacer estimaciones aunque las muestras sean pequeñas, con sólo verificarse que la distribución de la variable es normal, ya que la distribución del estimador es conocida de forma exacta como distribución t-student. En cualquier caso si las muestras son grandes, aunque la distribución de los datos no sea normal, la media como en el caso de las proporciones se distribuye de manera aproximadamente normal. Y el mismo método que usamos para proporciones sigue siendo válido.
-
-Ejemplo: En un trabajo de Quetelet se estudia la distribución del perímetro torácico medido en pulgadas de militares escoceses de principios del siglo XIX. Los resultados se muestran en la gráfica, y aparentan una distribución normal. La media es 39.8 y la desviación típica 2.05; El tamaño de la muestra es de 5738 individuos, por tanto el error estándar es:  
-Podemos decir que el perímetro torácico medio es de 39.8 pulgadas con un margen de error de   pulgadas. La confianza es del 95%.
+>[Practique con la diferencia entre desviación típica y error típico](https://www.bioestadistica.uma.es/analisis/teoremacentral/)
 
 
-## Intervalos de confianza para otros parámetros
-Hay una técnica de estimación que usan casi todos los programas estadísticos que es la estimación por el método de máxima verosimilitud. Con ella es frecuente conseguir estimadores con muy buenas propiedades , y la técnicas anteriores se extienden con facilidad. En especial, cuando junto a la estimación de un parámetro observamos un término denominado error estándar o error típico, podemos confiar en que si la muestra es suficientemente grande, las técnicas anteriores se extienden sin cambios.
+###Ejemplo de intervalos de confianza y errores estándar {-}
 
-Ejemplo: En 1929 Edwin Hubble estudió la relación existente entre la distancia de 29 nebulosas y la velocidad radial con respecto a la tierra. El análisis de los datos muestra que un modelo de regresión lineal es una buena aproximación, siendo proporcional la velocidad de separación a la distancia, lo que se le dio la idea de que el universo estaba en expansión. En un análisis de regresión lineal se aprecia que el término constante es -40, pero siendo el error típico de 83.4, podemos decir que con una confianza del 95% (2 EE), el intervalo de confianza para dicha constante es  , que incluye al valor cero. Eso es una indicación de que el término constante puede ser eliminado del modelo por simplicidad. En cuanto al coeficiente que acompaña a la distancia se puede decir que es 454.2 con un error de   , para un nivel de confianza del 95%. Como se advierte, dicho intervalo no contiene al cero, y sugiere como estimación de la velocidad radial en función de la distancia, el modelo carente de término constante:
- , donde   es la estimación de la constante de Hubble, para la expansión del universo.
+Se consideran dos grupos de individuos que desmpeñan un trabajo similar, pero que siguen una forma de alimentación muy diferente. Están formados por albañiles de Málaga y Tánger. Descargue la base de datos [2poblaciones-Mismotrabajo-DiferenteNutricion.sav](datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav). Las primeras líneas tienen el siguiente aspecto:
 
-  
 
-## Contrastes de hipótesis basados en intervalos de confianza
-Aunque no hemos definido aún lo que es un contraste de hipótesis, en el último ejemplo se ha dejado entrever que es posible tomar ciertas decisiones como, por ejemplo, rechazar que la constante de Hubble sea cero, basándonos en que el intervalo de confianza al 95% no contiene a dicho valor. Hay una relación estrecha entre intervalos de confianza y contrastes de hipótesis. Buena parte de las hipótesis que se contrastan pueden rechazarse si dicha hipótesis establece un valor para el parámetro que no pertenece al intervalo de confianza. En un entorno clínico es preferible, con mucho, mostrar un intervalo de confianza que simplemente el resultado del contraste.
- 
+```r
+df=read_sav("datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav", user_na=FALSE) %>% haven::as_factor()
+```
+
+
+```r
+df %>% head()  %>% knitr::kable(booktabs=T)
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Grupo </th>
+   <th style="text-align:right;"> Colesterol </th>
+   <th style="text-align:right;"> Trigliceridos </th>
+   <th style="text-align:right;"> Glucemia </th>
+   <th style="text-align:right;"> PAS </th>
+   <th style="text-align:right;"> PAD </th>
+   <th style="text-align:right;"> Peso </th>
+   <th style="text-align:right;"> Talla </th>
+   <th style="text-align:right;"> Consumo </th>
+   <th style="text-align:right;"> Gasto </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Málaga </td>
+   <td style="text-align:right;"> 238 </td>
+   <td style="text-align:right;"> 107 </td>
+   <td style="text-align:right;"> 89 </td>
+   <td style="text-align:right;"> 130 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:right;"> 81 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 3521 </td>
+   <td style="text-align:right;"> 1400 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Tanger </td>
+   <td style="text-align:right;"> 251 </td>
+   <td style="text-align:right;"> 163 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 130 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 85 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 1490 </td>
+   <td style="text-align:right;"> 1730 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Málaga </td>
+   <td style="text-align:right;"> 194 </td>
+   <td style="text-align:right;"> 73 </td>
+   <td style="text-align:right;"> 89 </td>
+   <td style="text-align:right;"> 120 </td>
+   <td style="text-align:right;"> 60 </td>
+   <td style="text-align:right;"> 79 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 3701 </td>
+   <td style="text-align:right;"> 2180 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Tanger </td>
+   <td style="text-align:right;"> 169 </td>
+   <td style="text-align:right;"> 71 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 60 </td>
+   <td style="text-align:right;"> 86 </td>
+   <td style="text-align:right;"> 1.8 </td>
+   <td style="text-align:right;"> 3200 </td>
+   <td style="text-align:right;"> 2150 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Málaga </td>
+   <td style="text-align:right;"> 227 </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 121 </td>
+   <td style="text-align:right;"> 130 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 91 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 4124 </td>
+   <td style="text-align:right;"> 1700 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Málaga </td>
+   <td style="text-align:right;"> 214 </td>
+   <td style="text-align:right;"> 84 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:right;"> 120 </td>
+   <td style="text-align:right;"> 60 </td>
+   <td style="text-align:right;"> 87 </td>
+   <td style="text-align:right;"> 1.8 </td>
+   <td style="text-align:right;"> 4209 </td>
+   <td style="text-align:right;"> 1845 </td>
+  </tr>
+</tbody>
+</table>
+
+
+Si usa SPSS en el menú "_Analizar - Estadística discriptiva - Explorar_", colocando las variables numéricas en el campo _Dependientes_ y el Grupo en el campo _Factor_ puede obtener información para construir estos resultados:
+
+
+
+```r
+grid.arrange(
+sjp.grpfrq(df$Colesterol, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$Trigliceridos, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$Glucemia, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$PAS, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$PAD, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$Peso, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$Talla, df$Grupo, type="boxplot",ylim = c(1.50,1.90)),
+sjp.grpfrq(df$Consumo, df$Grupo, type="boxplot"),
+sjp.grpfrq(df$Gasto, df$Grupo, type="boxplot"), ncol=3)
+```
+
+<img src="02-IntConf_files/figure-html/unnamed-chunk-3-1.png" width="768" />
+
+Visualmente se aprecia que los individuos de _Grupo==Málaga_ siendo de _Talla_ similar, presentan mayor _Consumo de energía_ y similar _Gasto_. Se observa en ellos mayores valores de _Colesterol, Trigliceridos, Glucemia y Peso_, y valores similares de _Presión arterial_.
+
+Los intervalos de confianza y errores estándar podrían mostrarse en una tabla como sigue:
+
+
+```r
+vNumericas=names(df) %>% setdiff("Grupo")
+df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
+                                columnas = c("media","dt","et","ic1","ic2")) %>% 
+  knitr::kable( booktabs = T, 
+                col.names=c("Variable",
+                        "media","dt","et","ic(min)","ic(max)",
+                        "media","dt","et","ic(min)","ic(max)")) %>%
+  add_header_above(c(" " = 1, "Tanger" = 5, "Málaga" = 5)) %>%
+  kable_styling(font_size = 9)
+```
+
+<table class="table" style="font-size: 9px; margin-left: auto; margin-right: auto;">
+ <thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1"></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Tanger</div></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Málaga</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Variable </th>
+   <th style="text-align:right;"> media </th>
+   <th style="text-align:right;"> dt </th>
+   <th style="text-align:right;"> et </th>
+   <th style="text-align:right;"> ic(min) </th>
+   <th style="text-align:right;"> ic(max) </th>
+   <th style="text-align:right;"> media </th>
+   <th style="text-align:right;"> dt </th>
+   <th style="text-align:right;"> et </th>
+   <th style="text-align:right;"> ic(min) </th>
+   <th style="text-align:right;"> ic(max) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Colesterol </td>
+   <td style="text-align:right;"> 162.7 </td>
+   <td style="text-align:right;"> 44.81 </td>
+   <td style="text-align:right;"> 8.32 </td>
+   <td style="text-align:right;"> 145.7 </td>
+   <td style="text-align:right;"> 179.7 </td>
+   <td style="text-align:right;"> 209.1 </td>
+   <td style="text-align:right;"> 42.42 </td>
+   <td style="text-align:right;"> 6.06 </td>
+   <td style="text-align:right;"> 196.9 </td>
+   <td style="text-align:right;"> 221.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Trigliceridos </td>
+   <td style="text-align:right;"> 82.1 </td>
+   <td style="text-align:right;"> 45.18 </td>
+   <td style="text-align:right;"> 8.39 </td>
+   <td style="text-align:right;"> 65.0 </td>
+   <td style="text-align:right;"> 99.3 </td>
+   <td style="text-align:right;"> 113.2 </td>
+   <td style="text-align:right;"> 69.89 </td>
+   <td style="text-align:right;"> 9.98 </td>
+   <td style="text-align:right;"> 93.2 </td>
+   <td style="text-align:right;"> 133.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Glucemia </td>
+   <td style="text-align:right;"> 78.0 </td>
+   <td style="text-align:right;"> 11.27 </td>
+   <td style="text-align:right;"> 2.09 </td>
+   <td style="text-align:right;"> 73.8 </td>
+   <td style="text-align:right;"> 82.3 </td>
+   <td style="text-align:right;"> 88.2 </td>
+   <td style="text-align:right;"> 19.03 </td>
+   <td style="text-align:right;"> 2.72 </td>
+   <td style="text-align:right;"> 82.7 </td>
+   <td style="text-align:right;"> 93.6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PAS </td>
+   <td style="text-align:right;"> 119.8 </td>
+   <td style="text-align:right;"> 10.04 </td>
+   <td style="text-align:right;"> 1.86 </td>
+   <td style="text-align:right;"> 116.0 </td>
+   <td style="text-align:right;"> 123.7 </td>
+   <td style="text-align:right;"> 121.7 </td>
+   <td style="text-align:right;"> 12.84 </td>
+   <td style="text-align:right;"> 1.83 </td>
+   <td style="text-align:right;"> 118.0 </td>
+   <td style="text-align:right;"> 125.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PAD </td>
+   <td style="text-align:right;"> 72.5 </td>
+   <td style="text-align:right;"> 9.72 </td>
+   <td style="text-align:right;"> 1.80 </td>
+   <td style="text-align:right;"> 68.8 </td>
+   <td style="text-align:right;"> 76.2 </td>
+   <td style="text-align:right;"> 70.3 </td>
+   <td style="text-align:right;"> 9.60 </td>
+   <td style="text-align:right;"> 1.37 </td>
+   <td style="text-align:right;"> 67.5 </td>
+   <td style="text-align:right;"> 73.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Peso </td>
+   <td style="text-align:right;"> 72.7 </td>
+   <td style="text-align:right;"> 7.84 </td>
+   <td style="text-align:right;"> 1.46 </td>
+   <td style="text-align:right;"> 69.7 </td>
+   <td style="text-align:right;"> 75.7 </td>
+   <td style="text-align:right;"> 81.4 </td>
+   <td style="text-align:right;"> 8.73 </td>
+   <td style="text-align:right;"> 1.25 </td>
+   <td style="text-align:right;"> 78.9 </td>
+   <td style="text-align:right;"> 83.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Talla </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 0.05 </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 0.05 </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 1.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Consumo </td>
+   <td style="text-align:right;"> 1909.2 </td>
+   <td style="text-align:right;"> 469.75 </td>
+   <td style="text-align:right;"> 87.23 </td>
+   <td style="text-align:right;"> 1730.8 </td>
+   <td style="text-align:right;"> 2087.6 </td>
+   <td style="text-align:right;"> 3528.0 </td>
+   <td style="text-align:right;"> 550.94 </td>
+   <td style="text-align:right;"> 78.71 </td>
+   <td style="text-align:right;"> 3369.9 </td>
+   <td style="text-align:right;"> 3686.2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gasto </td>
+   <td style="text-align:right;"> 1894.2 </td>
+   <td style="text-align:right;"> 185.89 </td>
+   <td style="text-align:right;"> 34.52 </td>
+   <td style="text-align:right;"> 1823.6 </td>
+   <td style="text-align:right;"> 1964.8 </td>
+   <td style="text-align:right;"> 1880.3 </td>
+   <td style="text-align:right;"> 438.12 </td>
+   <td style="text-align:right;"> 62.59 </td>
+   <td style="text-align:right;"> 1754.5 </td>
+   <td style="text-align:right;"> 2006.1 </td>
+  </tr>
+</tbody>
+</table>
+
+En la tabla anterior vemos para cada grupo no solo la media y desviación típica de cada grupo (que nos da una idea de donde se sitúan los individuos de cada grupo), sino un la precisión con la que se ha estimado la media de cada grupo (en forma de error estándar e intervalo de confianza al 95%). 
+
+Realmente no es esta la forma habitual de presentar los resultados en una publicación científica. Normalmente queremos mostrar como es la precisión de nuestras estimaciones, y el intervalo de confianza se muestra más bien para la diferencia que hay entre los dos grupos. Hay que esperar a ver la **prueba t-student** para ver como construir la tabla habitual:
+
+
+```r
+df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
+                                columnas = c("n","mediaet","p.t","ci95")) %>% 
+  knitr::kable( booktabs = T, 
+                col.names=c("Variable",
+                        "n","media±et", 
+                        "n","media±et",
+                        "p dif.","ic95% dif.")) %>%
+  add_header_above(c(" " = 1, "Tanger" = 2, "Málaga" = 2," "=2))
+```
+
+<table>
+ <thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1"></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Tanger</div></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Málaga</div></th>
+<th style="border-bottom:hidden" colspan="2"></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Variable </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:left;"> media±et </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:left;"> media±et </th>
+   <th style="text-align:left;"> p dif. </th>
+   <th style="text-align:left;"> ic95% dif. </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Colesterol </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 162.67±8.32 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 209.12±6.06 </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+   <td style="text-align:left;"> 46.45[26.15,66.76] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Trigliceridos </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 82.13±8.39 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 113.22±9.98 </td>
+   <td style="text-align:left;"> 0.018* </td>
+   <td style="text-align:left;"> 31.09[5.45,56.72] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Glucemia </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 78.03±2.09 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 88.18±2.72 </td>
+   <td style="text-align:left;"> 0.004* </td>
+   <td style="text-align:left;"> 10.15[3.40,16.89] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PAS </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 119.83±1.86 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 121.70±1.83 </td>
+   <td style="text-align:left;"> 0.472 </td>
+   <td style="text-align:left;"> 1.87[-3.28,7.01] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PAD </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 72.50±1.80 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 70.30±1.37 </td>
+   <td style="text-align:left;"> 0.329 </td>
+   <td style="text-align:left;"> -2.20[-6.67,2.27] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Peso </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 72.67±1.46 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 81.38±1.25 </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+   <td style="text-align:left;"> 8.71[4.94,12.49] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Talla </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 1.70±0.01 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 1.69±0.01 </td>
+   <td style="text-align:left;"> 0.431 </td>
+   <td style="text-align:left;"> -0.01[-0.03,0.01] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Consumo </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 1909.17±87.23 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 3528.04±78.71 </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+   <td style="text-align:left;"> 1618.87[1387.71,1850.04] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gasto </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 1894.20±34.52 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 1880.30±62.59 </td>
+   <td style="text-align:left;"> 0.845 </td>
+   <td style="text-align:left;"> -13.90[-154.73,126.93] </td>
+  </tr>
+</tbody>
+</table>
+
+
+
+```r
+resumen=df %>% gather(Variable,Valor,-Grupo) %>% group_by(Grupo,Variable) %>% summarise(Media=mean(Valor),n=length(Valor),ET=sd(Valor)/sqrt(n))
+```
+
+```r
+grid.arrange(
+ggplot(resumen %>% filter(Variable=="Colesterol"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
+  geom_point( size=4, shape=21, fill="white")+ylab("Colesterol"),
+ggplot(resumen %>% filter(Variable=="Trigliceridos"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
+  geom_point( size=4, shape=21, fill="white")+ylab("Triglicéridos"),
+ggplot(resumen %>% filter(Variable=="Glucemia"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
+  geom_point( size=4, shape=21, fill="white")+ylab("Glucemia"),
+ggplot(resumen %>% filter(Variable=="Peso"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
+  geom_point( size=4, shape=21, fill="white")+ylab("Peso"),nrow=2)
+```
+
+<img src="02-IntConf_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+
+Las barras ocupan mucho espacio y no permiten apreciar bien las diferencias. Personalmente pienso que es mejor mostrar solo los intervalos formados por las medias y el error típico como sigue:
+
+```r
+grid.arrange(
+ggplot(resumen %>% filter(Variable=="Colesterol"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab("Colesterol"),
+ggplot(resumen %>% filter(Variable=="Trigliceridos"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab("Triglicéridos"),
+ggplot(resumen %>% filter(Variable=="Glucemia"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab("Glucemia"),
+ggplot(resumen %>% filter(Variable=="Peso"), aes(x=Grupo,y=Media)) +
+  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab("Peso"),nrow=2)
+```
+
+<img src="02-IntConf_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+
+
 
