@@ -1,7 +1,11 @@
 
 
+#Estimación
 
-#Intervalos de confianza
+En esta capítulo trataremos sobre como usar una muestra para obtener información sobre la población de la que se ha extraído. Esto nos conducirá a introducir los conceptos de **intervalo de confianza** y de **error típico** de estimación.
+
+
+##Intervalos de confianza
 
 Un problema habitual es el de estimar parámetros que ayuden a caracterizar una variable. Por ejemplo el porcentaje de individuos que mejora ante un cierto tratamiento, o el tiempo medio que tarda un anestésico en hacer efecto. 
 
@@ -442,11 +446,9 @@ df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
 
 
 
-```r
-resumen=df %>% gather(Variable,Valor,-Grupo) %>% group_by(Grupo,Variable) %>% summarise(Media=mean(Valor),n=length(Valor),ET=sd(Valor)/sqrt(n))
-```
 
 ```r
+resumen=df %>% gather(Variable,Valor,-Grupo) %>% group_by(Grupo,Variable) %>% summarise(Media=mean(Valor),n=length(Valor),ET=sd(Valor)/sqrt(n))
 grid.arrange(
 ggplot(resumen %>% filter(Variable=="Colesterol"), aes(x=Grupo,y=Media)) +
   geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
@@ -466,7 +468,7 @@ ggplot(resumen %>% filter(Variable=="Peso"), aes(x=Grupo,y=Media)) +
   geom_point( size=4, shape=21, fill="white")+ylab("Peso"),nrow=2)
 ```
 
-<img src="02-IntConf_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="02-IntConf_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 
 Las barras ocupan mucho espacio y no permiten apreciar bien las diferencias. Personalmente pienso que es mejor mostrar solo los intervalos formados por las medias y el error típico como sigue:
@@ -487,7 +489,7 @@ ggplot(resumen %>% filter(Variable=="Peso"), aes(x=Grupo,y=Media)) +
   geom_point( size=4, shape=21, fill="white")+ylab("Peso"),nrow=2)
 ```
 
-<img src="02-IntConf_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="02-IntConf_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 
 

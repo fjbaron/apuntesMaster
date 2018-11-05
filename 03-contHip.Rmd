@@ -94,30 +94,131 @@ Un contraste se declara como **estadísticamente significativo**, cuando a parti
 
 En los capítulos siguientes trataremos contrastes de hipótesis de frecuente uso en la ciencia médica, indicando en cada caso la hipótesis nula y la alternativa.
 
-## Tipos de error, significación, nivel de significación y potencia
+## Tipos de error
+
 Al realizar un contraste de hipótesis hay dos tipos de errores posibles:
 
 -	Rechazar la hipótesis nula, cuando esta es cierta. A esto se le denomina error de tipo I. 
 
 -	No rechazar la hipótesis nula, cuando esta es falsa. Lo denominamos error de tipo II, y a la probabilidad de que ocurra se la denomina β. 
 
-### Nivel de significación
+## Nivel de significación
+
 Se denomina nivel de significación de un contraste, a la probabilidad de cometer un error de tipo I. La probabilidad de que este evento ocurra, es una cantidad que se fija de antemano (antes incluso de extraer las muestras) en un número pequeño denominado nivel de significación, y se representa con la letra α. Típicamente se elige un valor pequeño, 5% o 1%. Todo experimento, en su definición y antes de elegir las muestras, debe llevar descrito cuál es el criterio con el que rechazaremos una hipótesis. Esto se traduce en prefijar el nivel de significación del contraste.
 
-Al leer un artículo, en la sección “material y métodos”, es frecuente encontrárselo referenciado en frases del estilo: “Se declararán significativos los contrastes cuando la significación sea inferior al 5%”. Esta frase debe entenderse como que se rechazará la hipótesis nula del contraste si, al examinar la muestra, se observa que discrepa tanto de la hipótesis nula, que si esta fuese realmente cierta, la probabilidad de obtener una muestra como la obtenida (o aún peor), es inferior al 5%. Dicho con otros términos, “Declaramos que no hay efecto, hasta que los datos nos indique otra cosa más allá de una duda razonable”.
+Al leer un artículo, en la sección “material y métodos”, es frecuente encontrárselo referenciado en frases del estilo: 
 
-### Significación
-Se denomina significación de un contraste, y se suele representar con la letra p, al valor calculado tras observar la muestra, y que debería tomar el nivel de significación para estar en una situación donde dudemos entre rechazar o no una hipótesis.
+> “Se declararán significativos los contrastes cuando la significación sea inferior al 5%”. 
 
-Visto así, podemos considerar la significación como un indicador de la discrepancia entre una hipótesis nula y los datos muestrales. Cuanto más cercano sea a cero, más evidencia tenemos en contra de la hipótesis nula; Hasta el punto que cuando la significación es inferior al nivel de significación fijado de antemano (por ejemplo el 5%), directamente se rechaza la hipótesis nula (se ha superado el umbral de los que se había fijado de antemano como una “duda razonable a favor de que no hay efecto”)
+Esta frase debe entenderse como que se rechazará la hipótesis nula del contraste si, al examinar la muestra, se observa que discrepa tanto de la hipótesis nula que, si esta fuese realmente cierta, la probabilidad de obtener una muestra como la obtenida (o aún peor), es inferior al 5%. Dicho con otros términos, 
 
-### Potencia
-La probabilidad de que no ocurra el error de tipo II, cuando esta puede calcularse, se la denomina potencia del contraste. Es decir, la potencia del contraste es una medida de la habilidad de un contraste para detectar un efecto que está presente.
+> “Declaramos que no hay efecto, hasta que los datos nos indique otra cosa más allá de una duda razonable”.
 
-En los casos en que es posible fijar la potencia del contraste suele tomarse valores como 85% o 90%. Aparece normalmente en contrastes donde la hipótesis alternativa afirma que no solo un tratamiento X es mejor que un placebo, sino que además es mejor en, al menos, cierta cantidad que se considera clínicamente significativa (no confundir con estadísticamente significativa).
+## Significación
+Se denomina **significación de un contraste**, y se suele representar con la letra **p**, al valor calculado _tras observar la muestra_, y que debería tomar el nivel de significación para estar en una situación donde dudemos entre rechazar o no una hipótesis.
 
-Normalmente los programas estadísticos solamente hacen referencia a la significación de un contraste, y no a la potencia. Ello se debe a que para determinar la potencia es necesario que la hipótesis alternativa no sea simplemente una negación de la hipótesis nula, sino que debe especificar explícitamente una diferencia cuantitativa con ella.
+Visto así, podemos considerar la significación como un _indicador de la discrepancia entre una hipótesis nula y los datos muestrales_. Cuanto más cercano sea a cero, más evidencia tenemos en contra de la hipótesis nula; Hasta el punto que cuando la significación es inferior al nivel de significación fijado de antemano (por ejemplo el 5%), directamente se rechaza la hipótesis nula (se ha superado el umbral de los que se había fijado de antemano como una “duda razonable a favor de que no hay efecto”)
 
-Ejemplo: Se espera que un tratamiento X produzca un efecto beneficioso en la reducción del colesterol de al menos 10 unidades. Para ello se eligen dos grupos de pacientes de características similares y se prueba con un grupo un placebo y con el otro el tratamiento en cuestión. Mientras los datos no indiquen lo contrario pensaremos que el tratamiento no tiene efecto (no consigue reducir de media las 10 unidades). Esta es la hipótesis nula. La hipótesis alternativa es que el tratamiento sí tiene efecto (bajará el colesterol esas 10 unidades, o más). Un nivel de significación del 5% se interpreta como que a menos que los resultados del experimento discrepen suficientemente de que el tratamiento no tiene efecto, consideraremos que el tratamiento no sirve. Si el tratamiento muestra resultados muy buenos con respecto al placebo decidiremos que sí sirve, y rechazaremos la hipótesis nula. Por supuesto, excepcionalmente puede ocurrir que un tratamiento que no tiene ninguna utilidad muestre resultados buenos sobre una muestra, y acabemos concluyendo por error que es bueno. La probabilidad de que esto ocurra evidentemente esperamos que sea baja y es lo que hemos denominado nivel de significación. Supongamos que tras estudiar los resultados del experimento con algún contraste obtenemos que la significación es p=0.001=0.1%. Esto quiere decir que los resultados de la muestra son incoherentes con la hipótesis nula (son más improbables que el valor límite que fue fijado en 5%). Concluimos que hay evidencia estadísticamente significativa en contra de que el tratamiento no reduce el colesterol en al menos 10 unidades. ¿Cómo se interpreta la potencia en este ejemplo? Supongamos que el tratamiento realmente es efectivo (reduce al menos 10 unidades el colesterol). ¿Cuál sería la probabilidad de que una prueba estadística lo detecte (rechace la hipótesis nula)? Esta probabilidad sería la potencia.
+## Potencia
+La probabilidad de que no ocurra el error de tipo II, cuando esta puede calcularse, se la denomina potencia del contraste. Es decir, _la potencia del contraste es una medida de la habilidad de un contraste para detectar un efecto que está presente_.
+
+En los casos en que es posible fijar la potencia del contraste suele tomarse valores como 85% o 90%. Aparece normalmente en contrastes donde la hipótesis alternativa afirma que no solo un tratamiento es mejor que un placebo, sino que además es mejor en, al menos, cierta cantidad que se considera _clínicamente significativa_ (no confundir con _estadísticamente significativa_).
+
+Normalmente los programas estadísticos solamente hacen referencia a la significación de un contraste, y no a la potencia. Ello se debe a que para determinar la potencia es necesario que la hipótesis alternativa no sea simplemente una negación de la hipótesis nula, sino que debe especificar explícitamente una diferencia cuantitativa con ella. Esta diferencia es algo que depende del investigador, no de lo los datos.
+
+### Ejemplo simple {-}
+Se espera que un tratamiento produzca un efecto beneficioso en la reducción del colesterol de al menos 10 unidades. Para ello se eligen dos grupos de pacientes de características similares y se prueba con un grupo un placebo y con el otro el tratamiento en cuestión. 
+
+- Mientras los datos no indiquen lo contrario pensaremos que el tratamiento no tiene efecto (no consigue reducir de media las 10 unidades). Esta es la _hipótesis nula_.
+
+- La _hipótesis alternativa_ es que el tratamiento sí tiene efecto (bajará el colesterol esas 10 unidades, o más).
+
+- Un _nivel de significación del 5%_ se interpreta como que a menos que los resultados del experimento discrepen suficientemente de que el tratamiento no tiene efecto, consideraremos que el tratamiento no sirve. Si el tratamiento muestra resultados muy buenos con respecto al placebo decidiremos que sí sirve, y rechazaremos la hipótesis nula. Por supuesto, excepcionalmente puede ocurrir que un tratamiento que no tiene ninguna utilidad muestre resultados buenos sobre una muestra, y acabemos concluyendo por error que es bueno. La probabilidad de que esto ocurra evidentemente esperamos que sea baja y es lo que hemos denominado _nivel de significación_. 
+
+- Supongamos que tras estudiar los resultados del experimento con algún contraste obtenemos que la significación es _p=0.001=0.1%_. Esto quiere decir que los resultados de la muestra son _incoherentes con la hipótesis nula_ (son más improbables que el valor límite que fue fijado en 5%). Concluimos que _hay evidencia estadísticamente significativa_ en contra de que el tratamiento no reduce el colesterol en al menos 10 unidades.
+
+- ¿Cómo se interpreta la potencia en este ejemplo? Supongamos que el tratamiento realmente es efectivo (reduce al menos 10 unidades el colesterol). ¿Cuál sería la probabilidad de que una prueba estadística lo detecte (rechace la hipótesis nula)? Esta probabilidad sería _la potencia_.
  
+ 
+ 
+> [Para practicar con estos conceptos puede trabajar con esta simulación](https://www.bioestadistica.uma.es/analisis/contrastes/) 
+
+
+
+### Ejemplo real: Lectura de un artículo
+
+Siga este enlace para consultar como se ha redactado la publicación de [un artículo científico concreto](https://doi.org/10.1161/JAHA.118.009331). Vamos a destacar de él agunos pasajes y vamos a traducir algunas frases a los conceptos anteriores:
+
+
+> We measured biventricular strains in 1824 randomly selected patients (973 men, aged 70±14 years) from a strain registry. 
+
+En primer lugar, 70±14 nos indica que la media es 70 años. No todos tenían la misma edad, 14 se utiliza en este contecto como medida de dispersión, y es de esperar que la edad no se separase mucho de una distribución normal de desviación típica 14 años. Seguramente no había muchos individuos que se alejasen 2*14=28 años de la media.
+
+
+> A total of 799 patients (43.8%) died during the median follow‐up duration of 31.7 months.
+
+Cada paciente fue seguido una cantidad de tiempo diferente. La mediana o percentil 50, fue de 31.7 meses, es decir, la mitad de ellos fue seguido un tiempo inferior o igual. El resto fue medido un tiempo superior. La evolución de los pacientes es tal que a esos 31.7 meses ya habían fallecidol 43.8% de ellos.
+
+
+> In univariate analysis, LVGLS and RVGLS were significantly associated with all‐cause mortality. We classified them into 4 strain groups according to LVGLS (≥9%) and RVGLS (≥12%). On Cox proportional hazards analysis, group 4 (<9% LVGLS and <12% RVGLS) had the worst prognosis, with a hazard ratio (HR) of 1.755 (95% confidence interval [CI], 1.473–2.091; P<0.001) compared with that of group 1 (≥9% LVGLS and ≥12% RVGLS). 
+
+Dividieron a los pacientes en 2x2=4 grupos dependiendo de que los pacientes superasen o no en dos variables ciertos puntos de corte elegidos por los investigadores y con algún significado clínico. Eligen a un grupo de referencia que tiene el mejor pronóstico: 
+
+> "group 1 (≥9% LVGLS and ≥12% RVGLS)"
+
+
+Con respecto a él miden cuánto más peligroso es estar en el resto de grupos.Es habitual hacerlo con conceptos que son _razones_, de forma que:
+
+- una razón igual *1* refleja que algo es igual de peligroso;
+
+- valores *mayores que 1* indican aumento del riesgo;
+
+- *valores menores que 1* indican disminución del riesgo
+
+En este caso utilizan como medida de riesgo el  _Hazard Ratio (HR)._ 
+
+
+En concreto, para el grupo que tenía peor pronóstico, 
+
+> group 4 (<9% LVGLS and <12% RVGLS) 
+
+un intervalo de confianza al 95% les indica que _HR_ es un valor comprendido en _1.473–2.091_. Es decir, no saben seguro cual es el valor real, pero respoden a su calculo usando un mecanismo que acierta en el 95% de las ocasiones, y que en este caso indica que sea cual sea el valor real, este debe ser claramente mayor que 1.
+
+
+En términos de _contrastes de hipótesis_ podríamos decirlo de este modo: 
+
+- Si no hubiese datos que nos indicasen otra cosa, en principio asumiríamos la **hipótesis nula** de que los _grupos 1 y 4_ presentan mortalidad similar (_HR=1_)
+
+- Si los datos mostrasen otra cosa con evidencia suficiente podríamos decir que tenemos pruebas en contra de la nula, y a favor de una **Hipótesis alternativa:** Los grupos 1 y 4 presentan mortalidad diferente (_HR≠1_).
+
+Pues bien, la evidencia que ellos encuentran en contra de la hipótesis nula es:
+
+> 95% confidence interval [CI], 1.473–2.091; *P<0.001*
+
+Es decir, si fuese cierta la nula y ambos grupos fuesen en realidad de riesgo similar, ellos han obtenido una muestra tan extraña que es dificil de explicar a menos que el azar haya jugado en su contra de tal modo que les ha ocurrido algo que no se vería ni en 1 de cada 1000 estudios similares. 
+
+Más adelante en el artículo indican:
+
+> On the basis of previously reported data,13 we calculated the sample
+size to obtain a hazard ratio (HR) of 1.3 in both groups.14 A 2- sided log-rank test with an overall sample size of 1600 participants (800 in group 1 and 800 in group 2) achieved
+99.1% power at a 0.05 significance level to detect an HR of
+1.30 when the control group had an HR of 1.00. 
+
+Se podría traducir de este modo. Tenemos como hipótesis alternativa la de que ciertos grupos de pacientes deben tener un HR>=1.3, que es un valor que el investigador considera clínicamente relevante. No ha sido observado (aún) en los datos 8ya que cuando diseñaron el estudio, no habían empezado a rcoger datos de los pacientes). Es un valor que el investigador, por su experiencia en el tema, sospecha que debe ser así de grande o aún mayor. Es, en la fase de diseño del estudio, solo una creencia del investigador.
+
+Eligieron una muestra de 1600 pacientes, que es lo bastante grande como para que si su hipótesis alternativa fuese cierta, pudieran declarar significativo el resultado con una probabilidad del 99.1%. Esto era algo conocido *antes* de realizar el estudio. Como observa, la potencia se utiliza para diseñar el estudio. Nadie quiere empezar a trabajar en un tema donde si tu hipótesis alternativa es correcta, por haber elegido la muestra muy pequeña, tienes pocas probabilidades de encontrar evidencia contra la _hipótesis nula_.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
