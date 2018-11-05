@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Apuntes de estadística</title>
+  <meta name="description" content="Apuntes de estadística para estudiantes de Master de Nuevas Tendencias">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Apuntes de estadística" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://www.bioestadistica.uma.es/apuntesMaster/" />
+  
+  <meta property="og:description" content="Apuntes de estadística para estudiantes de Master de Nuevas Tendencias" />
+  <meta name="github-repo" content="fjbaron/apuntesEstadistica.git" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Apuntes de estadística" />
+  
+  <meta name="twitter:description" content="Apuntes de estadística para estudiantes de Master de Nuevas Tendencias" />
+  
+
+<meta name="author" content="Francisco Javier Barón López">
+
+
+<meta name="date" content="2018-11-05">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="intervalos-de-confianza.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Apuntes de estadística</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html"><i class="fa fa-check"></i><b>1</b> Capítulo 1: Exploración de los datos</a><ul>
+<li class="chapter" data-level="1.1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-univariantes"><i class="fa fa-check"></i><b>1.1</b> Datos Univariantes</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-categoricos"><i class="fa fa-check"></i><b>1.1.1</b> Datos categóricos</a></li>
+<li class="chapter" data-level="1.1.2" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-numericos."><i class="fa fa-check"></i><b>1.1.2</b> Datos Numéricos.</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-bivariantes"><i class="fa fa-check"></i><b>1.2</b> Datos bivariantes</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#categorica-categorica"><i class="fa fa-check"></i><b>1.2.1</b> Categórica-categórica</a></li>
+<li class="chapter" data-level="1.2.2" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#categorica-numerica"><i class="fa fa-check"></i><b>1.2.2</b> Categórica-Numérica</a></li>
+<li class="chapter" data-level="1.2.3" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#numerica-numerica."><i class="fa fa-check"></i><b>1.2.3</b> Numérica-Numérica.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intervalos-de-confianza.html"><a href="intervalos-de-confianza.html"><i class="fa fa-check"></i><b>2</b> Intervalos de confianza</a><ul>
+<li class="chapter" data-level="2.1" data-path="intervalos-de-confianza.html"><a href="intervalos-de-confianza.html#error-tipico-o-estandar"><i class="fa fa-check"></i><b>2.1</b> Error típico o estándar</a></li>
+<li class="chapter" data-level="2.2" data-path="intervalos-de-confianza.html"><a href="intervalos-de-confianza.html#intervalo-de-confianza-para-una-proporcion"><i class="fa fa-check"></i><b>2.2</b> Intervalo de confianza para una proporción</a></li>
+<li class="chapter" data-level="2.3" data-path="intervalos-de-confianza.html"><a href="intervalos-de-confianza.html#intervalos-de-confianza-para-otros-parametros"><i class="fa fa-check"></i><b>2.3</b> Intervalos de confianza para otros parámetros</a></li>
+<li class="chapter" data-level="2.4" data-path="intervalos-de-confianza.html"><a href="intervalos-de-confianza.html#contrastes-de-hipotesis-basados-en-intervalos-de-confianza"><i class="fa fa-check"></i><b>2.4</b> Contrastes de hipótesis basados en intervalos de confianza</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html"><i class="fa fa-check"></i><b>3</b> Contrastes de hipótesis</a><ul>
+<li class="chapter" data-level="3.1" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#que-es-una-hipotesis"><i class="fa fa-check"></i><b>3.1</b> ¿Qué es una hipótesis?</a></li>
+<li class="chapter" data-level="3.2" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#tipos-de-error-significacion-nivel-de-significacion-y-potencia"><i class="fa fa-check"></i><b>3.2</b> Tipos de error, significación, nivel de significación y potencia</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#nivel-de-significacion"><i class="fa fa-check"></i><b>3.2.1</b> Nivel de significación</a></li>
+<li class="chapter" data-level="3.2.2" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#significacion"><i class="fa fa-check"></i><b>3.2.2</b> Significación</a></li>
+<li class="chapter" data-level="3.2.3" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#potencia"><i class="fa fa-check"></i><b>3.2.3</b> Potencia</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Apuntes de estadística</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="contrastes-de-hipotesis" class="section level1">
+<h1><span class="header-section-number">Capítulo 3</span> Contrastes de hipótesis</h1>
+<p>Aunque gran parte de la investigación médica esta relacionada con la recogida de datos con propósito descriptivo, otra buena parte lo está con la recolección de información con el plan de responder a cuestiones puntuales, es decir, contrastes de hipótesis.</p>
+<p>Las técnicas de contrastes de hipótesis están muy vinculadas a las de cálculo de intervalos de confianza, como mencionábamos al hablar de estos últimos. Aunque la aproximación es diferente:</p>
+<ul>
+<li>Al hacer un intervalo de confianza establecemos una región donde esperamos que esté el valor del parámetro.</li>
+<li>Al hacer un contraste de hipótesis establecemos posibles valores para unos parámetros y calculamos la probabilidad de que se obtengan muestras tan discrepantes o más que la obtenida, bajo la suposición de que la hipótesis es cierta. Si dicha probabilidad es muy baja (por debajo de una cantidad denominada nivel de significación) la hipótesis es rechazada.</li>
+</ul>
+<p>Vamos a ilustrarlo retomando un ejemplo del tema de intervalos de confianza. Supongamos que con un método tradicional, los pacientes afirman no sufrir trastornos con un tratamiento en el 50% de los casos, pero con un nuevo tratamiento probado sobre 80 personas, 60 afirman no haberlos sufrido. Previamente habíamos calculado que un intervalo de confianza al 95% sería que hay un 75% de individuos sin trastornos con un margen de error de 9.6%. Este intervalo parece indicarnos que el tratamiento es preferible ya que claramente ofrece resultados mejores (el valor 50% no está contenido en el intervalo de confianza).</p>
+<p>En términos de contraste de hipótesis resolveríamos la cuestión con cálculos muy parecidos pero se enunciaría de otra manera. Diríamos que si fuese cierta la hipótesis de que el nuevo tratamiento provoca trastornos con frecuencia similar al 50%, la muestra obtenida sería muy improbable. Lo que nos llevaría a rechazar dicha hipótesis, con un nivel de significación del 100%-95%=5%. Como se aprecia, tiene una interpretación clínica más inmediata el resolver una cuestión con un intervalo de confianza que con un contraste de hipótesis. Será mejor hacerlo así donde se pueda.</p>
+<div id="que-es-una-hipotesis" class="section level2">
+<h2><span class="header-section-number">3.1</span> ¿Qué es una hipótesis?</h2>
+<p>Las hipótesis que se contrastan hay que entenderlas como una declaración, no como una pregunta a responder. No se formulan como la cuestión “¿El tratamiento tiene efecto?”. Se formulan bien como “El tratamiento no tiene efecto” o como “el tratamiento sí tiene efecto”. A una hipótesis que traduce las ideas de “no hay efecto”, “no hay relación”, “los resultados en los grupos son similares”, se la denomina hipótesis nula. La hipótesis alternativa es la que se deduce al rechazar a la primera.</p>
+<p>Las hipótesis se formularán normalmente como una declaración sobre una o más poblaciones, especialmente sobre sus parámetros. Ejemplos de hipótesis pueden ser:</p>
+<ul>
+<li><p>La edad media de los individuos con la enfermedad X es 50 años.</p></li>
+<li><p>El tratamiento X tiene el mismo efecto que un placebo (por tanto no tiene valor terapéutico). Se podría traducir como que el efecto medio del placebo es igual al efecto medio del tratamiento.</p></li>
+<li><p>Para determinar la cantidad de anestésico a aplicar a un paciente, se utiliza un modelo de regresión lineal, siendo el peso y la edad del mismo variables independientes. Alguna hipótesis podría ser que no deberíamos tener en cuenta la edad, por ejemplo. Esto se traduciría en que el coeficiente asociado en el modelo de regresión es cero.</p></li>
+<li><p>Al tratar de identificar factores de riesgo para el desarrollo de una enfermedad podríamos estar interesados en saber si fumar es uno de ellos. Para ello podríamos realizar una regresión logística y contrastar si la “odds ratio” es igual a uno, lo que equivale a decir que no es un factor de riesgo.</p></li>
+</ul>
+<p>En todo contraste de hipótesis se enfrenta la denominada hipótesis nula (“no efecto”), frente a la hipótesis alternativa, que la niega. La hipótesis nula puede interpretarse como aquella que normalmente sería aceptada mientras los datos no indiquen otra cosa. Cuando los datos se muestran contrarios a la hipótesis nula a la vez que favorables a la hipótesis alternativa, se rechaza la nula y se acepta la alternativa. El mecanismo no puede ser más simple, pero hay que tener cuidado con interpretarlo bien, pues pueden esconderse trampas de no emplearse con atención.</p>
+<p>Un contraste se declara como estadísticamente significativo, cuando a partir de los resultados muestrales concluimos que se rechaza la hipótesis nula.</p>
+<p>En los capítulos siguientes trataremos contrastes de hipótesis de frecuente uso en la ciencia médica, indicando en cada caso la hipótesis nula y la alternativa.</p>
+</div>
+<div id="tipos-de-error-significacion-nivel-de-significacion-y-potencia" class="section level2">
+<h2><span class="header-section-number">3.2</span> Tipos de error, significación, nivel de significación y potencia</h2>
+<p>Al realizar un contraste de hipótesis hay dos tipos de errores posibles:</p>
+<ul>
+<li><p>Rechazar la hipótesis nula, cuando esta es cierta. A esto se le denomina error de tipo I.</p></li>
+<li><p>No rechazar la hipótesis nula, cuando esta es falsa. Lo denominamos error de tipo II, y a la probabilidad de que ocurra se la denomina β.</p></li>
+</ul>
+<div id="nivel-de-significacion" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Nivel de significación</h3>
+<p>Se denomina nivel de significación de un contraste, a la probabilidad de cometer un error de tipo I. La probabilidad de que este evento ocurra, es una cantidad que se fija de antemano (antes incluso de extraer las muestras) en un número pequeño denominado nivel de significación, y se representa con la letra α. Típicamente se elige un valor pequeño, 5% o 1%. Todo experimento, en su definición y antes de elegir las muestras, debe llevar descrito cuál es el criterio con el que rechazaremos una hipótesis. Esto se traduce en prefijar el nivel de significación del contraste.</p>
+<p>Al leer un artículo, en la sección “material y métodos”, es frecuente encontrárselo referenciado en frases del estilo: “Se declararán significativos los contrastes cuando la significación sea inferior al 5%”. Esta frase debe entenderse como que se rechazará la hipótesis nula del contraste si, al examinar la muestra, se observa que discrepa tanto de la hipótesis nula, que si esta fuese realmente cierta, la probabilidad de obtener una muestra como la obtenida (o aún peor), es inferior al 5%. Dicho con otros términos, “Declaramos que no hay efecto, hasta que los datos nos indique otra cosa más allá de una duda razonable”.</p>
+</div>
+<div id="significacion" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Significación</h3>
+<p>Se denomina significación de un contraste, y se suele representar con la letra p, al valor calculado tras observar la muestra, y que debería tomar el nivel de significación para estar en una situación donde dudemos entre rechazar o no una hipótesis.</p>
+<p>Visto así, podemos considerar la significación como un indicador de la discrepancia entre una hipótesis nula y los datos muestrales. Cuanto más cercano sea a cero, más evidencia tenemos en contra de la hipótesis nula; Hasta el punto que cuando la significación es inferior al nivel de significación fijado de antemano (por ejemplo el 5%), directamente se rechaza la hipótesis nula (se ha superado el umbral de los que se había fijado de antemano como una “duda razonable a favor de que no hay efecto”)</p>
+</div>
+<div id="potencia" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Potencia</h3>
+<p>La probabilidad de que no ocurra el error de tipo II, cuando esta puede calcularse, se la denomina potencia del contraste. Es decir, la potencia del contraste es una medida de la habilidad de un contraste para detectar un efecto que está presente.</p>
+<p>En los casos en que es posible fijar la potencia del contraste suele tomarse valores como 85% o 90%. Aparece normalmente en contrastes donde la hipótesis alternativa afirma que no solo un tratamiento X es mejor que un placebo, sino que además es mejor en, al menos, cierta cantidad que se considera clínicamente significativa (no confundir con estadísticamente significativa).</p>
+<p>Normalmente los programas estadísticos solamente hacen referencia a la significación de un contraste, y no a la potencia. Ello se debe a que para determinar la potencia es necesario que la hipótesis alternativa no sea simplemente una negación de la hipótesis nula, sino que debe especificar explícitamente una diferencia cuantitativa con ella.</p>
+<p>Ejemplo: Se espera que un tratamiento X produzca un efecto beneficioso en la reducción del colesterol de al menos 10 unidades. Para ello se eligen dos grupos de pacientes de características similares y se prueba con un grupo un placebo y con el otro el tratamiento en cuestión. Mientras los datos no indiquen lo contrario pensaremos que el tratamiento no tiene efecto (no consigue reducir de media las 10 unidades). Esta es la hipótesis nula. La hipótesis alternativa es que el tratamiento sí tiene efecto (bajará el colesterol esas 10 unidades, o más). Un nivel de significación del 5% se interpreta como que a menos que los resultados del experimento discrepen suficientemente de que el tratamiento no tiene efecto, consideraremos que el tratamiento no sirve. Si el tratamiento muestra resultados muy buenos con respecto al placebo decidiremos que sí sirve, y rechazaremos la hipótesis nula. Por supuesto, excepcionalmente puede ocurrir que un tratamiento que no tiene ninguna utilidad muestre resultados buenos sobre una muestra, y acabemos concluyendo por error que es bueno. La probabilidad de que esto ocurra evidentemente esperamos que sea baja y es lo que hemos denominado nivel de significación. Supongamos que tras estudiar los resultados del experimento con algún contraste obtenemos que la significación es p=0.001=0.1%. Esto quiere decir que los resultados de la muestra son incoherentes con la hipótesis nula (son más improbables que el valor límite que fue fijado en 5%). Concluimos que hay evidencia estadísticamente significativa en contra de que el tratamiento no reduce el colesterol en al menos 10 unidades. ¿Cómo se interpreta la potencia en este ejemplo? Supongamos que el tratamiento realmente es efectivo (reduce al menos 10 unidades el colesterol). ¿Cuál sería la probabilidad de que una prueba estadística lo detecte (rechace la hipótesis nula)? Esta probabilidad sería la potencia.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intervalos-de-confianza.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["apuntesEstadistica.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

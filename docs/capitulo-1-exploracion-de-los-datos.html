@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Apuntes de estadística</title>
+  <meta name="description" content="Apuntes de estadística para estudiantes de Master de Nuevas Tendencias">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Apuntes de estadística" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://www.bioestadistica.uma.es/apuntesMaster/" />
+  
+  <meta property="og:description" content="Apuntes de estadística para estudiantes de Master de Nuevas Tendencias" />
+  <meta name="github-repo" content="fjbaron/apuntesEstadistica.git" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Apuntes de estadística" />
+  
+  <meta name="twitter:description" content="Apuntes de estadística para estudiantes de Master de Nuevas Tendencias" />
+  
+
+<meta name="author" content="Francisco Javier Barón López">
+
+
+<meta name="date" content="2018-11-05">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="intervalos-de-confianza.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Apuntes de estadística</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html"><i class="fa fa-check"></i><b>1</b> Capítulo 1: Exploración de los datos</a><ul>
+<li class="chapter" data-level="1.1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-univariantes"><i class="fa fa-check"></i><b>1.1</b> Datos Univariantes</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-categoricos"><i class="fa fa-check"></i><b>1.1.1</b> Datos categóricos</a></li>
+<li class="chapter" data-level="1.1.2" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-numericos."><i class="fa fa-check"></i><b>1.1.2</b> Datos Numéricos.</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-bivariantes"><i class="fa fa-check"></i><b>1.2</b> Datos bivariantes</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#categorica-categorica"><i class="fa fa-check"></i><b>1.2.1</b> Categórica-categórica</a></li>
+<li class="chapter" data-level="1.2.2" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#categorica-numerica"><i class="fa fa-check"></i><b>1.2.2</b> Categórica-Numérica</a></li>
+<li class="chapter" data-level="1.2.3" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#numerica-numerica."><i class="fa fa-check"></i><b>1.2.3</b> Numérica-Numérica.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intervalos-de-confianza.html"><a href="intervalos-de-confianza.html"><i class="fa fa-check"></i><b>2</b> Intervalos de confianza</a><ul>
+<li class="chapter" data-level="2.1" data-path="intervalos-de-confianza.html"><a href="intervalos-de-confianza.html#error-tipico-o-estandar"><i class="fa fa-check"></i><b>2.1</b> Error típico o estándar</a></li>
+<li class="chapter" data-level="2.2" data-path="intervalos-de-confianza.html"><a href="intervalos-de-confianza.html#intervalo-de-confianza-para-una-proporcion"><i class="fa fa-check"></i><b>2.2</b> Intervalo de confianza para una proporción</a></li>
+<li class="chapter" data-level="2.3" data-path="intervalos-de-confianza.html"><a href="intervalos-de-confianza.html#intervalos-de-confianza-para-otros-parametros"><i class="fa fa-check"></i><b>2.3</b> Intervalos de confianza para otros parámetros</a></li>
+<li class="chapter" data-level="2.4" data-path="intervalos-de-confianza.html"><a href="intervalos-de-confianza.html#contrastes-de-hipotesis-basados-en-intervalos-de-confianza"><i class="fa fa-check"></i><b>2.4</b> Contrastes de hipótesis basados en intervalos de confianza</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html"><i class="fa fa-check"></i><b>3</b> Contrastes de hipótesis</a><ul>
+<li class="chapter" data-level="3.1" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#que-es-una-hipotesis"><i class="fa fa-check"></i><b>3.1</b> ¿Qué es una hipótesis?</a></li>
+<li class="chapter" data-level="3.2" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#tipos-de-error-significacion-nivel-de-significacion-y-potencia"><i class="fa fa-check"></i><b>3.2</b> Tipos de error, significación, nivel de significación y potencia</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#nivel-de-significacion"><i class="fa fa-check"></i><b>3.2.1</b> Nivel de significación</a></li>
+<li class="chapter" data-level="3.2.2" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#significacion"><i class="fa fa-check"></i><b>3.2.2</b> Significación</a></li>
+<li class="chapter" data-level="3.2.3" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#potencia"><i class="fa fa-check"></i><b>3.2.3</b> Potencia</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Apuntes de estadística</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="capitulo-1-exploracion-de-los-datos" class="section level1">
+<h1><span class="header-section-number">Capítulo 1</span> Capítulo 1: Exploración de los datos</h1>
+<p>Cuando abordamos el estudio de un conjunto de datos, antes de introducirnos en cuestiones más detalladas, es necesario hacer una exploración inicial de los mismos. Así podemos tener una idea más clara de las características principales de los datos que hemos recogido, y de las posibles asociaciones.</p>
+<p>En primer lugar, daremos unas ideas sobre la manera de presentar ordenadamente y resumir variables consideradas aisladamente de las demás, para después explorar conjuntamente grupos de variables.</p>
+<div id="datos-univariantes" class="section level2">
+<h2><span class="header-section-number">1.1</span> Datos Univariantes</h2>
+<p>Los métodos para visualizar y resumir los datos dependen de sus tipos, que básicamente diferenciamos en dos: <strong>categóricos</strong> y <strong>numéricos</strong>.</p>
+<p>Los datos <em>categóricos (o factores)</em> son aquellos que registran categorías o cualidades. Si descargamos esta <a href="datos/centroSalud-transversal.sav">base de datos de pacientes</a>, ejemplos de variables categóricas son el <em>sexo</em>, el <em>estado civil</em> y el <em>nivel de estudios</em>. Dentro de las categóricas podemos a su vez distinguir entre variable <strong>nominal</strong> y <strong>ordinal</strong>. En esta última hay un orden entre las distintas categorías como se aprecia en la la variable <em>nivel de estudios</em> y <em>tabaqismo</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df=<span class="kw">read_sav</span>(<span class="st">&quot;datos/centroSalud-transversal.sav&quot;</span>, <span class="dt">user_na=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>haven<span class="op">::</span><span class="kw">as_factor</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(sexo<span class="op">:</span>peso) <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">booktabs=</span>T)</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+sexo
+</th>
+<th style="text-align:left;">
+nivelest
+</th>
+<th style="text-align:left;">
+tabaco
+</th>
+<th style="text-align:left;">
+estcivil
+</th>
+<th style="text-align:left;">
+laboro
+</th>
+<th style="text-align:right;">
+hijos
+</th>
+<th style="text-align:right;">
+edad
+</th>
+<th style="text-align:right;">
+peso
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Hombre
+</td>
+<td style="text-align:left;">
+Primarios
+</td>
+<td style="text-align:left;">
+Ex fumador (10+) años
+</td>
+<td style="text-align:left;">
+Viudo
+</td>
+<td style="text-align:left;">
+Jubilado
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:left;">
+Primarios
+</td>
+<td style="text-align:left;">
+Fumador
+</td>
+<td style="text-align:left;">
+Casado/pareja
+</td>
+<td style="text-align:left;">
+Ama de casa
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:left;">
+Primarios
+</td>
+<td style="text-align:left;">
+Fumador
+</td>
+<td style="text-align:left;">
+Casado/pareja
+</td>
+<td style="text-align:left;">
+Trabaja
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:left;">
+Primarios
+</td>
+<td style="text-align:left;">
+Ex fumador (9-) años
+</td>
+<td style="text-align:left;">
+Casado/pareja
+</td>
+<td style="text-align:left;">
+Ama de casa
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:left;">
+Sin estudios
+</td>
+<td style="text-align:left;">
+Ex fumador (9-) años
+</td>
+<td style="text-align:left;">
+Casado/pareja
+</td>
+<td style="text-align:left;">
+Ama de casa
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+61
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hombre
+</td>
+<td style="text-align:left;">
+Sabe leer y escribir
+</td>
+<td style="text-align:left;">
+No fuma
+</td>
+<td style="text-align:left;">
+Casado/pareja
+</td>
+<td style="text-align:left;">
+Jubilado
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+69
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<p>Siguiendo con la misma base de datos de pacientes, si recogemos, el peso de una persona es una cantidad numérica. En particular <strong>continua</strong> (los valores dentro de cualquier intervalo son posibles); Esto no ocurre cuando recogemos el <em>número de hijos</em>; Esta variable es <strong>discreta</strong>.</p>
+<div id="datos-categoricos" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Datos categóricos</h3>
+<p>Los datos categóricos los examinamos bien con tablas de frecuencias o con representaciones gráficas como diagramas de barras o de sectores.</p>
+<div id="frecuencias-y-porcentajes" class="section level4">
+<h4><span class="header-section-number">1.1.1.1</span> Frecuencias y porcentajes</h4>
+<p>Las frecuencias pueden obtenerse en términos absolutos (frecuencias absolutas), mostrando las repeticiones de cada categoría, o bien en términos relativos (porcentajes), mostrando los participación de cada categoría en relación con el total. Las frecuencias absolutas se utilizan con muestras de tamaño pequeño, y las relativas tienen más sentido con muestras de tamaño grande.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">CreateTableOne</span>(<span class="dt">vars=</span><span class="kw">c</span>(<span class="st">&quot;sexo&quot;</span>,<span class="st">&quot;laboro&quot;</span>, <span class="st">&quot;nivelest&quot;</span>, <span class="st">&quot;tabaco&quot;</span>,  <span class="st">&quot;diabm&quot;</span>),<span class="dt">data =</span> df) <span class="op">%&gt;%</span><span class="kw">summary</span>()</code></pre></div>
+<pre><code>## 
+##      ### Summary of categorical variables ### 
+## 
+## strata: Overall
+##       var   n miss p.miss                 level freq percent cum.percent
+##      sexo 536    0    0.0                Hombre  218    40.7        40.7
+##                                           Mujer  318    59.3       100.0
+##                                                                         
+##    laboro 536    5    0.9               Trabaja   97    18.3        18.3
+##                                          Parado   16     3.0        21.3
+##                                        Jubilado  254    47.8        69.1
+##                                     Ama de casa  164    30.9       100.0
+##                                                                         
+##  nivelest 536    6    1.1          Sin estudios   93    17.5        17.5
+##                            Sabe leer y escribir  150    28.3        45.8
+##                                       Primarios  188    35.5        81.3
+##                                    Bachillerato   53    10.0        91.3
+##                                      Superiores   46     8.7       100.0
+##                                                                         
+##    tabaco 536   16    3.0               No fuma  133    25.6        25.6
+##                           Ex fumador (10+) años   32     6.2        31.7
+##                            Ex fumador (9-) años  272    52.3        84.0
+##                                         Fumador   83    16.0       100.0
+##                                                                         
+##     diabm 536    4    0.7                    Sí  163    30.6        30.6
+##                                              No  369    69.4       100.0
+## </code></pre>
+<p>Si las variables son categóricas ordinales (o numéricas) pueden sernos de interés los porcentajes acumulados. Nos indican para cada valor de la variable, en qué porcentaje de ocasiones se presentó un valor inferior o igual.</p>
+</div>
+<div id="diagrama-de-barras" class="section level4">
+<h4><span class="header-section-number">1.1.1.2</span> Diagrama de barras</h4>
+<p>El diagrama de barras se representa asignándole a cada modalidad de la variable una barra de una altura proporcional a su frecuencia absoluta o a su porcentaje. En ambos casos el gráfico es el mismo, sólo se modifica la escala.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(<span class="kw">sjp.frq</span>(df<span class="op">$</span>sexo),  <span class="kw">sjp.frq</span>(df<span class="op">$</span>laboro) , <span class="kw">sjp.frq</span>(df<span class="op">$</span>nivelest), <span class="kw">sjp.frq</span>(df<span class="op">$</span>diabm),<span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-4-1.png" width="960" /></p>
+</div>
+<div id="diagramas-de-sectores" class="section level4">
+<h4><span class="header-section-number">1.1.1.3</span> Diagramas de sectores</h4>
+<p>En este diagrama se le asigna a cada valor un sector cuyo ángulo sea proporcional a su frecuencia. Se suele utilizar en datos categóricos nominales y no tanto en los ordinales (es menos clara de interpretar).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(
+<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="dv">1</span>), <span class="dt">fill =</span> sexo)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">width =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_void</span>(),
+<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="dv">1</span>), <span class="dt">fill =</span> nivelest)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">width =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_void</span>(),
+<span class="dt">nrow=</span><span class="dv">1</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Si usamos SPSS, tanto tablas de frecuencias como los gráficos mencionados los encontramos en la opción de menú “<em>Analizar – Estadísticos Descriptivos – Frecuencias</em>”.</p>
+</div>
+</div>
+<div id="datos-numericos." class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Datos Numéricos.</h3>
+<p>Los datos numéricos son mucho más ricos en información que los datos categóricos. Por tanto además de las tablas, tenemos otras medidas que sirven para resumir la información que contienen. Dependiendo de cómo se distribuyan los datos, usaremos grupos de medidas de resumen diferentes.</p>
+<p>Cuando se tiene una variable numérica, lo primero que nos puede interesar es alrededor de qué valor se agrupan los datos, y cómo se dispersan con respecto a él.</p>
+<p>En múltiples ocasiones los datos presentan cierta distribución acampanada como la de la figura adjunta, denominada distribución normal. En estos casos con sólo dos medidas como son la media y la desviación típica tenemos resumida prácticamente toda la información contenida en las observaciones.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sjp.frq</span>(df<span class="op">$</span>talla, <span class="dt">type =</span> <span class="st">&quot;hist&quot;</span>, <span class="dt">show.mean =</span> <span class="ot">TRUE</span>,<span class="dt">normal.curve =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>La media: es el promedio de todos los valores de la variable, es decir, la suma de todos los datos dividido por el número de ellos. La <strong>desviación típica (S)</strong> nos da una medida de la dispersión que tienen los datos con respecto a la media. En datos de distribución <em>acampanada</em> (aproximadamente normal), ocurre lo siguiente:</p>
+<ul>
+<li><p>Entre la media y a una distancia de <strong>una</strong> desviación típica se encuentra (aproximadamente) el <strong>68%</strong> central de los datos.</p></li>
+<li><p>Entre la media y a una distancia de <strong>dos</strong> desviación típica se encuentra (aproximadamente) el <strong>95%</strong> central de los datos.</p></li>
+</ul>
+<blockquote>
+<p><a href="https://www.bioestadistica.uma.es/analisis/teoremacentral/">Sigue este enlace para practicar con la desviación típica</a></p>
+</blockquote>
+<p>La media y la desviación muestral no tienen tanto interés cuando los datos presentan largas colas u observaciones anómalas (outliers), es decir, son muy influenciables por las asimetrías y los valores extremos. En estos casos, debemos considerar medidas más resistentes a estas influencias.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(
+<span class="kw">sjp.frq</span>(df<span class="op">$</span>peso, <span class="dt">type =</span> <span class="st">&quot;hist&quot;</span>, <span class="dt">show.mean =</span> <span class="ot">TRUE</span>,<span class="dt">normal.curve =</span> <span class="ot">TRUE</span>)<span class="op">+</span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">40</span>,<span class="dv">160</span>)),
+<span class="kw">sjp.frq</span>(df<span class="op">$</span>peso, <span class="dt">type =</span> <span class="st">&quot;boxplot&quot;</span>, <span class="dt">show.mean =</span> <span class="ot">TRUE</span>,<span class="dt">normal.curve =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">40</span>,<span class="dv">160</span>))<span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>(), <span class="dt">nrow=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Como medidas de centralización resistentes podemos utilizar en sustitución de la media:</p>
+<ul>
+<li><p>La mediana, que es aquel valor que deja la mitad de los datos por debajo de él.</p></li>
+<li><p>La media recortada (trimmed mean), muy utilizada en datos preferentemente simétricos, con muchas observaciones anómalas y, que se obtiene eliminando un determinado porcentaje de los datos menores y mayores; Así calculamos la media sin contar con ese porcentaje de datos extremos, haciendo desaparecer su influencia.</p></li>
+</ul>
+<p>En cuanto a las medidas de dispersión más resistentes podemos utilizar el <strong>rango intercuartílico</strong> (<em>IQR</em>), que es la diferencia entre el tercer cuartil y el primero. El primer cuartil (Q1) deja al 25% de los datos por debajo de él y el tercer cuartil (Q3) deja al 75%, por tanto sabemos que entre ambos valores se encuentra el 50% central de las observaciones.</p>
+<blockquote>
+<p><a href="https://www.bioestadistica.uma.es/analisis/percentil/">Para practicar con percentiles sigue este enlace</a></p>
+</blockquote>
+<p>Ahora bien, ¿qué criterios aproximados podemos utilizar para clasificar unos datos como normales o no? Para ello destacamos varias características de la distribución normal. El alejamiento de las mismas es indicación de falta de normalidad:</p>
+<ul>
+<li>Es simétrica (el coeficiente de asimetría vale cero)</li>
+<li>Tiene forma de campana (el apuntamiento o curtosis vale cero).</li>
+<li>Coinciden la media y la mediana</li>
+<li>Aproximadamente el 95% de las observaciones se encuentran en el intervalo de centro la media y radio dos veces la desviación típica.</li>
+</ul>
+<p>Los indicadores que miden la simetría y la forma de la campana son el <strong>coeficiente de asimetría</strong> (<em>skewness</em>) (negativo en distribuciones con cola a la izquierda, positivo en distribuciones con cola a la derecha) y la <strong>curtosis</strong> (<em>kurtosis</em>) (negativa para las aplanadas y positiva para las apuntadas).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dftmp=df<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(edad<span class="op">:</span>imc)
+dftmp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">CreateTableOne</span>(<span class="dt">data =</span> .) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</code></pre></div>
+<pre><code>## 
+##      ### Summary of continuous variables ###
+## 
+## strata: Overall
+##         n miss p.miss mean sd median p25 p75 min max skew   kurt
+## edad  536    0      0   65 10     65  58  72  31  93 -0.2  0.089
+## peso  536  106     20   77 13     76  69  85  46 150  0.9  2.763
+## talla 536  182     34  159 10    158 152 165 130 188  0.3 -0.008
+## imc   536  185     35   31  5     30  28  33  20  51  1.0  2.095</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(
+<span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>edad))<span class="op">+</span><span class="kw">geom_histogram</span>(),
+<span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>talla))<span class="op">+</span><span class="kw">geom_histogram</span>(),
+<span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>peso))<span class="op">+</span><span class="kw">geom_histogram</span>(),
+<span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>imc))<span class="op">+</span><span class="kw">geom_histogram</span>(),
+<span class="dt">nrow=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>En la tablas anteriores, así como en los gráficos (llamados <strong>histogramas</strong>) vemos como <em>peso</em> e <em>IMC</em> presentan una cierta falta de normalidad; Podríamos entonces presentar un resumen de estas variables del siguiente modo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dftmp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">CreateTableOne</span>(<span class="dt">data =</span> .) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>(<span class="dt">nonnormal=</span><span class="kw">c</span>(<span class="st">&quot;peso&quot;</span>,<span class="st">&quot;imc&quot;</span>))</code></pre></div>
+<pre><code>##                      
+##                       Overall              
+##   n                      536               
+##   edad (mean (sd))     65.19 (10.39)       
+##   peso (median [IQR])  76.00 [69.00, 84.57]
+##   talla (mean (sd))   158.68 (9.71)        
+##   imc (median [IQR])   30.12 [27.61, 33.20]</code></pre>
+<p>La falta de normalidad no es fácil de apreciarlo mirando directamente el histograma. Hay gráficos como el Q-Q plot, que nos indican la falta de normalidad como desviaciones de la observaciones con respecto a una línea recta:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(
+<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">sample =</span>edad))  <span class="op">+</span><span class="st">  </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>()<span class="op">+</span><span class="kw">ggtitle</span>(<span class="st">&quot;edad&quot;</span>),
+<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">sample =</span>talla))  <span class="op">+</span><span class="st">  </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>()<span class="op">+</span><span class="kw">ggtitle</span>(<span class="st">&quot;peso&quot;</span>),
+<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">sample =</span>peso)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st">  </span><span class="kw">stat_qq_line</span>()<span class="op">+</span><span class="kw">ggtitle</span>(<span class="st">&quot;talla&quot;</span>),
+<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">sample =</span>imc))   <span class="op">+</span><span class="st">  </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>()<span class="op">+</span><span class="kw">ggtitle</span>(<span class="st">&quot;imc&quot;</span>), 
+<span class="dt">nrow=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Las medida mencionadas podemos calcularlas con SPSS en el menú “<em>Analizar – Estadísticos Descriptivos – Frecuencias</em>” y pulsando el botón “<em>Estadísticos…</em>”, o bien podemos usar el menú “<em>Analizar - Estadísticos descriptivos - Explorar</em>”, donde podemos añadir los gráficos con pruebas de normalidad.</p>
+</div>
+</div>
+<div id="datos-bivariantes" class="section level2">
+<h2><span class="header-section-number">1.2</span> Datos bivariantes</h2>
+<p>Si resumir la información de una variable es de por sí interesante, en investigación lo es mucho más el poner de manifiesto la posible relación entre dos de ellas:</p>
+<blockquote>
+<p>¿Hay relación entre el tabaco y el cáncer de pulmón? ¿Aumentando la dosis de un medicamento, mejoramos la respuesta?</p>
+</blockquote>
+<p>Para ello realizamos estudios donde intervienen ambas variables simultáneamente. Según sean los tipos de cada una de ellas usaremos técnicas diferentes.</p>
+<div id="categorica-categorica" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Categórica-categórica</h3>
+<p>Cuando ambas variables son categóricas (o discretas con pocas modalidades), se suele presentar las observaciones en una tabla de contingencia. Esta una tabla de doble entrada donde se presentan la distribución de frecuencias conjunta de las dos variables.</p>
+<p>Continuando con la base de datos del ejemplo, podríamos estudiar qué distribución presentan otras variables cualitativas según el sexo del paciente. Lo mostraríamos como sigue:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">CreateTableOne</span>(<span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">&quot;tabaco&quot;</span>,<span class="st">&quot;estcivil&quot;</span>,<span class="st">&quot;sedentar&quot;</span>,<span class="st">&quot;diabm&quot;</span>,<span class="st">&quot;hipercol&quot;</span>), <span class="dt">strata =</span> <span class="st">&quot;sexo&quot;</span> , <span class="dt">data =</span> .)</code></pre></div>
+<pre><code>##                           Stratified by sexo
+##                            Hombre      Mujer       p      test
+##   n                        218         318                    
+##   tabaco (%)                                       &lt;0.001     
+##      No fuma                43 (20.8)   90 (28.8)             
+##      Ex fumador (10+) años  30 (14.5)    2 ( 0.6)             
+##      Ex fumador (9-) años   70 (33.8)  202 (64.5)             
+##      Fumador                64 (30.9)   19 ( 6.1)             
+##   estcivil (%)                                     &lt;0.001     
+##      Soltero                 7 ( 3.2)   15 ( 4.7)             
+##      Casado/pareja         191 (87.6)  188 (59.3)             
+##      Separado                5 ( 2.3)   12 ( 3.8)             
+##      Viudo                  15 ( 6.9)  102 (32.2)             
+##   sedentar = No (%)         81 (47.9)  100 (37.9)   0.049     
+##   diabm = No (%)           157 (73.0)  212 (66.9)   0.158     
+##   hipercol = No (%)        162 (74.7)  211 (67.4)   0.089</code></pre>
+<p>En la tabla anterior hay una columna denominada <em>p</em> (<strong>significación</strong>) que será my importante en temas posteriores.</p>
+<p>En cuanto a la representación gráfica, podemos utilizar el diagrama de barras apiladas o agrupadas, aunque en ellos no es inmediato apreciar las diferencias por sexos</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(
+<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>tabaco, df<span class="op">$</span>sexo,<span class="dt">show.prc =</span> <span class="ot">FALSE</span>),
+<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>estcivil, df<span class="op">$</span>sexo,,<span class="dt">show.prc =</span> <span class="ot">FALSE</span>),
+<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>sedentar, df<span class="op">$</span>sexo,<span class="dt">show.prc =</span> <span class="ot">FALSE</span>),
+<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>diabm, df<span class="op">$</span>sexo,<span class="dt">show.prc =</span> <span class="ot">FALSE</span>),
+<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>hipercol, df<span class="op">$</span>sexo,<span class="dt">show.prc =</span> <span class="ot">FALSE</span>),<span class="dt">ncol=</span><span class="dv">1</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-13-1.png" width="576" /></p>
+<p>Desglosando en cada categoría de la variable los porcentajes de cada sexo es más sencillo de ver:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#ggplot(df, aes(tabaco)) + geom_bar(aes(fill = sexo))</span>
+dftmp=df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(sexo,tabaco)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(tabaco)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cuenta=</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(sexo,tabaco) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">tally</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">fraccion=</span>n<span class="op">/</span><span class="kw">sum</span>(n))
+<span class="kw">ggplot</span>(dftmp, <span class="kw">aes</span>(<span class="dt">fill=</span>sexo, <span class="dt">y=</span>fraccion, <span class="dt">x=</span>tabaco)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_bar</span>( <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="st">&quot;fill&quot;</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#ggplot(df, aes(tabaco)) + geom_bar(aes(fill = sexo))</span>
+dftmp=df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(sexo,diabm) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(diabm)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">cuenta=</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(sexo,diabm) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tally</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">fraccion=</span>n<span class="op">/</span><span class="kw">sum</span>(n))
+<span class="kw">ggplot</span>(dftmp, <span class="kw">aes</span>(<span class="dt">fill=</span>sexo, <span class="dt">y=</span>fraccion, <span class="dt">x=</span>diabm)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_bar</span>( <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="st">&quot;fill&quot;</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="categorica-numerica" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Categórica-Numérica</h3>
+<p>Supongamos que tenemos datos numéricos para varias categorías. Por ejemplo, en un experimento donde hacemos mediciones numéricas en dos grupos: uno al que se le aplica determinado tratamiento y otro de control. Podemos describir los resultados del experimento con sólo dos variables: Una variable categórica que representa el grupo de tratamiento, y otra que representa el resultado numérico</p>
+<p>En estos casos, lo que se realiza es un estudio descriptivo de la variable numérica en cada una de las muestras y comparamos los resultados.</p>
+<p>Volviendo a nuestro ejemplo, vamos a comparar las variables numéricas de la base de datos entre sexos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">CreateTableOne</span>(<span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">&quot;edad&quot;</span>, <span class="st">&quot;talla&quot;</span>,<span class="st">&quot;peso&quot;</span>,<span class="st">&quot;imc&quot;</span>), <span class="dt">strata =</span> <span class="st">&quot;sexo&quot;</span> , <span class="dt">data =</span> .) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>(<span class="dt">nonnormal=</span><span class="kw">c</span>(<span class="st">&quot;peso&quot;</span>,<span class="st">&quot;imc&quot;</span>))</code></pre></div>
+<pre><code>##                      Stratified by sexo
+##                       Hombre                Mujer                 p     
+##   n                      218                   318                      
+##   edad (mean (sd))     63.85 (10.70)         66.11 (10.08)         0.013
+##   talla (mean (sd))   167.03 (7.22)         153.70 (7.28)         &lt;0.001
+##   peso (median [IQR])  80.00 [73.38, 87.55]  73.60 [66.00, 81.50] &lt;0.001
+##   imc (median [IQR])   28.97 [26.86, 31.22]  31.41 [28.14, 34.19] &lt;0.001
+##                      Stratified by sexo
+##                       test   
+##   n                          
+##   edad (mean (sd))           
+##   talla (mean (sd))          
+##   peso (median [IQR]) nonnorm
+##   imc (median [IQR])  nonnorm</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">CreateTableOne</span>(<span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">&quot;edad&quot;</span>,<span class="st">&quot;peso&quot;</span>,<span class="st">&quot;talla&quot;</span>,<span class="st">&quot;imc&quot;</span>,<span class="st">&quot;pas&quot;</span>,<span class="st">&quot;pad&quot;</span>,<span class="st">&quot;fc&quot;</span>), <span class="dt">strata =</span> <span class="st">&quot;tabaco&quot;</span> , <span class="dt">data =</span> df)</code></pre></div>
+<pre><code>##                    Stratified by tabaco
+##                     No fuma        Ex fumador (10+) años
+##   n                    133             32               
+##   edad (mean (sd))   67.14 (9.28)   64.09 (8.19)        
+##   peso (mean (sd))   77.77 (14.44)  79.97 (10.46)       
+##   talla (mean (sd)) 158.10 (9.73)  165.67 (5.25)        
+##   imc (mean (sd))    31.15 (5.11)   29.00 (2.72)        
+##   pas (mean (sd))   150.33 (20.89) 133.03 (13.88)       
+##   pad (mean (sd))    81.00 (11.05)  81.84 (9.96)        
+##   fc (mean (sd))     74.93 (12.10)  58.66 (33.20)       
+##                    Stratified by tabaco
+##                     Ex fumador (9-) años Fumador        p      test
+##   n                    272                   83                    
+##   edad (mean (sd))   66.13 (10.75)        59.36 (9.81)  &lt;0.001     
+##   peso (mean (sd))   75.75 (13.24)        80.56 (12.94)  0.053     
+##   talla (mean (sd)) 155.94 (8.70)        167.13 (9.03)  &lt;0.001     
+##   imc (mean (sd))    31.39 (5.59)         29.10 (3.56)   0.022     
+##   pas (mean (sd))   142.25 (18.19)       141.08 (17.57) &lt;0.001     
+##   pad (mean (sd))    81.24 (10.61)        84.20 (10.06)  0.127     
+##   fc (mean (sd))     58.25 (29.20)        64.35 (28.23) &lt;0.001</code></pre>
+<p>En las tablas anteriores aparecen de nuevos las cantidades <strong>p (significación)</strong> de las que hablaremos más adelante.</p>
+<p>Los diagramas de cajas muestran los cuartiles en unas cajas centrales, así como observaciones más alejadas, y permiten hacerse una idea visual de qué diferencias existen entre los grupos. Por ejemplo, en las tablas anteriores se apreciaba una cierta diferencia de <em>talla</em> entre hombres y mujeres, aunque no así en <em>pad</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(
+<span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>sexo,<span class="dt">y=</span>talla))<span class="op">+</span><span class="kw">geom_boxplot</span>(),
+<span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>sexo,<span class="dt">y=</span>pad))<span class="op">+</span><span class="kw">geom_boxplot</span>(),<span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Si usamos <em>SPSS</em>, tenemos a nuestra disposición la opción de menú “<em>Analizar – Estadísticos descriptivos – Explorar…</em>”. En la casilla denominada “<em>dependientes</em>” situamos la variable numérica y en “<em>factores</em>” situamos la categórica.</p>
+</div>
+<div id="numerica-numerica." class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Numérica-Numérica.</h3>
+<p>Cuando hablamos de comparar dos variables numéricas, pensamos en establecer la posible relación entre ellas.</p>
+<blockquote>
+<p>¿Estarán relacionados la altura y el peso de los individuos? ¿Cuanto mayor es el tamaño del cerebro, mayor es el coeficiente intelectual?</p>
+</blockquote>
+<p>La vía más directa para estudiar la posible asociación consiste en inspeccionar visualmente un diagrama de dispersión (nube de puntos). Si reconocemos una tendencia, es una indicación de que puede valer la pena explorar con más profundidad. Si es el caso, puede interesarnos proseguir con un análisis de regresión. En este tipo de análisis se pretende encontrar un modelo matemático (recta de regresión) que explique los valores de una de las variables (dependiente) en función de la otra (independiente). A ello le dedicamos un capítulo con posterioridad.</p>
+<p>Por ejemplo, en la base de datos con que trabajamos, es lógicco esperar una buena relación entre el <em>peso</em> y el <em>imc</em>, y eso es justo lo que encontramos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x=</span>peso, <span class="dt">y=</span>imc)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span><span class="fl">0.3</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>En otras variables la relación no es tan evidente, como la que existe entre <em>edad</em> y mayor <em>presi´on arterial diastólica</em> y menor <em>presión arterial sistólica</em>. Las rectas de regresión no serán muy útiles para percibir la tendencia con más facilidad:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(
+  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x=</span>edad, <span class="dt">y=</span>pas)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span><span class="fl">0.3</span>)<span class="op">+</span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>),
+<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x=</span>edad, <span class="dt">y=</span>pad)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span><span class="fl">0.3</span>)<span class="op">+</span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>),<span class="dt">nrow=</span><span class="dv">1</span>)</code></pre></div>
+<p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>En <em>SPSS</em> estos tipos de gráficos podemos encontrarlos en el menú: “<em>Gráficos – Dispersión… – Simple</em>“.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intervalos-de-confianza.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["apuntesEstadistica.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

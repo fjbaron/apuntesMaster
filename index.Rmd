@@ -12,6 +12,22 @@ url: 'https\://www.bioestadistica.uma.es/apuntesMaster/'
 description: "Apuntes de estadística para estudiantes de Master de Nuevas Tendencias"
 ---
 
-# Preface {-}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
 
-Presentación del curso
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load("tidyverse", "ggplot2", "haven", "bookdown", "knitr", "kableExtra","stargazer", "tableone","sjPlot","sjlabelled","sjmisc","gridExtra" )
+options(stringsAsFactors=F,digits=2)
+source("tablasDeArticulo_v2.R")
+theme_set(theme_minimal())
+
+```
+
+
+# Introducción {-}
+
+Apuntes para las asignatura de Estadística básica y avanzada del Máster en Nuevas Tendencias en Ciencias de la Salud.

@@ -1,17 +1,20 @@
 --- 
-title: "A Minimal Bookdown Book"
-author: "Sean Kross"
-date: "2016-12-09"
+title: "Apuntes de estadística"
+author: "Francisco Javier Barón López"
+date: "2018-11-05"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: seankross/bookdown-start
-url: 'http\://seankross.com/bookdown-start/'
-description: "Everything you need (and nothing more) to start a bookdown book."
+github-repo: fjbaron/apuntesEstadistica.git
+url: 'https\://www.bioestadistica.uma.es/apuntesMaster/'
+description: "Apuntes de estadística para estudiantes de Master de Nuevas Tendencias"
 ---
 
-# Preface {-}
 
-This is the very first part of the book.
+
+
+# Introducción {-}
+
+Apuntes para las asignatura de Estadística básica y avanzada del Máster en Nuevas Tendencias en Ciencias de la Salud.
