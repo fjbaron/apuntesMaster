@@ -148,7 +148,7 @@ Podemos realizar la prueba paramétrica en SPSS en el menú: "_Analizar - Compar
 
 La prueba no paramétrica está en un diálogo análogo que obtenemos en el menú "_Analizar - Pruebas no paramétricas - Cuadros de dialogo antiguos - 2 muestras independientes"
 
-Una representación gráfica de los intervalos de confianza nos dejan claro que son demasiado amplios como para que las diferencia que se observa entre ambos grupos sea estadísticamente significativa.
+Una representación gráfica de los intervalos de confianza nos dejan claro que son demasiado amplios como para que las diferencia que se observa entre ambos grupos sea estadísticamente significativa. Ni siquiera queda claro que el Calcio, con un intervalo de confianza tan amplio presente un efecto mayor que cero.
 
 
 ```{r}
@@ -160,5 +160,192 @@ resumen=df %>% gather(Variable,Valor,-Grupo) %>%
 ggplot(resumen %>% filter(Variable=="Diferencia"), aes(x=Grupo,y=Media)) +
   geom_errorbar(aes(ymin=Media-IC,ymax=Media+IC),width=0.2, size=1, color="navyblue")+
   geom_point( size=4, shape=21, fill="white")+ylab("Diferencia")+
-  geom_hline(yintercept=0,lty=2)
+  geom_hline(yintercept=0,lty=2,color="red")
 ```
+
+
+
+###¿Es lo mismo que la diferencia entre dos grupos sea significativa que el que sus respectivos intervalos de confianza para la media no se toquen? {-}
+Parecería que es lo mismo, pero no es así. La realidad es que si hay diferencia significativa entre la media de dos grupos, entonces los intervalos de confianza se tocan nada o _muy poco._ Vamos a ilustrarlo retomando la base de datos [2poblaciones-Mismotrabajo-DiferenteNutricion.sav](datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav). 
+
+```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+df=read_sav("datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav", user_na=FALSE) %>% haven::as_factor()
+```
+
+Vamos a usar tanto las pruebas t-student como las no paramétricas para estudiar las diferencias entre los individuos de _Málaga_ y _Tanger_ en todas las variables numéricas.
+
+
+
+Normalmente en una publicación científica pondríamos como tabla de resultados algo similar a esto:
+
+```{r}
+vNumericas=names(df) %>% setdiff("Grupo")
+df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
+                                columnas = c("n","mediaet","p.t","ci95","p.w")) %>% 
+  knitr::kable( booktabs = T, 
+                col.names=c("Variable",
+                        "n","media±et", 
+                        "n","media±et",
+                        "p dif.","IC95% dif.", "p")) %>%
+  add_header_above(c(" " = 1, "Tanger" = 2, "Málaga" = 2,"t-test"=2, "No normal"=1)) %>%
+  kable_styling(font_size=12)
+
+
+```
+Normalmente no mostraríamos los dos tipos de significación si no que haríamos la elección de usar pruebas paramétricas o no paramétricas según se den las condiciones de validez. Obsérvese que cuando las muestras no son pequeñas y las desviaciones de la normalidad no son grandes, ambos tipos de prueba suelen ofrecer significaciones similares.
+
+Veamos para varias de estas variables como son los ic95% para las medias en cada grupo, y para las diferencias entre ambos grupos. La diferencia entre ambos grupos será significativa cuando el IC)%% para la diferencia no contiene al cero. En ese caso observaremos que los IC95% para cada grupo se tocan _nada o muy poco._
+
+
+```{r}
+
+dfResumen=df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
+                                columnas = c("ic1","ic2", "ci_min","ci_max")) 
+
+dfResumenTidy = dfResumen %>% select(-ci_min,-ci_max) %>% gather(Clave,Valor,-Variable) %>%
+  separate(Clave,c("Concepto","Grupo")) %>% spread(Concepto,Valor)
+
+
+dfResumen %>% 
+  knitr::kable(booktabs=T, 
+                col.names=c("Variable",
+                        "ic(min)","ic(max)" ,
+                        "ic(min)","ic(max)",  
+                         "ic.dif.(min)", "ic.dif.(max)")) %>%
+  add_header_above(c(" " = 1, "Tanger" = 2, "Málaga" = 2,"Málaga-Tanger"=2))
+```
+
+Para el colesterol se ve que el IC95% para la diferencia no contiene al valor cero, es decir, tenemos evidencia estadísticamente significativa en contra de que las medias en ambos grupos sean iguales. Por otro lado, vemos que los IC95% para las medias de colesterol en ambos grupos no se cruzan. Hasta ahora todo coincide con la intuición.
+
+```{r}
+laVariable="Colesterol"
+grid.arrange(
+ggplot(dfResumenTidy %>% filter (Variable==laVariable), aes(x=Grupo, y=(ic1+ic2)/2)) +
+  geom_errorbar(aes(ymin=ic1,ymax=ic2),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(laVariable)+xlab(""),
+ggplot(dfResumen %>% filter (Variable==laVariable), aes(x="Málaga-Tanger", y=(ci_max+ci_min)/2)) +
+  geom_errorbar(aes(ymin=ci_min,ymax=ci_max),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(str_c("Diferencia de ", laVariable)) +
+  xlab("")+geom_hline(yintercept=0,lty=2,color="red"),
+ncol=2)
+```
+
+En cuanto a la siguiente variable, _Triglicéridos_ y _Glucemia_ nos encontramos la sorpresa: observamos que el IC95% para la diferencia de medias no contiene (por poco) al cero, es decir, la diferencia de medias es apenas significativamente diferente de cero, sin embargo los intervalos de confianza dentro de cada grupo se cruzan (por poco).
+
+
+```{r echo=FALSE}
+laVariable="Trigliceridos"
+grid.arrange(
+ggplot(dfResumenTidy %>% filter (Variable==laVariable), aes(x=Grupo, y=(ic1+ic2)/2)) +
+  geom_errorbar(aes(ymin=ic1,ymax=ic2),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(laVariable)+xlab(""),
+ggplot(dfResumen %>% filter (Variable==laVariable), aes(x="Málaga-Tanger", y=(ci_max+ci_min)/2)) +
+  geom_errorbar(aes(ymin=ci_min,ymax=ci_max),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(str_c("Diferencia de ", laVariable)) +
+  xlab("")+geom_hline(yintercept=0,lty=2,color="red"),
+ncol=2)
+```
+
+Estudie lo que ocurre en el resto de variables y compruebe si gráficamente es cierto lo de que:
+
+> Cuando la diferencia entre dos grupos es estadísticamente significativa, los IC95% de cada grupo se tocan _nada o muy poc.o_
+
+```{r echo=FALSE}
+laVariable="Glucemia"
+grid.arrange(
+ggplot(dfResumenTidy %>% filter (Variable==laVariable), aes(x=Grupo, y=(ic1+ic2)/2)) +
+  geom_errorbar(aes(ymin=ic1,ymax=ic2),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(laVariable)+xlab(""),
+ggplot(dfResumen %>% filter (Variable==laVariable), aes(x="Málaga-Tanger", y=(ci_max+ci_min)/2)) +
+  geom_errorbar(aes(ymin=ci_min,ymax=ci_max),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(str_c("Diferencia de ", laVariable)) +
+  xlab("")+geom_hline(yintercept=0,lty=2,color="red"),
+ncol=2)
+```
+
+
+```{r echo=FALSE}
+laVariable="PAS"
+grid.arrange(
+ggplot(dfResumenTidy %>% filter (Variable==laVariable), aes(x=Grupo, y=(ic1+ic2)/2)) +
+  geom_errorbar(aes(ymin=ic1,ymax=ic2),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(laVariable)+xlab(""),
+ggplot(dfResumen %>% filter (Variable==laVariable), aes(x="Málaga-Tanger", y=(ci_max+ci_min)/2)) +
+  geom_errorbar(aes(ymin=ci_min,ymax=ci_max),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(str_c("Diferencia de ", laVariable)) +
+  xlab("")+geom_hline(yintercept=0,lty=2,color="red"),
+ncol=2)
+```
+
+
+```{r echo=FALSE}
+laVariable="PAD"
+grid.arrange(
+ggplot(dfResumenTidy %>% filter (Variable==laVariable), aes(x=Grupo, y=(ic1+ic2)/2)) +
+  geom_errorbar(aes(ymin=ic1,ymax=ic2),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(laVariable)+xlab(""),
+ggplot(dfResumen %>% filter (Variable==laVariable), aes(x="Málaga-Tanger", y=(ci_max+ci_min)/2)) +
+  geom_errorbar(aes(ymin=ci_min,ymax=ci_max),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(str_c("Diferencia de ", laVariable)) +
+  xlab("")+geom_hline(yintercept=0,lty=2,color="red"),
+ncol=2)
+```
+
+
+
+```{r echo=FALSE}
+laVariable="Peso"
+grid.arrange(
+ggplot(dfResumenTidy %>% filter (Variable==laVariable), aes(x=Grupo, y=(ic1+ic2)/2)) +
+  geom_errorbar(aes(ymin=ic1,ymax=ic2),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(laVariable)+xlab(""),
+ggplot(dfResumen %>% filter (Variable==laVariable), aes(x="Málaga-Tanger", y=(ci_max+ci_min)/2)) +
+  geom_errorbar(aes(ymin=ci_min,ymax=ci_max),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(str_c("Diferencia de ", laVariable)) +
+  xlab("")+geom_hline(yintercept=0,lty=2,color="red"),
+ncol=2)
+```
+
+```{r echo=FALSE}
+laVariable="Talla"
+grid.arrange(
+ggplot(dfResumenTidy %>% filter (Variable==laVariable), aes(x=Grupo, y=(ic1+ic2)/2)) +
+  geom_errorbar(aes(ymin=ic1,ymax=ic2),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(laVariable)+xlab("")+
+  scale_y_continuous(labels=function(x) sprintf("%.2f", x)),
+ggplot(dfResumen %>% filter (Variable==laVariable), aes(x="Málaga-Tanger", y=(ci_max+ci_min)/2)) +
+  geom_errorbar(aes(ymin=ci_min,ymax=ci_max),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(str_c("Diferencia de ", laVariable)) +
+  xlab("")+geom_hline(yintercept=0,lty=2,color="red"),
+ncol=2)
+```
+
+
+
+```{r echo=FALSE}
+laVariable="Consumo"
+grid.arrange(
+ggplot(dfResumenTidy %>% filter (Variable==laVariable), aes(x=Grupo, y=(ic1+ic2)/2)) +
+  geom_errorbar(aes(ymin=ic1,ymax=ic2),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(laVariable)+xlab(""),
+ggplot(dfResumen %>% filter (Variable==laVariable), aes(x="Málaga-Tanger", y=(ci_max+ci_min)/2)) +
+  geom_errorbar(aes(ymin=ci_min,ymax=ci_max),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(str_c("Diferencia de ", laVariable)) +
+  xlab("")+geom_hline(yintercept=0,lty=2,color="red"),
+ncol=2)
+```
+
+
+```{r echo=FALSE}
+laVariable="Gasto"
+grid.arrange(
+ggplot(dfResumenTidy %>% filter (Variable==laVariable), aes(x=Grupo, y=(ic1+ic2)/2)) +
+  geom_errorbar(aes(ymin=ic1,ymax=ic2),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(laVariable)+xlab(""),
+ggplot(dfResumen %>% filter (Variable==laVariable), aes(x="Málaga-Tanger", y=(ci_max+ci_min)/2)) +
+  geom_errorbar(aes(ymin=ci_min,ymax=ci_max),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(str_c("Diferencia de ", laVariable)) +
+  xlab("")+geom_hline(yintercept=0,lty=2,color="red"),
+ncol=2)
+```
+

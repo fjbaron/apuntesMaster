@@ -325,7 +325,7 @@ Podemos realizar la prueba paramétrica en SPSS en el menú: "_Analizar - Compar
 
 La prueba no paramétrica está en un diálogo análogo que obtenemos en el menú "_Analizar - Pruebas no paramétricas - Cuadros de dialogo antiguos - 2 muestras independientes"
 
-Una representación gráfica de los intervalos de confianza nos dejan claro que son demasiado amplios como para que las diferencia que se observa entre ambos grupos sea estadísticamente significativa.
+Una representación gráfica de los intervalos de confianza nos dejan claro que son demasiado amplios como para que las diferencia que se observa entre ambos grupos sea estadísticamente significativa. Ni siquiera queda claro que el Calcio, con un intervalo de confianza tan amplio presente un efecto mayor que cero.
 
 
 
@@ -338,7 +338,322 @@ resumen=df %>% gather(Variable,Valor,-Grupo) %>%
 ggplot(resumen %>% filter(Variable=="Diferencia"), aes(x=Grupo,y=Media)) +
   geom_errorbar(aes(ymin=Media-IC,ymax=Media+IC),width=0.2, size=1, color="navyblue")+
   geom_point( size=4, shape=21, fill="white")+ylab("Diferencia")+
-  geom_hline(yintercept=0,lty=2)
+  geom_hline(yintercept=0,lty=2,color="red")
 ```
 
 <img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+
+
+
+###¿Es lo mismo que la diferencia entre dos grupos sea significativa que el que sus respectivos intervalos de confianza para la media no se toquen? {-}
+Parecería que es lo mismo, pero no es así. La realidad es que si hay diferencia significativa entre la media de dos grupos, entonces los intervalos de confianza se tocan nada o _muy poco._ Vamos a ilustrarlo retomando la base de datos [2poblaciones-Mismotrabajo-DiferenteNutricion.sav](datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav). 
+
+
+
+Vamos a usar tanto las pruebas t-student como las no paramétricas para estudiar las diferencias entre los individuos de _Málaga_ y _Tanger_ en todas las variables numéricas.
+
+
+
+Normalmente en una publicación científica pondríamos como tabla de resultados algo similar a esto:
+
+
+```r
+vNumericas=names(df) %>% setdiff("Grupo")
+df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
+                                columnas = c("n","mediaet","p.t","ci95","p.w")) %>% 
+  knitr::kable( booktabs = T, 
+                col.names=c("Variable",
+                        "n","media±et", 
+                        "n","media±et",
+                        "p dif.","IC95% dif.", "p")) %>%
+  add_header_above(c(" " = 1, "Tanger" = 2, "Málaga" = 2,"t-test"=2, "No normal"=1)) %>%
+  kable_styling(font_size=12)
+```
+
+<table class="table" style="font-size: 12px; margin-left: auto; margin-right: auto;">
+ <thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1"></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Tanger</div></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Málaga</div></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">t-test</div></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">No normal</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Variable </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:left;"> media±et </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:left;"> media±et </th>
+   <th style="text-align:left;"> p dif. </th>
+   <th style="text-align:left;"> IC95% dif. </th>
+   <th style="text-align:left;"> p </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Colesterol </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 162.67±8.32 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 209.12±6.06 </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+   <td style="text-align:left;"> 46.45[26.15,66.76] </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Trigliceridos </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 82.13±8.39 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 113.22±9.98 </td>
+   <td style="text-align:left;"> 0.018* </td>
+   <td style="text-align:left;"> 31.09[5.45,56.72] </td>
+   <td style="text-align:left;"> 0.018* </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Glucemia </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 78.03±2.09 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 88.18±2.72 </td>
+   <td style="text-align:left;"> 0.004* </td>
+   <td style="text-align:left;"> 10.15[3.40,16.89] </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PAS </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 119.83±1.86 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 121.70±1.83 </td>
+   <td style="text-align:left;"> 0.472 </td>
+   <td style="text-align:left;"> 1.87[-3.28,7.01] </td>
+   <td style="text-align:left;"> 0.596 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PAD </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 72.50±1.80 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 70.30±1.37 </td>
+   <td style="text-align:left;"> 0.329 </td>
+   <td style="text-align:left;"> -2.20[-6.67,2.27] </td>
+   <td style="text-align:left;"> 0.322 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Peso </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 72.67±1.46 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 81.38±1.25 </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+   <td style="text-align:left;"> 8.71[4.94,12.49] </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Talla </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 1.70±0.01 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 1.69±0.01 </td>
+   <td style="text-align:left;"> 0.431 </td>
+   <td style="text-align:left;"> -0.01[-0.03,0.01] </td>
+   <td style="text-align:left;"> 0.611 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Consumo </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 1909.17±87.23 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 3528.04±78.71 </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+   <td style="text-align:left;"> 1618.87[1387.71,1850.04] </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gasto </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 1894.20±34.52 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> 1880.30±62.59 </td>
+   <td style="text-align:left;"> 0.845 </td>
+   <td style="text-align:left;"> -13.90[-154.73,126.93] </td>
+   <td style="text-align:left;"> 0.972 </td>
+  </tr>
+</tbody>
+</table>
+Normalmente no mostraríamos los dos tipos de significación si no que haríamos la elección de usar pruebas paramétricas o no paramétricas según se den las condiciones de validez. Obsérvese que cuando las muestras no son pequeñas y las desviaciones de la normalidad no son grandes, ambos tipos de prueba suelen ofrecer significaciones similares.
+
+Veamos para varias de estas variables como son los ic95% para las medias en cada grupo, y para las diferencias entre ambos grupos. La diferencia entre ambos grupos será significativa cuando el IC)%% para la diferencia no contiene al cero. En ese caso observaremos que los IC95% para cada grupo se tocan _nada o muy poco._
+
+
+
+```r
+dfResumen=df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
+                                columnas = c("ic1","ic2", "ci_min","ci_max")) 
+
+dfResumenTidy = dfResumen %>% select(-ci_min,-ci_max) %>% gather(Clave,Valor,-Variable) %>%
+  separate(Clave,c("Concepto","Grupo")) %>% spread(Concepto,Valor)
+
+
+dfResumen %>% 
+  knitr::kable(booktabs=T, 
+                col.names=c("Variable",
+                        "ic(min)","ic(max)" ,
+                        "ic(min)","ic(max)",  
+                         "ic.dif.(min)", "ic.dif.(max)")) %>%
+  add_header_above(c(" " = 1, "Tanger" = 2, "Málaga" = 2,"Málaga-Tanger"=2))
+```
+
+<table>
+ <thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1"></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Tanger</div></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Málaga</div></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Málaga-Tanger</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Variable </th>
+   <th style="text-align:right;"> ic(min) </th>
+   <th style="text-align:right;"> ic(max) </th>
+   <th style="text-align:right;"> ic(min) </th>
+   <th style="text-align:right;"> ic(max) </th>
+   <th style="text-align:right;"> ic.dif.(min) </th>
+   <th style="text-align:right;"> ic.dif.(max) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Colesterol </td>
+   <td style="text-align:right;"> 145.7 </td>
+   <td style="text-align:right;"> 179.7 </td>
+   <td style="text-align:right;"> 196.9 </td>
+   <td style="text-align:right;"> 221.3 </td>
+   <td style="text-align:right;"> 26.15 </td>
+   <td style="text-align:right;"> 66.76 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Trigliceridos </td>
+   <td style="text-align:right;"> 65.0 </td>
+   <td style="text-align:right;"> 99.3 </td>
+   <td style="text-align:right;"> 93.2 </td>
+   <td style="text-align:right;"> 133.3 </td>
+   <td style="text-align:right;"> 5.45 </td>
+   <td style="text-align:right;"> 56.72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Glucemia </td>
+   <td style="text-align:right;"> 73.8 </td>
+   <td style="text-align:right;"> 82.3 </td>
+   <td style="text-align:right;"> 82.7 </td>
+   <td style="text-align:right;"> 93.6 </td>
+   <td style="text-align:right;"> 3.40 </td>
+   <td style="text-align:right;"> 16.89 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PAS </td>
+   <td style="text-align:right;"> 116.0 </td>
+   <td style="text-align:right;"> 123.7 </td>
+   <td style="text-align:right;"> 118.0 </td>
+   <td style="text-align:right;"> 125.4 </td>
+   <td style="text-align:right;"> -3.28 </td>
+   <td style="text-align:right;"> 7.01 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PAD </td>
+   <td style="text-align:right;"> 68.8 </td>
+   <td style="text-align:right;"> 76.2 </td>
+   <td style="text-align:right;"> 67.5 </td>
+   <td style="text-align:right;"> 73.1 </td>
+   <td style="text-align:right;"> -6.67 </td>
+   <td style="text-align:right;"> 2.27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Peso </td>
+   <td style="text-align:right;"> 69.7 </td>
+   <td style="text-align:right;"> 75.7 </td>
+   <td style="text-align:right;"> 78.9 </td>
+   <td style="text-align:right;"> 83.9 </td>
+   <td style="text-align:right;"> 4.94 </td>
+   <td style="text-align:right;"> 12.49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Talla </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> -0.03 </td>
+   <td style="text-align:right;"> 0.01 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Consumo </td>
+   <td style="text-align:right;"> 1730.8 </td>
+   <td style="text-align:right;"> 2087.6 </td>
+   <td style="text-align:right;"> 3369.9 </td>
+   <td style="text-align:right;"> 3686.2 </td>
+   <td style="text-align:right;"> 1387.71 </td>
+   <td style="text-align:right;"> 1850.04 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gasto </td>
+   <td style="text-align:right;"> 1823.6 </td>
+   <td style="text-align:right;"> 1964.8 </td>
+   <td style="text-align:right;"> 1754.5 </td>
+   <td style="text-align:right;"> 2006.1 </td>
+   <td style="text-align:right;"> -154.73 </td>
+   <td style="text-align:right;"> 126.93 </td>
+  </tr>
+</tbody>
+</table>
+
+Para el colesterol se ve que el IC95% para la diferencia no contiene al valor cero, es decir, tenemos evidencia estadísticamente significativa en contra de que las medias en ambos grupos sean iguales. Por otro lado, vemos que los IC95% para las medias de colesterol en ambos grupos no se cruzan. Hasta ahora todo coincide con la intuición.
+
+
+```r
+laVariable="Colesterol"
+grid.arrange(
+ggplot(dfResumenTidy %>% filter (Variable==laVariable), aes(x=Grupo, y=(ic1+ic2)/2)) +
+  geom_errorbar(aes(ymin=ic1,ymax=ic2),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(laVariable)+xlab(""),
+ggplot(dfResumen %>% filter (Variable==laVariable), aes(x="Málaga-Tanger", y=(ci_max+ci_min)/2)) +
+  geom_errorbar(aes(ymin=ci_min,ymax=ci_max),width=0.2, size=1, color="navyblue")+
+  geom_point( size=4, shape=21, fill="white")+ylab(str_c("Diferencia de ", laVariable)) +
+  xlab("")+geom_hline(yintercept=0,lty=2,color="red"),
+ncol=2)
+```
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+
+En cuanto a la siguiente variable, _Triglicéridos_ y _Glucemia_ nos encontramos la sorpresa: observamos que el IC95% para la diferencia de medias no contiene (por poco) al cero, es decir, la diferencia de medias es apenas significativamente diferente de cero, sin embargo los intervalos de confianza dentro de cada grupo se cruzan (por poco).
+
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+
+Estudie lo que ocurre en el resto de variables y compruebe si gráficamente es cierto lo de que:
+
+> Cuando la diferencia entre dos grupos es estadísticamente significativa, los IC95% de cada grupo se tocan _nada o muy poc.o_
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+
+
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+
+
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+
