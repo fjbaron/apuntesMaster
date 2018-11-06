@@ -2,7 +2,7 @@ book_filename: "apuntesEstadistica"
 chapter_name: "Capítulo "
 repo: https://github.com/fjbaron/apuntesMaster
 output_dir: docs
-rmd_files: ["index.Rmd", "01-Descriptiva.Rmd", "02-IntConf.Rmd", "03-contHip.Rmd", "04-numerica2Grupos.Rmd"]
+rmd_files: ["index.Rmd", "01-Descriptiva.Rmd", "02-IntConf.Rmd", "03-contHip.Rmd", "04-numerica2Grupos.Rmd", "05-anova.Rmd"]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes
 delete_merged_file: true

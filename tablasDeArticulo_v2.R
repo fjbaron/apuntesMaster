@@ -32,7 +32,7 @@ library(effsize)
 desc1vn=function(df,vNum,formato="%1.2f\u00B1%1.2f",formatoIntervalo="%1.2f-%1.2f",columnas=NULL){
   shapiro50="-"
   shapiro.p=1
-  resultado=tibble("Fallo"=1,"n"=0,"media"=NA, "mediadt"="","mediaet"="","medianaRI"="","rango"="","gauss"="","out3SD"=NA,"out5SD"=NA,"shapiro"="","p25"=NA,"p50"=NA,"p75"=NA,"p.intra"="",ic1=NA,ic2=NA)
+  resultado=tibble("Fallo"=1,"n"=0,"media"=NA, "mediadt"="","mediaet"="","medianaRI"="","rango"="","gauss"="","out3SD"=NA,"out5SD"=NA,"shapiro"="","p25"=NA,"p50"=NA,"p75"=NA,"p.intra"="",ic1=NA,ic2=NA,ic95="",asim=NA,curtosis=NA)
 
   try({
     datos=df[[vNum]][!is.na(df[[vNum]])]
@@ -77,7 +77,10 @@ desc1vn=function(df,vNum,formato="%1.2f\u00B1%1.2f",formatoIntervalo="%1.2f-%1.2
         out5SD=zout5SD,
         p.intra=pvalores(2*pt(abs(media/et),n-1,lower.tail = F)),
         ic1=media-anchoIC*et,
-        ic2=media+anchoIC*et
+        ic2=media+anchoIC*et,
+        ic95=sprintf(formatoIntervalo,ic1,ic2),
+        asim=e1071::skewness(numerica,na.rm = T),
+        curtosis=e1071::kurtosis(numerica,na.rm = T)
       )
     }
   }, silent = TRUE)
@@ -348,7 +351,7 @@ pvalores=function(y){
 
 
 
-generaTablaDescriptivaNumericas=function(df,vNumericas,traduccion,columnas=c("n","mediaet","gauss","rango","out3SD","out5SD")){
+generaTablaDescriptivaNumericas=function(df,vNumericas,traduccion=NULL,columnas=c("n","mediaet","gauss","rango","out3SD","out5SD")){
   if(is.null(traduccion)) traduccion=vNumericas
   listaLineas= vNumericas %>% map ( ~ desc1vn(df,.,columnas=columnas))
   longitud=listaLineas %>% map_int(length)
@@ -652,3 +655,32 @@ rbindMioRestringido=function(dfA,dfB){
   rbind(dfA,dfB)
 }
 
+
+KreateTableOne = function(x, ..., printSMD = TRUE, nonnormal=NULL){
+  t1 = tableone::CreateTableOne( ...)
+  t2 = print(t1, quote=TRUE, nonnormal=nonnormal,...)
+  rownames(t2) = gsub(pattern='\\"', replacement='', rownames(t2))
+  colnames(t2) = gsub(pattern='\\"', replacement='', colnames(t2))
+  return(t2)
+}
+
+
+
+
+
+generaTablaCorrelaciones=function(df,vNumericas,traduccion=NULL){
+  if(is.null(traduccion)) traduccion=vNumericas
+  dfCorr=as.matrix(df[,vNumericas])
+  tabla.r=Hmisc::rcorr(dfCorr)
+  tablaCorrelaciones=matrix(sprintf("%0.2f%s",tabla.r$r,asteriscos2(tabla.r$P)),nrow = NROW(tabla.r$r),ncol=NCOL(tabla.r$r))
+  for(i in 1:NROW(tablaCorrelaciones)){
+    for (j in i:NROW(tablaCorrelaciones))tablaCorrelaciones[i,j]=""
+  }
+  dimnames(tablaCorrelaciones)=dimnames(tabla.r$r)
+  tablaCorrelaciones=data.frame(tablaCorrelaciones) %>% mutate(Variable=dimnames(tablaCorrelaciones)[[1]]) %>% select(Variable,everything())
+  tablaCorrelaciones=tablaCorrelaciones[-1,-NCOL(tablaCorrelaciones)]
+  tablaCorrelaciones$Variable=sprintf("[%02d] %s",1:NROW(tablaCorrelaciones),tablaCorrelaciones$Variable)
+  names(tablaCorrelaciones)[-c(1,2)]=sprintf("[%02d]",1:(NROW(tablaCorrelaciones)-1))
+  rownames(tablaCorrelaciones)=NULL
+  tablaCorrelaciones %>% as_tibble()
+}

@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="contrastes-de-hipotesis.html">
-
+<link rel="next" href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -140,6 +140,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html#dos-muestras-independientes"><i class="fa fa-check"></i><b>4.2</b> Dos Muestras independientes</a><ul>
 <li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html#es-lo-mismo-que-la-diferencia-entre-dos-grupos-sea-significativa-que-el-que-sus-respectivos-intervalos-de-confianza-para-la-media-no-se-toquen"><i class="fa fa-check"></i>¿Es lo mismo que la diferencia entre dos grupos sea significativa que el que sus respectivos intervalos de confianza para la media no se toquen?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><i class="fa fa-check"></i><b>5</b> Diferencias que presenta una variable numérica entre varios grupos</a><ul>
+<li class="chapter" data-level="5.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#anova-de-un-factor-o-una-via"><i class="fa fa-check"></i><b>5.1</b> Anova de un factor o una vía</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#en-que-se-basa-el-contraste-anova"><i class="fa fa-check"></i><b>5.1.1</b> En qué se basa el contraste ANOVA</a></li>
+<li class="chapter" data-level="5.1.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#como-se-interpreta-anova"><i class="fa fa-check"></i><b>5.1.2</b> Cómo se interpreta ANOVA</a></li>
+<li class="chapter" data-level="5.1.3" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#contrastes-no-planeados-o-post-hoc"><i class="fa fa-check"></i><b>5.1.3</b> Contrastes no planeados o post-hoc</a></li>
+<li class="chapter" data-level="5.1.4" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#comparaciones-planeadas"><i class="fa fa-check"></i><b>5.1.4</b> Comparaciones planeadas</a></li>
+<li class="chapter" data-level="5.1.5" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#que-hacer-si-no-se-verifican-las-premisas-del-modelo-anova"><i class="fa fa-check"></i><b>5.1.5</b> ¿Qué hacer si no se verifican las premisas del modelo ANOVA?</a></li>
+<li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#ejemplo-parametrico"><i class="fa fa-check"></i>Ejemplo paramétrico</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -520,7 +530,7 @@ Placebo
 <span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Antes))<span class="op">+</span><span class="kw">geom_boxplot</span>(),
 <span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Diferencia))<span class="op">+</span><span class="kw">geom_boxplot</span>(),
 <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-7-1.png" width="672" /> Se aprecia que los dos grupos eran similares al iniciarse el experimento. Sin embargo el grupo de que tomo el Placebo practicamente se quedó igual, y el que tomó <em>Calcio</em> experimentó una mejoría. Nos queda por saber si esta mejoría es explicable por el azar o va más allá (diferencia estadísticamente sgnificativa entre grupos).</p>
+<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-7-1.png" width="672" /> Se aprecia que los dos grupos eran similares al iniciarse el experimento. Sin embargo el grupo de que tomo el Placebo practicamente se quedó igual, y el que tomó <em>Calcio</em> experimentó una mejoría. Nos queda por saber si esta mejoría es explicable por el azar o va más allá (diferencia estadísticamente significativa entre grupos).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">generaTablatTestPorGrupo</span>(<span class="st">&quot;Grupo&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Antes&quot;</span>,<span class="st">&quot;Diferencia&quot;</span>),
                                 <span class="dt">columnas =</span> <span class="kw">c</span>(<span class="st">&quot;n&quot;</span>,<span class="st">&quot;mediaet&quot;</span>,<span class="st">&quot;p.t&quot;</span>,<span class="st">&quot;ci95&quot;</span>, <span class="st">&quot;p.w&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>( <span class="dt">booktabs =</span> T, 
@@ -1245,6 +1255,11 @@ Gasto
 <p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>En las publicaciones suele verse un tipo de gráfico u otro: El que muestra los intervalos de confianza en cada grupo, o el que sirve para estudiar las diferencias entre dos grupos. Existe una tercera posibilidad, no muy utilizada, usando la libreria <em>emmeans</em> de R, donde además de observarse los intervalos de confianza para la media en cada grupo, una flecha interior indica cuando las comparaciones entre dos grupos son significativas: OCurre justo cuando no tienen intersección común. Este tipo de gráficos será muy útil cuando haya muchas comparaciones a realizar entre grupos (pruebas <em>ANOVA</em>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">listaGraficos=vNumericas <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map</span>( <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(<span class="kw">formula</span>(<span class="kw">str_c</span>(.,<span class="st">&quot; ~ Grupo&quot;</span>)),<span class="dt">data=</span>df) <span class="op">%&gt;%</span>
+<span class="st">              </span><span class="kw">emmeans</span>(<span class="st">&quot;Grupo&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dt">comparisons=</span><span class="ot">TRUE</span>)<span class="op">+</span><span class="kw">xlab</span>(.x)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;&quot;</span>)<span class="op">+</span><span class="kw">coord_flip</span>())
+<span class="kw">do.call</span>(<span class="st">&quot;grid.arrange&quot;</span>, <span class="kw">c</span>(listaGraficos, <span class="dt">ncol=</span><span class="dv">3</span>))</code></pre></div>
+<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-22-1.png" width="768" /></p>
 
 </div>
 </div>
@@ -1254,8 +1269,8 @@ Gasto
           </div>
         </div>
       </div>
-<a href="contrastes-de-hipotesis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="contrastes-de-hipotesis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

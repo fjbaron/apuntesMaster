@@ -142,6 +142,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html#es-lo-mismo-que-la-diferencia-entre-dos-grupos-sea-significativa-que-el-que-sus-respectivos-intervalos-de-confianza-para-la-media-no-se-toquen"><i class="fa fa-check"></i>¿Es lo mismo que la diferencia entre dos grupos sea significativa que el que sus respectivos intervalos de confianza para la media no se toquen?</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><i class="fa fa-check"></i><b>5</b> Diferencias que presenta una variable numérica entre varios grupos</a><ul>
+<li class="chapter" data-level="5.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#anova-de-un-factor-o-una-via"><i class="fa fa-check"></i><b>5.1</b> Anova de un factor o una vía</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#en-que-se-basa-el-contraste-anova"><i class="fa fa-check"></i><b>5.1.1</b> En qué se basa el contraste ANOVA</a></li>
+<li class="chapter" data-level="5.1.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#como-se-interpreta-anova"><i class="fa fa-check"></i><b>5.1.2</b> Cómo se interpreta ANOVA</a></li>
+<li class="chapter" data-level="5.1.3" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#contrastes-no-planeados-o-post-hoc"><i class="fa fa-check"></i><b>5.1.3</b> Contrastes no planeados o post-hoc</a></li>
+<li class="chapter" data-level="5.1.4" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#comparaciones-planeadas"><i class="fa fa-check"></i><b>5.1.4</b> Comparaciones planeadas</a></li>
+<li class="chapter" data-level="5.1.5" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#que-hacer-si-no-se-verifican-las-premisas-del-modelo-anova"><i class="fa fa-check"></i><b>5.1.5</b> ¿Qué hacer si no se verifican las premisas del modelo ANOVA?</a></li>
+<li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#ejemplo-parametrico"><i class="fa fa-check"></i>Ejemplo paramétrico</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://www.bioestadistica.uma.es" target="blank">Bioestadística-UMA</a></li>
 
@@ -695,7 +705,7 @@ Gasto
 <blockquote>
 <p>“group 1 (≥9% LVGLS and ≥12% RVGLS)”</p>
 </blockquote>
-<p>Con respecto a él miden cuánto más peligroso es estar en el resto de grupos.Es habitual hacerlo con conceptos que son <em>razones</em>, de forma que:</p>
+<p>Con respecto a él, miden cuánto más peligroso es estar en el resto de grupos.Es habitual hacerlo con conceptos que son <em>razones</em>, de forma que:</p>
 <ul>
 <li><p>una razón igual <em>1</em> refleja que algo es igual de peligroso;</p></li>
 <li><p>valores <em>mayores que 1</em> indican aumento del riesgo;</p></li>
@@ -706,7 +716,7 @@ Gasto
 <blockquote>
 <p>group 4 (&lt;9% LVGLS and &lt;12% RVGLS)</p>
 </blockquote>
-<p>un intervalo de confianza al 95% les indica que <em>HR</em> es un valor comprendido en <em>1.473–2.091</em>. Es decir, no saben seguro cual es el valor real, pero respoden a su calculo usando un mecanismo que acierta en el 95% de las ocasiones, y que en este caso indica que sea cual sea el valor real, este debe ser claramente mayor que 1.</p>
+<p>un intervalo de confianza al 95% les indica que <em>HR</em> es un valor comprendido en <em>1.473–2.091</em>. Es decir, no saben seguro cual es el valor real, pero responden a su calculo usando un mecanismo que acierta en el 95% de las ocasiones, y que en este caso indica que sea cual sea el valor real, este debe ser claramente mayor que 1.</p>
 <p>En términos de <em>contrastes de hipótesis</em> podríamos decirlo de este modo:</p>
 <ul>
 <li><p>Si no hubiese datos que nos indicasen otra cosa, en principio asumiríamos la <strong>hipótesis nula</strong> de que los <em>grupos 1 y 4</em> presentan mortalidad similar (<em>HR=1</em>)</p></li>
@@ -719,10 +729,10 @@ Gasto
 <p>Es decir, si fuese cierta la nula y ambos grupos fuesen en realidad de riesgo similar, ellos han obtenido una muestra tan extraña que es dificil de explicar a menos que el azar haya jugado en su contra de tal modo que les ha ocurrido algo que no se vería ni en 1 de cada 1000 estudios similares.</p>
 <p>Más adelante en el artículo indican:</p>
 <blockquote>
-<p>On the basis of previously reported data,13 we calculated the sample size to obtain a hazard ratio (HR) of 1.3 in both groups.14 A 2- sided log-rank test with an overall sample size of 1600 participants (800 in group 1 and 800 in group 2) achieved 99.1% power at a 0.05 significance level to detect an HR of 1.30 when the control group had an HR of 1.00.</p>
+<p>On the basis of previously reported data, we calculated the sample size to obtain a hazard ratio (HR) of 1.3 in both groups. A 2-sided log-rank test with an overall sample size of 1600 participants (800 in group 1 and 800 in group 2) achieved 99.1% power at a 0.05 significance level to detect an HR of 1.30 when the control group had an HR of 1.</p>
 </blockquote>
-<p>Se podría traducir de este modo. Tenemos como hipótesis alternativa la de que ciertos grupos de pacientes deben tener un HR&gt;=1.3, que es un valor que el investigador considera clínicamente relevante. No ha sido observado (aún) en los datos 8ya que cuando diseñaron el estudio, no habían empezado a rcoger datos de los pacientes). Es un valor que el investigador, por su experiencia en el tema, sospecha que debe ser así de grande o aún mayor. Es, en la fase de diseño del estudio, solo una creencia del investigador.</p>
-<p>Eligieron una muestra de 1600 pacientes, que es lo bastante grande como para que si su hipótesis alternativa fuese cierta, pudieran declarar significativo el resultado con una probabilidad del 99.1%. Esto era algo conocido <em>antes</em> de realizar el estudio. Como observa, la potencia se utiliza para diseñar el estudio. Nadie quiere empezar a trabajar en un tema donde si tu hipótesis alternativa es correcta, por haber elegido la muestra muy pequeña, tienes pocas probabilidades de encontrar evidencia contra la <em>hipótesis nula</em>.</p>
+<p>Se podría traducir de este modo. Tenemos como hipótesis alternativa la de que ciertos grupos de pacientes deben tener un HR&gt;1.3, que es un valor que el investigador considera clínicamente relevante. No ha sido observado (aún) en los datos ya que cuando diseñaron el estudio, no habían empezado a recoger datos de los pacientes). Es un valor que el investigador, por su experiencia en el tema, sospecha que debe ser así de grande o aún mayor. Es, en la fase de diseño del estudio, solo una creencia del investigador, basada en lo que sabe o ha leído del tema.</p>
+<p>Eligieron una muestra de 1600 pacientes, que es lo bastante grande como para que si su hipótesis alternativa fuese cierta con HR&gt;1.3, pudieran declarar significativo el resultado con una probabilidad del 99.1%. Esto era algo conocido <em>antes</em> de realizar el estudio. Como observa, la potencia se utiliza para diseñar el estudio. Nadie quiere empezar a trabajar en un tema donde si tu hipótesis alternativa es correcta, por haber elegido la muestra muy pequeña, tienes pocas probabilidades de encontrar evidencia contra la <em>hipótesis nula</em>.</p>
 
 </div>
 </div>

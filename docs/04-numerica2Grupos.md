@@ -261,7 +261,7 @@ ncol=2)
 ```
 
 <img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-7-1.png" width="672" />
-Se aprecia que los dos grupos eran similares al iniciarse el experimento. Sin embargo el grupo de que tomo el Placebo practicamente se quedó igual, y el que tomó _Calcio_ experimentó una mejoría. Nos queda por saber si esta mejoría es explicable por el azar o va más allá (diferencia estadísticamente sgnificativa entre grupos).
+Se aprecia que los dos grupos eran similares al iniciarse el experimento. Sin embargo el grupo de que tomo el Placebo practicamente se quedó igual, y el que tomó _Calcio_ experimentó una mejoría. Nos queda por saber si esta mejoría es explicable por el azar o va más allá (diferencia estadísticamente significativa entre grupos).
 
 
 
@@ -656,4 +656,22 @@ Estudie lo que ocurre en el resto de variables y compruebe si gráficamente es c
 
 
 <img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+
+
+
+En las publicaciones suele verse un tipo de gráfico u otro: El que muestra los intervalos de confianza en cada grupo, o el que sirve para estudiar las diferencias entre dos grupos. Existe una tercera posibilidad, no muy utilizada, usando la libreria _emmeans_ de R, donde además de observarse los intervalos de confianza para la media en cada grupo, una flecha interior indica cuando las comparaciones entre dos grupos son significativas: OCurre justo cuando no tienen intersección común. Este tipo de gráficos será muy útil cuando haya muchas comparaciones a realizar entre grupos (pruebas _ANOVA_).
+
+
+
+
+```r
+listaGraficos=vNumericas %>% map( ~ lm(formula(str_c(.," ~ Grupo")),data=df) %>%
+              emmeans("Grupo") %>% plot(comparisons=TRUE)+xlab(.x)+ylab("")+coord_flip())
+do.call("grid.arrange", c(listaGraficos, ncol=3))
+```
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-22-1.png" width="768" />
+
+
+
 

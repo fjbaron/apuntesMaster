@@ -48,8 +48,11 @@ Los datos categóricos los examinamos bien con tablas de frecuencias o con repre
 ####Frecuencias y porcentajes
 Las frecuencias pueden obtenerse en términos absolutos (frecuencias absolutas), mostrando las repeticiones de cada categoría, o bien en términos relativos (porcentajes), mostrando los participación de cada categoría en relación con el total. Las frecuencias absolutas se utilizan con muestras de tamaño pequeño, y las relativas tienen más sentido con muestras de tamaño grande.
 
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, results=FALSE}
+tabla=KreateTableOne(vars=c("sexo","laboro", "nivelest", "tabaco",  "diabm"),data = df) 
+```
 ```{r}
-CreateTableOne(vars=c("sexo","laboro", "nivelest", "tabaco",  "diabm"),data = df) %>%summary()
+tabla  %>% knitr::kable()
 ```
 
 
@@ -138,10 +141,13 @@ Ahora bien, ¿qué criterios aproximados podemos utilizar para clasificar unos d
 Los indicadores que miden la simetría y la forma de la campana son el **coeficiente de asimetría** (_skewness_) (negativo en distribuciones con cola a la izquierda, positivo en distribuciones con cola a la derecha) y la **curtosis** (_kurtosis_) (negativa para las aplanadas y positiva para las apuntadas).
 
 
-```{r}
-dftmp=df%>% select(edad:imc)
-dftmp %>% CreateTableOne(data = .) %>% summary()
+```{r }
+generaTablaDescriptivaNumericas(df,c("edad","peso","talla","imc"),
+               columnas = c("n", "media","dt","min","p25","p50","p75","max","asim","curtosis")) %>%
+  kable(booktabs=T)
 ```
+
+
 
 
 ```{r}
@@ -156,9 +162,13 @@ nrow=2)
 
 En la tablas anteriores, así como en los gráficos (llamados **histogramas**) vemos como _peso_ e _IMC_ presentan una cierta falta de normalidad; Podríamos entonces presentar un resumen de estas variables del siguiente modo:
 
-```{r}
-dftmp %>% CreateTableOne(data = .) %>% print(nonnormal=c("peso","imc"))
+```{r results=FALSE}
+tabla=KreateTableOne(data = df %>% select(edad,talla,peso,imc),nonnormal=c("peso","imc"))
 ```
+```{r}
+tabla %>% knitr::kable(booktabs=TRUE)
+```
+
 
 
 La falta de normalidad no es fácil de apreciarlo mirando directamente el histograma. Hay gráficos como el Q-Q plot, que nos indican la falta de normalidad como desviaciones de la observaciones con respecto a una línea recta:
@@ -189,8 +199,11 @@ Para ello realizamos estudios donde intervienen ambas variables simultáneamente
 Cuando ambas variables son categóricas (o discretas con pocas modalidades), se suele presentar las observaciones en una tabla de contingencia. Esta una tabla de doble entrada donde se presentan la distribución de frecuencias conjunta de las dos variables.
 
 Continuando con la base de datos del ejemplo, podríamos estudiar qué distribución presentan otras variables cualitativas según el sexo del paciente. Lo mostraríamos como sigue:
+```{r results=FALSE}
+tabla=KreateTableOne(vars = c("tabaco","estcivil","sedentar","diabm","hipercol"), strata = "sexo" , data = df)
+```
 ```{r}
-df %>% CreateTableOne(vars = c("tabaco","estcivil","sedentar","diabm","hipercol"), strata = "sexo" , data = .)
+tabla %>% knitr::kable(booktabs=T)
 ```
 
 
@@ -240,18 +253,26 @@ En estos casos, lo que se realiza es un estudio descriptivo de la variable numé
 Volviendo a nuestro ejemplo, vamos a comparar las variables numéricas de la base de datos entre sexos:
 
 
+```{r results=FALSE}
+tabla=KreateTableOne(vars = c("edad", "talla","peso","imc"), strata = "sexo" , data = df) 
+```
+
 ```{r}
-df %>% CreateTableOne(vars = c("edad", "talla","peso","imc"), strata = "sexo" , data = .) %>% print(nonnormal=c("peso","imc"))
+tabla %>% knitr::kable(booktabs=T)
 ```
 
 
 
+```{r results=FALSE}
+tabla=KreateTableOne(data=df,vars = c("edad","peso","talla","imc","pas","pad","fc"), strata = "tabaco" ) 
+```
+
 ```{r}
-CreateTableOne(vars = c("edad","peso","talla","imc","pas","pad","fc"), strata = "tabaco" , data = df)
+tabla %>% knitr::kable(booktabs=T)
 ```
 
 
-En las tablas anteriores aparecen de nuevos las cantidades **p (significación)** de las que hablaremos más adelante.
+En las tablas anteriores aparecen de nuevos las cantidades **p** **(significación)** de las que hablaremos más adelante.
 
 
 Los diagramas de cajas muestran los cuartiles en unas cajas centrales, así como observaciones más alejadas, y permiten hacerse una idea visual de qué diferencias existen entre los grupos. Por ejemplo, en las tablas anteriores se apreciaba una cierta diferencia de *talla* entre hombres y mujeres, aunque no así en *pad*:
@@ -278,13 +299,13 @@ Cuando hablamos de comparar dos variables numéricas, pensamos en establecer la 
 La vía más directa para estudiar la posible asociación consiste en inspeccionar visualmente un diagrama de dispersión (nube de puntos). Si reconocemos una tendencia, es una indicación de que puede valer la pena explorar con más profundidad. Si es el caso, puede interesarnos proseguir con un análisis de regresión. En este tipo de análisis se pretende encontrar un modelo matemático (recta de regresión) que explique los valores de una de las variables (dependiente) en función de la otra (independiente). A ello le dedicamos un capítulo con posterioridad.
 
 
-Por ejemplo, en la base de datos con que trabajamos, es lógicco esperar una buena relación entre el _peso_ y el _imc_, y eso es justo lo que encontramos.
+Por ejemplo, en la base de datos con que trabajamos, es lógico esperar una buena relación entre el _peso_ y el _imc_, y eso es justo lo que encontramos.
 
 ```{r}
 ggplot(df, aes(x=peso, y=imc)) + geom_jitter(alpha=0.3)
 ```
 
-En otras variables la relación no es tan evidente, como la que existe entre _edad_ y mayor _presi´on arterial diastólica_ y menor _presión arterial sistólica_. Las rectas de regresión no serán muy útiles para percibir la tendencia con más facilidad:
+En otras variables la relación no es tan evidente, como la que existe entre _edad_ y mayor _presión arterial diastólica_ y menor _presión arterial sistólica_. Las rectas de regresión no serán muy útiles para percibir la tendencia con más facilidad (aunque esto solo lo utilizamos ahora como ayuda visual).
 
 ```{r}
 grid.arrange(
@@ -296,14 +317,23 @@ ggplot(df, aes(x=edad, y=pad)) + geom_jitter(alpha=0.3)+geom_smooth(method="lm")
 
 
 
-
-
-
-En *SPSS* estos tipos de gráficos podemos encontrarlos en el menú: “*Gráficos – Dispersión… – Simple*“.
-
-
  
+Para describir numéricamente el grado de asociación lineal dentre variables numéricas suele usarse el **coeficiente de correlación lineal de Pearson (r)**. Esta es una cantidad adimensional que toma valores entre -1 y 1. Cuando _r=0_ se dice que hay *incorrelación* (nada de asociación lineal). Cuánto más se aleje r de cero, mayor es el grado de asociación lineal entre las vaiables.
+
+> [Para practicar con el coeficiente de correlación lineal de Pearson, siga este enlace](https://www.bioestadistica.uma.es/analisis/correlacion/)
+
+
+
+Los gráficos mostrados se realizan en *SPSS* en el menú: “*Gráficos – Dispersión… – Simple*“. El *coeficiente de correlacion lineal de Pearson* lo encontramos en el menú: "*Analizar - Correlaciones - Bivariadas*".
+
+
+Si queremos mostrar todas las correlaciones existentes entre las variables numéricas de nuestra base de datos, tendremos un *r* que mostrar por cada par de variables. Eso hace una buena cantidad de números. Una forma habitual de mostrarlos sin ocupar mucho espacio es esta:
+
+```{r}
+df %>% generaTablaCorrelaciones(vNumericas = c("edad","peso","talla","imc","pas","pad","fc")) %>%
+  knitr::kable(booktabs=T)
  
+```
 
 
 

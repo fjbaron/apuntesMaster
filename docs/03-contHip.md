@@ -333,7 +333,7 @@ Dividieron a los pacientes en 2x2=4 grupos dependiendo de que los pacientes supe
 > "group 1 (≥9% LVGLS and ≥12% RVGLS)"
 
 
-Con respecto a él miden cuánto más peligroso es estar en el resto de grupos.Es habitual hacerlo con conceptos que son _razones_, de forma que:
+Con respecto a él, miden cuánto más peligroso es estar en el resto de grupos.Es habitual hacerlo con conceptos que son _razones_, de forma que:
 
 - una razón igual *1* refleja que algo es igual de peligroso;
 
@@ -348,7 +348,7 @@ En concreto, para el grupo que tenía peor pronóstico,
 
 > group 4 (<9% LVGLS and <12% RVGLS) 
 
-un intervalo de confianza al 95% les indica que _HR_ es un valor comprendido en _1.473–2.091_. Es decir, no saben seguro cual es el valor real, pero respoden a su calculo usando un mecanismo que acierta en el 95% de las ocasiones, y que en este caso indica que sea cual sea el valor real, este debe ser claramente mayor que 1.
+un intervalo de confianza al 95% les indica que _HR_ es un valor comprendido en _1.473–2.091_. Es decir, no saben seguro cual es el valor real, pero responden a su calculo usando un mecanismo que acierta en el 95% de las ocasiones, y que en este caso indica que sea cual sea el valor real, este debe ser claramente mayor que 1.
 
 
 En términos de _contrastes de hipótesis_ podríamos decirlo de este modo: 
@@ -365,24 +365,14 @@ Es decir, si fuese cierta la nula y ambos grupos fuesen en realidad de riesgo si
 
 Más adelante en el artículo indican:
 
-> On the basis of previously reported data,13 we calculated the sample
-size to obtain a hazard ratio (HR) of 1.3 in both groups.14 A 2- sided log-rank test with an overall sample size of 1600 participants (800 in group 1 and 800 in group 2) achieved
+> On the basis of previously reported data, we calculated the sample
+size to obtain a hazard ratio (HR) of 1.3 in both groups. A 2-sided log-rank test with an overall sample size of 1600 participants (800 in group 1 and 800 in group 2) achieved
 99.1% power at a 0.05 significance level to detect an HR of
-1.30 when the control group had an HR of 1.00. 
+1.30 when the control group had an HR of 1. 
 
-Se podría traducir de este modo. Tenemos como hipótesis alternativa la de que ciertos grupos de pacientes deben tener un HR>=1.3, que es un valor que el investigador considera clínicamente relevante. No ha sido observado (aún) en los datos 8ya que cuando diseñaron el estudio, no habían empezado a rcoger datos de los pacientes). Es un valor que el investigador, por su experiencia en el tema, sospecha que debe ser así de grande o aún mayor. Es, en la fase de diseño del estudio, solo una creencia del investigador.
+Se podría traducir de este modo. Tenemos como hipótesis alternativa la de que ciertos grupos de pacientes deben tener un HR>1.3, que es un valor que el investigador considera clínicamente relevante. No ha sido observado (aún) en los datos ya que cuando diseñaron el estudio, no habían empezado a recoger datos de los pacientes). Es un valor que el investigador, por su experiencia en el tema, sospecha que debe ser así de grande o aún mayor. Es, en la fase de diseño del estudio, solo una creencia del investigador, basada en lo que sabe o ha leído del tema.
 
-Eligieron una muestra de 1600 pacientes, que es lo bastante grande como para que si su hipótesis alternativa fuese cierta, pudieran declarar significativo el resultado con una probabilidad del 99.1%. Esto era algo conocido *antes* de realizar el estudio. Como observa, la potencia se utiliza para diseñar el estudio. Nadie quiere empezar a trabajar en un tema donde si tu hipótesis alternativa es correcta, por haber elegido la muestra muy pequeña, tienes pocas probabilidades de encontrar evidencia contra la _hipótesis nula_.
-
-
-
-
-
-
-
-
-
-
+Eligieron una muestra de 1600 pacientes, que es lo bastante grande como para que si su hipótesis alternativa fuese cierta con HR>1.3, pudieran declarar significativo el resultado con una probabilidad del 99.1%. Esto era algo conocido *antes* de realizar el estudio. Como observa, la potencia se utiliza para diseñar el estudio. Nadie quiere empezar a trabajar en un tema donde si tu hipótesis alternativa es correcta, por haber elegido la muestra muy pequeña, tienes pocas probabilidades de encontrar evidencia contra la _hipótesis nula_.
 
 
 
