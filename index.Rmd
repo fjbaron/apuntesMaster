@@ -31,3 +31,6 @@ theme_set(theme_minimal())
 # Introducción {-}
 
 Apuntes para las asignatura de Estadística básica y avanzada del Máster en Nuevas Tendencias en Ciencias de la Salud.
+
+Si quieres modificarlo, o hacer correcciones, puedes acceder al código fuente en [https://github.com/fjbaron/apuntesMaster](https://github.com/fjbaron/apuntesMaster).
+
