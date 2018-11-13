@@ -43,7 +43,7 @@ Si al realizar la prueba ANOVA se obtiene una significación baja (por ejemplo *
 
 -	Antes de recoger datos es posible que tengamos algunas sospechas de dónde se deberían producir las diferencias. A esto se le denomina comparaciones planeadas. En SPSS lo encontramos pulsando el botón “contrastes” en la ventana para realizar el contraste ANOVA.
 
-### Contrastes no planeados o post-hoc
+#### Contrastes no planeados o post-hoc
 
 Bajo ese nombre encontramos múltiples técnicas. Éstas se consideran bastante conservadoras, en el sentido de que intentan reducir la posibilidad de errores de tipo I, a costa de aumentar la posibilidad de errores de tipo II. Dicho de otro modo, es probable que en situaciones donde realmente haya diferencias entre grupos, las pruebas post-hoc no lo detecten. Tienen que ser las diferencias entre grupos realmente grandes para poder ser reconocidas por estas pruebas.
 
@@ -76,7 +76,7 @@ o	Test de Scheffé: Hace todas las comparaciones posibles. Por ejemplo, el prime
   + Scheffé,
   + Games-Howell.
 
-### Comparaciones planeadas
+#### Comparaciones planeadas
 
 Son las que deberíamos hacer cuando honestamente tenemos una sospecha sobre el posible resultado del análisis, es decir entre qué grupos esperamos encontrar diferencias, y estas sospechas han sido formuladas con anterioridad a la recogida de datos.
 
@@ -102,60 +102,380 @@ Otra condición que necesitamos para la validez de la prueba ANOVA es la de la n
 
 ###Ejemplo paramétrico{-}
 
-Se realizó un experimento para comparar tres métodos de aprendizaje de lectura. Se asignó aleatoriamente los estudiantes a cada uno de los tres métodos. Cada método fue probado con 22 estudiantes (experimento equilibrado). Se evaluó mediante diferentes pruebas la capacidad de comprensión de los estudiantes, antes y después de recibir la instrucción. Las puntuaciones antes de recibir la enseñanza eran de media muy similares y aproximadamente normales. La prueba ANOVA con dichas puntuaciones no mostró diferencia estadísticamente significativa (p=0.45). La prueba de Levene para la igualdad de varianzas confirmó que se podía asumir la igualdad de varianzas para las pruebas de lectura “antes” (p=0.738). Es decir, los estudiantes de los tres grupos tenían habilidades medias similares, como sería de esperar al haber hecho la distribución aleatoriamente. 
+Se realizó un experimento para comparar tres métodos de aprendizaje de lectura. Se asignó aleatoriamente los estudiantes a cada uno de los tres métodos. Cada método fue probado con 22 estudiantes (experimento equilibrado). Se evaluó mediante diferentes pruebas la capacidad de comprensión de los estudiantes, antes y después de recibir la instrucción. Los resultados se recogen en la base de datos [lectura-anova.sav](datos/lectura-anova.sav), de la que exploramos las primeras líneas:
 
- 
- 
+```r
+df=read_sav("datos/lectura-anova.sav", user_na=FALSE) %>% haven::as_factor() 
+```
+
+
+```r
+df %>% head()  %>% knitr::kable(booktabs=T)
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Grupo </th>
+   <th style="text-align:right;"> Antes </th>
+   <th style="text-align:right;"> Despues </th>
+   <th style="text-align:right;"> Diferencia </th>
+   <th style="text-align:right;"> gr1 </th>
+   <th style="text-align:right;"> gr2 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Control </td>
+   <td style="text-align:right;"> 9.5 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 4.5 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Control </td>
+   <td style="text-align:right;"> 8.5 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 6.5 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Control </td>
+   <td style="text-align:right;"> 14.0 </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 6.7 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Control </td>
+   <td style="text-align:right;"> 8.5 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 7.8 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Control </td>
+   <td style="text-align:right;"> 7.0 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 8.0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Control </td>
+   <td style="text-align:right;"> 7.5 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 8.2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+</tbody>
+</table>
 
 
 Queremos contrastar la hipótesis nula de que las tres técnicas ofrecen resultados medios similares, frente a la hipótesis alternativa de que esto no es así. Para ello podríamos considerar el resultado obtenido “después”. Pero esto estaría sin duda influido por la habilidad previa de cada estudiante. Para eliminar esta fuente de variabilidad podríamos considerar a cada estudiante como su propio control, y considerar una nueva variable que sería la diferencia entre “después” y “antes”. Ahora la hipótesis nula es que la variable “diferencia”, posee medias similares, frente a la hipótesis alternativa de que esto es falso. Un análisis descriptivo exploratorio muestra que aparentemente el grupo control tiene resultados peores que los que siguieron la técnica I y II. 
 
- 
 
-Las diferencias tampoco se alejan demasiado de la normalidad y parecen similarmente dispersas. Parece que estamos entonces en condiciones de hacer una prueba ANOVA sobre la variable “diferencia” en los tres grupos. La prueba de Levene sobre igualdad de varianzas tiene una significación de p=0.251, lo que nos lo confirma. La prueba ANOVA resulta significativa siendo p un valor cercano a cero. 
+La siguiente tabla muestra los resultados de la prueba ANOVA para las 3 variables, en morma de media y error estándar, así como las comparaciones paramétricas (ANOVA) y no paramétricas (Kruskal-Wallis, que veremos posteriormente):
 
+```r
+generaTablaANOVA1F(df,"Grupo",c("Antes","Despues","Diferencia"),columnas = c("mediaet","p.F","p.kw"))  %>%
+  knitr::kable( booktabs = T, 
+                col.names=c("Variable",
+                         "Control", 
+                        "Técnica I",
+                        "Técnica II",
+                        "p (parám.)", "P (no parám)."))
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Variable </th>
+   <th style="text-align:left;"> Control </th>
+   <th style="text-align:left;"> Técnica I </th>
+   <th style="text-align:left;"> Técnica II </th>
+   <th style="text-align:left;"> p (parám.) </th>
+   <th style="text-align:left;"> P (no parám). </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Antes </td>
+   <td style="text-align:left;"> 7.89±0.51 </td>
+   <td style="text-align:left;"> 7.41±0.44 </td>
+   <td style="text-align:left;"> 7.05±0.45 </td>
+   <td style="text-align:left;"> 0.436 </td>
+   <td style="text-align:left;"> 0.440 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Despues </td>
+   <td style="text-align:left;"> 17.76±0.56 </td>
+   <td style="text-align:left;"> 20.91±0.63 </td>
+   <td style="text-align:left;"> 20.14±0.63 </td>
+   <td style="text-align:left;"> 0.001* </td>
+   <td style="text-align:left;"> 0.002* </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Diferencia </td>
+   <td style="text-align:left;"> 9.87±0.58 </td>
+   <td style="text-align:left;"> 13.50±0.67 </td>
+   <td style="text-align:left;"> 13.09±0.52 </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+   <td style="text-align:left;"> &lt;0.001* </td>
+  </tr>
+</tbody>
+</table>
+
+
+
+Las puntuaciones antes de recibir la enseñanza eran de media muy similares. La prueba ANOVA con dichas puntuaciones no mostró diferencia estadísticamente significativa (p=0.45) como sería de esperar en una asignación aleatoria al grupo. Al observar la variable *Después*, La prueba ANOVA sí resulta significativa, es decir, los 3 grupos no presentan el mismo cambio medio.
+
+El análisis posthoc lo podemos hacer con la prueba *HSD (Diferencia Honestamente Significativa) de Tukey*,
+
+```r
+modeloLineal <- lm(Diferencia ~ Grupo,data=df)
+modeloLineal %>% aov() %>% TukeyHSD() %>% .[["Grupo"]] %>% knitr::kable()
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> diff </th>
+   <th style="text-align:right;"> lwr </th>
+   <th style="text-align:right;"> upr </th>
+   <th style="text-align:right;"> p adj </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Técnica I-Control </td>
+   <td style="text-align:right;"> 3.63 </td>
+   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 5.6 </td>
+   <td style="text-align:right;"> 0.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Técnica II-Control </td>
+   <td style="text-align:right;"> 3.22 </td>
+   <td style="text-align:right;"> 1.2 </td>
+   <td style="text-align:right;"> 5.2 </td>
+   <td style="text-align:right;"> 0.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Técnica II-Técnica I </td>
+   <td style="text-align:right;"> -0.41 </td>
+   <td style="text-align:right;"> -2.4 </td>
+   <td style="text-align:right;"> 1.6 </td>
+   <td style="text-align:right;"> 0.87 </td>
+  </tr>
+</tbody>
+</table>
+
+Donde vemos para cada par de variables, la diferencia entre las medias, un intervalo de confianza (con extremos inferior y superior para la diferencia de medias), y la significación de la diferencia. En él vemos que el grupo de Control presenta diferencias significativas con respecto a los demás grupos, que no presentan diferencias significativas entre sí. 
+
+Observe que en todos los intervalos de confianza donde se ha obtenido diferencias estadísticamente significativas para parejas de grupos, se obtienen intervalos de confianza que no contienen el valor cero para la diferencia de medias. Esto es otra manera de leer un contraste de hipótesis que permite obtener una interpretación clínica de los resultados de un experimento más interesante que la más abstracta significación.
+
+
+El análisis post-hoc viene reflejado en el siguiente gráfico en el que se usa la prueba HSD para contrastar las diferencias entre pares de grupos, usando una flecha roja dentro del intervalo de confianza en cada grupo. Si las líneas rojas se superponen, la diferencia no es significativa.
+
+```r
+modeloLineal %>% emmeans("Grupo") %>% 
+                plot(comparisons=TRUE)+xlab("Diferencia")+ylab("")+coord_flip()
+```
+
+<img src="05-anova_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+
+En cuanto a las condiciones de validez de la prueba ANOVA, veamos como podemos explorarlo:
+
+ - **Normalidad:** Podemos estudiar la normalidad en cada una de los grupos:
+
+```r
+grid.arrange(
+ggplot(df %>% filter(Grupo=="Control"),aes(sample=Diferencia))+stat_qq() + stat_qq_line()+ggtitle("Controles"),
+ggplot(df %>% filter(Grupo=="Técnica I"),aes(sample=Diferencia))+stat_qq() + stat_qq_line()+ggtitle("Técnica I"),
+ggplot(df %>% filter(Grupo=="Técnica II"),aes(sample=Diferencia))+stat_qq() + stat_qq_line()+ggtitle("Técnica II"),
+ncol=2)
+```
+
+<img src="05-anova_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+
+Al estudiar muchos gráficos a la vez, es posible que en algunos encontremos desviaciones de la normalidad que nos hagan dudar. Es normal por la abundancia de comparaciones múltiples. Es más conveniente es tratar a todos los datos juntos estudiando todos los residuos del ajuste ANOVA (desviación de cada dato con respecto a la media de su propio grupo), en un solo gráfico QQ:
+
+
+```r
+qqPlot(modeloLineal, main="QQ Plot") 
+```
+
+<img src="05-anova_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+```
+## [1]  1 57
+```
+No se aprecia una notable desviación de la normalidad.
+
+
+ - En cuanto a la **homogeneidad de varianzas (heterocedasticidad)**, podemos usar la prueba de Levene:
+
+```r
+leveneTest(modeloLineal)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(>F)
+## group  2    1.27   0.29
+##       63
+```
+Al haber obtenido *p bastante grande* para la prueba de homogeneidad de varianzas, podemos asumir que las tres muestras presentan similar dispersión.
+
+Como se aprecia es algo pesado ir comprobando todas las cuestiones de validez una a una. La librería de R **gvlma** hace una buena cantidad de comprobaciones de una forma muy simple:
   
- 
- 
-Esto quiere decir que efectivamente aceptamos que hay diferencia estadísticamente significativa entre los resultados de las tres técnicas (las diferencias no han sido causadas por el azar). Por tanto nos gustaría saber entre qué grupos se ha producido la diferencia. Una aproximación ingenua sería la de hacer directamente los contrastes no planeados, como si no tuviésemos ninguna hipótesis de qué grupo debe ser diferente al resto. Esto no es muy sensato, pues cuando hacemos un experimento no lo hacemos por que no tengamos nada mejor que hacer. Seguramente tendremos alguna sospecha. En cualquier caso, las pruebas de Scheffé y Tukey encuentran diferencias estadísticamente significativas para las combinaciones (grupo de control, técnica I), (grupo de control, técnica II), y no encuentra diferencias entre los grupos (técnica I, técnica II). 
+
+```r
+(modeloLineal %>% gvlma() %>% summary()) %>% knitr::kable(booktabs=T)
+```
+
+```
+## 
+## Call:
+## lm(formula = Diferencia ~ Grupo, data = df)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -5.371 -1.996  0.121  2.098  6.129 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)        9.871      0.579   17.04  < 2e-16 ***
+## GrupoTécnica I     3.629      0.819    4.43  3.8e-05 ***
+## GrupoTécnica II    3.220      0.819    3.93  0.00021 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.7 on 63 degrees of freedom
+## Multiple R-squared:  0.272,	Adjusted R-squared:  0.249 
+## F-statistic: 11.8 on 2 and 63 DF,  p-value: 4.54e-05
+## 
+## 
+## ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+## USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+## Level of Significance =  0.05 
+## 
+## Call:
+##  gvlma(x = .) 
+## 
+##                       Value p-value                Decision
+## Global Stat        1.89e+00   0.756 Assumptions acceptable.
+## Skewness           1.11e-02   0.916 Assumptions acceptable.
+## Kurtosis           1.87e+00   0.171 Assumptions acceptable.
+## Link Function      9.21e-16   1.000 Assumptions acceptable.
+## Heteroscedasticity 5.03e-03   0.943 Assumptions acceptable.
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Value </th>
+   <th style="text-align:right;"> p-value </th>
+   <th style="text-align:left;"> Decision </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Global Stat </td>
+   <td style="text-align:right;"> 1.89 </td>
+   <td style="text-align:right;"> 0.76 </td>
+   <td style="text-align:left;"> Assumptions acceptable. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Skewness </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 0.92 </td>
+   <td style="text-align:left;"> Assumptions acceptable. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Kurtosis </td>
+   <td style="text-align:right;"> 1.87 </td>
+   <td style="text-align:right;"> 0.17 </td>
+   <td style="text-align:left;"> Assumptions acceptable. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Link Function </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:left;"> Assumptions acceptable. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Heteroscedasticity </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 0.94 </td>
+   <td style="text-align:left;"> Assumptions acceptable. </td>
+  </tr>
+</tbody>
+</table>
 
  
-
- 
-
-
-
-Observe que en todos los intervalos de confianza donde se ha obtenido diferencias estadísticamente significativas para parejas de grupos, se obtienen intervalos de confianza que no contienen el valor cero para la diferencia de medias. Esto es otra manera de leer un contraste de hipótesis que permite obtener una interpretación clínica de los resultados de un experimento más interesante que la abstracta significación.
+Para hacer algo similar en SPSS tenemos el menú: * Analizar -Comparar medias - ANOVA de un factor*. Las variables dependientes son *Antes* y *Diferencia*. El factor es *Grupo*. En pruebas posthoc, podemos seleccionar *Tukey*. En el botón *Opciones*, podemos marcar la prueba de *homogeneidad de varianzas*. La normalidad en cada muestra puede ser comprobada como hicimos en ocasiones anteriores en el menú, *Analizar - Estadísticos descriptivos - Explorar*, eligiendo como gráfico el histograma y añadiéndole las *pruebas de normalidad*.
 
 
 
-Junto a las pruebas anteriores, SPSS nos muestra una tabla formada por uniones de grupos que presentan valores de las medias parecidos.
-
-En este caso se aprecia  que el grupo formado por los resultados de los individuos que han seguido las técnicas I y II formarían un grupo “homogéneo” (sus medias son muy similares, y un contraste de diferencia de medias resulta muy claramente muy no significativo (p=0,872 para la prueba de Tukey y p=0,883) para la prueba de Scheffe). Todo esto lo apreciamos en la columa etiquetada como ‘2’. La columna etiquetada como ‘1’, solo contiene un grupo, que por supuesto no presenta diferencias consigo mismo (faltaría más). SPSS lo muestra simplemente para que apreciemos la diferencia entre la media de ese grupo, con las cantidades que aparecen en la columna ‘2’.
-
-
- Por último, recordemos que nuestra hipótesis de partida era bastante “fina”; Pensábamos (antes de recoger los datos), que el grupo control obtendría resultados diferentes a los que siguieron las técnicas I y II. Es legítimo entonces no hacer comparaciones tan genéricas como las post-hoc, y hacer exactamente esa. Esto lo podemos realizar haciendo una comparación planeada. Asignamos coeficientes 1, -0.5 y -0.5 (juntos suman cero) respectivamente a los grupos Control, Técnica I y Técnica II, pulsando en el botón “contrastes” de la prueba ANOVA de un factor de SPSS. Los resultados resultan muy significativos para confirmar nuestra hipótesis (tanto suponiendo varianzas iguales como diferentes).
-
- 
-
- 
-
-
-
-Es decir, concluimos que el grupo de control, presenta resultados diferentes al resto de los grupos (técnicas I y II).
-
-1.2 Contraste no paramétrico de Kruskal-Wallis
+## Contraste no paramétrico de Kruskal-Wallis
 Si tenemos dudas sobre la validez de las condiciones del ANOVA, o incluso si la variable respuesta es ordinal, la prueba no paramétrica de Kruskal-Wallis contrasta unas hipótesis análogas a la prueba ANOVA de un factor. No requiere condiciones de validez especiales.
 
-El contraste de Kruskal-Wallis no contrasta que las medias sean iguales, sino simplemente si los valores obtenidos en los diferentes grupos son similares. Esto lo realiza de un modo sorprendentemente simple. Se ordenan todas las observaciones, de menor a mayor de todos los grupos. Si al ordenarse de esta manera se da la circunstancia de que muchas de las observaciones más pequeñas (o más grandes) pertenecen a un grupo sería una indicación de que los grupos no presentan valores similares. Es decir, si al ordenar las observaciones de menor a mayor, aparecen muy poco “mezcladas”, se rechaza la hipótesis nula.
+El contraste de Kruskal-Wallis no contrasta que las medias sean iguales, sino simplemente si los valores obtenidos en los diferentes grupos son similares. Esto lo realiza de un modo sorprendentemente simple. Se ordenan todas las observaciones, de menor a mayor de todos los grupos. Si al ordenarse de esta manera se da la circunstancia de que muchas de las observaciones más pequeñas (o más grandes) pertenecen a un grupo sería una indicación de que los grupos no presentan valores similares. Es decir, si al ordenar las observaciones de menor a mayor, aparecen muy poco “mezcladas”, se rechaza la hipótesis nula. Como demostración, vamos a hacerlo en el caso del ejemplo anterior:
 
-#### Ejemplo (No paramétrico) {-}
+```r
+df %>% arrange(Diferencia) %>% .[["Grupo"]] %>% as.character()
+```
 
-Continuamos el mismo ejemplo que usamos al explicar el contraste ANOVA. Como la prueba de Kruskal-Wallis no requiere ninguna condición de validez especial, podemos pasar a contrastar directamente si la variable diferencia presenta valores similares en los tres grupos. Esta prueba la encontramos en SPSS en el menú “Analizar - Pruebas no paramétricas - k muestras independientes”.
+```
+##  [1] "Control"    "Control"    "Control"    "Control"    "Control"   
+##  [6] "Control"    "Control"    "Control"    "Técnica I"  "Control"   
+## [11] "Control"    "Técnica I"  "Técnica II" "Control"    "Técnica I" 
+## [16] "Técnica II" "Control"    "Control"    "Técnica I"  "Técnica II"
+## [21] "Técnica I"  "Técnica II" "Técnica II" "Control"    "Técnica I" 
+## [26] "Técnica II" "Control"    "Técnica I"  "Control"    "Técnica I" 
+## [31] "Técnica II" "Técnica II" "Control"    "Técnica I"  "Control"   
+## [36] "Control"    "Control"    "Técnica II" "Control"    "Técnica II"
+## [41] "Técnica I"  "Técnica II" "Técnica I"  "Técnica II" "Técnica II"
+## [46] "Técnica I"  "Técnica II" "Técnica II" "Técnica II" "Técnica II"
+## [51] "Técnica II" "Técnica I"  "Técnica I"  "Técnica I"  "Técnica II"
+## [56] "Técnica II" "Control"    "Técnica I"  "Técnica I"  "Técnica I" 
+## [61] "Técnica II" "Técnica I"  "Técnica I"  "Técnica II" "Técnica I" 
+## [66] "Técnica I"
+```
 
- 
+O si se prefiere de modo más visual:
 
- 
-La significación del contraste es prácticamente nula, es decir hay una gran evidencia estadística en contra de que los resultados obtenidos por las tres técnicas sean similares.
- 
+```r
+ggplot(df %>% arrange(Diferencia) %>% mutate(Rango=rank(Diferencia)), aes(x=Rango, y=Grupo,fill=Grupo,col=Grupo))+geom_point()
+```
+
+<img src="05-anova_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+
+Aparentemente tras ordenar por la variable *Diferencia* de menor a mayor, abundan en las primeras posiciones (rangos bajos) los individuos del grupo de Control. Es decir, estos son los que menor *Diferencia* han experimentado, por tanto nos hace pensar que ese grupo es diferente a los otros dos. Eso es lo que obteníamos en la primera tabla del ejemplo, en la columna **"P no paramétrica"**
+
+
+El equivalente a la prueba posthoc de ANOVa para el test de Kruskal Wallis es el test de Dunn:
+
+```r
+FSA::dunnTest(Diferencia ~ Grupo, data=df, method="bh") 
+```
+
+```
+##               Comparison     Z P.unadj   P.adj
+## 1    Control - Técnica I -3.84 0.00012 0.00037
+## 2   Control - Técnica II -3.48 0.00050 0.00075
+## 3 Técnica I - Técnica II  0.36 0.72079 0.72079
+```
+
+
+La prueba de no paramétrica de Kruskal-Wallis la encontramos en SPSS en el menú “Analizar - Pruebas no paramétricas - k muestras independientes”.
 

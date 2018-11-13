@@ -41,7 +41,7 @@ Se estudia si mejoran unos niños su velocidad de lectura en palabras por minuto
 
 
 ```r
-df=read_sav("datos/lectura-anova.sav", user_na=FALSE) %>% haven::as_factor()
+df=read_sav("datos/lectura-anova.sav", user_na=FALSE) %>% haven::as_factor() 
 ```
 
 
@@ -116,7 +116,7 @@ Ya que los datos están ordenados de forma que los peores resultados se muestran
 
 
 ```r
-ggplot(df, aes(x=Diferencia))+geom_histogram()+ geom_rug(sides = "b", aes(y = 0), position = "jitter", colour = "blue")+coord_cartesian(xlim=c(0,20))+geom_vline(xintercept = 0,lty=2,col="red")
+ggplot(df, aes(x=Diferencia))+geom_histogram(fill="lightblue")+ geom_rug(sides = "b", aes(y = 0), position = "jitter", colour = "blue")+coord_cartesian(xlim=c(0,20))+geom_vline(xintercept = 0,lty=2,col="red")
 ```
 
 <img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-3-1.png" width="672" />
@@ -153,13 +153,6 @@ df %>% desc1vn(vNum = "Diferencia",columnas = c("mediaet","p.intra","ic1","ic2")
 </table>
 
 
-
-
-```r
-ggplot(df, aes(x=Diferencia))+geom_histogram()+ geom_rug(sides = "b", aes(y = 0), position = "jitter", colour = "blue")+coord_cartesian(xlim=c(0,20))+geom_vline(xintercept = 0,lty=2,col="red")
-```
-
-<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 La diferencia observada en los niños representa una mejoría de más de 12 palabras por minuto. Sea cual sea la mejoría media si se aplicase en toda la población de niños similares a estos, los datos observados están _en contra de la hipótesis nula_ de no mejoría (p<0.001). Tenemos una confianza del 95% de que sea cual sea la mejoría media, el valor real está en algún lugar entre 11 y 13 palabras por minuto (redondeando).
 
@@ -255,12 +248,12 @@ solo nos interesa la variable _Diferencia_ comprarada entre ambos grupos, pero d
 
 ```r
 grid.arrange(
-ggplot(df,aes(x=Grupo,y=Antes))+geom_boxplot(),
-ggplot(df,aes(x=Grupo,y=Diferencia))+geom_boxplot(),
+ggplot(df,aes(x=Grupo,y=Antes))+geom_boxplot(fill="lightblue"),
+ggplot(df,aes(x=Grupo,y=Diferencia))+geom_boxplot(fill="lightblue"),
 ncol=2)
 ```
 
-<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 Se aprecia que los dos grupos eran similares al iniciarse el experimento. Sin embargo el grupo de que tomo el Placebo practicamente se quedó igual, y el que tomó _Calcio_ experimentó una mejoría. Nos queda por saber si esta mejoría es explicable por el azar o va más allá (diferencia estadísticamente significativa entre grupos).
 
 
@@ -325,7 +318,11 @@ Podemos realizar la prueba paramétrica en SPSS en el menú: "_Analizar - Compar
 
 La prueba no paramétrica está en un diálogo análogo que obtenemos en el menú "_Analizar - Pruebas no paramétricas - Cuadros de dialogo antiguos - 2 muestras independientes"
 
-Una representación gráfica de los intervalos de confianza nos dejan claro que son demasiado amplios como para que las diferencia que se observa entre ambos grupos sea estadísticamente significativa. Ni siquiera queda claro que el Calcio, con un intervalo de confianza tan amplio presente un efecto mayor que cero.
+
+
+
+Una representación gráfica de los intervalos de confianza muestra que ambos tienen el común el valor cero. Es decir, ninguno de ellos puede decirse que presente una mejoría significativa. ¿Podría interpretarse como que entre ellos no hay diferencia? Esto es algo que no se deduce directamente mirando a los intervalos de confianza, aunque nuestra intuición nos indique que no deben haber mucha diferencia entre ellas.
+
 
 
 
@@ -341,7 +338,7 @@ ggplot(resumen %>% filter(Variable=="Diferencia"), aes(x=Grupo,y=Media)) +
   geom_hline(yintercept=0,lty=2,color="red")
 ```
 
-<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 
 
@@ -454,11 +451,11 @@ df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
   <tr>
    <td style="text-align:left;"> Talla </td>
    <td style="text-align:right;"> 30 </td>
-   <td style="text-align:left;"> 1.70±0.01 </td>
+   <td style="text-align:left;"> 170.33±0.86 </td>
    <td style="text-align:right;"> 50 </td>
-   <td style="text-align:left;"> 1.69±0.01 </td>
+   <td style="text-align:left;"> 169.48±0.67 </td>
    <td style="text-align:left;"> 0.431 </td>
-   <td style="text-align:left;"> -0.01[-0.03,0.01] </td>
+   <td style="text-align:left;"> -0.85[-3.01,1.30] </td>
    <td style="text-align:left;"> 0.611 </td>
   </tr>
   <tr>
@@ -527,84 +524,84 @@ dfResumen %>%
 <tbody>
   <tr>
    <td style="text-align:left;"> Colesterol </td>
-   <td style="text-align:right;"> 145.7 </td>
-   <td style="text-align:right;"> 179.7 </td>
-   <td style="text-align:right;"> 196.9 </td>
-   <td style="text-align:right;"> 221.3 </td>
-   <td style="text-align:right;"> 26.15 </td>
-   <td style="text-align:right;"> 66.76 </td>
+   <td style="text-align:right;"> 146 </td>
+   <td style="text-align:right;"> 180 </td>
+   <td style="text-align:right;"> 197 </td>
+   <td style="text-align:right;"> 221 </td>
+   <td style="text-align:right;"> 26.1 </td>
+   <td style="text-align:right;"> 66.8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Trigliceridos </td>
-   <td style="text-align:right;"> 65.0 </td>
-   <td style="text-align:right;"> 99.3 </td>
-   <td style="text-align:right;"> 93.2 </td>
-   <td style="text-align:right;"> 133.3 </td>
-   <td style="text-align:right;"> 5.45 </td>
-   <td style="text-align:right;"> 56.72 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 99 </td>
+   <td style="text-align:right;"> 93 </td>
+   <td style="text-align:right;"> 133 </td>
+   <td style="text-align:right;"> 5.4 </td>
+   <td style="text-align:right;"> 56.7 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Glucemia </td>
-   <td style="text-align:right;"> 73.8 </td>
-   <td style="text-align:right;"> 82.3 </td>
-   <td style="text-align:right;"> 82.7 </td>
-   <td style="text-align:right;"> 93.6 </td>
-   <td style="text-align:right;"> 3.40 </td>
-   <td style="text-align:right;"> 16.89 </td>
+   <td style="text-align:right;"> 74 </td>
+   <td style="text-align:right;"> 82 </td>
+   <td style="text-align:right;"> 83 </td>
+   <td style="text-align:right;"> 94 </td>
+   <td style="text-align:right;"> 3.4 </td>
+   <td style="text-align:right;"> 16.9 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PAS </td>
-   <td style="text-align:right;"> 116.0 </td>
-   <td style="text-align:right;"> 123.7 </td>
-   <td style="text-align:right;"> 118.0 </td>
-   <td style="text-align:right;"> 125.4 </td>
-   <td style="text-align:right;"> -3.28 </td>
-   <td style="text-align:right;"> 7.01 </td>
+   <td style="text-align:right;"> 116 </td>
+   <td style="text-align:right;"> 124 </td>
+   <td style="text-align:right;"> 118 </td>
+   <td style="text-align:right;"> 125 </td>
+   <td style="text-align:right;"> -3.3 </td>
+   <td style="text-align:right;"> 7.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PAD </td>
-   <td style="text-align:right;"> 68.8 </td>
-   <td style="text-align:right;"> 76.2 </td>
-   <td style="text-align:right;"> 67.5 </td>
-   <td style="text-align:right;"> 73.1 </td>
-   <td style="text-align:right;"> -6.67 </td>
-   <td style="text-align:right;"> 2.27 </td>
+   <td style="text-align:right;"> 69 </td>
+   <td style="text-align:right;"> 76 </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:right;"> 73 </td>
+   <td style="text-align:right;"> -6.7 </td>
+   <td style="text-align:right;"> 2.3 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Peso </td>
-   <td style="text-align:right;"> 69.7 </td>
-   <td style="text-align:right;"> 75.7 </td>
-   <td style="text-align:right;"> 78.9 </td>
-   <td style="text-align:right;"> 83.9 </td>
-   <td style="text-align:right;"> 4.94 </td>
-   <td style="text-align:right;"> 12.49 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:right;"> 76 </td>
+   <td style="text-align:right;"> 79 </td>
+   <td style="text-align:right;"> 84 </td>
+   <td style="text-align:right;"> 4.9 </td>
+   <td style="text-align:right;"> 12.5 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Talla </td>
-   <td style="text-align:right;"> 1.7 </td>
-   <td style="text-align:right;"> 1.7 </td>
-   <td style="text-align:right;"> 1.7 </td>
-   <td style="text-align:right;"> 1.7 </td>
-   <td style="text-align:right;"> -0.03 </td>
-   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 169 </td>
+   <td style="text-align:right;"> 172 </td>
+   <td style="text-align:right;"> 168 </td>
+   <td style="text-align:right;"> 171 </td>
+   <td style="text-align:right;"> -3.0 </td>
+   <td style="text-align:right;"> 1.3 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Consumo </td>
-   <td style="text-align:right;"> 1730.8 </td>
-   <td style="text-align:right;"> 2087.6 </td>
-   <td style="text-align:right;"> 3369.9 </td>
-   <td style="text-align:right;"> 3686.2 </td>
-   <td style="text-align:right;"> 1387.71 </td>
-   <td style="text-align:right;"> 1850.04 </td>
+   <td style="text-align:right;"> 1731 </td>
+   <td style="text-align:right;"> 2088 </td>
+   <td style="text-align:right;"> 3370 </td>
+   <td style="text-align:right;"> 3686 </td>
+   <td style="text-align:right;"> 1387.7 </td>
+   <td style="text-align:right;"> 1850.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Gasto </td>
-   <td style="text-align:right;"> 1823.6 </td>
-   <td style="text-align:right;"> 1964.8 </td>
-   <td style="text-align:right;"> 1754.5 </td>
-   <td style="text-align:right;"> 2006.1 </td>
-   <td style="text-align:right;"> -154.73 </td>
-   <td style="text-align:right;"> 126.93 </td>
+   <td style="text-align:right;"> 1824 </td>
+   <td style="text-align:right;"> 1965 </td>
+   <td style="text-align:right;"> 1755 </td>
+   <td style="text-align:right;"> 2006 </td>
+   <td style="text-align:right;"> -154.7 </td>
+   <td style="text-align:right;"> 126.9 </td>
   </tr>
 </tbody>
 </table>
@@ -625,16 +622,19 @@ ggplot(dfResumen %>% filter (Variable==laVariable), aes(x="Málaga-Tanger", y=(c
 ncol=2)
 ```
 
-<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 En cuanto a la siguiente variable, _Triglicéridos_ y _Glucemia_ nos encontramos la sorpresa: observamos que el IC95% para la diferencia de medias no contiene (por poco) al cero, es decir, la diferencia de medias es apenas significativamente diferente de cero, sin embargo los intervalos de confianza dentro de cada grupo se cruzan (por poco).
 
 
-<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 Estudie lo que ocurre en el resto de variables y compruebe si gráficamente es cierto lo de que:
 
 > Cuando la diferencia entre dos grupos es estadísticamente significativa, los IC95% de cada grupo se tocan _nada o muy poc.o_
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+
 
 <img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
@@ -642,24 +642,21 @@ Estudie lo que ocurre en el resto de variables y compruebe si gráficamente es c
 <img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 
+
 <img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-17-1.png" width="672" />
-
-
 
 <img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
-<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
+
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 
 <img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 
-<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
-
-
-En las publicaciones suele verse un tipo de gráfico u otro: El que muestra los intervalos de confianza en cada grupo, o el que sirve para estudiar las diferencias entre dos grupos. Existe una tercera posibilidad, no muy utilizada, usando la libreria _emmeans_ de R, donde además de observarse los intervalos de confianza para la media en cada grupo, una flecha interior indica cuando las comparaciones entre dos grupos son significativas: OCurre justo cuando no tienen intersección común. Este tipo de gráficos será muy útil cuando haya muchas comparaciones a realizar entre grupos (pruebas _ANOVA_).
+En las publicaciones suele verse un tipo de gráfico u otro: El que muestra los intervalos de confianza en cada grupo, o el que sirve para estudiar las diferencias entre dos grupos. Existe una tercera posibilidad, usando la libreria _emmeans_ de R, donde además de observarse los intervalos de confianza para la media en cada grupo, una flecha interior indica cuando las comparaciones entre dos grupos son significativas: Ocurre justo cuando no tienen intersección común. Este tipo de gráficos será muy útil cuando haya muchas comparaciones a realizar entre grupos (análisis posthoc de _ANOVA_).
 
 
 
@@ -670,7 +667,7 @@ listaGraficos=vNumericas %>% map( ~ lm(formula(str_c(.," ~ Grupo")),data=df) %>%
 do.call("grid.arrange", c(listaGraficos, ncol=3))
 ```
 
-<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-22-1.png" width="768" />
+<img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-21-1.png" width="768" />
 
 
 

@@ -52,7 +52,7 @@ Se estudia si mejoran unos niños su velocidad de lectura en palabras por minuto
 
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
-df=read_sav("datos/lectura-anova.sav", user_na=FALSE) %>% haven::as_factor()
+df=read_sav("datos/lectura-anova.sav", user_na=FALSE) %>% haven::as_factor() 
 ```
 
 ```{r}
@@ -62,7 +62,7 @@ df %>% head()  %>% knitr::kable(booktabs=T)
 Ya que los datos están ordenados de forma que los peores resultados se muestran primero, y estos han experimentado mejoría, parece que evidentemente vamos a encontrar gran diferencia en contra de la hipótesis nula. Veamos qué distribución presentan las diferencias:
 
 ```{r}
-ggplot(df, aes(x=Diferencia))+geom_histogram()+ geom_rug(sides = "b", aes(y = 0), position = "jitter", colour = "blue")+coord_cartesian(xlim=c(0,20))+geom_vline(xintercept = 0,lty=2,col="red")
+ggplot(df, aes(x=Diferencia))+geom_histogram(fill="lightblue")+ geom_rug(sides = "b", aes(y = 0), position = "jitter", colour = "blue")+coord_cartesian(xlim=c(0,20))+geom_vline(xintercept = 0,lty=2,col="red")
 ```
 
 Se ve que todos los individuos han mejorado. la evidencia contra la hipótesis nula la encontramos en esta tabla
@@ -75,10 +75,6 @@ df %>% desc1vn(vNum = "Diferencia",columnas = c("mediaet","p.intra","ic1","ic2")
 ```
 
 
-
-```{r}
-ggplot(df, aes(x=Diferencia))+geom_histogram()+ geom_rug(sides = "b", aes(y = 0), position = "jitter", colour = "blue")+coord_cartesian(xlim=c(0,20))+geom_vline(xintercept = 0,lty=2,col="red")
-```
 
 La diferencia observada en los niños representa una mejoría de más de 12 palabras por minuto. Sea cual sea la mejoría media si se aplicase en toda la población de niños similares a estos, los datos observados están _en contra de la hipótesis nula_ de no mejoría (p<0.001). Tenemos una confianza del 95% de que sea cual sea la mejoría media, el valor real está en algún lugar entre 11 y 13 palabras por minuto (redondeando).
 
@@ -123,8 +119,8 @@ solo nos interesa la variable _Diferencia_ comprarada entre ambos grupos, pero d
 
 ```{r}
 grid.arrange(
-ggplot(df,aes(x=Grupo,y=Antes))+geom_boxplot(),
-ggplot(df,aes(x=Grupo,y=Diferencia))+geom_boxplot(),
+ggplot(df,aes(x=Grupo,y=Antes))+geom_boxplot(fill="lightblue"),
+ggplot(df,aes(x=Grupo,y=Diferencia))+geom_boxplot(fill="lightblue"),
 ncol=2)
 ```
 Se aprecia que los dos grupos eran similares al iniciarse el experimento. Sin embargo el grupo de que tomo el Placebo practicamente se quedó igual, y el que tomó _Calcio_ experimentó una mejoría. Nos queda por saber si esta mejoría es explicable por el azar o va más allá (diferencia estadísticamente significativa entre grupos).
@@ -148,7 +144,11 @@ Podemos realizar la prueba paramétrica en SPSS en el menú: "_Analizar - Compar
 
 La prueba no paramétrica está en un diálogo análogo que obtenemos en el menú "_Analizar - Pruebas no paramétricas - Cuadros de dialogo antiguos - 2 muestras independientes"
 
-Una representación gráfica de los intervalos de confianza nos dejan claro que son demasiado amplios como para que las diferencia que se observa entre ambos grupos sea estadísticamente significativa. Ni siquiera queda claro que el Calcio, con un intervalo de confianza tan amplio presente un efecto mayor que cero.
+
+
+
+Una representación gráfica de los intervalos de confianza muestra que ambos tienen el común el valor cero. Es decir, ninguno de ellos puede decirse que presente una mejoría significativa. ¿Podría interpretarse como que entre ellos no hay diferencia? Esto es algo que no se deduce directamente mirando a los intervalos de confianza, aunque nuestra intuición nos indique que no deben haber mucha diferencia entre ellas.
+
 
 
 ```{r}
@@ -169,7 +169,7 @@ ggplot(resumen %>% filter(Variable=="Diferencia"), aes(x=Grupo,y=Media)) +
 Parecería que es lo mismo, pero no es así. La realidad es que si hay diferencia significativa entre la media de dos grupos, entonces los intervalos de confianza se tocan nada o _muy poco._ Vamos a ilustrarlo retomando la base de datos [2poblaciones-Mismotrabajo-DiferenteNutricion.sav](datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav). 
 
 ```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
-df=read_sav("datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav", user_na=FALSE) %>% haven::as_factor()
+df=read_sav("datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav", user_na=FALSE) %>% haven::as_factor() %>% mutate(Talla=Talla*100)
 ```
 
 Vamos a usar tanto las pruebas t-student como las no paramétricas para estudiar las diferencias entre los individuos de _Málaga_ y _Tanger_ en todas las variables numéricas.
@@ -351,7 +351,7 @@ ncol=2)
 
 
 
-En las publicaciones suele verse un tipo de gráfico u otro: El que muestra los intervalos de confianza en cada grupo, o el que sirve para estudiar las diferencias entre dos grupos. Existe una tercera posibilidad, no muy utilizada, usando la libreria _emmeans_ de R, donde además de observarse los intervalos de confianza para la media en cada grupo, una flecha interior indica cuando las comparaciones entre dos grupos son significativas: OCurre justo cuando no tienen intersección común. Este tipo de gráficos será muy útil cuando haya muchas comparaciones a realizar entre grupos (pruebas _ANOVA_).
+En las publicaciones suele verse un tipo de gráfico u otro: El que muestra los intervalos de confianza en cada grupo, o el que sirve para estudiar las diferencias entre dos grupos. Existe una tercera posibilidad, usando la libreria _emmeans_ de R, donde además de observarse los intervalos de confianza para la media en cada grupo, una flecha interior indica cuando las comparaciones entre dos grupos son significativas: Ocurre justo cuando no tienen intersección común. Este tipo de gráficos será muy útil cuando haya muchas comparaciones a realizar entre grupos (análisis posthoc de _ANOVA_).
 
 
 

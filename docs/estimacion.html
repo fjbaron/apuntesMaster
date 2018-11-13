@@ -25,7 +25,7 @@
 <meta name="author" content="Francisco Javier Barón López">
 
 
-<meta name="date" content="2018-11-07">
+<meta name="date" content="2018-11-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -146,11 +146,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#anova-de-un-factor-o-una-via"><i class="fa fa-check"></i><b>5.1</b> Anova de un factor o una vía</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#en-que-se-basa-el-contraste-anova"><i class="fa fa-check"></i><b>5.1.1</b> En qué se basa el contraste ANOVA</a></li>
 <li class="chapter" data-level="5.1.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#como-se-interpreta-anova"><i class="fa fa-check"></i><b>5.1.2</b> Cómo se interpreta ANOVA</a></li>
-<li class="chapter" data-level="5.1.3" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#contrastes-no-planeados-o-post-hoc"><i class="fa fa-check"></i><b>5.1.3</b> Contrastes no planeados o post-hoc</a></li>
-<li class="chapter" data-level="5.1.4" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#comparaciones-planeadas"><i class="fa fa-check"></i><b>5.1.4</b> Comparaciones planeadas</a></li>
-<li class="chapter" data-level="5.1.5" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#que-hacer-si-no-se-verifican-las-premisas-del-modelo-anova"><i class="fa fa-check"></i><b>5.1.5</b> ¿Qué hacer si no se verifican las premisas del modelo ANOVA?</a></li>
+<li class="chapter" data-level="5.1.3" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#que-hacer-si-no-se-verifican-las-premisas-del-modelo-anova"><i class="fa fa-check"></i><b>5.1.3</b> ¿Qué hacer si no se verifican las premisas del modelo ANOVA?</a></li>
 <li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#ejemplo-parametrico"><i class="fa fa-check"></i>Ejemplo paramétrico</a></li>
 </ul></li>
+<li class="chapter" data-level="5.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#contraste-no-parametrico-de-kruskal-wallis"><i class="fa fa-check"></i><b>5.2</b> Contraste no paramétrico de Kruskal-Wallis</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://www.bioestadistica.uma.es" target="blank">Bioestadística-UMA</a></li>
@@ -206,7 +205,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="ejemplo-de-intervalos-de-confianza-y-errores-estandar" class="section level3 unnumbered">
 <h3>Ejemplo de intervalos de confianza y errores estándar</h3>
 <p>Se consideran dos grupos de individuos que desmpeñan un trabajo similar, pero que siguen una forma de alimentación muy diferente. Están formados por albañiles de Málaga y Tánger. Descargue la base de datos <a href="datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav">2poblaciones-Mismotrabajo-DiferenteNutricion.sav</a>. Las primeras líneas tienen el siguiente aspecto:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df=<span class="kw">read_sav</span>(<span class="st">&quot;datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav&quot;</span>, <span class="dt">user_na=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>haven<span class="op">::</span><span class="kw">as_factor</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df=<span class="kw">read_sav</span>(<span class="st">&quot;datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav&quot;</span>, <span class="dt">user_na=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>haven<span class="op">::</span><span class="kw">as_factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Talla=</span>Talla<span class="op">*</span><span class="dv">100</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()  <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">booktabs=</span>T)</code></pre></div>
 <table>
 <thead>
@@ -267,7 +266,7 @@ Málaga
 81
 </td>
 <td style="text-align:right;">
-1.7
+167
 </td>
 <td style="text-align:right;">
 3521
@@ -299,7 +298,7 @@ Tanger
 85
 </td>
 <td style="text-align:right;">
-1.7
+167
 </td>
 <td style="text-align:right;">
 1490
@@ -331,7 +330,7 @@ Málaga
 79
 </td>
 <td style="text-align:right;">
-1.7
+170
 </td>
 <td style="text-align:right;">
 3701
@@ -363,7 +362,7 @@ Tanger
 86
 </td>
 <td style="text-align:right;">
-1.8
+181
 </td>
 <td style="text-align:right;">
 3200
@@ -395,7 +394,7 @@ Málaga
 91
 </td>
 <td style="text-align:right;">
-1.7
+173
 </td>
 <td style="text-align:right;">
 4124
@@ -427,7 +426,7 @@ Málaga
 87
 </td>
 <td style="text-align:right;">
-1.8
+178
 </td>
 <td style="text-align:right;">
 4209
@@ -439,16 +438,9 @@ Málaga
 </tbody>
 </table>
 <p>Si usa SPSS en el menú “<em>Analizar - Estadística discriptiva - Explorar</em>”, colocando las variables numéricas en el campo <em>Dependientes</em> y el Grupo en el campo <em>Factor</em> puede obtener información para construir estos resultados:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(
-<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>Colesterol, df<span class="op">$</span>Grupo, <span class="dt">type=</span><span class="st">&quot;boxplot&quot;</span>),
-<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>Trigliceridos, df<span class="op">$</span>Grupo, <span class="dt">type=</span><span class="st">&quot;boxplot&quot;</span>),
-<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>Glucemia, df<span class="op">$</span>Grupo, <span class="dt">type=</span><span class="st">&quot;boxplot&quot;</span>),
-<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>PAS, df<span class="op">$</span>Grupo, <span class="dt">type=</span><span class="st">&quot;boxplot&quot;</span>),
-<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>PAD, df<span class="op">$</span>Grupo, <span class="dt">type=</span><span class="st">&quot;boxplot&quot;</span>),
-<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>Peso, df<span class="op">$</span>Grupo, <span class="dt">type=</span><span class="st">&quot;boxplot&quot;</span>),
-<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>Talla, df<span class="op">$</span>Grupo, <span class="dt">type=</span><span class="st">&quot;boxplot&quot;</span>,<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">1.50</span>,<span class="fl">1.90</span>)),
-<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>Consumo, df<span class="op">$</span>Grupo, <span class="dt">type=</span><span class="st">&quot;boxplot&quot;</span>),
-<span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>Gasto, df<span class="op">$</span>Grupo, <span class="dt">type=</span><span class="st">&quot;boxplot&quot;</span>), <span class="dt">ncol=</span><span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vNumericas=<span class="kw">names</span>(df) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">setdiff</span>(<span class="st">&quot;Grupo&quot;</span>)
+listaGraficos=vNumericas <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map</span>( <span class="op">~</span><span class="st"> </span><span class="kw">ggplot</span>(df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Respuesta=</span>df[[.x]]) ,<span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Respuesta))<span class="op">+</span><span class="kw">geom_boxplot</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>)<span class="op">+</span><span class="kw">xlab</span>(.x)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;&quot;</span>))
+<span class="kw">do.call</span>(<span class="st">&quot;grid.arrange&quot;</span>, <span class="kw">c</span>(listaGraficos, <span class="dt">ncol=</span><span class="dv">3</span>))</code></pre></div>
 <p><img src="02-IntConf_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>
 <p>Visualmente se aprecia que los individuos de <em>Grupo==Málaga</em> siendo de <em>Talla</em> similar, presentan mayor <em>Consumo de energía</em> y similar <em>Gasto</em>. Se observa en ellos mayores valores de <em>Colesterol, Trigliceridos, Glucemia y Peso</em>, y valores similares de <em>Presión arterial</em>.</p>
 <p>Los intervalos de confianza y errores estándar podrían mostrarse en una tabla como sigue:</p>
@@ -519,34 +511,34 @@ ic(max)
 Colesterol
 </td>
 <td style="text-align:right;">
-162.7
+163
 </td>
 <td style="text-align:right;">
-44.81
+44.8
 </td>
 <td style="text-align:right;">
 8.32
 </td>
 <td style="text-align:right;">
-145.7
+146
 </td>
 <td style="text-align:right;">
-179.7
+180
 </td>
 <td style="text-align:right;">
-209.1
+209
 </td>
 <td style="text-align:right;">
-42.42
+42.4
 </td>
 <td style="text-align:right;">
 6.06
 </td>
 <td style="text-align:right;">
-196.9
+197
 </td>
 <td style="text-align:right;">
-221.3
+221
 </td>
 </tr>
 <tr>
@@ -554,34 +546,34 @@ Colesterol
 Trigliceridos
 </td>
 <td style="text-align:right;">
-82.1
+82
 </td>
 <td style="text-align:right;">
-45.18
+45.2
 </td>
 <td style="text-align:right;">
 8.39
 </td>
 <td style="text-align:right;">
-65.0
+65
 </td>
 <td style="text-align:right;">
-99.3
+99
 </td>
 <td style="text-align:right;">
-113.2
+113
 </td>
 <td style="text-align:right;">
-69.89
+69.9
 </td>
 <td style="text-align:right;">
 9.98
 </td>
 <td style="text-align:right;">
-93.2
+93
 </td>
 <td style="text-align:right;">
-133.3
+133
 </td>
 </tr>
 <tr>
@@ -589,34 +581,34 @@ Trigliceridos
 Glucemia
 </td>
 <td style="text-align:right;">
-78.0
+78
 </td>
 <td style="text-align:right;">
-11.27
+11.3
 </td>
 <td style="text-align:right;">
 2.09
 </td>
 <td style="text-align:right;">
-73.8
+74
 </td>
 <td style="text-align:right;">
-82.3
+82
 </td>
 <td style="text-align:right;">
-88.2
+88
 </td>
 <td style="text-align:right;">
-19.03
+19.0
 </td>
 <td style="text-align:right;">
 2.72
 </td>
 <td style="text-align:right;">
-82.7
+83
 </td>
 <td style="text-align:right;">
-93.6
+94
 </td>
 </tr>
 <tr>
@@ -624,34 +616,34 @@ Glucemia
 PAS
 </td>
 <td style="text-align:right;">
-119.8
+120
 </td>
 <td style="text-align:right;">
-10.04
+10.0
 </td>
 <td style="text-align:right;">
 1.86
 </td>
 <td style="text-align:right;">
-116.0
+116
 </td>
 <td style="text-align:right;">
-123.7
+124
 </td>
 <td style="text-align:right;">
-121.7
+122
 </td>
 <td style="text-align:right;">
-12.84
+12.8
 </td>
 <td style="text-align:right;">
 1.83
 </td>
 <td style="text-align:right;">
-118.0
+118
 </td>
 <td style="text-align:right;">
-125.4
+125
 </td>
 </tr>
 <tr>
@@ -659,34 +651,34 @@ PAS
 PAD
 </td>
 <td style="text-align:right;">
-72.5
+72
 </td>
 <td style="text-align:right;">
-9.72
+9.7
 </td>
 <td style="text-align:right;">
 1.80
 </td>
 <td style="text-align:right;">
-68.8
+69
 </td>
 <td style="text-align:right;">
-76.2
+76
 </td>
 <td style="text-align:right;">
-70.3
+70
 </td>
 <td style="text-align:right;">
-9.60
+9.6
 </td>
 <td style="text-align:right;">
 1.37
 </td>
 <td style="text-align:right;">
-67.5
+68
 </td>
 <td style="text-align:right;">
-73.1
+73
 </td>
 </tr>
 <tr>
@@ -694,34 +686,34 @@ PAD
 Peso
 </td>
 <td style="text-align:right;">
-72.7
+73
 </td>
 <td style="text-align:right;">
-7.84
+7.8
 </td>
 <td style="text-align:right;">
 1.46
 </td>
 <td style="text-align:right;">
-69.7
+70
 </td>
 <td style="text-align:right;">
-75.7
+76
 </td>
 <td style="text-align:right;">
-81.4
+81
 </td>
 <td style="text-align:right;">
-8.73
+8.7
 </td>
 <td style="text-align:right;">
 1.25
 </td>
 <td style="text-align:right;">
-78.9
+79
 </td>
 <td style="text-align:right;">
-83.9
+84
 </td>
 </tr>
 <tr>
@@ -729,34 +721,34 @@ Peso
 Talla
 </td>
 <td style="text-align:right;">
-1.7
+170
 </td>
 <td style="text-align:right;">
-0.05
+4.6
 </td>
 <td style="text-align:right;">
-0.01
+0.86
 </td>
 <td style="text-align:right;">
-1.7
+169
 </td>
 <td style="text-align:right;">
-1.7
+172
 </td>
 <td style="text-align:right;">
-1.7
+169
 </td>
 <td style="text-align:right;">
-0.05
+4.7
 </td>
 <td style="text-align:right;">
-0.01
+0.67
 </td>
 <td style="text-align:right;">
-1.7
+168
 </td>
 <td style="text-align:right;">
-1.7
+171
 </td>
 </tr>
 <tr>
@@ -764,34 +756,34 @@ Talla
 Consumo
 </td>
 <td style="text-align:right;">
-1909.2
+1909
 </td>
 <td style="text-align:right;">
-469.75
+469.8
 </td>
 <td style="text-align:right;">
 87.23
 </td>
 <td style="text-align:right;">
-1730.8
+1731
 </td>
 <td style="text-align:right;">
-2087.6
+2088
 </td>
 <td style="text-align:right;">
-3528.0
+3528
 </td>
 <td style="text-align:right;">
-550.94
+550.9
 </td>
 <td style="text-align:right;">
 78.71
 </td>
 <td style="text-align:right;">
-3369.9
+3370
 </td>
 <td style="text-align:right;">
-3686.2
+3686
 </td>
 </tr>
 <tr>
@@ -799,34 +791,34 @@ Consumo
 Gasto
 </td>
 <td style="text-align:right;">
-1894.2
+1894
 </td>
 <td style="text-align:right;">
-185.89
+185.9
 </td>
 <td style="text-align:right;">
 34.52
 </td>
 <td style="text-align:right;">
-1823.6
+1824
 </td>
 <td style="text-align:right;">
-1964.8
+1965
 </td>
 <td style="text-align:right;">
-1880.3
+1880
 </td>
 <td style="text-align:right;">
-438.12
+438.1
 </td>
 <td style="text-align:right;">
 62.59
 </td>
 <td style="text-align:right;">
-1754.5
+1755
 </td>
 <td style="text-align:right;">
-2006.1
+2006
 </td>
 </tr>
 </tbody>
@@ -1030,19 +1022,19 @@ Talla
 30
 </td>
 <td style="text-align:left;">
-1.70±0.01
+170.33±0.86
 </td>
 <td style="text-align:right;">
 50
 </td>
 <td style="text-align:left;">
-1.69±0.01
+169.48±0.67
 </td>
 <td style="text-align:left;">
 0.431
 </td>
 <td style="text-align:left;">
--0.01[-0.03,0.01]
+-0.85[-3.01,1.30]
 </td>
 </tr>
 <tr>
@@ -1093,40 +1085,25 @@ Gasto
 </tr>
 </tbody>
 </table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resumen=df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(Variable,Valor,<span class="op">-</span>Grupo) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Grupo,Variable) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Media=</span><span class="kw">mean</span>(Valor),<span class="dt">n=</span><span class="kw">length</span>(Valor),<span class="dt">ET=</span><span class="kw">sd</span>(Valor)<span class="op">/</span><span class="kw">sqrt</span>(n))
-<span class="kw">grid.arrange</span>(
-<span class="kw">ggplot</span>(resumen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Variable<span class="op">==</span><span class="st">&quot;Colesterol&quot;</span>), <span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Media)) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resumen=df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(Variable,Valor,<span class="op">-</span>Grupo) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Grupo,Variable) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Media=</span><span class="kw">mean</span>(Valor),
+                <span class="dt">n=</span><span class="kw">length</span>(Valor),
+               <span class="dt">ET=</span><span class="kw">sd</span>(Valor)<span class="op">/</span><span class="kw">sqrt</span>(n),
+               <span class="dt">IC=</span>ET<span class="op">*</span><span class="kw">qt</span>(<span class="fl">0.975</span>,n<span class="op">-</span><span class="dv">1</span>))
+
+listaGraficos=vNumericas <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map</span>( <span class="op">~</span><span class="st"> </span><span class="kw">ggplot</span>(resumen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Variable<span class="op">==</span>.x), <span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Media)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>Media<span class="op">-</span>ET,<span class="dt">ymax=</span>Media<span class="op">+</span>ET),<span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;navyblue&quot;</span>)<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;Colesterol&quot;</span>),
-<span class="kw">ggplot</span>(resumen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Variable<span class="op">==</span><span class="st">&quot;Trigliceridos&quot;</span>), <span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Media)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>Media<span class="op">-</span>ET,<span class="dt">ymax=</span>Media<span class="op">+</span>ET),<span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;navyblue&quot;</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;Triglicéridos&quot;</span>),
-<span class="kw">ggplot</span>(resumen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Variable<span class="op">==</span><span class="st">&quot;Glucemia&quot;</span>), <span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Media)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>Media<span class="op">-</span>ET,<span class="dt">ymax=</span>Media<span class="op">+</span>ET),<span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;navyblue&quot;</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;Glucemia&quot;</span>),
-<span class="kw">ggplot</span>(resumen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Variable<span class="op">==</span><span class="st">&quot;Peso&quot;</span>), <span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Media)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>Media<span class="op">-</span>ET,<span class="dt">ymax=</span>Media<span class="op">+</span>ET),<span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;navyblue&quot;</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;Peso&quot;</span>),<span class="dt">nrow=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="02-IntConf_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(.x))
+<span class="kw">do.call</span>(<span class="st">&quot;grid.arrange&quot;</span>, <span class="kw">c</span>(listaGraficos, <span class="dt">ncol=</span><span class="dv">3</span>))</code></pre></div>
+<p><img src="02-IntConf_files/figure-html/unnamed-chunk-6-1.png" width="768" /></p>
 <p>Las barras ocupan mucho espacio y no permiten apreciar bien las diferencias. Personalmente pienso que es mejor mostrar solo los intervalos formados por las medias y el error típico como sigue:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(
-<span class="kw">ggplot</span>(resumen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Variable<span class="op">==</span><span class="st">&quot;Colesterol&quot;</span>), <span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Media)) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">listaGraficos=vNumericas <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map</span>( <span class="op">~</span><span class="st"> </span><span class="kw">ggplot</span>(resumen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Variable<span class="op">==</span>.x), <span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Media)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>Media<span class="op">-</span>ET,<span class="dt">ymax=</span>Media<span class="op">+</span>ET),<span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;navyblue&quot;</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;Colesterol&quot;</span>),
-<span class="kw">ggplot</span>(resumen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Variable<span class="op">==</span><span class="st">&quot;Trigliceridos&quot;</span>), <span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Media)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>Media<span class="op">-</span>ET,<span class="dt">ymax=</span>Media<span class="op">+</span>ET),<span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;navyblue&quot;</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;Triglicéridos&quot;</span>),
-<span class="kw">ggplot</span>(resumen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Variable<span class="op">==</span><span class="st">&quot;Glucemia&quot;</span>), <span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Media)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>Media<span class="op">-</span>ET,<span class="dt">ymax=</span>Media<span class="op">+</span>ET),<span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;navyblue&quot;</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;Glucemia&quot;</span>),
-<span class="kw">ggplot</span>(resumen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Variable<span class="op">==</span><span class="st">&quot;Peso&quot;</span>), <span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Media)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>Media<span class="op">-</span>ET,<span class="dt">ymax=</span>Media<span class="op">+</span>ET),<span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;navyblue&quot;</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;Peso&quot;</span>),<span class="dt">nrow=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="02-IntConf_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(.x))
+<span class="kw">do.call</span>(<span class="st">&quot;grid.arrange&quot;</span>, <span class="kw">c</span>(listaGraficos, <span class="dt">ncol=</span><span class="dv">3</span>))</code></pre></div>
+<p><img src="02-IntConf_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
 
 </div>
 </div>
@@ -1170,7 +1147,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["apuntesEstadistica.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }

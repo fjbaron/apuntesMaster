@@ -47,7 +47,7 @@ Se consideran dos grupos de individuos que desmpeñan un trabajo similar, pero q
 
 
 ```r
-df=read_sav("datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav", user_na=FALSE) %>% haven::as_factor()
+df=read_sav("datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav", user_na=FALSE) %>% haven::as_factor() %>% mutate(Talla=Talla*100)
 ```
 
 
@@ -79,7 +79,7 @@ df %>% head()  %>% knitr::kable(booktabs=T)
    <td style="text-align:right;"> 130 </td>
    <td style="text-align:right;"> 70 </td>
    <td style="text-align:right;"> 81 </td>
-   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 167 </td>
    <td style="text-align:right;"> 3521 </td>
    <td style="text-align:right;"> 1400 </td>
   </tr>
@@ -91,7 +91,7 @@ df %>% head()  %>% knitr::kable(booktabs=T)
    <td style="text-align:right;"> 130 </td>
    <td style="text-align:right;"> 90 </td>
    <td style="text-align:right;"> 85 </td>
-   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 167 </td>
    <td style="text-align:right;"> 1490 </td>
    <td style="text-align:right;"> 1730 </td>
   </tr>
@@ -103,7 +103,7 @@ df %>% head()  %>% knitr::kable(booktabs=T)
    <td style="text-align:right;"> 120 </td>
    <td style="text-align:right;"> 60 </td>
    <td style="text-align:right;"> 79 </td>
-   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 170 </td>
    <td style="text-align:right;"> 3701 </td>
    <td style="text-align:right;"> 2180 </td>
   </tr>
@@ -115,7 +115,7 @@ df %>% head()  %>% knitr::kable(booktabs=T)
    <td style="text-align:right;"> 110 </td>
    <td style="text-align:right;"> 60 </td>
    <td style="text-align:right;"> 86 </td>
-   <td style="text-align:right;"> 1.8 </td>
+   <td style="text-align:right;"> 181 </td>
    <td style="text-align:right;"> 3200 </td>
    <td style="text-align:right;"> 2150 </td>
   </tr>
@@ -127,7 +127,7 @@ df %>% head()  %>% knitr::kable(booktabs=T)
    <td style="text-align:right;"> 130 </td>
    <td style="text-align:right;"> 90 </td>
    <td style="text-align:right;"> 91 </td>
-   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 173 </td>
    <td style="text-align:right;"> 4124 </td>
    <td style="text-align:right;"> 1700 </td>
   </tr>
@@ -139,7 +139,7 @@ df %>% head()  %>% knitr::kable(booktabs=T)
    <td style="text-align:right;"> 120 </td>
    <td style="text-align:right;"> 60 </td>
    <td style="text-align:right;"> 87 </td>
-   <td style="text-align:right;"> 1.8 </td>
+   <td style="text-align:right;"> 178 </td>
    <td style="text-align:right;"> 4209 </td>
    <td style="text-align:right;"> 1845 </td>
   </tr>
@@ -151,20 +151,18 @@ Si usa SPSS en el menú "_Analizar - Estadística discriptiva - Explorar_", colo
 
 
 
+
+
+
 ```r
-grid.arrange(
-sjp.grpfrq(df$Colesterol, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$Trigliceridos, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$Glucemia, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$PAS, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$PAD, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$Peso, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$Talla, df$Grupo, type="boxplot",ylim = c(1.50,1.90)),
-sjp.grpfrq(df$Consumo, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$Gasto, df$Grupo, type="boxplot"), ncol=3)
+vNumericas=names(df) %>% setdiff("Grupo")
+listaGraficos=vNumericas %>% map( ~ ggplot(df %>% mutate(Respuesta=df[[.x]]) ,aes(x=Grupo,y=Respuesta))+geom_boxplot(fill="lightblue")+xlab(.x)+ylab(""))
+do.call("grid.arrange", c(listaGraficos, ncol=3))
 ```
 
 <img src="02-IntConf_files/figure-html/unnamed-chunk-3-1.png" width="768" />
+
+
 
 Visualmente se aprecia que los individuos de _Grupo==Málaga_ siendo de _Talla_ similar, presentan mayor _Consumo de energía_ y similar _Gasto_. Se observa en ellos mayores valores de _Colesterol, Trigliceridos, Glucemia y Peso_, y valores similares de _Presión arterial_.
 
@@ -207,120 +205,120 @@ df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
 <tbody>
   <tr>
    <td style="text-align:left;"> Colesterol </td>
-   <td style="text-align:right;"> 162.7 </td>
-   <td style="text-align:right;"> 44.81 </td>
+   <td style="text-align:right;"> 163 </td>
+   <td style="text-align:right;"> 44.8 </td>
    <td style="text-align:right;"> 8.32 </td>
-   <td style="text-align:right;"> 145.7 </td>
-   <td style="text-align:right;"> 179.7 </td>
-   <td style="text-align:right;"> 209.1 </td>
-   <td style="text-align:right;"> 42.42 </td>
+   <td style="text-align:right;"> 146 </td>
+   <td style="text-align:right;"> 180 </td>
+   <td style="text-align:right;"> 209 </td>
+   <td style="text-align:right;"> 42.4 </td>
    <td style="text-align:right;"> 6.06 </td>
-   <td style="text-align:right;"> 196.9 </td>
-   <td style="text-align:right;"> 221.3 </td>
+   <td style="text-align:right;"> 197 </td>
+   <td style="text-align:right;"> 221 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Trigliceridos </td>
-   <td style="text-align:right;"> 82.1 </td>
-   <td style="text-align:right;"> 45.18 </td>
+   <td style="text-align:right;"> 82 </td>
+   <td style="text-align:right;"> 45.2 </td>
    <td style="text-align:right;"> 8.39 </td>
-   <td style="text-align:right;"> 65.0 </td>
-   <td style="text-align:right;"> 99.3 </td>
-   <td style="text-align:right;"> 113.2 </td>
-   <td style="text-align:right;"> 69.89 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 99 </td>
+   <td style="text-align:right;"> 113 </td>
+   <td style="text-align:right;"> 69.9 </td>
    <td style="text-align:right;"> 9.98 </td>
-   <td style="text-align:right;"> 93.2 </td>
-   <td style="text-align:right;"> 133.3 </td>
+   <td style="text-align:right;"> 93 </td>
+   <td style="text-align:right;"> 133 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Glucemia </td>
-   <td style="text-align:right;"> 78.0 </td>
-   <td style="text-align:right;"> 11.27 </td>
+   <td style="text-align:right;"> 78 </td>
+   <td style="text-align:right;"> 11.3 </td>
    <td style="text-align:right;"> 2.09 </td>
-   <td style="text-align:right;"> 73.8 </td>
-   <td style="text-align:right;"> 82.3 </td>
-   <td style="text-align:right;"> 88.2 </td>
-   <td style="text-align:right;"> 19.03 </td>
+   <td style="text-align:right;"> 74 </td>
+   <td style="text-align:right;"> 82 </td>
+   <td style="text-align:right;"> 88 </td>
+   <td style="text-align:right;"> 19.0 </td>
    <td style="text-align:right;"> 2.72 </td>
-   <td style="text-align:right;"> 82.7 </td>
-   <td style="text-align:right;"> 93.6 </td>
+   <td style="text-align:right;"> 83 </td>
+   <td style="text-align:right;"> 94 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PAS </td>
-   <td style="text-align:right;"> 119.8 </td>
-   <td style="text-align:right;"> 10.04 </td>
+   <td style="text-align:right;"> 120 </td>
+   <td style="text-align:right;"> 10.0 </td>
    <td style="text-align:right;"> 1.86 </td>
-   <td style="text-align:right;"> 116.0 </td>
-   <td style="text-align:right;"> 123.7 </td>
-   <td style="text-align:right;"> 121.7 </td>
-   <td style="text-align:right;"> 12.84 </td>
+   <td style="text-align:right;"> 116 </td>
+   <td style="text-align:right;"> 124 </td>
+   <td style="text-align:right;"> 122 </td>
+   <td style="text-align:right;"> 12.8 </td>
    <td style="text-align:right;"> 1.83 </td>
-   <td style="text-align:right;"> 118.0 </td>
-   <td style="text-align:right;"> 125.4 </td>
+   <td style="text-align:right;"> 118 </td>
+   <td style="text-align:right;"> 125 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PAD </td>
-   <td style="text-align:right;"> 72.5 </td>
-   <td style="text-align:right;"> 9.72 </td>
+   <td style="text-align:right;"> 72 </td>
+   <td style="text-align:right;"> 9.7 </td>
    <td style="text-align:right;"> 1.80 </td>
-   <td style="text-align:right;"> 68.8 </td>
-   <td style="text-align:right;"> 76.2 </td>
-   <td style="text-align:right;"> 70.3 </td>
-   <td style="text-align:right;"> 9.60 </td>
+   <td style="text-align:right;"> 69 </td>
+   <td style="text-align:right;"> 76 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:right;"> 9.6 </td>
    <td style="text-align:right;"> 1.37 </td>
-   <td style="text-align:right;"> 67.5 </td>
-   <td style="text-align:right;"> 73.1 </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:right;"> 73 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Peso </td>
-   <td style="text-align:right;"> 72.7 </td>
-   <td style="text-align:right;"> 7.84 </td>
+   <td style="text-align:right;"> 73 </td>
+   <td style="text-align:right;"> 7.8 </td>
    <td style="text-align:right;"> 1.46 </td>
-   <td style="text-align:right;"> 69.7 </td>
-   <td style="text-align:right;"> 75.7 </td>
-   <td style="text-align:right;"> 81.4 </td>
-   <td style="text-align:right;"> 8.73 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:right;"> 76 </td>
+   <td style="text-align:right;"> 81 </td>
+   <td style="text-align:right;"> 8.7 </td>
    <td style="text-align:right;"> 1.25 </td>
-   <td style="text-align:right;"> 78.9 </td>
-   <td style="text-align:right;"> 83.9 </td>
+   <td style="text-align:right;"> 79 </td>
+   <td style="text-align:right;"> 84 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Talla </td>
-   <td style="text-align:right;"> 1.7 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 1.7 </td>
-   <td style="text-align:right;"> 1.7 </td>
-   <td style="text-align:right;"> 1.7 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 1.7 </td>
-   <td style="text-align:right;"> 1.7 </td>
+   <td style="text-align:right;"> 170 </td>
+   <td style="text-align:right;"> 4.6 </td>
+   <td style="text-align:right;"> 0.86 </td>
+   <td style="text-align:right;"> 169 </td>
+   <td style="text-align:right;"> 172 </td>
+   <td style="text-align:right;"> 169 </td>
+   <td style="text-align:right;"> 4.7 </td>
+   <td style="text-align:right;"> 0.67 </td>
+   <td style="text-align:right;"> 168 </td>
+   <td style="text-align:right;"> 171 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Consumo </td>
-   <td style="text-align:right;"> 1909.2 </td>
-   <td style="text-align:right;"> 469.75 </td>
+   <td style="text-align:right;"> 1909 </td>
+   <td style="text-align:right;"> 469.8 </td>
    <td style="text-align:right;"> 87.23 </td>
-   <td style="text-align:right;"> 1730.8 </td>
-   <td style="text-align:right;"> 2087.6 </td>
-   <td style="text-align:right;"> 3528.0 </td>
-   <td style="text-align:right;"> 550.94 </td>
+   <td style="text-align:right;"> 1731 </td>
+   <td style="text-align:right;"> 2088 </td>
+   <td style="text-align:right;"> 3528 </td>
+   <td style="text-align:right;"> 550.9 </td>
    <td style="text-align:right;"> 78.71 </td>
-   <td style="text-align:right;"> 3369.9 </td>
-   <td style="text-align:right;"> 3686.2 </td>
+   <td style="text-align:right;"> 3370 </td>
+   <td style="text-align:right;"> 3686 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Gasto </td>
-   <td style="text-align:right;"> 1894.2 </td>
-   <td style="text-align:right;"> 185.89 </td>
+   <td style="text-align:right;"> 1894 </td>
+   <td style="text-align:right;"> 185.9 </td>
    <td style="text-align:right;"> 34.52 </td>
-   <td style="text-align:right;"> 1823.6 </td>
-   <td style="text-align:right;"> 1964.8 </td>
-   <td style="text-align:right;"> 1880.3 </td>
-   <td style="text-align:right;"> 438.12 </td>
+   <td style="text-align:right;"> 1824 </td>
+   <td style="text-align:right;"> 1965 </td>
+   <td style="text-align:right;"> 1880 </td>
+   <td style="text-align:right;"> 438.1 </td>
    <td style="text-align:right;"> 62.59 </td>
-   <td style="text-align:right;"> 1754.5 </td>
-   <td style="text-align:right;"> 2006.1 </td>
+   <td style="text-align:right;"> 1755 </td>
+   <td style="text-align:right;"> 2006 </td>
   </tr>
 </tbody>
 </table>
@@ -417,11 +415,11 @@ df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
   <tr>
    <td style="text-align:left;"> Talla </td>
    <td style="text-align:right;"> 30 </td>
-   <td style="text-align:left;"> 1.70±0.01 </td>
+   <td style="text-align:left;"> 170.33±0.86 </td>
    <td style="text-align:right;"> 50 </td>
-   <td style="text-align:left;"> 1.69±0.01 </td>
+   <td style="text-align:left;"> 169.48±0.67 </td>
    <td style="text-align:left;"> 0.431 </td>
-   <td style="text-align:left;"> -0.01[-0.03,0.01] </td>
+   <td style="text-align:left;"> -0.85[-3.01,1.30] </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Consumo </td>
@@ -448,48 +446,35 @@ df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
 
 
 ```r
-resumen=df %>% gather(Variable,Valor,-Grupo) %>% group_by(Grupo,Variable) %>% summarise(Media=mean(Valor),n=length(Valor),ET=sd(Valor)/sqrt(n))
-grid.arrange(
-ggplot(resumen %>% filter(Variable=="Colesterol"), aes(x=Grupo,y=Media)) +
+resumen=df %>% gather(Variable,Valor,-Grupo) %>% 
+  group_by(Grupo,Variable) %>% 
+  summarise(Media=mean(Valor),
+                n=length(Valor),
+               ET=sd(Valor)/sqrt(n),
+               IC=ET*qt(0.975,n-1))
+
+listaGraficos=vNumericas %>% map( ~ ggplot(resumen %>% filter(Variable==.x), aes(x=Grupo,y=Media)) +
   geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
   geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
-  geom_point( size=4, shape=21, fill="white")+ylab("Colesterol"),
-ggplot(resumen %>% filter(Variable=="Trigliceridos"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
-  geom_point( size=4, shape=21, fill="white")+ylab("Triglicéridos"),
-ggplot(resumen %>% filter(Variable=="Glucemia"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
-  geom_point( size=4, shape=21, fill="white")+ylab("Glucemia"),
-ggplot(resumen %>% filter(Variable=="Peso"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
-  geom_point( size=4, shape=21, fill="white")+ylab("Peso"),nrow=2)
+  geom_point( size=4, shape=21, fill="white")+ylab(.x))
+do.call("grid.arrange", c(listaGraficos, ncol=3))
 ```
 
-<img src="02-IntConf_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="02-IntConf_files/figure-html/unnamed-chunk-6-1.png" width="768" />
+
+
 
 
 Las barras ocupan mucho espacio y no permiten apreciar bien las diferencias. Personalmente pienso que es mejor mostrar solo los intervalos formados por las medias y el error típico como sigue:
 
+
+
 ```r
-grid.arrange(
-ggplot(resumen %>% filter(Variable=="Colesterol"), aes(x=Grupo,y=Media)) +
+listaGraficos=vNumericas %>% map( ~ ggplot(resumen %>% filter(Variable==.x), aes(x=Grupo,y=Media)) +
   geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_point( size=4, shape=21, fill="white")+ylab("Colesterol"),
-ggplot(resumen %>% filter(Variable=="Trigliceridos"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_point( size=4, shape=21, fill="white")+ylab("Triglicéridos"),
-ggplot(resumen %>% filter(Variable=="Glucemia"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_point( size=4, shape=21, fill="white")+ylab("Glucemia"),
-ggplot(resumen %>% filter(Variable=="Peso"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_point( size=4, shape=21, fill="white")+ylab("Peso"),nrow=2)
+  geom_point( size=4, shape=21, fill="white")+ylab(.x))
+do.call("grid.arrange", c(listaGraficos, ncol=3))
 ```
 
-<img src="02-IntConf_files/figure-html/unnamed-chunk-7-1.png" width="672" />
-
-
+<img src="02-IntConf_files/figure-html/unnamed-chunk-7-1.png" width="768" />
 

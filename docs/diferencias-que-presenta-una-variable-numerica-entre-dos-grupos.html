@@ -25,7 +25,7 @@
 <meta name="author" content="Francisco Javier Barón López">
 
 
-<meta name="date" content="2018-11-07">
+<meta name="date" content="2018-11-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -146,11 +146,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#anova-de-un-factor-o-una-via"><i class="fa fa-check"></i><b>5.1</b> Anova de un factor o una vía</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#en-que-se-basa-el-contraste-anova"><i class="fa fa-check"></i><b>5.1.1</b> En qué se basa el contraste ANOVA</a></li>
 <li class="chapter" data-level="5.1.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#como-se-interpreta-anova"><i class="fa fa-check"></i><b>5.1.2</b> Cómo se interpreta ANOVA</a></li>
-<li class="chapter" data-level="5.1.3" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#contrastes-no-planeados-o-post-hoc"><i class="fa fa-check"></i><b>5.1.3</b> Contrastes no planeados o post-hoc</a></li>
-<li class="chapter" data-level="5.1.4" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#comparaciones-planeadas"><i class="fa fa-check"></i><b>5.1.4</b> Comparaciones planeadas</a></li>
-<li class="chapter" data-level="5.1.5" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#que-hacer-si-no-se-verifican-las-premisas-del-modelo-anova"><i class="fa fa-check"></i><b>5.1.5</b> ¿Qué hacer si no se verifican las premisas del modelo ANOVA?</a></li>
+<li class="chapter" data-level="5.1.3" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#que-hacer-si-no-se-verifican-las-premisas-del-modelo-anova"><i class="fa fa-check"></i><b>5.1.3</b> ¿Qué hacer si no se verifican las premisas del modelo ANOVA?</a></li>
 <li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#ejemplo-parametrico"><i class="fa fa-check"></i>Ejemplo paramétrico</a></li>
 </ul></li>
+<li class="chapter" data-level="5.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#contraste-no-parametrico-de-kruskal-wallis"><i class="fa fa-check"></i><b>5.2</b> Contraste no paramétrico de Kruskal-Wallis</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://www.bioestadistica.uma.es" target="blank">Bioestadística-UMA</a></li>
@@ -201,7 +200,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="ejemplo" class="section level3 unnumbered">
 <h3>Ejemplo</h3>
 <p>Se estudia si mejoran unos niños su velocidad de lectura en palabras por minuto. Para ellos se les mide al inicio de un estudio, se les vuelve a medir tras una intervención. Se toma nota de la diferencia entre la velocidad final y la inicial. Puede descargar los datos del experimento en la base de datos <a href="datos/lectura-anova.sav">lectura-anova.sav</a>. La exploración de los primeros casos, ordenados de menor a mayor diferencia nos ofrece:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df=<span class="kw">read_sav</span>(<span class="st">&quot;datos/lectura-anova.sav&quot;</span>, <span class="dt">user_na=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>haven<span class="op">::</span><span class="kw">as_factor</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df=<span class="kw">read_sav</span>(<span class="st">&quot;datos/lectura-anova.sav&quot;</span>, <span class="dt">user_na=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>haven<span class="op">::</span><span class="kw">as_factor</span>() </code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()  <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">booktabs=</span>T)</code></pre></div>
 <table>
 <thead>
@@ -350,7 +349,7 @@ Control
 </tbody>
 </table>
 <p>Ya que los datos están ordenados de forma que los peores resultados se muestran primero, y estos han experimentado mejoría, parece que evidentemente vamos a encontrar gran diferencia en contra de la hipótesis nula. Veamos qué distribución presentan las diferencias:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x=</span>Diferencia))<span class="op">+</span><span class="kw">geom_histogram</span>()<span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>(<span class="dt">sides =</span> <span class="st">&quot;b&quot;</span>, <span class="kw">aes</span>(<span class="dt">y =</span> <span class="dv">0</span>), <span class="dt">position =</span> <span class="st">&quot;jitter&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)<span class="op">+</span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>))<span class="op">+</span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>,<span class="dt">lty=</span><span class="dv">2</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x=</span>Diferencia))<span class="op">+</span><span class="kw">geom_histogram</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>(<span class="dt">sides =</span> <span class="st">&quot;b&quot;</span>, <span class="kw">aes</span>(<span class="dt">y =</span> <span class="dv">0</span>), <span class="dt">position =</span> <span class="st">&quot;jitter&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)<span class="op">+</span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>))<span class="op">+</span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>,<span class="dt">lty=</span><span class="dv">2</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
 <p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Se ve que todos los individuos han mejorado. la evidencia contra la hipótesis nula la encontramos en esta tabla</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">desc1vn</span>(<span class="dt">vNum =</span> <span class="st">&quot;Diferencia&quot;</span>,<span class="dt">columnas =</span> <span class="kw">c</span>(<span class="st">&quot;mediaet&quot;</span>,<span class="st">&quot;p.intra&quot;</span>,<span class="st">&quot;ic1&quot;</span>,<span class="st">&quot;ic2&quot;</span>)) <span class="op">%&gt;%</span>
@@ -397,8 +396,6 @@ Diferencia
 </tr>
 </tbody>
 </table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x=</span>Diferencia))<span class="op">+</span><span class="kw">geom_histogram</span>()<span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>(<span class="dt">sides =</span> <span class="st">&quot;b&quot;</span>, <span class="kw">aes</span>(<span class="dt">y =</span> <span class="dv">0</span>), <span class="dt">position =</span> <span class="st">&quot;jitter&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)<span class="op">+</span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>))<span class="op">+</span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>,<span class="dt">lty=</span><span class="dv">2</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
-<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>La diferencia observada en los niños representa una mejoría de más de 12 palabras por minuto. Sea cual sea la mejoría media si se aplicase en toda la población de niños similares a estos, los datos observados están <em>en contra de la hipótesis nula</em> de no mejoría (p&lt;0.001). Tenemos una confianza del 95% de que sea cual sea la mejoría media, el valor real está en algún lugar entre 11 y 13 palabras por minuto (redondeando).</p>
 <p>En SPSS podemos realizar este calculo seleccionando el menú: “_Analizar - Comparar medias - prueba T para muestras apareadas“. Allí marcamos el par de variables <em>Antes y Después</em>. También podríamos haber elegido el menú”_Analizar - Comparar medias - prueba T para una muestra&quot; y haber trabajado con la variable <em>Dferencia</em>. El resultado es el mismo.</p>
 </div>
@@ -527,10 +524,10 @@ Placebo
 </table>
 <p>solo nos interesa la variable <em>Diferencia</em> comprarada entre ambos grupos, pero de todas formas vamos a examinar las mediciones <em>Antes</em>. La razón es que al realizar un experimento, repartimos a los individuos en dos grupos, y estamos muy interesados en que los dos grupos sean muy similares en el punto de partida (medición <em>basal</em>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(
-<span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Antes))<span class="op">+</span><span class="kw">geom_boxplot</span>(),
-<span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Diferencia))<span class="op">+</span><span class="kw">geom_boxplot</span>(),
+<span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Antes))<span class="op">+</span><span class="kw">geom_boxplot</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>),
+<span class="kw">ggplot</span>(df,<span class="kw">aes</span>(<span class="dt">x=</span>Grupo,<span class="dt">y=</span>Diferencia))<span class="op">+</span><span class="kw">geom_boxplot</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>),
 <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-7-1.png" width="672" /> Se aprecia que los dos grupos eran similares al iniciarse el experimento. Sin embargo el grupo de que tomo el Placebo practicamente se quedó igual, y el que tomó <em>Calcio</em> experimentó una mejoría. Nos queda por saber si esta mejoría es explicable por el azar o va más allá (diferencia estadísticamente significativa entre grupos).</p>
+<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-6-1.png" width="672" /> Se aprecia que los dos grupos eran similares al iniciarse el experimento. Sin embargo el grupo de que tomo el Placebo practicamente se quedó igual, y el que tomó <em>Calcio</em> experimentó una mejoría. Nos queda por saber si esta mejoría es explicable por el azar o va más allá (diferencia estadísticamente significativa entre grupos).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">generaTablatTestPorGrupo</span>(<span class="st">&quot;Grupo&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Antes&quot;</span>,<span class="st">&quot;Diferencia&quot;</span>),
                                 <span class="dt">columnas =</span> <span class="kw">c</span>(<span class="st">&quot;n&quot;</span>,<span class="st">&quot;mediaet&quot;</span>,<span class="st">&quot;p.t&quot;</span>,<span class="st">&quot;ci95&quot;</span>, <span class="st">&quot;p.w&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>( <span class="dt">booktabs =</span> T, 
@@ -642,7 +639,7 @@ Diferencia
 <p>A la vista de los resultados, entre el grupo <em>Calcio</em> y el <em>Placebo</em> no hay diferencias estadísticamente significativas, no solo al inicio del experimento, si no que el cambio producido en los individuos también es compatible con la hipótesis nula de que obtienen resultados similares. Las significaciones obtenidas se han realizado tanto con la prueba paramétrica de la t-student como con una prueba no paramétrica. Ambas obtienen conclusiones similares.</p>
 <p>Podemos realizar la prueba paramétrica en SPSS en el menú: “<em>Analizar - Comparar medias -Prueba t para muestras independientes</em>”. En la variable Grupo hemos de indicar que comparamos los grupos 0 (Placebo), con el grupo 1 (Calcio), pues así es como se han codificado numéricamente las variables. El el campo de <em>Variables de prueba</em> situamos las variables <em>Antes</em> y <em>Diferencia</em>.</p>
 <p>La prueba no paramétrica está en un diálogo análogo que obtenemos en el menú “_Analizar - Pruebas no paramétricas - Cuadros de dialogo antiguos - 2 muestras independientes&quot;</p>
-<p>Una representación gráfica de los intervalos de confianza nos dejan claro que son demasiado amplios como para que las diferencia que se observa entre ambos grupos sea estadísticamente significativa. Ni siquiera queda claro que el Calcio, con un intervalo de confianza tan amplio presente un efecto mayor que cero.</p>
+<p>Una representación gráfica de los intervalos de confianza muestra que ambos tienen el común el valor cero. Es decir, ninguno de ellos puede decirse que presente una mejoría significativa. ¿Podría interpretarse como que entre ellos no hay diferencia? Esto es algo que no se deduce directamente mirando a los intervalos de confianza, aunque nuestra intuición nos indique que no deben haber mucha diferencia entre ellas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resumen=df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(Variable,Valor,<span class="op">-</span>Grupo) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(Grupo,Variable) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Media=</span><span class="kw">mean</span>(Valor),
@@ -652,7 +649,7 @@ Diferencia
 <span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>Media<span class="op">-</span>IC,<span class="dt">ymax=</span>Media<span class="op">+</span>IC),<span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;navyblue&quot;</span>)<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;Diferencia&quot;</span>)<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">0</span>,<span class="dt">lty=</span><span class="dv">2</span>,<span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
-<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="es-lo-mismo-que-la-diferencia-entre-dos-grupos-sea-significativa-que-el-que-sus-respectivos-intervalos-de-confianza-para-la-media-no-se-toquen" class="section level3 unnumbered">
 <h3>¿Es lo mismo que la diferencia entre dos grupos sea significativa que el que sus respectivos intervalos de confianza para la media no se toquen?</h3>
@@ -887,19 +884,19 @@ Talla
 30
 </td>
 <td style="text-align:left;">
-1.70±0.01
+170.33±0.86
 </td>
 <td style="text-align:right;">
 50
 </td>
 <td style="text-align:left;">
-1.69±0.01
+169.48±0.67
 </td>
 <td style="text-align:left;">
 0.431
 </td>
 <td style="text-align:left;">
--0.01[-0.03,0.01]
+-0.85[-3.01,1.30]
 </td>
 <td style="text-align:left;">
 0.611
@@ -1026,22 +1023,22 @@ ic.dif.(max)
 Colesterol
 </td>
 <td style="text-align:right;">
-145.7
+146
 </td>
 <td style="text-align:right;">
-179.7
+180
 </td>
 <td style="text-align:right;">
-196.9
+197
 </td>
 <td style="text-align:right;">
-221.3
+221
 </td>
 <td style="text-align:right;">
-26.15
+26.1
 </td>
 <td style="text-align:right;">
-66.76
+66.8
 </td>
 </tr>
 <tr>
@@ -1049,22 +1046,22 @@ Colesterol
 Trigliceridos
 </td>
 <td style="text-align:right;">
-65.0
+65
 </td>
 <td style="text-align:right;">
-99.3
+99
 </td>
 <td style="text-align:right;">
-93.2
+93
 </td>
 <td style="text-align:right;">
-133.3
+133
 </td>
 <td style="text-align:right;">
-5.45
+5.4
 </td>
 <td style="text-align:right;">
-56.72
+56.7
 </td>
 </tr>
 <tr>
@@ -1072,22 +1069,22 @@ Trigliceridos
 Glucemia
 </td>
 <td style="text-align:right;">
-73.8
+74
 </td>
 <td style="text-align:right;">
-82.3
+82
 </td>
 <td style="text-align:right;">
-82.7
+83
 </td>
 <td style="text-align:right;">
-93.6
+94
 </td>
 <td style="text-align:right;">
-3.40
+3.4
 </td>
 <td style="text-align:right;">
-16.89
+16.9
 </td>
 </tr>
 <tr>
@@ -1095,22 +1092,22 @@ Glucemia
 PAS
 </td>
 <td style="text-align:right;">
-116.0
+116
 </td>
 <td style="text-align:right;">
-123.7
+124
 </td>
 <td style="text-align:right;">
-118.0
+118
 </td>
 <td style="text-align:right;">
-125.4
+125
 </td>
 <td style="text-align:right;">
--3.28
+-3.3
 </td>
 <td style="text-align:right;">
-7.01
+7.0
 </td>
 </tr>
 <tr>
@@ -1118,22 +1115,22 @@ PAS
 PAD
 </td>
 <td style="text-align:right;">
-68.8
+69
 </td>
 <td style="text-align:right;">
-76.2
+76
 </td>
 <td style="text-align:right;">
-67.5
+68
 </td>
 <td style="text-align:right;">
-73.1
+73
 </td>
 <td style="text-align:right;">
--6.67
+-6.7
 </td>
 <td style="text-align:right;">
-2.27
+2.3
 </td>
 </tr>
 <tr>
@@ -1141,22 +1138,22 @@ PAD
 Peso
 </td>
 <td style="text-align:right;">
-69.7
+70
 </td>
 <td style="text-align:right;">
-75.7
+76
 </td>
 <td style="text-align:right;">
-78.9
+79
 </td>
 <td style="text-align:right;">
-83.9
+84
 </td>
 <td style="text-align:right;">
-4.94
+4.9
 </td>
 <td style="text-align:right;">
-12.49
+12.5
 </td>
 </tr>
 <tr>
@@ -1164,22 +1161,22 @@ Peso
 Talla
 </td>
 <td style="text-align:right;">
-1.7
+169
 </td>
 <td style="text-align:right;">
-1.7
+172
 </td>
 <td style="text-align:right;">
-1.7
+168
 </td>
 <td style="text-align:right;">
-1.7
+171
 </td>
 <td style="text-align:right;">
--0.03
+-3.0
 </td>
 <td style="text-align:right;">
-0.01
+1.3
 </td>
 </tr>
 <tr>
@@ -1187,22 +1184,22 @@ Talla
 Consumo
 </td>
 <td style="text-align:right;">
-1730.8
+1731
 </td>
 <td style="text-align:right;">
-2087.6
+2088
 </td>
 <td style="text-align:right;">
-3369.9
+3370
 </td>
 <td style="text-align:right;">
-3686.2
+3686
 </td>
 <td style="text-align:right;">
-1387.71
+1387.7
 </td>
 <td style="text-align:right;">
-1850.04
+1850.0
 </td>
 </tr>
 <tr>
@@ -1210,22 +1207,22 @@ Consumo
 Gasto
 </td>
 <td style="text-align:right;">
-1823.6
+1824
 </td>
 <td style="text-align:right;">
-1964.8
+1965
 </td>
 <td style="text-align:right;">
-1754.5
+1755
 </td>
 <td style="text-align:right;">
-2006.1
+2006
 </td>
 <td style="text-align:right;">
--154.73
+-154.7
 </td>
 <td style="text-align:right;">
-126.93
+126.9
 </td>
 </tr>
 </tbody>
@@ -1241,25 +1238,25 @@ Gasto
 <span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)<span class="op">+</span><span class="kw">ylab</span>(<span class="kw">str_c</span>(<span class="st">&quot;Diferencia de &quot;</span>, laVariable)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)<span class="op">+</span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">0</span>,<span class="dt">lty=</span><span class="dv">2</span>,<span class="dt">color=</span><span class="st">&quot;red&quot;</span>),
 <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>En cuanto a la siguiente variable, <em>Triglicéridos</em> y <em>Glucemia</em> nos encontramos la sorpresa: observamos que el IC95% para la diferencia de medias no contiene (por poco) al cero, es decir, la diferencia de medias es apenas significativamente diferente de cero, sin embargo los intervalos de confianza dentro de cada grupo se cruzan (por poco).</p>
-<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Estudie lo que ocurre en el resto de variables y compruebe si gráficamente es cierto lo de que:</p>
 <blockquote>
 <p>Cuando la diferencia entre dos grupos es estadísticamente significativa, los IC95% de cada grupo se tocan <em>nada o muy poc.o</em></p>
 </blockquote>
+<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<p>En las publicaciones suele verse un tipo de gráfico u otro: El que muestra los intervalos de confianza en cada grupo, o el que sirve para estudiar las diferencias entre dos grupos. Existe una tercera posibilidad, no muy utilizada, usando la libreria <em>emmeans</em> de R, donde además de observarse los intervalos de confianza para la media en cada grupo, una flecha interior indica cuando las comparaciones entre dos grupos son significativas: OCurre justo cuando no tienen intersección común. Este tipo de gráficos será muy útil cuando haya muchas comparaciones a realizar entre grupos (pruebas <em>ANOVA</em>).</p>
+<p>En las publicaciones suele verse un tipo de gráfico u otro: El que muestra los intervalos de confianza en cada grupo, o el que sirve para estudiar las diferencias entre dos grupos. Existe una tercera posibilidad, usando la libreria <em>emmeans</em> de R, donde además de observarse los intervalos de confianza para la media en cada grupo, una flecha interior indica cuando las comparaciones entre dos grupos son significativas: Ocurre justo cuando no tienen intersección común. Este tipo de gráficos será muy útil cuando haya muchas comparaciones a realizar entre grupos (análisis posthoc de <em>ANOVA</em>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">listaGraficos=vNumericas <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map</span>( <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(<span class="kw">formula</span>(<span class="kw">str_c</span>(.,<span class="st">&quot; ~ Grupo&quot;</span>)),<span class="dt">data=</span>df) <span class="op">%&gt;%</span>
 <span class="st">              </span><span class="kw">emmeans</span>(<span class="st">&quot;Grupo&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dt">comparisons=</span><span class="ot">TRUE</span>)<span class="op">+</span><span class="kw">xlab</span>(.x)<span class="op">+</span><span class="kw">ylab</span>(<span class="st">&quot;&quot;</span>)<span class="op">+</span><span class="kw">coord_flip</span>())
 <span class="kw">do.call</span>(<span class="st">&quot;grid.arrange&quot;</span>, <span class="kw">c</span>(listaGraficos, <span class="dt">ncol=</span><span class="dv">3</span>))</code></pre></div>
-<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-22-1.png" width="768" /></p>
+<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-21-1.png" width="768" /></p>
 
 </div>
 </div>
@@ -1303,7 +1300,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["apuntesEstadistica.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }

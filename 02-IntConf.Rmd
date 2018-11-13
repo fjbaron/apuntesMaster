@@ -59,7 +59,7 @@ Es fácil confundir desviación típica con error típico. Ambos hablan de la di
 Se consideran dos grupos de individuos que desmpeñan un trabajo similar, pero que siguen una forma de alimentación muy diferente. Están formados por albañiles de Málaga y Tánger. Descargue la base de datos [2poblaciones-Mismotrabajo-DiferenteNutricion.sav](datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav). Las primeras líneas tienen el siguiente aspecto:
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
-df=read_sav("datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav", user_na=FALSE) %>% haven::as_factor()
+df=read_sav("datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav", user_na=FALSE) %>% haven::as_factor() %>% mutate(Talla=Talla*100)
 ```
 
 ```{r}
@@ -70,18 +70,16 @@ df %>% head()  %>% knitr::kable(booktabs=T)
 Si usa SPSS en el menú "_Analizar - Estadística discriptiva - Explorar_", colocando las variables numéricas en el campo _Dependientes_ y el Grupo en el campo _Factor_ puede obtener información para construir estos resultados:
 
 
-```{r, fig.height=10, fig.width=8}
-grid.arrange(
-sjp.grpfrq(df$Colesterol, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$Trigliceridos, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$Glucemia, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$PAS, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$PAD, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$Peso, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$Talla, df$Grupo, type="boxplot",ylim = c(1.50,1.90)),
-sjp.grpfrq(df$Consumo, df$Grupo, type="boxplot"),
-sjp.grpfrq(df$Gasto, df$Grupo, type="boxplot"), ncol=3)
+
+
+
+```{r  fig.height=8, fig.width=8}
+vNumericas=names(df) %>% setdiff("Grupo")
+listaGraficos=vNumericas %>% map( ~ ggplot(df %>% mutate(Respuesta=df[[.x]]) ,aes(x=Grupo,y=Respuesta))+geom_boxplot(fill="lightblue")+xlab(.x)+ylab(""))
+do.call("grid.arrange", c(listaGraficos, ncol=3))
 ```
+
+
 
 Visualmente se aprecia que los individuos de _Grupo==Málaga_ siendo de _Talla_ similar, presentan mayor _Consumo de energía_ y similar _Gasto_. Se observa en ellos mayores valores de _Colesterol, Trigliceridos, Glucemia y Peso_, y valores similares de _Presión arterial_.
 
@@ -119,45 +117,31 @@ df %>% generaTablatTestPorGrupo("Grupo", vNumericas,
 
 
 
-```{r}
+```{r  fig.height=8, fig.width=8}
+resumen=df %>% gather(Variable,Valor,-Grupo) %>% 
+  group_by(Grupo,Variable) %>% 
+  summarise(Media=mean(Valor),
+                n=length(Valor),
+               ET=sd(Valor)/sqrt(n),
+               IC=ET*qt(0.975,n-1))
 
-resumen=df %>% gather(Variable,Valor,-Grupo) %>% group_by(Grupo,Variable) %>% summarise(Media=mean(Valor),n=length(Valor),ET=sd(Valor)/sqrt(n))
-grid.arrange(
-ggplot(resumen %>% filter(Variable=="Colesterol"), aes(x=Grupo,y=Media)) +
+listaGraficos=vNumericas %>% map( ~ ggplot(resumen %>% filter(Variable==.x), aes(x=Grupo,y=Media)) +
   geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
   geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
-  geom_point( size=4, shape=21, fill="white")+ylab("Colesterol"),
-ggplot(resumen %>% filter(Variable=="Trigliceridos"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
-  geom_point( size=4, shape=21, fill="white")+ylab("Triglicéridos"),
-ggplot(resumen %>% filter(Variable=="Glucemia"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
-  geom_point( size=4, shape=21, fill="white")+ylab("Glucemia"),
-ggplot(resumen %>% filter(Variable=="Peso"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_bar(stat="identity", fill="lightblue", alpha=0.5)+
-  geom_point( size=4, shape=21, fill="white")+ylab("Peso"),nrow=2)
+  geom_point( size=4, shape=21, fill="white")+ylab(.x))
+do.call("grid.arrange", c(listaGraficos, ncol=3))
 ```
+
+
 
 
 Las barras ocupan mucho espacio y no permiten apreciar bien las diferencias. Personalmente pienso que es mejor mostrar solo los intervalos formados por las medias y el error típico como sigue:
-```{r}
-grid.arrange(
-ggplot(resumen %>% filter(Variable=="Colesterol"), aes(x=Grupo,y=Media)) +
+
+
+```{r  fig.height=8, fig.width=8}
+listaGraficos=vNumericas %>% map( ~ ggplot(resumen %>% filter(Variable==.x), aes(x=Grupo,y=Media)) +
   geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_point( size=4, shape=21, fill="white")+ylab("Colesterol"),
-ggplot(resumen %>% filter(Variable=="Trigliceridos"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_point( size=4, shape=21, fill="white")+ylab("Triglicéridos"),
-ggplot(resumen %>% filter(Variable=="Glucemia"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_point( size=4, shape=21, fill="white")+ylab("Glucemia"),
-ggplot(resumen %>% filter(Variable=="Peso"), aes(x=Grupo,y=Media)) +
-  geom_errorbar(aes(ymin=Media-ET,ymax=Media+ET),width=0.2, size=1, color="navyblue")+
-  geom_point( size=4, shape=21, fill="white")+ylab("Peso"),nrow=2)
+  geom_point( size=4, shape=21, fill="white")+ylab(.x))
+do.call("grid.arrange", c(listaGraficos, ncol=3))
 ```
-
-
 
