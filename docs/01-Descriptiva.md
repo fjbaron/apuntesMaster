@@ -17,7 +17,7 @@ En primer lugar, daremos unas ideas sobre la manera de presentar ordenadamente y
 ## Datos Univariantes
 Los métodos para visualizar y resumir los datos dependen de sus tipos, que básicamente diferenciamos en dos: **categóricos** y **numéricos**.
 
-Los datos *categóricos (o factores)* son aquellos que registran categorías o cualidades. Si descargamos esta [base de datos de pacientes](datos/centroSalud-transversal.sav), ejemplos de variables categóricas son el *sexo*, el *estado civil* y el *nivel de estudios*. Dentro de las categóricas podemos a su vez distinguir entre variable **nominal** y **ordinal**. En esta última hay un orden entre las distintas categorías como  se aprecia en la la variable *nivel de estudios* y *tabaqismo*:
+Los datos *categóricos (o factores)* son aquellos que registran categorías o cualidades. Si descargamos la base de datos [centroSalud-transversal.sav](datos/centroSalud-transversal.sav), ejemplos de variables categóricas son el *sexo*, el *estado civil* y el *nivel de estudios*. Dentro de las categóricas podemos a su vez distinguir entre variable **nominal** y **ordinal**. En esta última hay un orden entre las distintas categorías como  se aprecia en la la variable *nivel de estudios* y *tabaqismo*:
 
 
 ```r
@@ -43,64 +43,64 @@ df %>% head() %>% select(sexo:peso) %>% knitr::kable(booktabs=T)
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> Hombre </td>
-   <td style="text-align:left;"> Primarios </td>
-   <td style="text-align:left;"> Ex fumador (10+) años </td>
-   <td style="text-align:left;"> Viudo </td>
-   <td style="text-align:left;"> Jubilado </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 75 </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> Mujer </td>
-   <td style="text-align:left;"> Primarios </td>
-   <td style="text-align:left;"> Fumador </td>
-   <td style="text-align:left;"> Casado/pareja </td>
+   <td style="text-align:left;"> Sin estudios </td>
+   <td style="text-align:left;"> Ex fumador (9-) años </td>
+   <td style="text-align:left;"> Separado </td>
    <td style="text-align:left;"> Ama de casa </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 67 </td>
    <td style="text-align:right;"> 72 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Mujer </td>
-   <td style="text-align:left;"> Primarios </td>
-   <td style="text-align:left;"> Fumador </td>
+   <td style="text-align:left;"> Hombre </td>
+   <td style="text-align:left;"> Bachillerato </td>
+   <td style="text-align:left;"> No fuma </td>
    <td style="text-align:left;"> Casado/pareja </td>
-   <td style="text-align:left;"> Trabaja </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 57 </td>
-   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Jubilado </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 56 </td>
+   <td style="text-align:right;"> 150 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Hombre </td>
+   <td style="text-align:left;"> Sabe leer y escribir </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:left;"> Viudo </td>
+   <td style="text-align:left;"> Jubilado </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 81 </td>
+   <td style="text-align:right;"> 71 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Mujer </td>
-   <td style="text-align:left;"> Primarios </td>
-   <td style="text-align:left;"> Ex fumador (9-) años </td>
+   <td style="text-align:left;"> Sin estudios </td>
+   <td style="text-align:left;"> No fuma </td>
    <td style="text-align:left;"> Casado/pareja </td>
    <td style="text-align:left;"> Ama de casa </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 74 </td>
+   <td style="text-align:right;"> 85 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Hombre </td>
+   <td style="text-align:left;"> Superiores </td>
+   <td style="text-align:left;"> Ex fumador (9-) años </td>
+   <td style="text-align:left;"> Casado/pareja </td>
+   <td style="text-align:left;"> Trabaja </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 62 </td>
-   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 53 </td>
+   <td style="text-align:right;"> 102 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Mujer </td>
    <td style="text-align:left;"> Sin estudios </td>
    <td style="text-align:left;"> Ex fumador (9-) años </td>
-   <td style="text-align:left;"> Casado/pareja </td>
-   <td style="text-align:left;"> Ama de casa </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 61 </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Hombre </td>
-   <td style="text-align:left;"> Sabe leer y escribir </td>
-   <td style="text-align:left;"> No fuma </td>
-   <td style="text-align:left;"> Casado/pareja </td>
+   <td style="text-align:left;"> Viudo </td>
    <td style="text-align:left;"> Jubilado </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 69 </td>
-   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 79 </td>
+   <td style="text-align:right;"> 98 </td>
   </tr>
 </tbody>
 </table>
@@ -608,7 +608,6 @@ Desglosando en cada categoría de la variable los porcentajes de cada sexo es m�
  
 
 ```r
-#ggplot(df, aes(tabaco)) + geom_bar(aes(fill = sexo))
 dftmp=df %>% select(sexo,tabaco)%>% filter(!is.na(tabaco)) %>% 
   mutate(cuenta=1) %>% group_by(sexo,tabaco) %>% 
   tally() %>% mutate(fraccion=n/sum(n))
@@ -620,7 +619,6 @@ ggplot(dftmp, aes(fill=sexo, y=fraccion, x=tabaco)) +
 
 
 ```r
-#ggplot(df, aes(tabaco)) + geom_bar(aes(fill = sexo))
 dftmp=df %>% select(sexo,diabm) %>% filter(!is.na(diabm)) %>% mutate(cuenta=1) %>% group_by(sexo,diabm) %>% tally() %>% mutate(fraccion=n/sum(n))
 ggplot(dftmp, aes(fill=sexo, y=fraccion, x=diabm)) + 
     geom_bar( stat="identity", position="fill")
@@ -772,10 +770,10 @@ tabla %>% knitr::kable(booktabs=T)
   </tr>
   <tr>
    <td style="text-align:left;"> pas (mean (sd)) </td>
-   <td style="text-align:left;"> 150.33 (20.89) </td>
+   <td style="text-align:left;"> 149.11 (18.69) </td>
    <td style="text-align:left;"> 133.03 (13.88) </td>
-   <td style="text-align:left;"> 142.25 (18.19) </td>
-   <td style="text-align:left;"> 141.08 (17.57) </td>
+   <td style="text-align:left;"> 142.10 (17.51) </td>
+   <td style="text-align:left;"> 140.72 (16.66) </td>
    <td style="text-align:left;"> &lt;0.001 </td>
    <td style="text-align:left;">  </td>
   </tr>
@@ -915,10 +913,10 @@ df %>% generaTablaCorrelaciones(vNumericas = c("edad","peso","talla","imc","pas"
   </tr>
   <tr>
    <td style="text-align:left;"> [04] pas </td>
-   <td style="text-align:left;"> 0.20*** </td>
-   <td style="text-align:left;"> 0.01 </td>
-   <td style="text-align:left;"> -0.11* </td>
-   <td style="text-align:left;"> 0.09 </td>
+   <td style="text-align:left;"> 0.22*** </td>
+   <td style="text-align:left;"> 0.02 </td>
+   <td style="text-align:left;"> -0.12* </td>
+   <td style="text-align:left;"> 0.12* </td>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;">  </td>
   </tr>
@@ -928,7 +926,7 @@ df %>% generaTablaCorrelaciones(vNumericas = c("edad","peso","talla","imc","pas"
    <td style="text-align:left;"> 0.13** </td>
    <td style="text-align:left;"> 0.10 </td>
    <td style="text-align:left;"> 0.07 </td>
-   <td style="text-align:left;"> 0.38*** </td>
+   <td style="text-align:left;"> 0.39*** </td>
    <td style="text-align:left;">  </td>
   </tr>
   <tr>

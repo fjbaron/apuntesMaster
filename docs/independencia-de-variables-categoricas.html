@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Apuntes de estadística</title>
+  <meta name="description" content="Apuntes de estadística para estudiantes de Master de Nuevas Tendencias">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Apuntes de estadística" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://www.bioestadistica.uma.es/apuntesMaster/" />
+  
+  <meta property="og:description" content="Apuntes de estadística para estudiantes de Master de Nuevas Tendencias" />
+  <meta name="github-repo" content="fjbaron/apuntesEstadistica.git" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Apuntes de estadística" />
+  
+  <meta name="twitter:description" content="Apuntes de estadística para estudiantes de Master de Nuevas Tendencias" />
+  
+
+<meta name="author" content="Francisco Javier Barón López">
+
+
+<meta name="date" content="2018-11-19">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html">
+<link rel="next" href="regresion-lineal-multiple.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Apuntes de estadística</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html"><i class="fa fa-check"></i><b>1</b> Capítulo 1: Exploración de los datos</a><ul>
+<li class="chapter" data-level="1.1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-univariantes"><i class="fa fa-check"></i><b>1.1</b> Datos Univariantes</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-categoricos"><i class="fa fa-check"></i><b>1.1.1</b> Datos categóricos</a></li>
+<li class="chapter" data-level="1.1.2" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-numericos."><i class="fa fa-check"></i><b>1.1.2</b> Datos Numéricos.</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#datos-bivariantes"><i class="fa fa-check"></i><b>1.2</b> Datos bivariantes</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#categorica-categorica"><i class="fa fa-check"></i><b>1.2.1</b> Categórica-categórica</a></li>
+<li class="chapter" data-level="1.2.2" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#categorica-numerica"><i class="fa fa-check"></i><b>1.2.2</b> Categórica-Numérica</a></li>
+<li class="chapter" data-level="1.2.3" data-path="capitulo-1-exploracion-de-los-datos.html"><a href="capitulo-1-exploracion-de-los-datos.html#numerica-numerica."><i class="fa fa-check"></i><b>1.2.3</b> Numérica-Numérica.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="estimacion.html"><a href="estimacion.html"><i class="fa fa-check"></i><b>2</b> Estimación</a><ul>
+<li class="chapter" data-level="2.1" data-path="estimacion.html"><a href="estimacion.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>2.1</b> Intervalos de confianza</a></li>
+<li class="chapter" data-level="2.2" data-path="estimacion.html"><a href="estimacion.html#error-tipico-o-estandar"><i class="fa fa-check"></i><b>2.2</b> Error típico o estándar</a><ul>
+<li class="chapter" data-level="" data-path="estimacion.html"><a href="estimacion.html#ejemplo-de-intervalos-de-confianza-y-errores-estandar"><i class="fa fa-check"></i>Ejemplo de intervalos de confianza y errores estándar</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html"><i class="fa fa-check"></i><b>3</b> Contrastes de hipótesis</a><ul>
+<li class="chapter" data-level="3.1" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#que-es-una-hipotesis"><i class="fa fa-check"></i><b>3.1</b> ¿Qué es una hipótesis?</a></li>
+<li class="chapter" data-level="3.2" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#tipos-de-error"><i class="fa fa-check"></i><b>3.2</b> Tipos de error</a></li>
+<li class="chapter" data-level="3.3" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#nivel-de-significacion"><i class="fa fa-check"></i><b>3.3</b> Nivel de significación</a></li>
+<li class="chapter" data-level="3.4" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#significacion"><i class="fa fa-check"></i><b>3.4</b> Significación</a></li>
+<li class="chapter" data-level="3.5" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#potencia"><i class="fa fa-check"></i><b>3.5</b> Potencia</a><ul>
+<li class="chapter" data-level="" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#ejemplo-simple"><i class="fa fa-check"></i>Ejemplo simple</a></li>
+<li class="chapter" data-level="3.5.1" data-path="contrastes-de-hipotesis.html"><a href="contrastes-de-hipotesis.html#ejemplo-real-lectura-de-un-articulo"><i class="fa fa-check"></i><b>3.5.1</b> Ejemplo real: Lectura de un artículo</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><i class="fa fa-check"></i><b>4</b> Diferencias que presenta una variable numérica entre dos grupos</a><ul>
+<li class="chapter" data-level="4.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html#muestras-apareadas-o-relacionadas"><i class="fa fa-check"></i><b>4.1</b> Muestras apareadas o relacionadas</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html#hipotesis-nula-en-estudios-apareados"><i class="fa fa-check"></i><b>4.1.1</b> Hipótesis nula en estudios apareados</a></li>
+<li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html#dos-muestras-independientes"><i class="fa fa-check"></i><b>4.2</b> Dos Muestras independientes</a><ul>
+<li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html#es-lo-mismo-que-la-diferencia-entre-dos-grupos-sea-significativa-que-el-que-sus-respectivos-intervalos-de-confianza-para-la-media-no-se-toquen"><i class="fa fa-check"></i>¿Es lo mismo que la diferencia entre dos grupos sea significativa que el que sus respectivos intervalos de confianza para la media no se toquen?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><i class="fa fa-check"></i><b>5</b> Diferencias que presenta una variable numérica entre varios grupos</a><ul>
+<li class="chapter" data-level="5.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#anova-de-un-factor-o-una-via"><i class="fa fa-check"></i><b>5.1</b> Anova de un factor o una vía</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#en-que-se-basa-el-contraste-anova"><i class="fa fa-check"></i><b>5.1.1</b> En qué se basa el contraste ANOVA</a></li>
+<li class="chapter" data-level="5.1.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#como-se-interpreta-anova"><i class="fa fa-check"></i><b>5.1.2</b> Cómo se interpreta ANOVA</a></li>
+<li class="chapter" data-level="5.1.3" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#que-hacer-si-no-se-verifican-las-premisas-del-modelo-anova"><i class="fa fa-check"></i><b>5.1.3</b> ¿Qué hacer si no se verifican las premisas del modelo ANOVA?</a></li>
+<li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#ejemplo-parametrico"><i class="fa fa-check"></i>Ejemplo paramétrico</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#contraste-no-parametrico-de-kruskal-wallis"><i class="fa fa-check"></i><b>5.2</b> Contraste no paramétrico de Kruskal-Wallis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="independencia-de-variables-categoricas.html"><a href="independencia-de-variables-categoricas.html"><i class="fa fa-check"></i><b>6</b> Independencia de variables categóricas</a><ul>
+<li class="chapter" data-level="" data-path="independencia-de-variables-categoricas.html"><a href="independencia-de-variables-categoricas.html#ejemploprioridades-en-ninos-y-sexo"><i class="fa fa-check"></i>Ejemplo:Prioridades en niños y sexo</a></li>
+<li class="chapter" data-level="6.1" data-path="independencia-de-variables-categoricas.html"><a href="independencia-de-variables-categoricas.html#limitaciones-de-la-prueba-de-independencia"><i class="fa fa-check"></i><b>6.1</b> Limitaciones de la prueba de independencia</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html"><i class="fa fa-check"></i><b>7</b> Regresión lineal múltiple</a><ul>
+<li class="chapter" data-level="7.1" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#aplicaciones-de-la-regresion-multiple"><i class="fa fa-check"></i><b>7.1</b> Aplicaciones de la regresión múltiple</a></li>
+<li class="chapter" data-level="7.2" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#requisitos-y-limitaciones"><i class="fa fa-check"></i><b>7.2</b> Requisitos y limitaciones</a></li>
+<li class="chapter" data-level="7.3" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#variables-numericas-e-indicadoras-dummy"><i class="fa fa-check"></i><b>7.3</b> Variables numéricas e indicadoras (dummy)</a><ul>
+<li class="chapter" data-level="" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#ejemplo-regresion-lineal-generaliza-a-las-pruebas-t-student-para-dos-muestras-y-anova-de-un-factor"><i class="fa fa-check"></i>Ejemplo: Regresión lineal generaliza a las pruebas t-student para dos muestras, y ANOVA de un factor</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#bondad-de-ajuste"><i class="fa fa-check"></i><b>7.4</b> Bondad de ajuste</a></li>
+<li class="chapter" data-level="7.5" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#matriz-de-correlaciones"><i class="fa fa-check"></i><b>7.5</b> Matriz de correlaciones</a></li>
+<li class="chapter" data-level="7.6" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#variables-confusoras"><i class="fa fa-check"></i><b>7.6</b> Variables confusoras</a><ul>
+<li class="chapter" data-level="" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://www.bioestadistica.uma.es" target="blank">Bioestadística-UMA</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Apuntes de estadística</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="independencia-de-variables-categoricas" class="section level1">
+<h1><span class="header-section-number">Capítulo 6</span> Independencia de variables categóricas</h1>
+<p>Las tablas de contingencia se utilizan para examinar la relación entre dos variables categóricas, o bien explorar la distribución que posee una variable categórica entre diferentes muestras.</p>
+<p>Hay diferentes cuestiones que surgen al examinar una tabla de contingencia, y en este tema vamos a tratar la cuestión de la independencia.</p>
+<p>La independencia de dos variables consiste en que la distribución de una de las variables es similar sea cual sea el nivel que examinemos de la otra. Esto se traduce en una tabla de contingencia en que las frecuencias de las filas (y las columnas) son aproximadamente proporcionales. Esto es equivalente a observar que los porcentajes por columnas(o filas) son similares.</p>
+<p>La prueba de independencia <span class="math inline">\(\chi^2\)</span> (chi-cuadrado) contrasta la hipótesis de que las variables son independientes, frente a la hipótesis alternativa de que una variable se distribuye de modo diferente para diversos niveles de la otra.</p>
+<div id="ejemploprioridades-en-ninos-y-sexo" class="section level3 unnumbered">
+<h3>Ejemplo:Prioridades en niños y sexo</h3>
+<p>Vamos a usar la base de datos <a href="datos/coolKids.sav">coolKids.sav</a> donde se recogen las respuestas de unos escolares de 10 a 12 años a los que se les preguntó, entre otras cosas, a qué daban más prioridad de entre tres posibilidades: Tener buenas notas, destacar en los deportes o ser popular entre los compañeros. Examinemos las primeras líneas de la base de datos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df=<span class="kw">read_sav</span>(<span class="st">&quot;datos/coolKids.sav&quot;</span>, <span class="dt">user_na=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>haven<span class="op">::</span><span class="kw">as_factor</span>() </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">booktabs=</span>T)</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Sexo
+</th>
+<th style="text-align:right;">
+Curso
+</th>
+<th style="text-align:right;">
+Edad
+</th>
+<th style="text-align:left;">
+Raza
+</th>
+<th style="text-align:left;">
+Entorno
+</th>
+<th style="text-align:left;">
+Escuela
+</th>
+<th style="text-align:left;">
+Metas
+</th>
+<th style="text-align:right;">
+Notas
+</th>
+<th style="text-align:right;">
+Deportes
+</th>
+<th style="text-align:right;">
+Apariencia
+</th>
+<th style="text-align:right;">
+Dinero
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Varón
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Blanco
+</td>
+<td style="text-align:left;">
+Rural
+</td>
+<td style="text-align:left;">
+Elm
+</td>
+<td style="text-align:left;">
+Deportes
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Varón
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Blanco
+</td>
+<td style="text-align:left;">
+Rural
+</td>
+<td style="text-align:left;">
+Elm
+</td>
+<td style="text-align:left;">
+Popular
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Blanco
+</td>
+<td style="text-align:left;">
+Rural
+</td>
+<td style="text-align:left;">
+Elm
+</td>
+<td style="text-align:left;">
+Popular
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Blanco
+</td>
+<td style="text-align:left;">
+Rural
+</td>
+<td style="text-align:left;">
+Elm
+</td>
+<td style="text-align:left;">
+Popular
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Blanco
+</td>
+<td style="text-align:left;">
+Rural
+</td>
+<td style="text-align:left;">
+Elm
+</td>
+<td style="text-align:left;">
+Popular
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Blanco
+</td>
+<td style="text-align:left;">
+Rural
+</td>
+<td style="text-align:left;">
+Elm
+</td>
+<td style="text-align:left;">
+Popular
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+<p>Vamos a estudiar por sexos si por <em>sexo</em> hay diferencias en la distribución de las <em>metas</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">generaTablaChi2PorGrupo</span>(<span class="dt">vGrupo =</span> <span class="st">&quot;Sexo&quot;</span>,<span class="dt">vCuali =</span> <span class="st">&quot;Metas&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">booktabs=</span>T) <span class="op">%&gt;%</span><span class="kw">collapse_rows</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Valores
+</th>
+<th style="text-align:left;">
+Varón
+</th>
+<th style="text-align:left;">
+Mujer
+</th>
+<th style="text-align:left;">
+p
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+Metas
+</td>
+<td style="text-align:left;">
+Notas
+</td>
+<td style="text-align:left;">
+51.5(117)
+</td>
+<td style="text-align:left;">
+51.8(130)
+</td>
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+&lt;0.001*
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Popular
+</td>
+<td style="text-align:left;">
+22.0(50)
+</td>
+<td style="text-align:left;">
+36.3(91)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Deportes
+</td>
+<td style="text-align:left;">
+26.4(60)
+</td>
+<td style="text-align:left;">
+12.0(30)
+</td>
+</tr>
+</tbody>
+</table>
+<p>La significación que se observa en la tabla (p), es la de la prueba Chi-cuadrado. Nos indica que las diferencias en porcentajes que se aprecian en las columnas de niños y niñas van más allá de lo que se esperaría que ocurriese por puro azar.</p>
+<p>Con un poco de atención se observa porcentajes similares de niños y niñas en cuanto a la importancia que tienen para ellos las notas. Donde más diferencia se observa entre los sexos es en la preferencia que muestran muchos chicos por los deportes y muchas chicas por la popularidad.</p>
+<p>Gráficamente podríamos mostrarlo con diagramas de barras apiladas:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dftmp=df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Sexo,Metas)  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">cuenta=</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Sexo,Metas) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tally</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">fraccion=</span>n<span class="op">/</span><span class="kw">sum</span>(n))
+<span class="kw">ggplot</span>(dftmp, <span class="kw">aes</span>(<span class="dt">fill=</span>Metas, <span class="dt">y=</span>fraccion, <span class="dt">x=</span>Sexo)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_bar</span>( <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="st">&quot;fill&quot;</span>)</code></pre></div>
+<p><img src="06-chi2_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Otra forma interesante de mostrarlo consiste en utilizar <em>gráficos de mosaicos</em>, donde se utiliza un área para cada combinación de las dos variables, proporcional a las frecuencias observadas. Observe que son ligeramente más anchos los mosaicos de las mujeres que los de los varones. Esto refleja que en el estudio participa una cantida liéramente mayor de hombres que de mujeres.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> df) <span class="op">+</span>
+<span class="st">   </span><span class="kw">geom_mosaic</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">product</span>(Metas,Sexo), <span class="dt">fill=</span>Metas), <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">+</span>
+<span class="st">   </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Sexo&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Metas&quot;</span>,<span class="dt">title=</span><span class="st">&#39;Metas por Sexo&#39;</span>)</code></pre></div>
+<p><img src="06-chi2_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Usando SPSS podemos conseguir tanto las frecuencias como los porcentajes y resultado de la prueba chi-cuadrado en el menú: “Analizar - Estadísticos descriptivos - Tablas de contingencia…”. Allí situamos en columnas la variable <em>Sexo</em>, y en filas ponemos <em>Metas</em>. En el botón <em>Casillas</em> marcamos los <em>porcentajes por columnas</em>. En el botón “Estadísticos…” para marcar seleccionamos la prueba <em>chi-cuadrado de Pearson</em>.</p>
+<p>Podríamos afinar más nuestro estudio y ver si estas diferencias entre niños y niñas se presentan también según el <em>Entorno</em> (urbano, suburbano o rural) de los niños. Para ello podríamos realizar una prueba chi-cuadrado en cada entorno:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">generaTablaChi2PorGrupo_Tiempo</span>(<span class="dt">vGrupo =</span> <span class="st">&quot;Sexo&quot;</span>, <span class="dt">vCuali =</span> <span class="st">&quot;Metas&quot;</span>, <span class="dt">vTiempo =</span> <span class="st">&quot;Entorno&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">booktabs=</span>T) <span class="op">%&gt;%</span><span class="kw">collapse_rows</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Tiempo
+</th>
+<th style="text-align:left;">
+Valores
+</th>
+<th style="text-align:left;">
+Varón
+</th>
+<th style="text-align:left;">
+Mujer
+</th>
+<th style="text-align:left;">
+p
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+Rural
+</td>
+<td style="text-align:left;">
+Notas
+</td>
+<td style="text-align:left;">
+31.8(21)
+</td>
+<td style="text-align:left;">
+43.4(36)
+</td>
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+0.025*
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Popular
+</td>
+<td style="text-align:left;">
+28.8(19)
+</td>
+<td style="text-align:left;">
+37.3(31)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Deportes
+</td>
+<td style="text-align:left;">
+39.4(26)
+</td>
+<td style="text-align:left;">
+19.3(16)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+Suburbano
+</td>
+<td style="text-align:left;">
+Notas
+</td>
+<td style="text-align:left;">
+57.3(51)
+</td>
+<td style="text-align:left;">
+58.1(36)
+</td>
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+0.030*
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Popular
+</td>
+<td style="text-align:left;">
+22.5(20)
+</td>
+<td style="text-align:left;">
+35.5(22)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Deportes
+</td>
+<td style="text-align:left;">
+20.2(18)
+</td>
+<td style="text-align:left;">
+6.5(4)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+Urbano
+</td>
+<td style="text-align:left;">
+Notas
+</td>
+<td style="text-align:left;">
+62.5(45)
+</td>
+<td style="text-align:left;">
+54.7(58)
+</td>
+<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+0.003*
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Popular
+</td>
+<td style="text-align:left;">
+15.3(11)
+</td>
+<td style="text-align:left;">
+35.8(38)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Deportes
+</td>
+<td style="text-align:left;">
+22.2(16)
+</td>
+<td style="text-align:left;">
+9.4(10)
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> df) <span class="op">+</span>
+<span class="st">   </span><span class="kw">geom_mosaic</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">product</span>(Metas,Sexo), <span class="dt">fill=</span>Metas), <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">+</span>
+<span class="st">   </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Sexo&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Metas&quot;</span>,<span class="dt">title=</span><span class="st">&#39;Metas por Sexo&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(Entorno<span class="op">~</span>.)</code></pre></div>
+<p><img src="06-chi2_files/figure-html/unnamed-chunk-7-1.png" width="576" /></p>
+<p>Para hacer lo mismo con <em>SPSS</em>, en el mismo diálogo donde hacíamos <em>tablas cruzadas</em>, pasamos la variable <em>Entornos</em> al campos <em>Capas</em>.</p>
+</div>
+<div id="limitaciones-de-la-prueba-de-independencia" class="section level2">
+<h2><span class="header-section-number">6.1</span> Limitaciones de la prueba de independencia</h2>
+<p>El contraste de independencia tiene muy pocas limitaciones, aunque es conveniente hacer algunas observaciones:</p>
+<ul>
+<li><p>Para contrastar la independencia se suele usar el estadístico chi-cuadrado de Pearson. Su cálculo se basa en calcular la diferencia entre las observaciones observadas para cada par de modalidades de las variables (casillas), y las que serían de esperar en caso de que se satisficiese la condición de independencia. Para que se pueda considerar correcta la significación calculada por el estadístico chi-cuadrado de Pearson, se debe cumplir que las frecuencias esperadas no sean muy pequeñas (inferiores a 5) más que en unas pocas casillas. Si es en muchas las casillas donde esto ocurre (más del 20% por ejemplo) se debe usar una prueba que no incluya aproximaciones, como la prueba exacta de Fisher. Esta la ofrece cualquier programa como opción cuando se hace este tipo de contrastes.</p></li>
+<li><p>Si las muestras son muy grandes, la prueba de independencia dará resultados significativos incluso donde, posiblemente, consideremos que las diferencias no sean en realidad clínicamente interesantes. Es conveniente una inspección visual para confirmar si las diferencias observadas por filas (o columnas, como prefiramos), nos parecen de interés.</p></li>
+<li><p>Si las variables poseen muchos niveles posiblemente la prueba no resulte de mucho interés, ya que es lógico esperar que se encuentren diferencias. Eso ocurre si por ejemplo una de las variables es numérica y no hemos agrupado los posibles valores en una cantidad adecuada de intervalos.</p></li>
+<li><p>Si una de las variables es numérica u ordinal, posiblemente queramos hacer algo más que contrastar la simple independencia. Después de todo, esto no es tan informativo como saber que en cierto grupo los valores son significativamente mayores que en otro. Lo aconsejable es usar pruebas de tipo t-student, anova o contrastes no paramétricos comos los que se tratan en otros temas.</p></li>
+<li><p>El contraste de chi-cuadrado sirve para contrastar la independencia. No hay que considerarla como una medida de la asociación entre variables. Si buscamos estudiar la asociación de variables tenemos otros métodos a nuestra disposición como regresión logística que trataremos más adelante.</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regresion-lineal-multiple.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 --- 
 title: "Apuntes de estadística"
 author: "Francisco Javier Barón López"
-date: "2018-11-13"
+date: "2018-11-19"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -13,7 +13,7 @@ description: "Apuntes de estadística para estudiantes de Master de Nuevas Tende
 ---
 
 
-
+ 
 
 # Introducción {-}
 

@@ -25,7 +25,7 @@
 <meta name="author" content="Francisco Javier Barón López">
 
 
-<meta name="date" content="2018-11-13">
+<meta name="date" content="2018-11-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html">
-
+<link rel="next" href="independencia-de-variables-categoricas.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -150,6 +150,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#ejemplo-parametrico"><i class="fa fa-check"></i>Ejemplo paramétrico</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#contraste-no-parametrico-de-kruskal-wallis"><i class="fa fa-check"></i><b>5.2</b> Contraste no paramétrico de Kruskal-Wallis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="independencia-de-variables-categoricas.html"><a href="independencia-de-variables-categoricas.html"><i class="fa fa-check"></i><b>6</b> Independencia de variables categóricas</a><ul>
+<li class="chapter" data-level="" data-path="independencia-de-variables-categoricas.html"><a href="independencia-de-variables-categoricas.html#ejemploprioridades-en-ninos-y-sexo"><i class="fa fa-check"></i>Ejemplo:Prioridades en niños y sexo</a></li>
+<li class="chapter" data-level="6.1" data-path="independencia-de-variables-categoricas.html"><a href="independencia-de-variables-categoricas.html#limitaciones-de-la-prueba-de-independencia"><i class="fa fa-check"></i><b>6.1</b> Limitaciones de la prueba de independencia</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html"><i class="fa fa-check"></i><b>7</b> Regresión lineal múltiple</a><ul>
+<li class="chapter" data-level="7.1" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#aplicaciones-de-la-regresion-multiple"><i class="fa fa-check"></i><b>7.1</b> Aplicaciones de la regresión múltiple</a></li>
+<li class="chapter" data-level="7.2" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#requisitos-y-limitaciones"><i class="fa fa-check"></i><b>7.2</b> Requisitos y limitaciones</a></li>
+<li class="chapter" data-level="7.3" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#variables-numericas-e-indicadoras-dummy"><i class="fa fa-check"></i><b>7.3</b> Variables numéricas e indicadoras (dummy)</a><ul>
+<li class="chapter" data-level="" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#ejemplo-regresion-lineal-generaliza-a-las-pruebas-t-student-para-dos-muestras-y-anova-de-un-factor"><i class="fa fa-check"></i>Ejemplo: Regresión lineal generaliza a las pruebas t-student para dos muestras, y ANOVA de un factor</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#bondad-de-ajuste"><i class="fa fa-check"></i><b>7.4</b> Bondad de ajuste</a></li>
+<li class="chapter" data-level="7.5" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#matriz-de-correlaciones"><i class="fa fa-check"></i><b>7.5</b> Matriz de correlaciones</a></li>
+<li class="chapter" data-level="7.6" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#variables-confusoras"><i class="fa fa-check"></i><b>7.6</b> Variables confusoras</a><ul>
+<li class="chapter" data-level="" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://www.bioestadistica.uma.es" target="blank">Bioestadística-UMA</a></li>
@@ -282,73 +298,13 @@ gr2
 Control
 </td>
 <td style="text-align:right;">
-9.5
+10.0
 </td>
 <td style="text-align:right;">
-14
+19
 </td>
 <td style="text-align:right;">
-4.5
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Control
-</td>
-<td style="text-align:right;">
-8.5
-</td>
-<td style="text-align:right;">
-15
-</td>
-<td style="text-align:right;">
-6.5
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Control
-</td>
-<td style="text-align:right;">
-14.0
-</td>
-<td style="text-align:right;">
-21
-</td>
-<td style="text-align:right;">
-6.7
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Control
-</td>
-<td style="text-align:right;">
-8.5
-</td>
-<td style="text-align:right;">
-16
-</td>
-<td style="text-align:right;">
-7.8
+9.3
 </td>
 <td style="text-align:right;">
 0
@@ -365,13 +321,53 @@ Control
 7.0
 </td>
 <td style="text-align:right;">
-15
+20
 </td>
 <td style="text-align:right;">
-8.0
+13.0
 </td>
 <td style="text-align:right;">
 0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica I
+</td>
+<td style="text-align:right;">
+6.5
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+16.2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica I
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+1
 </td>
 <td style="text-align:right;">
 0
@@ -388,13 +384,33 @@ Control
 16
 </td>
 <td style="text-align:right;">
-8.2
+8.5
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
 0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica II
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 </tbody>
@@ -590,7 +606,7 @@ Técnica II-Técnica I
 <p>Al estudiar muchos gráficos a la vez, es posible que en algunos encontremos desviaciones de la normalidad que nos hagan dudar. Es normal por la abundancia de comparaciones múltiples. Es más conveniente es tratar a todos los datos juntos estudiando todos los residuos del ajuste ANOVA (desviación de cada dato con respecto a la media de su propio grupo), en un solo gráfico QQ:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqPlot</span>(modeloLineal, <span class="dt">main=</span><span class="st">&quot;QQ Plot&quot;</span>) </code></pre></div>
 <p><img src="05-anova_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<pre><code>## [1]  1 57</code></pre>
+<pre><code>## [1] 12 65</code></pre>
 <p>No se aprecia una notable desviación de la normalidad.</p>
 <ul>
 <li>En cuanto a la <strong>homogeneidad de varianzas (heterocedasticidad)</strong>, podemos usar la prueba de Levene:</li>
@@ -635,8 +651,8 @@ Técnica II-Técnica I
 ## Global Stat        1.89e+00   0.756 Assumptions acceptable.
 ## Skewness           1.11e-02   0.916 Assumptions acceptable.
 ## Kurtosis           1.87e+00   0.171 Assumptions acceptable.
-## Link Function      9.21e-16   1.000 Assumptions acceptable.
-## Heteroscedasticity 5.03e-03   0.943 Assumptions acceptable.</code></pre>
+## Link Function      3.13e-15   1.000 Assumptions acceptable.
+## Heteroscedasticity 6.81e-03   0.934 Assumptions acceptable.</code></pre>
 <table>
 <thead>
 <tr>
@@ -718,7 +734,7 @@ Heteroscedasticity
 0.01
 </td>
 <td style="text-align:right;">
-0.94
+0.93
 </td>
 <td style="text-align:left;">
 Assumptions acceptable.
@@ -736,13 +752,13 @@ Assumptions acceptable.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(Diferencia) <span class="op">%&gt;%</span><span class="st"> </span>.[[<span class="st">&quot;Grupo&quot;</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.character</span>()</code></pre></div>
 <pre><code>##  [1] &quot;Control&quot;    &quot;Control&quot;    &quot;Control&quot;    &quot;Control&quot;    &quot;Control&quot;   
 ##  [6] &quot;Control&quot;    &quot;Control&quot;    &quot;Control&quot;    &quot;Técnica I&quot;  &quot;Control&quot;   
-## [11] &quot;Control&quot;    &quot;Técnica I&quot;  &quot;Técnica II&quot; &quot;Control&quot;    &quot;Técnica I&quot; 
-## [16] &quot;Técnica II&quot; &quot;Control&quot;    &quot;Control&quot;    &quot;Técnica I&quot;  &quot;Técnica II&quot;
-## [21] &quot;Técnica I&quot;  &quot;Técnica II&quot; &quot;Técnica II&quot; &quot;Control&quot;    &quot;Técnica I&quot; 
+## [11] &quot;Técnica I&quot;  &quot;Control&quot;    &quot;Técnica II&quot; &quot;Control&quot;    &quot;Técnica I&quot; 
+## [16] &quot;Técnica II&quot; &quot;Control&quot;    &quot;Control&quot;    &quot;Técnica II&quot; &quot;Técnica I&quot; 
+## [21] &quot;Técnica I&quot;  &quot;Técnica II&quot; &quot;Técnica II&quot; &quot;Técnica I&quot;  &quot;Control&quot;   
 ## [26] &quot;Técnica II&quot; &quot;Control&quot;    &quot;Técnica I&quot;  &quot;Control&quot;    &quot;Técnica I&quot; 
 ## [31] &quot;Técnica II&quot; &quot;Técnica II&quot; &quot;Control&quot;    &quot;Técnica I&quot;  &quot;Control&quot;   
-## [36] &quot;Control&quot;    &quot;Control&quot;    &quot;Técnica II&quot; &quot;Control&quot;    &quot;Técnica II&quot;
-## [41] &quot;Técnica I&quot;  &quot;Técnica II&quot; &quot;Técnica I&quot;  &quot;Técnica II&quot; &quot;Técnica II&quot;
+## [36] &quot;Control&quot;    &quot;Control&quot;    &quot;Técnica II&quot; &quot;Técnica II&quot; &quot;Control&quot;   
+## [41] &quot;Técnica II&quot; &quot;Técnica I&quot;  &quot;Técnica I&quot;  &quot;Técnica II&quot; &quot;Técnica II&quot;
 ## [46] &quot;Técnica I&quot;  &quot;Técnica II&quot; &quot;Técnica II&quot; &quot;Técnica II&quot; &quot;Técnica II&quot;
 ## [51] &quot;Técnica II&quot; &quot;Técnica I&quot;  &quot;Técnica I&quot;  &quot;Técnica I&quot;  &quot;Técnica II&quot;
 ## [56] &quot;Técnica II&quot; &quot;Control&quot;    &quot;Técnica I&quot;  &quot;Técnica I&quot;  &quot;Técnica I&quot; 
@@ -767,8 +783,8 @@ Assumptions acceptable.
           </div>
         </div>
       </div>
-<a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="diferencias-que-presenta-una-variable-numerica-entre-dos-grupos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="independencia-de-variables-categoricas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -809,6 +825,19 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

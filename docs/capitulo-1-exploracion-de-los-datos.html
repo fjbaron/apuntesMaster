@@ -25,7 +25,7 @@
 <meta name="author" content="Francisco Javier Barón López">
 
 
-<meta name="date" content="2018-11-13">
+<meta name="date" content="2018-11-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -151,6 +151,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html"><a href="diferencias-que-presenta-una-variable-numerica-entre-varios-grupos.html#contraste-no-parametrico-de-kruskal-wallis"><i class="fa fa-check"></i><b>5.2</b> Contraste no paramétrico de Kruskal-Wallis</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="independencia-de-variables-categoricas.html"><a href="independencia-de-variables-categoricas.html"><i class="fa fa-check"></i><b>6</b> Independencia de variables categóricas</a><ul>
+<li class="chapter" data-level="" data-path="independencia-de-variables-categoricas.html"><a href="independencia-de-variables-categoricas.html#ejemploprioridades-en-ninos-y-sexo"><i class="fa fa-check"></i>Ejemplo:Prioridades en niños y sexo</a></li>
+<li class="chapter" data-level="6.1" data-path="independencia-de-variables-categoricas.html"><a href="independencia-de-variables-categoricas.html#limitaciones-de-la-prueba-de-independencia"><i class="fa fa-check"></i><b>6.1</b> Limitaciones de la prueba de independencia</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html"><i class="fa fa-check"></i><b>7</b> Regresión lineal múltiple</a><ul>
+<li class="chapter" data-level="7.1" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#aplicaciones-de-la-regresion-multiple"><i class="fa fa-check"></i><b>7.1</b> Aplicaciones de la regresión múltiple</a></li>
+<li class="chapter" data-level="7.2" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#requisitos-y-limitaciones"><i class="fa fa-check"></i><b>7.2</b> Requisitos y limitaciones</a></li>
+<li class="chapter" data-level="7.3" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#variables-numericas-e-indicadoras-dummy"><i class="fa fa-check"></i><b>7.3</b> Variables numéricas e indicadoras (dummy)</a><ul>
+<li class="chapter" data-level="" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#ejemplo-regresion-lineal-generaliza-a-las-pruebas-t-student-para-dos-muestras-y-anova-de-un-factor"><i class="fa fa-check"></i>Ejemplo: Regresión lineal generaliza a las pruebas t-student para dos muestras, y ANOVA de un factor</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#bondad-de-ajuste"><i class="fa fa-check"></i><b>7.4</b> Bondad de ajuste</a></li>
+<li class="chapter" data-level="7.5" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#matriz-de-correlaciones"><i class="fa fa-check"></i><b>7.5</b> Matriz de correlaciones</a></li>
+<li class="chapter" data-level="7.6" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#variables-confusoras"><i class="fa fa-check"></i><b>7.6</b> Variables confusoras</a><ul>
+<li class="chapter" data-level="" data-path="regresion-lineal-multiple.html"><a href="regresion-lineal-multiple.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://www.bioestadistica.uma.es" target="blank">Bioestadística-UMA</a></li>
 
@@ -178,7 +194,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="datos-univariantes" class="section level2">
 <h2><span class="header-section-number">1.1</span> Datos Univariantes</h2>
 <p>Los métodos para visualizar y resumir los datos dependen de sus tipos, que básicamente diferenciamos en dos: <strong>categóricos</strong> y <strong>numéricos</strong>.</p>
-<p>Los datos <em>categóricos (o factores)</em> son aquellos que registran categorías o cualidades. Si descargamos esta <a href="datos/centroSalud-transversal.sav">base de datos de pacientes</a>, ejemplos de variables categóricas son el <em>sexo</em>, el <em>estado civil</em> y el <em>nivel de estudios</em>. Dentro de las categóricas podemos a su vez distinguir entre variable <strong>nominal</strong> y <strong>ordinal</strong>. En esta última hay un orden entre las distintas categorías como se aprecia en la la variable <em>nivel de estudios</em> y <em>tabaqismo</em>:</p>
+<p>Los datos <em>categóricos (o factores)</em> son aquellos que registran categorías o cualidades. Si descargamos la base de datos <a href="datos/centroSalud-transversal.sav">centroSalud-transversal.sav</a>, ejemplos de variables categóricas son el <em>sexo</em>, el <em>estado civil</em> y el <em>nivel de estudios</em>. Dentro de las categóricas podemos a su vez distinguir entre variable <strong>nominal</strong> y <strong>ordinal</strong>. En esta última hay un orden entre las distintas categorías como se aprecia en la la variable <em>nivel de estudios</em> y <em>tabaqismo</em>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df=<span class="kw">read_sav</span>(<span class="st">&quot;datos/centroSalud-transversal.sav&quot;</span>, <span class="dt">user_na=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>haven<span class="op">::</span><span class="kw">as_factor</span>()</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(sexo<span class="op">:</span>peso) <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">booktabs=</span>T)</code></pre></div>
 <table>
@@ -213,13 +229,65 @@ peso
 <tbody>
 <tr>
 <td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:left;">
+Sin estudios
+</td>
+<td style="text-align:left;">
+Ex fumador (9-) años
+</td>
+<td style="text-align:left;">
+Separado
+</td>
+<td style="text-align:left;">
+Ama de casa
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 Hombre
 </td>
 <td style="text-align:left;">
-Primarios
+Bachillerato
 </td>
 <td style="text-align:left;">
-Ex fumador (10+) años
+No fuma
+</td>
+<td style="text-align:left;">
+Casado/pareja
+</td>
+<td style="text-align:left;">
+Jubilado
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+150
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hombre
+</td>
+<td style="text-align:left;">
+Sabe leer y escribir
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 Viudo
@@ -228,13 +296,13 @@ Viudo
 Jubilado
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:right;">
-75
+81
 </td>
 <td style="text-align:right;">
-NA
+71
 </td>
 </tr>
 <tr>
@@ -242,10 +310,10 @@ NA
 Mujer
 </td>
 <td style="text-align:left;">
-Primarios
+Sin estudios
 </td>
 <td style="text-align:left;">
-Fumador
+No fuma
 </td>
 <td style="text-align:left;">
 Casado/pareja
@@ -257,44 +325,18 @@ Ama de casa
 2
 </td>
 <td style="text-align:right;">
-65
+74
 </td>
 <td style="text-align:right;">
-72
+85
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Mujer
+Hombre
 </td>
 <td style="text-align:left;">
-Primarios
-</td>
-<td style="text-align:left;">
-Fumador
-</td>
-<td style="text-align:left;">
-Casado/pareja
-</td>
-<td style="text-align:left;">
-Trabaja
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-57
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mujer
-</td>
-<td style="text-align:left;">
-Primarios
+Superiores
 </td>
 <td style="text-align:left;">
 Ex fumador (9-) años
@@ -303,16 +345,16 @@ Ex fumador (9-) años
 Casado/pareja
 </td>
 <td style="text-align:left;">
-Ama de casa
+Trabaja
 </td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:right;">
-62
+53
 </td>
 <td style="text-align:right;">
-NA
+102
 </td>
 </tr>
 <tr>
@@ -326,45 +368,19 @@ Sin estudios
 Ex fumador (9-) años
 </td>
 <td style="text-align:left;">
-Casado/pareja
-</td>
-<td style="text-align:left;">
-Ama de casa
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-61
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Hombre
-</td>
-<td style="text-align:left;">
-Sabe leer y escribir
-</td>
-<td style="text-align:left;">
-No fuma
-</td>
-<td style="text-align:left;">
-Casado/pareja
+Viudo
 </td>
 <td style="text-align:left;">
 Jubilado
 </td>
 <td style="text-align:right;">
-2
+1
 </td>
 <td style="text-align:right;">
-69
+79
 </td>
 <td style="text-align:right;">
-NA
+98
 </td>
 </tr>
 </tbody>
@@ -1081,15 +1097,13 @@ hipercol = No (%)
 <span class="kw">sjp.grpfrq</span>(df<span class="op">$</span>hipercol, df<span class="op">$</span>sexo,<span class="dt">show.prc =</span> <span class="ot">FALSE</span>),<span class="dt">ncol=</span><span class="dv">1</span>)</code></pre></div>
 <p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-16-1.png" width="576" /></p>
 <p>Desglosando en cada categoría de la variable los porcentajes de cada sexo es más sencillo de ver:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#ggplot(df, aes(tabaco)) + geom_bar(aes(fill = sexo))</span>
-dftmp=df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(sexo,tabaco)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(tabaco)) <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dftmp=df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(sexo,tabaco)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(tabaco)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cuenta=</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(sexo,tabaco) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">tally</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">fraccion=</span>n<span class="op">/</span><span class="kw">sum</span>(n))
 <span class="kw">ggplot</span>(dftmp, <span class="kw">aes</span>(<span class="dt">fill=</span>sexo, <span class="dt">y=</span>fraccion, <span class="dt">x=</span>tabaco)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">geom_bar</span>( <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="st">&quot;fill&quot;</span>)</code></pre></div>
 <p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#ggplot(df, aes(tabaco)) + geom_bar(aes(fill = sexo))</span>
-dftmp=df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(sexo,diabm) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(diabm)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">cuenta=</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(sexo,diabm) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tally</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">fraccion=</span>n<span class="op">/</span><span class="kw">sum</span>(n))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dftmp=df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(sexo,diabm) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(diabm)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">cuenta=</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(sexo,diabm) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tally</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">fraccion=</span>n<span class="op">/</span><span class="kw">sum</span>(n))
 <span class="kw">ggplot</span>(dftmp, <span class="kw">aes</span>(<span class="dt">fill=</span>sexo, <span class="dt">y=</span>fraccion, <span class="dt">x=</span>diabm)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">geom_bar</span>( <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="st">&quot;fill&quot;</span>)</code></pre></div>
 <p><img src="01-Descriptiva_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
@@ -1344,16 +1358,16 @@ imc (mean (sd))
 pas (mean (sd))
 </td>
 <td style="text-align:left;">
-150.33 (20.89)
+149.11 (18.69)
 </td>
 <td style="text-align:left;">
 133.03 (13.88)
 </td>
 <td style="text-align:left;">
-142.25 (18.19)
+142.10 (17.51)
 </td>
 <td style="text-align:left;">
-141.08 (17.57)
+140.72 (16.66)
 </td>
 <td style="text-align:left;">
 &lt;0.001
@@ -1527,16 +1541,16 @@ edad
 [04] pas
 </td>
 <td style="text-align:left;">
-0.20***
+0.22***
 </td>
 <td style="text-align:left;">
-0.01
+0.02
 </td>
 <td style="text-align:left;">
--0.11*
+-0.12*
 </td>
 <td style="text-align:left;">
-0.09
+0.12*
 </td>
 <td style="text-align:left;">
 </td>
@@ -1560,7 +1574,7 @@ edad
 0.07
 </td>
 <td style="text-align:left;">
-0.38***
+0.39***
 </td>
 <td style="text-align:left;">
 </td>
@@ -1641,6 +1655,19 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

@@ -127,51 +127,51 @@ df %>% head()  %>% knitr::kable(booktabs=T)
 <tbody>
   <tr>
    <td style="text-align:left;"> Control </td>
-   <td style="text-align:right;"> 9.5 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 4.5 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Control </td>
-   <td style="text-align:right;"> 8.5 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 6.5 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Control </td>
-   <td style="text-align:right;"> 14.0 </td>
-   <td style="text-align:right;"> 21 </td>
-   <td style="text-align:right;"> 6.7 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Control </td>
-   <td style="text-align:right;"> 8.5 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 7.8 </td>
+   <td style="text-align:right;"> 10.0 </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 9.3 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Control </td>
    <td style="text-align:right;"> 7.0 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 8.0 </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 13.0 </td>
    <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Técnica I </td>
+   <td style="text-align:right;"> 6.5 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 16.2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Técnica I </td>
+   <td style="text-align:right;"> 9.5 </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 9.5 </td>
+   <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Control </td>
    <td style="text-align:right;"> 7.5 </td>
    <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 8.2 </td>
+   <td style="text-align:right;"> 8.5 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Técnica II </td>
+   <td style="text-align:right;"> 7.5 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 9.5 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
   </tr>
 </tbody>
 </table>
@@ -315,7 +315,7 @@ qqPlot(modeloLineal, main="QQ Plot")
 <img src="05-anova_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 ```
-## [1]  1 57
+## [1] 12 65
 ```
 No se aprecia una notable desviación de la normalidad.
 
@@ -374,8 +374,8 @@ Como se aprecia es algo pesado ir comprobando todas las cuestiones de validez un
 ## Global Stat        1.89e+00   0.756 Assumptions acceptable.
 ## Skewness           1.11e-02   0.916 Assumptions acceptable.
 ## Kurtosis           1.87e+00   0.171 Assumptions acceptable.
-## Link Function      9.21e-16   1.000 Assumptions acceptable.
-## Heteroscedasticity 5.03e-03   0.943 Assumptions acceptable.
+## Link Function      3.13e-15   1.000 Assumptions acceptable.
+## Heteroscedasticity 6.81e-03   0.934 Assumptions acceptable.
 ```
 
 <table>
@@ -415,7 +415,7 @@ Como se aprecia es algo pesado ir comprobando todas las cuestiones de validez un
   <tr>
    <td style="text-align:left;"> Heteroscedasticity </td>
    <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.94 </td>
+   <td style="text-align:right;"> 0.93 </td>
    <td style="text-align:left;"> Assumptions acceptable. </td>
   </tr>
 </tbody>
@@ -438,13 +438,13 @@ df %>% arrange(Diferencia) %>% .[["Grupo"]] %>% as.character()
 ```
 ##  [1] "Control"    "Control"    "Control"    "Control"    "Control"   
 ##  [6] "Control"    "Control"    "Control"    "Técnica I"  "Control"   
-## [11] "Control"    "Técnica I"  "Técnica II" "Control"    "Técnica I" 
-## [16] "Técnica II" "Control"    "Control"    "Técnica I"  "Técnica II"
-## [21] "Técnica I"  "Técnica II" "Técnica II" "Control"    "Técnica I" 
+## [11] "Técnica I"  "Control"    "Técnica II" "Control"    "Técnica I" 
+## [16] "Técnica II" "Control"    "Control"    "Técnica II" "Técnica I" 
+## [21] "Técnica I"  "Técnica II" "Técnica II" "Técnica I"  "Control"   
 ## [26] "Técnica II" "Control"    "Técnica I"  "Control"    "Técnica I" 
 ## [31] "Técnica II" "Técnica II" "Control"    "Técnica I"  "Control"   
-## [36] "Control"    "Control"    "Técnica II" "Control"    "Técnica II"
-## [41] "Técnica I"  "Técnica II" "Técnica I"  "Técnica II" "Técnica II"
+## [36] "Control"    "Control"    "Técnica II" "Técnica II" "Control"   
+## [41] "Técnica II" "Técnica I"  "Técnica I"  "Técnica II" "Técnica II"
 ## [46] "Técnica I"  "Técnica II" "Técnica II" "Técnica II" "Técnica II"
 ## [51] "Técnica II" "Técnica I"  "Técnica I"  "Técnica I"  "Técnica II"
 ## [56] "Técnica II" "Control"    "Técnica I"  "Técnica I"  "Técnica I" 

@@ -63,51 +63,51 @@ df %>% head()  %>% knitr::kable(booktabs=T)
 <tbody>
   <tr>
    <td style="text-align:left;"> Control </td>
-   <td style="text-align:right;"> 9.5 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 4.5 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Control </td>
-   <td style="text-align:right;"> 8.5 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 6.5 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Control </td>
-   <td style="text-align:right;"> 14.0 </td>
-   <td style="text-align:right;"> 21 </td>
-   <td style="text-align:right;"> 6.7 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Control </td>
-   <td style="text-align:right;"> 8.5 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 7.8 </td>
+   <td style="text-align:right;"> 10.0 </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 9.3 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Control </td>
    <td style="text-align:right;"> 7.0 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 8.0 </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 13.0 </td>
    <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Técnica I </td>
+   <td style="text-align:right;"> 6.5 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 16.2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Técnica I </td>
+   <td style="text-align:right;"> 9.5 </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 9.5 </td>
+   <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Control </td>
    <td style="text-align:right;"> 7.5 </td>
    <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 8.2 </td>
+   <td style="text-align:right;"> 8.5 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Técnica II </td>
+   <td style="text-align:right;"> 7.5 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 9.5 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
   </tr>
 </tbody>
 </table>

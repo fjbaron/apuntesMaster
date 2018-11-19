@@ -30,7 +30,7 @@ En primer lugar, daremos unas ideas sobre la manera de presentar ordenadamente y
 ## Datos Univariantes
 Los métodos para visualizar y resumir los datos dependen de sus tipos, que básicamente diferenciamos en dos: **categóricos** y **numéricos**.
 
-Los datos *categóricos (o factores)* son aquellos que registran categorías o cualidades. Si descargamos esta [base de datos de pacientes](datos/centroSalud-transversal.sav), ejemplos de variables categóricas son el *sexo*, el *estado civil* y el *nivel de estudios*. Dentro de las categóricas podemos a su vez distinguir entre variable **nominal** y **ordinal**. En esta última hay un orden entre las distintas categorías como  se aprecia en la la variable *nivel de estudios* y *tabaqismo*:
+Los datos *categóricos (o factores)* son aquellos que registran categorías o cualidades. Si descargamos la base de datos [centroSalud-transversal.sav](datos/centroSalud-transversal.sav), ejemplos de variables categóricas son el *sexo*, el *estado civil* y el *nivel de estudios*. Dentro de las categóricas podemos a su vez distinguir entre variable **nominal** y **ordinal**. En esta última hay un orden entre las distintas categorías como  se aprecia en la la variable *nivel de estudios* y *tabaqismo*:
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 df=read_sav("datos/centroSalud-transversal.sav", user_na=FALSE) %>% haven::as_factor()
@@ -223,7 +223,6 @@ sjp.grpfrq(df$hipercol, df$sexo,show.prc = FALSE),ncol=1)
 Desglosando en cada categoría de la variable los porcentajes de cada sexo es más sencillo de ver:
  
 ```{r}
-#ggplot(df, aes(tabaco)) + geom_bar(aes(fill = sexo))
 dftmp=df %>% select(sexo,tabaco)%>% filter(!is.na(tabaco)) %>% 
   mutate(cuenta=1) %>% group_by(sexo,tabaco) %>% 
   tally() %>% mutate(fraccion=n/sum(n))
@@ -233,7 +232,6 @@ ggplot(dftmp, aes(fill=sexo, y=fraccion, x=tabaco)) +
 ```
 
 ```{r}
-#ggplot(df, aes(tabaco)) + geom_bar(aes(fill = sexo))
 dftmp=df %>% select(sexo,diabm) %>% filter(!is.na(diabm)) %>% mutate(cuenta=1) %>% group_by(sexo,diabm) %>% tally() %>% mutate(fraccion=n/sum(n))
 ggplot(dftmp, aes(fill=sexo, y=fraccion, x=diabm)) + 
     geom_bar( stat="identity", position="fill")
