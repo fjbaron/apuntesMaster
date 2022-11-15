@@ -75,12 +75,12 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
 ```
 
 ```{=html}
-<div id="eziaqroyfj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hqiasvsfuq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#eziaqroyfj .gt_table {
+#hqiasvsfuq .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -105,7 +105,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   border-left-color: #D3D3D3;
 }
 
-#eziaqroyfj .gt_heading {
+#hqiasvsfuq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -117,7 +117,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   border-right-color: #D3D3D3;
 }
 
-#eziaqroyfj .gt_title {
+#hqiasvsfuq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -129,7 +129,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   border-bottom-width: 0;
 }
 
-#eziaqroyfj .gt_subtitle {
+#hqiasvsfuq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -141,13 +141,13 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   border-top-width: 0;
 }
 
-#eziaqroyfj .gt_bottom_border {
+#hqiasvsfuq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#eziaqroyfj .gt_col_headings {
+#hqiasvsfuq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -162,7 +162,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   border-right-color: #D3D3D3;
 }
 
-#eziaqroyfj .gt_col_heading {
+#hqiasvsfuq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -182,7 +182,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   overflow-x: hidden;
 }
 
-#eziaqroyfj .gt_column_spanner_outer {
+#hqiasvsfuq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -194,15 +194,15 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   padding-right: 4px;
 }
 
-#eziaqroyfj .gt_column_spanner_outer:first-child {
+#hqiasvsfuq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#eziaqroyfj .gt_column_spanner_outer:last-child {
+#hqiasvsfuq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#eziaqroyfj .gt_column_spanner {
+#hqiasvsfuq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -214,7 +214,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   width: 100%;
 }
 
-#eziaqroyfj .gt_group_heading {
+#hqiasvsfuq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -239,7 +239,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   vertical-align: middle;
 }
 
-#eziaqroyfj .gt_empty_group_heading {
+#hqiasvsfuq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -254,15 +254,15 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   vertical-align: middle;
 }
 
-#eziaqroyfj .gt_from_md > :first-child {
+#hqiasvsfuq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#eziaqroyfj .gt_from_md > :last-child {
+#hqiasvsfuq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#eziaqroyfj .gt_row {
+#hqiasvsfuq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -281,7 +281,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   overflow-x: hidden;
 }
 
-#eziaqroyfj .gt_stub {
+#hqiasvsfuq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -294,7 +294,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   padding-right: 5px;
 }
 
-#eziaqroyfj .gt_stub_row_group {
+#hqiasvsfuq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -308,11 +308,11 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   vertical-align: top;
 }
 
-#eziaqroyfj .gt_row_group_first td {
+#hqiasvsfuq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#eziaqroyfj .gt_summary_row {
+#hqiasvsfuq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -322,16 +322,16 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   padding-right: 5px;
 }
 
-#eziaqroyfj .gt_first_summary_row {
+#hqiasvsfuq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#eziaqroyfj .gt_first_summary_row.thick {
+#hqiasvsfuq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#eziaqroyfj .gt_last_summary_row {
+#hqiasvsfuq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -341,7 +341,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   border-bottom-color: #D3D3D3;
 }
 
-#eziaqroyfj .gt_grand_summary_row {
+#hqiasvsfuq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -351,7 +351,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   padding-right: 5px;
 }
 
-#eziaqroyfj .gt_first_grand_summary_row {
+#hqiasvsfuq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -361,11 +361,11 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   border-top-color: #D3D3D3;
 }
 
-#eziaqroyfj .gt_striped {
+#hqiasvsfuq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#eziaqroyfj .gt_table_body {
+#hqiasvsfuq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -374,7 +374,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   border-bottom-color: #D3D3D3;
 }
 
-#eziaqroyfj .gt_footnotes {
+#hqiasvsfuq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -388,7 +388,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   border-right-color: #D3D3D3;
 }
 
-#eziaqroyfj .gt_footnote {
+#hqiasvsfuq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -397,7 +397,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   padding-right: 5px;
 }
 
-#eziaqroyfj .gt_sourcenotes {
+#hqiasvsfuq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -411,7 +411,7 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   border-right-color: #D3D3D3;
 }
 
-#eziaqroyfj .gt_sourcenote {
+#hqiasvsfuq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -419,64 +419,64 @@ df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summ
   padding-right: 5px;
 }
 
-#eziaqroyfj .gt_left {
+#hqiasvsfuq .gt_left {
   text-align: left;
 }
 
-#eziaqroyfj .gt_center {
+#hqiasvsfuq .gt_center {
   text-align: center;
 }
 
-#eziaqroyfj .gt_right {
+#hqiasvsfuq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#eziaqroyfj .gt_font_normal {
+#hqiasvsfuq .gt_font_normal {
   font-weight: normal;
 }
 
-#eziaqroyfj .gt_font_bold {
+#hqiasvsfuq .gt_font_bold {
   font-weight: bold;
 }
 
-#eziaqroyfj .gt_font_italic {
+#hqiasvsfuq .gt_font_italic {
   font-style: italic;
 }
 
-#eziaqroyfj .gt_super {
+#hqiasvsfuq .gt_super {
   font-size: 65%;
 }
 
-#eziaqroyfj .gt_footnote_marks {
+#hqiasvsfuq .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#eziaqroyfj .gt_asterisk {
+#hqiasvsfuq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#eziaqroyfj .gt_indent_1 {
+#hqiasvsfuq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#eziaqroyfj .gt_indent_2 {
+#hqiasvsfuq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#eziaqroyfj .gt_indent_3 {
+#hqiasvsfuq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#eziaqroyfj .gt_indent_4 {
+#hqiasvsfuq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#eziaqroyfj .gt_indent_5 {
+#hqiasvsfuq .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -669,12 +669,12 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
 ```
 
 ```{=html}
-<div id="xcifrbuwah" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="binquycyoa" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#xcifrbuwah .gt_table {
+#binquycyoa .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -699,7 +699,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   border-left-color: #D3D3D3;
 }
 
-#xcifrbuwah .gt_heading {
+#binquycyoa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -711,7 +711,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   border-right-color: #D3D3D3;
 }
 
-#xcifrbuwah .gt_title {
+#binquycyoa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -723,7 +723,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   border-bottom-width: 0;
 }
 
-#xcifrbuwah .gt_subtitle {
+#binquycyoa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -735,13 +735,13 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   border-top-width: 0;
 }
 
-#xcifrbuwah .gt_bottom_border {
+#binquycyoa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xcifrbuwah .gt_col_headings {
+#binquycyoa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -756,7 +756,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   border-right-color: #D3D3D3;
 }
 
-#xcifrbuwah .gt_col_heading {
+#binquycyoa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -776,7 +776,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   overflow-x: hidden;
 }
 
-#xcifrbuwah .gt_column_spanner_outer {
+#binquycyoa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -788,15 +788,15 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   padding-right: 4px;
 }
 
-#xcifrbuwah .gt_column_spanner_outer:first-child {
+#binquycyoa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xcifrbuwah .gt_column_spanner_outer:last-child {
+#binquycyoa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xcifrbuwah .gt_column_spanner {
+#binquycyoa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -808,7 +808,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   width: 100%;
 }
 
-#xcifrbuwah .gt_group_heading {
+#binquycyoa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -833,7 +833,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   vertical-align: middle;
 }
 
-#xcifrbuwah .gt_empty_group_heading {
+#binquycyoa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -848,15 +848,15 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   vertical-align: middle;
 }
 
-#xcifrbuwah .gt_from_md > :first-child {
+#binquycyoa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xcifrbuwah .gt_from_md > :last-child {
+#binquycyoa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xcifrbuwah .gt_row {
+#binquycyoa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -875,7 +875,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   overflow-x: hidden;
 }
 
-#xcifrbuwah .gt_stub {
+#binquycyoa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -888,7 +888,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   padding-right: 5px;
 }
 
-#xcifrbuwah .gt_stub_row_group {
+#binquycyoa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -902,11 +902,11 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   vertical-align: top;
 }
 
-#xcifrbuwah .gt_row_group_first td {
+#binquycyoa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xcifrbuwah .gt_summary_row {
+#binquycyoa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -916,16 +916,16 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   padding-right: 5px;
 }
 
-#xcifrbuwah .gt_first_summary_row {
+#binquycyoa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xcifrbuwah .gt_first_summary_row.thick {
+#binquycyoa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xcifrbuwah .gt_last_summary_row {
+#binquycyoa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -935,7 +935,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   border-bottom-color: #D3D3D3;
 }
 
-#xcifrbuwah .gt_grand_summary_row {
+#binquycyoa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -945,7 +945,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   padding-right: 5px;
 }
 
-#xcifrbuwah .gt_first_grand_summary_row {
+#binquycyoa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -955,11 +955,11 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   border-top-color: #D3D3D3;
 }
 
-#xcifrbuwah .gt_striped {
+#binquycyoa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xcifrbuwah .gt_table_body {
+#binquycyoa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -968,7 +968,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   border-bottom-color: #D3D3D3;
 }
 
-#xcifrbuwah .gt_footnotes {
+#binquycyoa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -982,7 +982,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   border-right-color: #D3D3D3;
 }
 
-#xcifrbuwah .gt_footnote {
+#binquycyoa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -991,7 +991,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   padding-right: 5px;
 }
 
-#xcifrbuwah .gt_sourcenotes {
+#binquycyoa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1005,7 +1005,7 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   border-right-color: #D3D3D3;
 }
 
-#xcifrbuwah .gt_sourcenote {
+#binquycyoa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1013,64 +1013,64 @@ df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summa
   padding-right: 5px;
 }
 
-#xcifrbuwah .gt_left {
+#binquycyoa .gt_left {
   text-align: left;
 }
 
-#xcifrbuwah .gt_center {
+#binquycyoa .gt_center {
   text-align: center;
 }
 
-#xcifrbuwah .gt_right {
+#binquycyoa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xcifrbuwah .gt_font_normal {
+#binquycyoa .gt_font_normal {
   font-weight: normal;
 }
 
-#xcifrbuwah .gt_font_bold {
+#binquycyoa .gt_font_bold {
   font-weight: bold;
 }
 
-#xcifrbuwah .gt_font_italic {
+#binquycyoa .gt_font_italic {
   font-style: italic;
 }
 
-#xcifrbuwah .gt_super {
+#binquycyoa .gt_super {
   font-size: 65%;
 }
 
-#xcifrbuwah .gt_footnote_marks {
+#binquycyoa .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#xcifrbuwah .gt_asterisk {
+#binquycyoa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xcifrbuwah .gt_indent_1 {
+#binquycyoa .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xcifrbuwah .gt_indent_2 {
+#binquycyoa .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xcifrbuwah .gt_indent_3 {
+#binquycyoa .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xcifrbuwah .gt_indent_4 {
+#binquycyoa .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xcifrbuwah .gt_indent_5 {
+#binquycyoa .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1228,12 +1228,12 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
 ```
 
 ```{=html}
-<div id="whpvbnmpdh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bfzaqzebdy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#whpvbnmpdh .gt_table {
+#bfzaqzebdy .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1258,7 +1258,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   border-left-color: #D3D3D3;
 }
 
-#whpvbnmpdh .gt_heading {
+#bfzaqzebdy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1270,7 +1270,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   border-right-color: #D3D3D3;
 }
 
-#whpvbnmpdh .gt_title {
+#bfzaqzebdy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1282,7 +1282,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   border-bottom-width: 0;
 }
 
-#whpvbnmpdh .gt_subtitle {
+#bfzaqzebdy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1294,13 +1294,13 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   border-top-width: 0;
 }
 
-#whpvbnmpdh .gt_bottom_border {
+#bfzaqzebdy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#whpvbnmpdh .gt_col_headings {
+#bfzaqzebdy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1315,7 +1315,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   border-right-color: #D3D3D3;
 }
 
-#whpvbnmpdh .gt_col_heading {
+#bfzaqzebdy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1335,7 +1335,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   overflow-x: hidden;
 }
 
-#whpvbnmpdh .gt_column_spanner_outer {
+#bfzaqzebdy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1347,15 +1347,15 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   padding-right: 4px;
 }
 
-#whpvbnmpdh .gt_column_spanner_outer:first-child {
+#bfzaqzebdy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#whpvbnmpdh .gt_column_spanner_outer:last-child {
+#bfzaqzebdy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#whpvbnmpdh .gt_column_spanner {
+#bfzaqzebdy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1367,7 +1367,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   width: 100%;
 }
 
-#whpvbnmpdh .gt_group_heading {
+#bfzaqzebdy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1392,7 +1392,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   vertical-align: middle;
 }
 
-#whpvbnmpdh .gt_empty_group_heading {
+#bfzaqzebdy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1407,15 +1407,15 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   vertical-align: middle;
 }
 
-#whpvbnmpdh .gt_from_md > :first-child {
+#bfzaqzebdy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#whpvbnmpdh .gt_from_md > :last-child {
+#bfzaqzebdy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#whpvbnmpdh .gt_row {
+#bfzaqzebdy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1434,7 +1434,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   overflow-x: hidden;
 }
 
-#whpvbnmpdh .gt_stub {
+#bfzaqzebdy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1447,7 +1447,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   padding-right: 5px;
 }
 
-#whpvbnmpdh .gt_stub_row_group {
+#bfzaqzebdy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1461,11 +1461,11 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   vertical-align: top;
 }
 
-#whpvbnmpdh .gt_row_group_first td {
+#bfzaqzebdy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#whpvbnmpdh .gt_summary_row {
+#bfzaqzebdy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1475,16 +1475,16 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   padding-right: 5px;
 }
 
-#whpvbnmpdh .gt_first_summary_row {
+#bfzaqzebdy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#whpvbnmpdh .gt_first_summary_row.thick {
+#bfzaqzebdy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#whpvbnmpdh .gt_last_summary_row {
+#bfzaqzebdy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1494,7 +1494,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   border-bottom-color: #D3D3D3;
 }
 
-#whpvbnmpdh .gt_grand_summary_row {
+#bfzaqzebdy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1504,7 +1504,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   padding-right: 5px;
 }
 
-#whpvbnmpdh .gt_first_grand_summary_row {
+#bfzaqzebdy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1514,11 +1514,11 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   border-top-color: #D3D3D3;
 }
 
-#whpvbnmpdh .gt_striped {
+#bfzaqzebdy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#whpvbnmpdh .gt_table_body {
+#bfzaqzebdy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1527,7 +1527,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   border-bottom-color: #D3D3D3;
 }
 
-#whpvbnmpdh .gt_footnotes {
+#bfzaqzebdy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1541,7 +1541,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   border-right-color: #D3D3D3;
 }
 
-#whpvbnmpdh .gt_footnote {
+#bfzaqzebdy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1550,7 +1550,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   padding-right: 5px;
 }
 
-#whpvbnmpdh .gt_sourcenotes {
+#bfzaqzebdy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1564,7 +1564,7 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   border-right-color: #D3D3D3;
 }
 
-#whpvbnmpdh .gt_sourcenote {
+#bfzaqzebdy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1572,64 +1572,64 @@ df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,su
   padding-right: 5px;
 }
 
-#whpvbnmpdh .gt_left {
+#bfzaqzebdy .gt_left {
   text-align: left;
 }
 
-#whpvbnmpdh .gt_center {
+#bfzaqzebdy .gt_center {
   text-align: center;
 }
 
-#whpvbnmpdh .gt_right {
+#bfzaqzebdy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#whpvbnmpdh .gt_font_normal {
+#bfzaqzebdy .gt_font_normal {
   font-weight: normal;
 }
 
-#whpvbnmpdh .gt_font_bold {
+#bfzaqzebdy .gt_font_bold {
   font-weight: bold;
 }
 
-#whpvbnmpdh .gt_font_italic {
+#bfzaqzebdy .gt_font_italic {
   font-style: italic;
 }
 
-#whpvbnmpdh .gt_super {
+#bfzaqzebdy .gt_super {
   font-size: 65%;
 }
 
-#whpvbnmpdh .gt_footnote_marks {
+#bfzaqzebdy .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#whpvbnmpdh .gt_asterisk {
+#bfzaqzebdy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#whpvbnmpdh .gt_indent_1 {
+#bfzaqzebdy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#whpvbnmpdh .gt_indent_2 {
+#bfzaqzebdy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#whpvbnmpdh .gt_indent_3 {
+#bfzaqzebdy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#whpvbnmpdh .gt_indent_4 {
+#bfzaqzebdy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#whpvbnmpdh .gt_indent_5 {
+#bfzaqzebdy .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1683,12 +1683,12 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
 ```
 
 ```{=html}
-<div id="vpciiigrta" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="wvuseywuea" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#vpciiigrta .gt_table {
+#wvuseywuea .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1713,7 +1713,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-left-color: #D3D3D3;
 }
 
-#vpciiigrta .gt_heading {
+#wvuseywuea .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1725,7 +1725,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-right-color: #D3D3D3;
 }
 
-#vpciiigrta .gt_title {
+#wvuseywuea .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1737,7 +1737,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-bottom-width: 0;
 }
 
-#vpciiigrta .gt_subtitle {
+#wvuseywuea .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1749,13 +1749,13 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-top-width: 0;
 }
 
-#vpciiigrta .gt_bottom_border {
+#wvuseywuea .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vpciiigrta .gt_col_headings {
+#wvuseywuea .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1770,7 +1770,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-right-color: #D3D3D3;
 }
 
-#vpciiigrta .gt_col_heading {
+#wvuseywuea .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1790,7 +1790,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   overflow-x: hidden;
 }
 
-#vpciiigrta .gt_column_spanner_outer {
+#wvuseywuea .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1802,15 +1802,15 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 4px;
 }
 
-#vpciiigrta .gt_column_spanner_outer:first-child {
+#wvuseywuea .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vpciiigrta .gt_column_spanner_outer:last-child {
+#wvuseywuea .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vpciiigrta .gt_column_spanner {
+#wvuseywuea .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1822,7 +1822,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   width: 100%;
 }
 
-#vpciiigrta .gt_group_heading {
+#wvuseywuea .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1847,7 +1847,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   vertical-align: middle;
 }
 
-#vpciiigrta .gt_empty_group_heading {
+#wvuseywuea .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1862,15 +1862,15 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   vertical-align: middle;
 }
 
-#vpciiigrta .gt_from_md > :first-child {
+#wvuseywuea .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vpciiigrta .gt_from_md > :last-child {
+#wvuseywuea .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vpciiigrta .gt_row {
+#wvuseywuea .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1889,7 +1889,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   overflow-x: hidden;
 }
 
-#vpciiigrta .gt_stub {
+#wvuseywuea .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1902,7 +1902,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 5px;
 }
 
-#vpciiigrta .gt_stub_row_group {
+#wvuseywuea .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1916,11 +1916,11 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   vertical-align: top;
 }
 
-#vpciiigrta .gt_row_group_first td {
+#wvuseywuea .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vpciiigrta .gt_summary_row {
+#wvuseywuea .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1930,16 +1930,16 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 5px;
 }
 
-#vpciiigrta .gt_first_summary_row {
+#wvuseywuea .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vpciiigrta .gt_first_summary_row.thick {
+#wvuseywuea .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vpciiigrta .gt_last_summary_row {
+#wvuseywuea .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1949,7 +1949,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-bottom-color: #D3D3D3;
 }
 
-#vpciiigrta .gt_grand_summary_row {
+#wvuseywuea .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1959,7 +1959,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 5px;
 }
 
-#vpciiigrta .gt_first_grand_summary_row {
+#wvuseywuea .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1969,11 +1969,11 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-top-color: #D3D3D3;
 }
 
-#vpciiigrta .gt_striped {
+#wvuseywuea .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vpciiigrta .gt_table_body {
+#wvuseywuea .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1982,7 +1982,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-bottom-color: #D3D3D3;
 }
 
-#vpciiigrta .gt_footnotes {
+#wvuseywuea .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1996,7 +1996,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-right-color: #D3D3D3;
 }
 
-#vpciiigrta .gt_footnote {
+#wvuseywuea .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2005,7 +2005,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 5px;
 }
 
-#vpciiigrta .gt_sourcenotes {
+#wvuseywuea .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2019,7 +2019,7 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-right-color: #D3D3D3;
 }
 
-#vpciiigrta .gt_sourcenote {
+#wvuseywuea .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2027,64 +2027,64 @@ modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 5px;
 }
 
-#vpciiigrta .gt_left {
+#wvuseywuea .gt_left {
   text-align: left;
 }
 
-#vpciiigrta .gt_center {
+#wvuseywuea .gt_center {
   text-align: center;
 }
 
-#vpciiigrta .gt_right {
+#wvuseywuea .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vpciiigrta .gt_font_normal {
+#wvuseywuea .gt_font_normal {
   font-weight: normal;
 }
 
-#vpciiigrta .gt_font_bold {
+#wvuseywuea .gt_font_bold {
   font-weight: bold;
 }
 
-#vpciiigrta .gt_font_italic {
+#wvuseywuea .gt_font_italic {
   font-style: italic;
 }
 
-#vpciiigrta .gt_super {
+#wvuseywuea .gt_super {
   font-size: 65%;
 }
 
-#vpciiigrta .gt_footnote_marks {
+#wvuseywuea .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#vpciiigrta .gt_asterisk {
+#wvuseywuea .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vpciiigrta .gt_indent_1 {
+#wvuseywuea .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vpciiigrta .gt_indent_2 {
+#wvuseywuea .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vpciiigrta .gt_indent_3 {
+#wvuseywuea .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vpciiigrta .gt_indent_4 {
+#wvuseywuea .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vpciiigrta .gt_indent_5 {
+#wvuseywuea .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2151,12 +2151,12 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
 ```
 
 ```{=html}
-<div id="nqcarpqvyv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fqkqzsexur" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#nqcarpqvyv .gt_table {
+#fqkqzsexur .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2181,7 +2181,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-left-color: #D3D3D3;
 }
 
-#nqcarpqvyv .gt_heading {
+#fqkqzsexur .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2193,7 +2193,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-right-color: #D3D3D3;
 }
 
-#nqcarpqvyv .gt_title {
+#fqkqzsexur .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2205,7 +2205,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-bottom-width: 0;
 }
 
-#nqcarpqvyv .gt_subtitle {
+#fqkqzsexur .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2217,13 +2217,13 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-top-width: 0;
 }
 
-#nqcarpqvyv .gt_bottom_border {
+#fqkqzsexur .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nqcarpqvyv .gt_col_headings {
+#fqkqzsexur .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2238,7 +2238,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-right-color: #D3D3D3;
 }
 
-#nqcarpqvyv .gt_col_heading {
+#fqkqzsexur .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2258,7 +2258,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   overflow-x: hidden;
 }
 
-#nqcarpqvyv .gt_column_spanner_outer {
+#fqkqzsexur .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2270,15 +2270,15 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 4px;
 }
 
-#nqcarpqvyv .gt_column_spanner_outer:first-child {
+#fqkqzsexur .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nqcarpqvyv .gt_column_spanner_outer:last-child {
+#fqkqzsexur .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nqcarpqvyv .gt_column_spanner {
+#fqkqzsexur .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2290,7 +2290,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   width: 100%;
 }
 
-#nqcarpqvyv .gt_group_heading {
+#fqkqzsexur .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2315,7 +2315,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   vertical-align: middle;
 }
 
-#nqcarpqvyv .gt_empty_group_heading {
+#fqkqzsexur .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2330,15 +2330,15 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   vertical-align: middle;
 }
 
-#nqcarpqvyv .gt_from_md > :first-child {
+#fqkqzsexur .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nqcarpqvyv .gt_from_md > :last-child {
+#fqkqzsexur .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nqcarpqvyv .gt_row {
+#fqkqzsexur .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2357,7 +2357,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   overflow-x: hidden;
 }
 
-#nqcarpqvyv .gt_stub {
+#fqkqzsexur .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2370,7 +2370,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 5px;
 }
 
-#nqcarpqvyv .gt_stub_row_group {
+#fqkqzsexur .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2384,11 +2384,11 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   vertical-align: top;
 }
 
-#nqcarpqvyv .gt_row_group_first td {
+#fqkqzsexur .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nqcarpqvyv .gt_summary_row {
+#fqkqzsexur .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2398,16 +2398,16 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 5px;
 }
 
-#nqcarpqvyv .gt_first_summary_row {
+#fqkqzsexur .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nqcarpqvyv .gt_first_summary_row.thick {
+#fqkqzsexur .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nqcarpqvyv .gt_last_summary_row {
+#fqkqzsexur .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2417,7 +2417,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-bottom-color: #D3D3D3;
 }
 
-#nqcarpqvyv .gt_grand_summary_row {
+#fqkqzsexur .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2427,7 +2427,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 5px;
 }
 
-#nqcarpqvyv .gt_first_grand_summary_row {
+#fqkqzsexur .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2437,11 +2437,11 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-top-color: #D3D3D3;
 }
 
-#nqcarpqvyv .gt_striped {
+#fqkqzsexur .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nqcarpqvyv .gt_table_body {
+#fqkqzsexur .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2450,7 +2450,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-bottom-color: #D3D3D3;
 }
 
-#nqcarpqvyv .gt_footnotes {
+#fqkqzsexur .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2464,7 +2464,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-right-color: #D3D3D3;
 }
 
-#nqcarpqvyv .gt_footnote {
+#fqkqzsexur .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2473,7 +2473,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 5px;
 }
 
-#nqcarpqvyv .gt_sourcenotes {
+#fqkqzsexur .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2487,7 +2487,7 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   border-right-color: #D3D3D3;
 }
 
-#nqcarpqvyv .gt_sourcenote {
+#fqkqzsexur .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2495,64 +2495,64 @@ modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
   padding-right: 5px;
 }
 
-#nqcarpqvyv .gt_left {
+#fqkqzsexur .gt_left {
   text-align: left;
 }
 
-#nqcarpqvyv .gt_center {
+#fqkqzsexur .gt_center {
   text-align: center;
 }
 
-#nqcarpqvyv .gt_right {
+#fqkqzsexur .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nqcarpqvyv .gt_font_normal {
+#fqkqzsexur .gt_font_normal {
   font-weight: normal;
 }
 
-#nqcarpqvyv .gt_font_bold {
+#fqkqzsexur .gt_font_bold {
   font-weight: bold;
 }
 
-#nqcarpqvyv .gt_font_italic {
+#fqkqzsexur .gt_font_italic {
   font-style: italic;
 }
 
-#nqcarpqvyv .gt_super {
+#fqkqzsexur .gt_super {
   font-size: 65%;
 }
 
-#nqcarpqvyv .gt_footnote_marks {
+#fqkqzsexur .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#nqcarpqvyv .gt_asterisk {
+#fqkqzsexur .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nqcarpqvyv .gt_indent_1 {
+#fqkqzsexur .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nqcarpqvyv .gt_indent_2 {
+#fqkqzsexur .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nqcarpqvyv .gt_indent_3 {
+#fqkqzsexur .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nqcarpqvyv .gt_indent_4 {
+#fqkqzsexur .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nqcarpqvyv .gt_indent_5 {
+#fqkqzsexur .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
