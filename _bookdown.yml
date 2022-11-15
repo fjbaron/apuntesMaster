@@ -1,8 +1,19 @@
-book_filename: "apuntesEstadistica"
-chapter_name: "Capítulo "
-repo: https://github.com/fjbaron/apuntesMaster
-output_dir: docs
-rmd_files: ["index.Rmd", "01-Descriptiva.Rmd", "02-IntConf.Rmd", "03-contHip.Rmd", "04-numerica2Grupos.Rmd", "05-anova.Rmd", "06-chi2.Rmd", "07-regresionLineal.Rmd"]
-clean: [packages.bib, bookdown.bbl]
-new_session: yes
+book_filename: "apuntesMaster2022"
+new_session: true
+before_chapter_script: _common.R
 delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Capítulo "
+rmd_files: [
+"index.Rmd", 
+"01-Descriptiva.Rmd", 
+"02-IntConf.Rmd", 
+"03-contHip.Rmd", 
+"04-numerica2Grupos.Rmd", 
+"05-anova.Rmd",
+"06-chi2.Rmd",
+"07-regresionLineal.Rmd",
+"08-regresionLogistica.Rmd", 
+"09-tallerRegresion.Rmd"
+]

@@ -1,19 +1,7 @@
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-	echo = TRUE,
-	message = FALSE,
-	warning = FALSE
-)
-
-if (!require("pacman")) install.packages("pacman")
-pacman::p_load("tidyverse", "ggplot2", "haven", "bookdown", "knitr", "kableExtra","stargazer", "tableone","sjPlot","sjlabelled","sjmisc","gridExtra" )
-options(stringsAsFactors=F,digits=2)
-source("tablasDeArticulo_v2.R")
-theme_set(theme_minimal())
-```
 
 
-#Contrastes de hipótesis
+
+# Contrastes de hipótesis
 
 Aunque gran parte de la investigación médica esta relacionada con la recogida de datos con propósito descriptivo, otra buena parte lo está con la recolección de información con el plan de responder a cuestiones puntuales, es decir, contrastes de hipótesis.
 

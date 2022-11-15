@@ -1,24 +1,4 @@
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-	echo = TRUE,
-	message = FALSE,
-	warning = FALSE
-)
-
-if (!require("pacman")) install.packages("pacman")
-pacman::p_load("tidyverse", "ggplot2", "haven", "bookdown", "knitr", "kableExtra","stargazer", "tableone","sjPlot","sjlabelled","sjmisc","gridExtra","emmeans","sjstats", "ggmosaic","finalfit" )
-options(stringsAsFactors=F,digits=2)
-source("tablasDeArticulo_v2.R")
-theme_set(theme_minimal())
-
-#Para esta parte se necesita, en caso de que no esté instalado el paquete finalfit:
-# install.packages("devtools")
-#devtools::install_github("ewenharrison/finalfit")
-library(finalfit)
-```
-
-
-#Regresión lineal múltiple
+# Regresión lineal múltiple
 Utilizamos regresión lineal múltiple cuando estudiamos la posible relación entre varias variables independientes (predictoras o explicativas) y otra variable dependiente (criterio, explicada, respuesta).
 
 Por ejemplo, podemos estar interesados en saber cómo influyen en la presión arterial sistólica de un paciente el peso, la edad y el sexo, donde la variable sexo es una variable dicotómica (o indicadora), codificada como 0 para las mujeres y 1 para los hombres. 
@@ -26,7 +6,7 @@ Por ejemplo, podemos estar interesados en saber cómo influyen en la presión ar
 
 La técnica de regresión múltiple se usa frecuentemente en investigación. Se aplica al caso en que la variable respuesta es de tipo numérico. Cuando la respuesta es de tipo dicotómico (muere/vive, enferma/no enferma), usamos otra técnica denominada regresión logística y que tratamos en un capítulo posterior.
 
-####Ejemplo {-}
+#### Ejemplo {-}
 Descargamos la base de datos que hemos usado en ocasiones anteriores [centroSalud-transversal.sav](datos/centroSalud-transversal.sav) y exploramos algunas las primeras líneas de las variables *sexo, edad, peso y pas*:
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
@@ -37,10 +17,7 @@ df %>% select(sexo,edad,peso,pas) %>% head()  %>% knitr::kable(booktabs=T)
 ```
 Estudiamos el modelo de regresión lineal donde intentamos estudiar la inflencia de *sexo, edad, peso* en *pas*:
 ```{r}
-ajuste <- df %>% lm(pas ~ sexo+edad+peso, data=.) 
-tab_model(ajuste,show.se = TRUE) %>% return() %$% 
-    knitr %>% 
-    asis_output()
+df %>% lm(pas ~ sexo+edad+peso, data=.) %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
 ```
 
 Esta salida de se puede interpretar  como que el mejor modelo lineal para explicar la *pas* a partir de las variables elegidas es:
@@ -126,20 +103,17 @@ $$Peso =-100 + 1 \times Altura - 5\times Sexo$$
 
 donde se ha codificado con Sexo=0 a los hombres y Sexo=1 a las mujeres, puede ser interpretado como que las mujeres, a igualdad de altura, pesan de media 5 Kg menos que los hombres. El coeficiente 1 de la altura, se interpreta como que por cada diferencia de altura de un centímetro en personas que tienen el resto de variables independientes iguales (mismo sexo), el peso aumenta, por término medio, en **1** kg.
 
-####Ejemplo
+#### Ejemplo
 La base de datos [peso_altura_sexo.sav](datos/peso_altura_sexo.sav) contiene datos simulados que han sido contruidos para dar un modelo de regresión similar al descrito anteriormente. Una analisis de regresión nos ofrecería por resultado:
 
 ```{r}
 df=read_sav("datos/peso_altura_sexo.sav") %>% haven::as_factor()
-ajuste <- df %>% lm(Peso ~ Sexo+ Altura, data=.) 
-tab_model(ajuste,show.se = TRUE) %>% return() %$% 
-    knitr %>% 
-    asis_output()
+df %>% lm(Peso ~ Sexo+ Altura, data=.) %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
 ```
 
 
 
-###Ejemplo: Regresión lineal generaliza a las pruebas t-student para dos muestras, y ANOVA de un factor {-}
+### Ejemplo: Regresión lineal generaliza a las pruebas t-student para dos muestras, y ANOVA de un factor {-}
 Observe que el modelo de regresión múltiple generaliza a otras técnicas estadísticas que conocemos a estas alturas como el modelo t-student para 2 muestras independientes o ANOVA de un factor. Un contraste de dos medias independientes puede resolverse con una regresión de la variable respuesta en función de una variable indicadora que identifica sendas muestras. Un modelo ANOVA de un factor se puede expresar usando variables indicadoras suficientes para codificar el grupo. Para poder interpretar cómodamente los resultados es importante que los grupos sean equilibrados (cada muestra debe tener un número similar de elementos).
 
 ## Bondad de ajuste
@@ -179,18 +153,13 @@ Recordamos que se realizó un experimento para comparar tres métodos de aprendi
 Podemos usar la pareja de variables *gr1 y gr2* como indicadoras de pertenencia al *Grupo*. Un análisis de regresión lineal nos ofrece el mismo resultado que la prueba ANOVA. Compruebe la diferencia existente entre la salida del modelo de regresión lineal con las variables indicadoras:
 
 ```{r}
-ajuste <- df %>% lm(Diferencia ~ gr1 + gr2, data=.) 
-tab_model(ajuste,show.se = TRUE) %>% return() %$% 
-    knitr %>% 
-    asis_output()
+df %>% lm(Diferencia ~ gr1 + gr2, data=.) %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
 ```
 y la salida del modelo ANOVA de un factor:
 
 ```{r}
-modelo1 <- df %>% lm(Diferencia ~ Grupo, data=.) 
-modelo1 %>% tab_model(show.se = TRUE) %>% return() %$% 
-    knitr %>% 
-    asis_output()
+modelo1=df %>% lm(Diferencia ~ Grupo, data=.) 
+modelo1 %>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
 ```
 Realmente las dos formas de escribir el análisis han hecho exactamente lo mismo internamente.
 
@@ -207,10 +176,9 @@ Podemos refinar el estudio del siguiente modo:
 El resultado del análisis sería:
 
 ```{r}
-modelo2 <- df %>% lm(Diferencia ~ Grupo+Antes, data=.)
-modelo2 %>%  tab_model(show.se = TRUE) %>% return() %$% 
-    knitr %>% 
-    asis_output()
+modelo2=df %>% lm(Diferencia ~ Grupo+Antes, data=.) 
+
+modelo2%>% model_parameters(show.se = TRUE,summary = TRUE) %>% print_html()
 ```
 
 Obsérvese que al mejorar $R^2$ hemos obtenido un mejor modelo explicativo, independientemente de que nos interese o no la significación de la nueva variable introducida. En ocasiones es útil mostrar una comparativa entre varios modelos. La forma que se suele dar a la tabla para compararlos es la siguiente:
@@ -220,9 +188,7 @@ Obsérvese que al mejorar $R^2$ hemos obtenido un mejor modelo explicativo, inde
 
 
 ```{r}
-tab_model(modelo1, modelo2,show.se = FALSE,show.aic = TRUE) %>% return() %$% 
-    knitr %>% 
-    asis_output()
+tab_model(modelo1, modelo2,show.se = FALSE,show.aic = TRUE) %>% .[["knitr"]] %>% asis_output()
 ```
 
 Podríamos interpretar que el segundo modelo es preferible al primero. Tiene no solo mejor $R^2$ (cuanto más alto, mejor), si no que otro indicador, **AIC** (*Akaike Information Criteria*), tiene un valor más bajo (cuanto más bajo, mejor a la hora de decidir entre múltiples modelos).

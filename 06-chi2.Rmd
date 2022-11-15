@@ -1,19 +1,4 @@
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-	echo = TRUE,
-	message = FALSE,
-	warning = FALSE
-)
-
-if (!require("pacman")) install.packages("pacman")
-pacman::p_load("tidyverse", "ggplot2", "haven", "bookdown", "knitr", "kableExtra","stargazer", "tableone","sjPlot","sjlabelled","sjmisc","gridExtra","emmeans","sjstats", "ggmosaic" )
-options(stringsAsFactors=F,digits=2)
-source("tablasDeArticulo_v2.R")
-theme_set(theme_minimal())
-```
-
-
-#Independencia de variables categóricas
+# Independencia de variables categóricas
 Las tablas de contingencia se utilizan para examinar la relación entre dos variables categóricas, o bien explorar la distribución que posee una variable categórica entre diferentes muestras.
 
 Hay diferentes cuestiones que surgen al examinar una tabla de contingencia, y en este tema vamos a tratar la cuestión de la independencia. 
@@ -22,7 +7,7 @@ La independencia de dos variables consiste en que la distribución de una de las
 
 La prueba de independencia $\chi^2$ (chi-cuadrado) contrasta la hipótesis de que las variables son independientes, frente a la hipótesis alternativa de que una variable se distribuye de modo diferente para diversos niveles de la otra.
 
-###Ejemplo:Prioridades en niños y sexo {-}
+### Ejemplo:Prioridades en niños y sexo {-}
 Vamos a usar la base de datos [coolKids.sav](datos/coolKids.sav) donde se recogen las respuestas de unos escolares de 10 a 12 años a los que se les preguntó, entre otras cosas, a qué daban más prioridad de entre tres posibilidades: Tener buenas notas, destacar en los deportes o ser popular entre los compañeros. Examinemos las primeras líneas de la base de datos:
 
  

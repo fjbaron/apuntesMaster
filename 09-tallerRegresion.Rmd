@@ -1,0 +1,287 @@
+
+
+
+# Taller de regresión lineal {-}
+
+En los siguientes problemas vamos a utilizar unas bases de datos simuladas, donde en cada base ocurre algo especial que debemos intentar visualizar y modelar de forma convenienteusando **regresión lineal múltiple**. En todos los casos suponemos que tenemos una base de datos de niños, donde se ha recogido el sexo con una variable que indica con el valor 1 a las mujeres (0 para los Hombres), *Edad* y *Talla*. Nuestra intención es ver como el sexo y la edad explican la talla.
+
+
+#### Ejemplo 1 {-}
+Descargue la base de datos
+[regresion-030-1.sav](datos/regresion-030-1.sav) y exploramos las primeras líneas:
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+df=read_sav("datos/regresion-030-1.sav", user_na=FALSE) %>% haven::as_factor() %>% 
+  mutate(Sexo=Mujer) %>% select(Sexo,Edad,Talla)
+```
+```{r}
+df %>% head()  %>% knitr::kable(booktabs=T)
+```
+Antes de comenzar a analizar los datos hacemos una representación gráfica del contenido de la base de datos:
+```{r}
+ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()
+```
+A simple vista, los individuos parecen tener mas talla con la edad sin importar el sexo, aunque por otro lado se observa que los varones son más jóvenes y pequeños, y las mujeres son de más edad y altas. Tenemos que hay confusión entre el sexo y la edad para explicar la talla. Si estudiamos de forma simple como el sexo explica la talla, tendríamos que las mujeres, sin tener en cuenta otra cosa son más altas que los hombres:
+
+```{r}
+ggplot(df, aes(x=Sexo, y=Talla))+geom_boxplot()
+```
+La causa de este resultado es no haber tenido en cuenta el ajuste por Edad en el analisis. ¿Cuál de los siguientes modelos le parece más interesante para describir la Altura de los niños?
+
+```{r}
+dfAumentado <- broom::augment(lm(Talla ~ Edad+Sexo,data=df))
+plot_SoloSexo=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE,formula = y ~ 1)+ggtitle("(1) Talla ~ Sexo")+ guides(color=FALSE,shape=FALSE)
+plot_SoloEdad=ggplot(df, aes(x=Edad,y=Talla))+geom_point(aes(shape=Sexo,color=Sexo))+
+  geom_smooth(method = "lm",se=FALSE)+ggtitle("(2) Talla ~ Edad")+ guides(color=FALSE,shape=FALSE)
+plot_SexoEdad=ggplot(dfAumentado, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_line(aes(y = .fitted))+ggtitle("(3) Talla ~ Sexo+Edad")+ guides(color=FALSE,shape=FALSE)
+plot_Interaccion=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE) +ggtitle("(4) Talla ~ Sexo+Edad+ Sexo:Edad")+ guides(color=FALSE,shape=FALSE)
+grid.arrange(plot_SoloSexo,plot_SoloEdad,plot_SexoEdad,plot_Interaccion)
+```
+
+Los cuatro modelos de regresión respectivos son:
+
+- **Modelo 1:** La talla sólo depende del sexo.
+
+- **Modelo 2:** La talla sólo depende de la altura (mi favorito, por su simplicidad).
+
+- **Modelo 3** La talla depende de la altura, y hay un pequeño efecto debido al sexo. las dos líneas son paralelas, siendo la distancia vertical entre ambas el efecto estimado atribuible al sexo.
+
+- **Modelo 4** La talla depende de la altura para cada sexo, con rectas que no tienen por qué ser paralelas. Se ajusta la recta dentro de cada grupo. Esto es equivalente a considerar que hay un término de interacción que permite que cada recta tenga pendientes diferentes. Este modelo parece demasiado complicado.
+
+El análisis de estos modelos lo encontramos en la siguiente tabla:
+
+```{r}
+modeloSexo <- df %>% lm(Talla ~ Sexo, data=.)
+modeloEdad <- df %>% lm(Talla ~ Edad, data=.)
+modeloSexoEdad <- df %>% lm(Talla ~ Sexo+Edad, data=.)
+modeloInteraccion <- df %>% lm(Talla ~ Sexo*Edad, data=.)
+tab_model(modeloSexo, modeloEdad,show.se = TRUE,show.ci = FALSE,show.aic = TRUE) %>% .[["knitr"]] %>% 
+    asis_output()
+```
+
+
+```{r}
+tab_model(modeloSexoEdad,modeloInteraccion,show.se = TRUE,show.ci = FALSE,show.aic = TRUE) %>% .[["knitr"]] %>% 
+    asis_output()
+```
+
+El primer modelo, es el menos adecuado. Es el de menor $R^2$, y atribuye un efecto significativo poramente al sexo, cuando en todos los demás modelos en que se incluye la edad, el sexo no tiene efecto significativo. Lo que vemos es debido al efecto confusor de la edad, que no ha sido tenido en cuenta.
+
+El segundo modelo es el que tomaría como más adecuado por su parsimonia. Es simple y parece una buena simplificación de las observaciones. La bondad de ajuste $R^2$ es prácticamente tan buena como se puede conseguir, y tiene el menor AIC. La única variable de la que depende (edad) el modelo tiene un efecto estadísticamente significativo.
+
+El tercer modelo posee el mayor $R2$ ajustado. Nos indica que la edad tiene efecto significativo en la talla, y que el sexo no tiene efecto significativo en la talla. Si queremos estudiar qué efecto tiene la edad en la talla, *descontando/ajustando/teniendo en cuenta* el sexo, es el modelo a utilizar.
+
+
+El cuarto modelo es demasiado complicado. Atendiendo al criterio de $R^2$, parece el mejor, pero eso es lógico ya que contiene a todas las variables explicativas y además su interacción. La reducción de $R^2$ ajustado con respecto al tercer modelo, así como el aumento en AIC, y la falta de significación del término de interacción de Sexo con Edad, nos invitan a abandonarlo. En caso de querer un modelo complejo, el tercero es lo suficientemente complejo.
+
+
+#### Ejemplo 2 {-}
+Descargue la base de datos
+[regresion-200-1.sav](datos/regresion-200-1.sav), que contiene datos similares al anterior, pero ahora la muestra está formada por 200 individuos. ¿No cree que el segundo modelo es el más adecuado?
+
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+df=read_sav("datos/regresion-200-1.sav", user_na=FALSE) %>% haven::as_factor() %>% 
+  mutate(Sexo=Mujer) %>% select(Sexo,Edad,Talla)
+```
+
+
+```{r}
+dfAumentado <- broom::augment(lm(Talla ~ Edad+Sexo,data=df))
+plot_SoloSexo=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE,formula = y ~ 1)+ggtitle("(1) Talla ~ Sexo")+ guides(color=FALSE,shape=FALSE)
+plot_SoloEdad=ggplot(df, aes(x=Edad,y=Talla))+geom_point(aes(shape=Sexo,color=Sexo))+
+  geom_smooth(method = "lm",se=FALSE)+ggtitle("(2) Talla ~ Edad")+ guides(color=FALSE,shape=FALSE)
+plot_SexoEdad=ggplot(dfAumentado, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_line(aes(y = .fitted))+ggtitle("(3) Talla ~ Sexo+Edad")+ guides(color=FALSE,shape=FALSE)
+plot_Interaccion=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE) +ggtitle("(4) Talla ~ Sexo+Edad+ Sexo:Edad")+ guides(color=FALSE,shape=FALSE)
+grid.arrange(plot_SoloSexo,plot_SoloEdad,plot_SexoEdad,plot_Interaccion)
+```
+
+
+```{r}
+modeloSexo <- df %>% lm(Talla ~ Sexo, data=.)
+modeloEdad <- df %>% lm(Talla ~ Edad, data=.)
+modeloSexoEdad <- df %>% lm(Talla ~ Sexo+Edad, data=.)
+modeloInteraccion <- df %>% lm(Talla ~ Sexo*Edad, data=.)
+tab_model(modeloSexo, modeloEdad,show.se = TRUE,show.ci = FALSE,show.aic = TRUE) %>% .[["knitr"]] %>% 
+    asis_output()
+```
+
+
+```{r}
+tab_model(modeloSexoEdad,modeloInteraccion,show.se = TRUE,show.ci = FALSE,show.aic = TRUE) %>% .[["knitr"]] %>% 
+    asis_output()
+```
+
+#### Ejemplo 3 {-}
+Descargue la base de datos
+[regresion-030-2.sav](datos/regresion-030-2.sav). En este caso tenemos niños que a igualdad de edad suelen ser más altos que las niñas. En ambos sexos, se crece con la edad a un ritmo similar. ¿Qué modelo cree que es más adecuado utilizar?
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+df=read_sav("datos/regresion-030-2.sav", user_na=FALSE) %>% haven::as_factor() %>% 
+  mutate(Sexo=Mujer) %>% select(Sexo,Edad,Talla)
+```
+
+
+```{r}
+dfAumentado <- broom::augment(lm(Talla ~ Edad+Sexo,data=df))
+plot_SoloSexo=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE,formula = y ~ 1)+ggtitle("(1) Talla ~ Sexo")+ guides(color=FALSE,shape=FALSE)
+plot_SoloEdad=ggplot(df, aes(x=Edad,y=Talla))+geom_point(aes(shape=Sexo,color=Sexo))+
+  geom_smooth(method = "lm",se=FALSE)+ggtitle("(2) Talla ~ Edad")+ guides(color=FALSE,shape=FALSE)
+plot_SexoEdad=ggplot(dfAumentado, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_line(aes(y = .fitted))+ggtitle("(3) Talla ~ Sexo+Edad")+ guides(color=FALSE,shape=FALSE)
+plot_Interaccion=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE) +ggtitle("(4) Talla ~ Sexo+Edad+ Sexo:Edad")+ guides(color=FALSE,shape=FALSE)
+grid.arrange(plot_SoloSexo,plot_SoloEdad,plot_SexoEdad,plot_Interaccion)
+```
+
+
+```{r}
+modeloSexo <- df %>% lm(Talla ~ Sexo, data=.)
+modeloEdad <- df %>% lm(Talla ~ Edad, data=.)
+modeloSexoEdad <- df %>% lm(Talla ~ Sexo+Edad, data=.)
+modeloInteraccion <- df %>% lm(Talla ~ Sexo*Edad, data=.)
+tab_model(modeloSexo, modeloEdad,show.se = TRUE,show.ci = FALSE,show.aic = TRUE)%>% .[["knitr"]] %>% 
+    asis_output()
+```
+
+
+```{r}
+tab_model(modeloSexoEdad,modeloInteraccion,show.se = TRUE,show.ci = FALSE,show.aic = TRUE) %>% .[["knitr"]] %>% 
+    asis_output()
+```
+
+
+
+
+
+#### Ejemplo 4 {-}
+Descargue la base de datos
+[regresion-200-2.sav](datos/regresion-200-2.sav). Es como el anterior, pero con una muestra mucho mayor. Observe como con el aumento del tamaño de muestra se reducen los errores estándar/típicos de estimación de los parámetros, lo que puede ofrecer unos *p* más pequeños eventualmente, pero nada más cambia notablemente.
+
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+df=read_sav("datos/regresion-200-2.sav", user_na=FALSE) %>% haven::as_factor() %>% 
+  mutate(Sexo=Mujer) %>% select(Sexo,Edad,Talla)
+```
+
+
+```{r}
+dfAumentado <- broom::augment(lm(Talla ~ Edad+Sexo,data=df))
+plot_SoloSexo=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE,formula = y ~ 1)+ggtitle("(1) Talla ~ Sexo")+ guides(color=FALSE,shape=FALSE)
+plot_SoloEdad=ggplot(df, aes(x=Edad,y=Talla))+geom_point(aes(shape=Sexo,color=Sexo))+
+  geom_smooth(method = "lm",se=FALSE)+ggtitle("(2) Talla ~ Edad")+ guides(color=FALSE,shape=FALSE)
+plot_SexoEdad=ggplot(dfAumentado, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_line(aes(y = .fitted))+ggtitle("(3) Talla ~ Sexo+Edad")+ guides(color=FALSE,shape=FALSE)
+plot_Interaccion=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE) +ggtitle("(4) Talla ~ Sexo+Edad+ Sexo:Edad")+ guides(color=FALSE,shape=FALSE)
+grid.arrange(plot_SoloSexo,plot_SoloEdad,plot_SexoEdad,plot_Interaccion)
+```
+
+
+```{r}
+modeloSexo <- df %>% lm(Talla ~ Sexo, data=.)
+modeloEdad <- df %>% lm(Talla ~ Edad, data=.)
+modeloSexoEdad <- df %>% lm(Talla ~ Sexo+Edad, data=.)
+modeloInteraccion <- df %>% lm(Talla ~ Sexo*Edad, data=.)
+tab_model(modeloSexo, modeloEdad,show.se = TRUE,show.ci = FALSE,show.aic = TRUE) %>% .[["knitr"]] %>% 
+    asis_output()
+```
+
+
+```{r}
+tab_model(modeloSexoEdad,modeloInteraccion,show.se = TRUE,show.ci = FALSE,show.aic = TRUE) %>% .[["knitr"]] %>% 
+    asis_output()
+```
+
+
+#### Ejemplo 5 {-}
+Descargue la base de datos
+[regresion-020-3.sav](datos/regresion-020-3.sav). En este caso tenemos niños y niñas que hacia los 10 años tienen la misma talla, pero de ahí en adelante, los niños crecen a un ritmo mayor que las niñas (aunque es dificil apreciar dicho efecto con muestras pequeñas) ¿Qué modelo cree que lo refleja mejor?
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+df=read_sav("datos/regresion-020-3.sav", user_na=FALSE) %>% haven::as_factor() %>% 
+  mutate(Sexo=Mujer) %>% select(Sexo,Edad,Talla)
+```
+
+
+```{r}
+dfAumentado <- broom::augment(lm(Talla ~ Edad+Sexo,data=df))
+plot_SoloSexo=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE,formula = y ~ 1)+ggtitle("(1) Talla ~ Sexo")+ guides(color=FALSE,shape=FALSE)
+plot_SoloEdad=ggplot(df, aes(x=Edad,y=Talla))+geom_point(aes(shape=Sexo,color=Sexo))+
+  geom_smooth(method = "lm",se=FALSE)+ggtitle("(2) Talla ~ Edad")+ guides(color=FALSE,shape=FALSE)
+plot_SexoEdad=ggplot(dfAumentado, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_line(aes(y = .fitted))+ggtitle("(3) Talla ~ Sexo+Edad")+ guides(color=FALSE,shape=FALSE)
+plot_Interaccion=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE) +ggtitle("(4) Talla ~ Sexo+Edad+ Sexo:Edad")+ guides(color=FALSE,shape=FALSE)
+grid.arrange(plot_SoloSexo,plot_SoloEdad,plot_SexoEdad,plot_Interaccion)
+```
+
+
+```{r}
+modeloSexo <- df %>% lm(Talla ~ Sexo, data=.)
+modeloEdad <- df %>% lm(Talla ~ Edad, data=.)
+modeloSexoEdad <- df %>% lm(Talla ~ Sexo+Edad, data=.)
+modeloInteraccion <- df %>% lm(Talla ~ Sexo*Edad, data=.)
+tab_model(modeloSexo, modeloEdad,show.se = TRUE,show.ci = FALSE,show.aic = TRUE) %>% .[["knitr"]] %>% 
+    asis_output()
+```
+
+
+```{r}
+tab_model(modeloSexoEdad,modeloInteraccion,show.se = TRUE,show.ci = FALSE,show.aic = TRUE) %>% .[["knitr"]] %>% 
+    asis_output()
+```
+
+
+
+
+
+
+
+#### Ejemplo 6{-}
+Descargue la base de datos
+[regresion-200-3.sav](datos/regresion-200-3.sav). Como el ejemplo anterior, pero usando muestras grandes, donde es más fácil apreciar las interacciones. ¿Que ve que haya cambiado con respecto al ejemplo anterior?
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+df=read_sav("datos/regresion-200-3.sav", user_na=FALSE) %>% haven::as_factor() %>% 
+  mutate(Sexo=Mujer) %>% select(Sexo,Edad,Talla)
+```
+
+
+```{r}
+dfAumentado <- broom::augment(lm(Talla ~ Edad+Sexo,data=df))
+plot_SoloSexo=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE,formula = y ~ 1)+ggtitle("(1) Talla ~ Sexo")+ guides(color=FALSE,shape=FALSE)
+plot_SoloEdad=ggplot(df, aes(x=Edad,y=Talla))+geom_point(aes(shape=Sexo,color=Sexo))+
+  geom_smooth(method = "lm",se=FALSE)+ggtitle("(2) Talla ~ Edad")+ guides(color=FALSE,shape=FALSE)
+plot_SexoEdad=ggplot(dfAumentado, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_line(aes(y = .fitted))+ggtitle("(3) Talla ~ Sexo+Edad")+ guides(color=FALSE,shape=FALSE)
+plot_Interaccion=ggplot(df, aes(x=Edad,y=Talla,shape=Sexo,color=Sexo))+geom_point()+
+  geom_smooth(method = "lm",se=FALSE) +ggtitle("(4) Talla ~ Sexo+Edad+ Sexo:Edad")+ guides(color=FALSE,shape=FALSE)
+grid.arrange(plot_SoloSexo,plot_SoloEdad,plot_SexoEdad,plot_Interaccion)
+```
+
+
+```{r}
+modeloSexo <- df %>% lm(Talla ~ Sexo, data=.)
+modeloEdad <- df %>% lm(Talla ~ Edad, data=.)
+modeloSexoEdad <- df %>% lm(Talla ~ Sexo+Edad, data=.)
+modeloInteraccion <- df %>% lm(Talla ~ Sexo*Edad, data=.)
+tab_model(modeloSexo, modeloEdad,show.se = TRUE,show.ci = FALSE,show.aic = TRUE) %>% .[["knitr"]] %>% 
+    asis_output()
+```
+
+
+```{r}
+tab_model(modeloSexoEdad,modeloInteraccion,show.se = TRUE,show.ci = FALSE,show.aic = TRUE)%>% .[["knitr"]] %>% 
+    asis_output()
+```

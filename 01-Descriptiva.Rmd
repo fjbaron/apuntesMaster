@@ -1,25 +1,5 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-	echo = TRUE,
-	message = FALSE,
-	warning = FALSE
-)
-
-if (!require("pacman")) install.packages("pacman")
-pacman::p_load("tidyverse", "ggplot2", "haven", "bookdown", "knitr", "kableExtra","stargazer", "tableone","sjPlot","sjlabelled","sjmisc","gridExtra" )
-options(stringsAsFactors=F,digits=2)
-source("tablasDeArticulo_v2.R")
-theme_set(theme_minimal())
-
-```
-# Capítulo 1: Exploración de los datos
+# Exploración de los datos
 
 
 
@@ -41,15 +21,15 @@ df %>% head() %>% select(sexo:peso) %>% knitr::kable(booktabs=T)
 
 Siguiendo con la misma base de datos de pacientes, si recogemos, el peso de una persona es una cantidad numérica. En particular **continua** (los valores dentro de cualquier intervalo son posibles); Esto no ocurre cuando recogemos el *número de hijos*; Esta variable es **discreta**.
 
-###Datos categóricos
+### Datos categóricos
 Los datos categóricos los examinamos bien con tablas de frecuencias o con representaciones gráficas como diagramas de barras o de sectores.
 
 
-####Frecuencias y porcentajes
+#### Frecuencias y porcentajes
 Las frecuencias pueden obtenerse en términos absolutos (frecuencias absolutas), mostrando las repeticiones de cada categoría, o bien en términos relativos (porcentajes), mostrando los participación de cada categoría en relación con el total. Las frecuencias absolutas se utilizan con muestras de tamaño pequeño, y las relativas tienen más sentido con muestras de tamaño grande.
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, results=FALSE}
-tabla=KreateTableOne(vars=c("sexo","laboro", "nivelest", "tabaco",  "diabm"),data = df) 
+tabla=KreateTableOne(vars=c("sexo","laboral", "nivelest", "tabaco",  "diabm"),data = df) 
 ```
 ```{r}
 tabla  %>% knitr::kable()
@@ -63,15 +43,15 @@ Si las variables son categóricas ordinales (o numéricas) pueden sernos de inte
 
 
 
-####Diagrama de barras
+#### Diagrama de barras
 El diagrama de barras se representa asignándole a cada modalidad de la variable una barra de una altura proporcional a su frecuencia absoluta o a su porcentaje. En ambos casos el gráfico es el mismo, sólo se modifica la escala.
 
 ```{r fig.height=10,fig.width=10}
-grid.arrange(sjp.frq(df$sexo),  sjp.frq(df$laboro) , sjp.frq(df$nivelest), sjp.frq(df$diabm),ncol=2)
+grid.arrange(plot_frq(df$sexo),  plot_frq(df$laboral) , plot_frq(df$nivelest), plot_frq(df$diabm),ncol=2)
 ```
 
 
-####Diagramas de sectores
+#### Diagramas de sectores
 En este diagrama se le asigna a cada valor un sector cuyo ángulo sea proporcional a su frecuencia. Se suele utilizar en datos categóricos nominales y no tanto en los ordinales (es menos clara de interpretar).
 
 ```{r}
@@ -93,7 +73,7 @@ Cuando se tiene una variable numérica, lo primero que nos puede interesar es al
 En múltiples ocasiones los datos presentan cierta distribución acampanada como la de la figura adjunta, denominada distribución normal. En estos casos con sólo dos medidas como son la media y la desviación típica tenemos resumida prácticamente toda la información contenida en las observaciones.
 
 ```{r}
-sjp.frq(df$talla, type = "hist", show.mean = TRUE,normal.curve = TRUE)
+plot_frq(df$talla, type = "hist", show.mean = TRUE,normal.curve = TRUE)
 ```
 
 
@@ -114,8 +94,8 @@ La media y la desviación muestral no tienen tanto interés cuando los datos pre
 
 ```{r}
 grid.arrange(
-sjp.frq(df$peso, type = "hist", show.mean = TRUE,normal.curve = TRUE)+coord_cartesian(xlim=c(40,160)),
-sjp.frq(df$peso, type = "boxplot", show.mean = TRUE,normal.curve = TRUE) + 
+plot_frq(df$peso, type = "hist", show.mean = TRUE,normal.curve = TRUE)+coord_cartesian(xlim=c(40,160)),
+plot_frq(df$peso, type = "boxplot", show.mean = TRUE,normal.curve = TRUE) + 
   coord_cartesian(ylim=c(40,160))+ coord_flip(), nrow=2)
 ```
 
@@ -188,7 +168,7 @@ Las medida mencionadas podemos calcularlas con SPSS en el menú “_Analizar –
 
 
 
-##Datos bivariantes
+## Datos bivariantes
 Si resumir la información de una variable es de por sí interesante, en investigación lo es mucho más el poner de manifiesto la posible relación entre dos de ellas:
 
 > ¿Hay relación entre el tabaco y el cáncer de pulmón? ¿Aumentando la dosis de un medicamento, mejoramos la respuesta? 
@@ -213,11 +193,11 @@ En la tabla anterior hay una columna denominada _p_ (**significación**) que ser
 En cuanto a la representación gráfica, podemos utilizar  el diagrama de barras apiladas o agrupadas, aunque en ellos no es inmediato apreciar las diferencias por sexos
 ```{r fig.height=15,fig.width=6}
 grid.arrange(
-sjp.grpfrq(df$tabaco, df$sexo,show.prc = FALSE),
-sjp.grpfrq(df$estcivil, df$sexo,,show.prc = FALSE),
-sjp.grpfrq(df$sedentar, df$sexo,show.prc = FALSE),
-sjp.grpfrq(df$diabm, df$sexo,show.prc = FALSE),
-sjp.grpfrq(df$hipercol, df$sexo,show.prc = FALSE),ncol=1)
+plot_grpfrq(df$tabaco, df$sexo,show.prc = FALSE),
+plot_grpfrq(df$estcivil, df$sexo,,show.prc = FALSE),
+plot_grpfrq(df$sedentar, df$sexo,show.prc = FALSE),
+plot_grpfrq(df$diabm, df$sexo,show.prc = FALSE),
+plot_grpfrq(df$hipercol, df$sexo,show.prc = FALSE),ncol=1)
 ```
  
 Desglosando en cada categoría de la variable los porcentajes de cada sexo es más sencillo de ver:
@@ -332,12 +312,5 @@ df %>% generaTablaCorrelaciones(vNumericas = c("edad","peso","talla","imc","pas"
   knitr::kable(booktabs=T)
  
 ```
-
-
-
-
-
-
-
 
 

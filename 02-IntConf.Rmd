@@ -1,24 +1,11 @@
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-	echo = TRUE,
-	message = FALSE,
-	warning = FALSE
-)
 
-if (!require("pacman")) install.packages("pacman")
-pacman::p_load("tidyverse", "ggplot2", "haven", "bookdown", "knitr", "kableExtra","stargazer", "tableone","sjPlot","sjlabelled","sjmisc","gridExtra" )
-options(stringsAsFactors=F,digits=2)
-source("tablasDeArticulo_v2.R")
-theme_set(theme_minimal())
 
-```
-
-#Estimación
+# Estimación
 
 En esta capítulo trataremos sobre como usar una muestra para obtener información sobre la población de la que se ha extraído. Esto nos conducirá a introducir los conceptos de **intervalo de confianza** y de **error típico** de estimación.
 
 
-##Intervalos de confianza
+## Intervalos de confianza
 
 Un problema habitual es el de estimar parámetros que ayuden a caracterizar una variable. Por ejemplo el porcentaje de individuos que mejora ante un cierto tratamiento, o el tiempo medio que tarda un anestésico en hacer efecto. 
 
@@ -54,7 +41,7 @@ Es fácil confundir desviación típica con error típico. Ambos hablan de la di
 >[Practique con la diferencia entre desviación típica y error típico](https://www.bioestadistica.uma.es/analisis/teoremacentral/)
 
 
-###Ejemplo de intervalos de confianza y errores estándar {-}
+### Ejemplo de intervalos de confianza y errores estándar {-}
 
 Se consideran dos grupos de individuos que desmpeñan un trabajo similar, pero que siguen una forma de alimentación muy diferente. Están formados por albañiles de Málaga y Tánger. Descargue la base de datos [2poblaciones-Mismotrabajo-DiferenteNutricion.sav](datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav). Las primeras líneas tienen el siguiente aspecto:
 

@@ -1,17 +1,13 @@
-bookdown::gitbook:
+bookdown::bs4_book:
   css: style.css
+  theme:
+    primary: "#096B72"
+  repo: https://github.com/fjbaron/apuntesMaster
   split_by: chapter
-  config:
-    toc:
-      collapse: subsection
-      before: |
-        <li><a href="./">Apuntes de estadística</a></li>
-      after: |
-        <li><a href="https://www.bioestadistica.uma.es" target="blank">Bioestadística-UMA</a></li>
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
   latex_engine: xelatex
   citation_package: natbib
-bookdown::epub_book:
-  stylesheet: style.css
+  keep_tex: yes
+bookdown::epub_book: default

@@ -1,19 +1,4 @@
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-	echo = TRUE,
-	message = FALSE,
-	warning = FALSE
-)
-
-if (!require("pacman")) install.packages("pacman")
-pacman::p_load("tidyverse", "ggplot2", "haven", "bookdown", "knitr", "kableExtra","stargazer", "tableone","sjPlot","sjlabelled","sjmisc","gridExtra","emmeans","sjstats","car", "gvlma" )
-options(stringsAsFactors=F,digits=2)
-source("tablasDeArticulo_v2.R")
-theme_set(theme_minimal())
-```
-
-
-#Diferencias que presenta una variable numérica entre varios grupos
+# Diferencias que presenta una variable numérica entre varios grupos
 
 En este capítulo vamos a generalizar las ideas del anterior, donde comparábamos las diferencias observadas en una variable en dos grupos, al caso de más grupos. De hecho, si aplicamos algunas de las técnicas que aquí veremos a sólo dos grupos, darían los mismos resultados que técnicas tratadas con anterioridad.
 
@@ -112,7 +97,7 @@ La más importante es la de igualdad de las varianzas. Para ello podemos prestar
 
 Otra condición que necesitamos para la validez de la prueba ANOVA es la de la normalidad en cada uno de los grupos, aunque indicábamos que esta condición no es tán crítica como la de  la igualdad de varianzas. Si la variable que medimos es un parámetro biológico, con frecuencia tiene sentido hacer un cambio de variable logarítmico, que habitualmente normaliza las observaciones e iguala varianzas.
 
-###Ejemplo paramétrico{-}
+### Ejemplo paramétrico{-}
 
 Se realizó un experimento para comparar tres métodos de aprendizaje de lectura. Se asignó aleatoriamente los estudiantes a cada uno de los tres métodos. Cada método fue probado con 22 estudiantes (experimento equilibrado). Se evaluó mediante diferentes pruebas la capacidad de comprensión de los estudiantes, antes y después de recibir la instrucción. Los resultados se recogen en la base de datos [lectura-anova.sav](datos/lectura-anova.sav), de la que exploramos las primeras líneas:
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
