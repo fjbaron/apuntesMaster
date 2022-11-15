@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 8 Regresión logística binaria | Apuntes de estadística</title>
+<meta name="author" content="Francisco Javier Barón López">
+<meta name="description" content="En ocasiones estamos interesados en conocer la influencia que una serie de variables tienen en una variable respuesta. Cuando la misma era numérica una herramienta que estaba a nuestra disposición...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Capítulo 8 Regresión logística binaria | Apuntes de estadística">
+<meta property="og:type" content="book">
+<meta property="og:description" content="En ocasiones estamos interesados en conocer la influencia que una serie de variables tienen en una variable respuesta. Cuando la misma era numérica una herramienta que estaba a nuestra disposición...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 8 Regresión logística binaria | Apuntes de estadística">
+<meta name="twitter:description" content="En ocasiones estamos interesados en conocer la influencia que una serie de variables tienen en una variable respuesta. Cuando la misma era numérica una herramienta que estaba a nuestra disposición...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Apuntes de estadística</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introducción</a></li>
+<li class="book-part">Curso estadística básica</li>
+<li><a class="" href="exploraci%C3%B3n-de-los-datos.html"><span class="header-section-number">1</span> Exploración de los datos</a></li>
+<li><a class="" href="estimaci%C3%B3n.html"><span class="header-section-number">2</span> Estimación</a></li>
+<li><a class="" href="contrastes-de-hip%C3%B3tesis.html"><span class="header-section-number">3</span> Contrastes de hipótesis</a></li>
+<li><a class="" href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-dos-grupos.html"><span class="header-section-number">4</span> Diferencias que presenta una variable numérica entre dos grupos</a></li>
+<li><a class="" href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-varios-grupos.html"><span class="header-section-number">5</span> Diferencias que presenta una variable numérica entre varios grupos</a></li>
+<li><a class="" href="independencia-de-variables-categ%C3%B3ricas.html"><span class="header-section-number">6</span> Independencia de variables categóricas</a></li>
+<li class="book-part">Curso estadística avanzada</li>
+<li><a class="" href="regresi%C3%B3n-lineal-m%C3%BAltiple.html"><span class="header-section-number">7</span> Regresión lineal múltiple</a></li>
+<li><a class="active" href="regresi%C3%B3n-log%C3%ADstica-binaria.html"><span class="header-section-number">8</span> Regresión logística binaria</a></li>
+<li><a class="" href="taller-de-regresi%C3%B3n-lineal.html">Taller de regresión lineal</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/fjbaron/apuntesMaster">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="regresión-logística-binaria" class="section level1" number="8">
+<h1>
+<span class="header-section-number">Capítulo 8</span> Regresión logística binaria<a class="anchor" aria-label="anchor" href="#regresi%C3%B3n-log%C3%ADstica-binaria"><i class="fas fa-link"></i></a>
+</h1>
+<p>En ocasiones estamos interesados en conocer la influencia que una serie de variables tienen en una variable respuesta. Cuando la misma era numérica una herramienta que estaba a nuestra disposición era la regresión múltiple. Pero, ¿qué podemos hacer cuando la respuesta es dicotómica? Por ejemplo, ¿qué podemos hacer si la respuesta observada es el desarrollo o no de una enfermedad?</p>
+<p>Este tipo de sitiaciones aparecen de manera natural en investigaciones médicas. Citemos unos cuantos ejemplos:</p>
+<ul>
+<li><p>Se cree que la apnea del sueño obstructiva es un factor de riesgo para la hipertensión arterial. Podríamos reformularlo en lenguaje estadístico como que la variable independiente padecer apnea obstructiva del sueño, está asociado (es factor de riesgo) para el la ocurrencia del evento hipertensión arterial.</p></li>
+<li><p>Se cree que la intervención por laparoscopia para tratar la hernia de hiato ofrece menor riesgo de complicaciones postoperatorias que otra técnica tradicional. La variable respuesta sería padecer complicaciones (sí o no), y la variable independiente sería el tipo de operación.</p></li>
+<li><p>Se cree que fumar es un factor de riesgo para la muerte fetal tardía. Esto se podría formular de varias maneras:</p></li>
+<li><p>Podemos considerar una variable independiente que es la “madre fuma” (sí o no) y una variable respuesta (dependiente) que es el “feto muere” (sí o no). Nos interesará evaluar cuánto aumenta el riesgo de que se pruduzca el evento de interés (muerte del feto) cuando está presente el factor de riesgo (la madre fuma).</p></li>
+<li><p>Otra aproximación podría ser considerar como variable numérica “número medio de cigarrillos que fuma la madre”. En este caso nos puede interesar estimar cuánto aumenta el riesgo de muerte del feto, por cada cigarrilo adicional que fuma la madre diariamente.</p></li>
+<li><p>Si el aumento del riesgo (se evalúe como se evalúe) no parece tener una tendencia constante con el número de cigarrillos, sino que mas bién se puede dividir a las madres en tres categorías “No fuma”, “Fuma poco”, “Fuma mucho”, nos interesará evaluar cómo aumenta el riesgo en las dos últimas categorías con respecto a las madres del primer grupo (grupo de control, o de referencia).</p></li>
+</ul>
+<p>El <strong>modelo de regresión logística binaria</strong> es muy útil para abordar este tipo de cuestiones bajo la condición de que hayamos tenido en cuenta al realizar el estudio todas las variables importantes para explicar la variable respuesta, y que hagamos el estudio con una muestra suficientemente numerosa y bien distribuida.</p>
+<p>Antes de pasar directamente al modelo de regresión logística vamos a refrescar rápidamente una serie de conceptos relacionados con la comparaciones de riesgos.</p>
+<div id="riesgo-oportunidad-riesgo-relativo-y-odds-ratio" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Riesgo, Oportunidad, Riesgo Relativo y Odds Ratio<a class="anchor" aria-label="anchor" href="#riesgo-oportunidad-riesgo-relativo-y-odds-ratio"><i class="fas fa-link"></i></a>
+</h2>
+<p>En medicina es frecuente encontrar todos estos términos. Vamos a repasarlos pues será necesario manejarlos con cierta soltura en el resto del capítulo.</p>
+<blockquote>
+<p><a href="https://www.bioestadistica.uma.es/app/oddsratio/">Aquí tiene un simulador para practicar con <strong>Odds Ratio</strong></a></p>
+</blockquote>
+<p>En 1 de cada 200 nacimientos ocurre un parto gemelar. Por tanto la probabilidad o riesgo de que elegido un embarazo al azar éste de lugar a gemelos es de <span class="math inline">\(R_1=1/200\)</span>. Esto es simplemente, el número de casos en que el evento ocurre dividido por el total de casos.</p>
+<p>Hay otra forma de decir lo mismo, que seguramente ha sido tomada del lenguaje usado por los anglosajones en las apuestas. Consiste en la <em>oportunidad/ventaja</em> (del inglés <em>odds</em>). Podemos decir que de 200 partos, 1 es gemelar y 199 no lo son. Las apuestas están 1 a 199. Se denomina oportunidad a la cantidad <span class="math inline">\(O_1=1/199\)</span>, es decir, el número de casos en los que el evento ocurre dividido por el número de casos en que no ocurre. En el fondo es sólo una manera anglosajona de decir lo mismo que con probabilidades. Hasta aquí no hay nada especial.</p>
+<p>Compliquemos la cosa un poquito, introduciendo un factor de riesgo. Se observó que entre las mujeres que han tomado ácido fólico para disminuir la probabilidad de espina bífida en sus hijos, ocurrió algo no esperado: 3 de cada 200 partos eran gemelares.
+Esto corresponde a un riesgo de <span class="math inline">\(R_2=3/200\)</span>, o si lo preferimos, a una oportunidad (odds) de 3 a 197, <span class="math inline">\(O_2=3/197\)</span>.</p>
+<p>¿Cómo podemos expresar numéricamente el aumento del riesgo de embarazo gemelar? Hay dos maneras. Una de ellas es más fácil de entender, y la otra tiene mejores propiedades matemáticas.</p>
+<ul>
+<li><p><strong>Riesgo Relativo (RR)</strong>: Este es el más simple de entender. Claramente el riesgo ha aumentado por 3, lo que corresponde a un <strong>Riesgo Relativo</strong> (<em>RR</em>) que es el cociente entre el riesgo de los embarazos expuestos al ácido fólico (factor de riesgo) y los que no han sido expuestos,
+<span class="math display">\[RR =  \frac{R_2}{R_1} =  \frac{3/200}{1/200} = 3\]</span></p></li>
+<li><p><strong>Odds Ratio (OR)</strong>: En español se traduce a veces en textos académicos como <em>Oportunidad Relativa</em> o <em>Razón de Ventajas</em>, aunque en las publicaciones aparece más frecuentemente con el término inglés. Es parecido al <em>RR</em>, pero usando oportunidades (odds). Es el cociente entre la oportunidad de los embarazos expuestos al ácido fólico (factor de riesgo) y los que no han sido expuestos,</p></li>
+</ul>
+<p><span class="math display">\[OR = \frac{O_2}{O_1} =  \frac{3/197}{1/199} = 3.03\]</span></p>
+<p>Desde luego no es tan fácil de interpretar una <em>OR</em> como lo es un <em>RR</em>, aunque en este caso poseen valores muy similares. Esto ocurre siempre que la probabilidad de que ocurra un evento sea cercana a cero, como en el caso de un embarazo gemelar. Cuando las probabilidades del evento no son cercanas a cero, ambas cantidades no son iguales y hay que tener cuidado con no confundirlas.</p>
+<p>Tanto para <em>OR</em> como <em>RR</em>, tenemos las siguientes propiedades:</p>
+<ul>
+<li><p>Un valor de <span class="math inline">\(OR=1\)</span> se interpreta como que no hay tal factor de riesgo, ya que la oportunidad para los expuestos es la misma que para los no expuestos.</p></li>
+<li><p>En epidemiología es frecuente intentar localizar factores dañinos. Eso corresponde a buscar valores de <span class="math inline">\(OR \gt 1\)</span>. Se interpreta como qué se ha localizado un factor de riesgo, pues es mayor la oportunidad de que ocurra el evento a los expuestos al factor que a los controles.</p></li>
+<li><p>En los ensayos clínicos, se persigue encontrar tratamientos que reduzcan la frecuencia de un evento (por ejemplo, la muerte del enfermo). En este caso se buscan valores <span class="math inline">\(OR \lt 1\)</span>. Es decir, que sea menor la oportunidad de que ocurra el evento en los individuos expuestos al tratamiento que en los controles.</p></li>
+</ul>
+<p>Por otro lado <span class="math inline">\(OR\)</span> tiene muy buenas propiedades matemáticas:</p>
+<ul>
+<li><p><span class="math inline">\(OR\)</span> toma valores entre cero e infinito. Esto lo hace muy adecuado para ser modelado matemáticamente. Sobre todo si tomamos su logaritmo, ya que en ese caso cualquier valor es posible. El modelo que consideraremos posteriormente será el de regresión logística.</p></li>
+<li><p>El modelo logístico de regresión puede usarse para determinar intervalos de confianza para la <span class="math inline">\(OR\)</span>:</p></li>
+<li><p>Si dichos intervalos contienen al valor <span class="math inline">\(OR=1\)</span>, no puede rechazarse que el factor de riesgo (o el tratamiento) no sea tal.</p></li>
+<li><p>En otro caso decimos que aumenta o disminuye la oportunidad del evento en función de que el intervalo de confianza sea de valores mayores o menores que uno respectivamente.</p></li>
+<li><p>Cuando se evalúa la eficacia de una prueba diagnóstica es razonablemente simple conocer la sensibilidad y especificidad de la misma, pero los valores predictivos requieren del conocimiento de la prevalencia, que no está siempre disponible. Si realizamos un estudio caso-control, donde la prevalencia de la enfermedad es desconocida, aunque no podamos calcular índices predictivos, siempre podremos estimar la <span class="math inline">\(OR\)</span>. Si la enfermedad (el evento de interés) es rara, podemos considerarla como una aproximación del <span class="math inline">\(RR\)</span>, que tiene una interpretación muy natural.</p></li>
+</ul>
+</div>
+<div id="el-modelo-de-regresión-logística-binaria" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> El modelo de regresión logística binaria<a class="anchor" aria-label="anchor" href="#el-modelo-de-regresi%C3%B3n-log%C3%ADstica-binaria"><i class="fas fa-link"></i></a>
+</h2>
+<p>Si tenemos una variable que describe una respuesta en forma de dos posibles eventos (vivir o no, enfermar o no), y queremos estudiar el efecto que otras variables (independientes) tienen sobre ella (fumar, edad), el modelo de regresión logística binaria puede resultarnos de gran utilidad para:</p>
+<ul>
+<li><p>Dado los valores de las variables independientes, estimar la probabilidad de que se presente el evento de interés (por ejemplo, enfermar.)</p></li>
+<li><p>Podemos evaluar la influencia que cada variable independiente tiene sobre la respuesta, en forma de OR. Una OR mayor que uno indica aumento en la probabilidad del evento y OR menor que uno, implica disminución.</p></li>
+</ul>
+<p>Para construir un modelo de regresión logística binarianecesitamos:</p>
+<ul>
+<li><p>Un conjunto de variables independientes o predictoras, muy en el estilo de la regresión lineal múltiple.</p></li>
+<li><p>Una variable respuesta dicotómica. Aquí se diferencia del modelo de regresión múltiple, donde la variable respuesta era numérica.</p></li>
+</ul>
+<div id="codificación-de-las-variables" class="section level3" number="8.2.1">
+<h3>
+<span class="header-section-number">8.2.1</span> Codificación de las variables<a class="anchor" aria-label="anchor" href="#codificaci%C3%B3n-de-las-variables"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para simplificar la interpretación del análisis del modelo de regresión logística es conveniente llegar a cierto convenio en la codificación de las variables. Realmente compensa seguir las siguientes recomendaciones:</p>
+<ul>
+<li><p>En la variable dependiente se codifica como 1 la ocurrencia del evento de interés y como 0 la ausencia.</p></li>
+<li><p>Las variables independientes pueden ser varias y cada una de un tipo diferente. Analicemos cada caso:</p></li>
+<li><p>Caso dicotómico: Se codifica como 1 el caso que se cree favorece la ocurrencia del evento. Se codifica como 0 el caso contrario. Por ejemplo con 0 codificamos típicamente a los individuos no expuestos a un posible factor de riesgo (casos de referencia, controles), y como 1 a los expuestos.</p></li>
+<li><p>Caso categórico: Cuando la variable independiente puede tomar más de dos posibles valores podemos codificarlas usando variables indicadoras (dummy), como se hacía con el modelo de regresión lineal múltiple. Si estamos usando SPSS, el programa nos ayuda a hacerlo sobre la marcha (hay que indicar el diálogo de regresión logística qué variables son categóricas). Es necesario destacar una modalidad que represente al caso de referencia, y al que le corresponde la codificación con todas las variables indicadoras puestas a 0.</p></li>
+<li><p>Caso de variable numérica: pueden darse dos situaciones:
+ - Si creemos que por cada unidad que aumente la variable, la OR aumenta en un factor multiplicativo constante, podemos usar la variable tal cual en el modelo. Si tenemos dudas de que esto sea así, o no sepamos ni siquiera lo que significa la frase anterior, mejor olvidamos esta posibilidad y consideramos la siguiente;
+ - Si creemos que la variable numérica puede afectar a la respuesta, pero no tenemos muy claro de qué manera, podemos “categorizar” la variable. Esto consiste por ejemplo en estratificar la variable en valores pequeños, medianos y grandes. Los puntos de corte los podemos elegir nosotros manualmente, o usar cortes automáticos basados en que cada categoría tenga el mismo número de observaciones (usando percentiles). En SPSS la opción de menú “Transformar – Categorizador visual…” de SPSS nos puede ser de gran ayuda.</p></li>
+</ul>
+</div>
+<div id="requisitos-y-limitaciones-1" class="section level3" number="8.2.2">
+<h3>
+<span class="header-section-number">8.2.2</span> Requisitos y limitaciones<a class="anchor" aria-label="anchor" href="#requisitos-y-limitaciones-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Además de las mencionadas en cuanto a los criterios para codificar la variables debemos tener en cuenta muchas otras cuestiones para confiar en la validez del modelo. De entre ellas destacamos:</p>
+<ul>
+<li><p>Los parámetros del modelo se calculan usando una estimación de máxima verosimilitud. Estas sólo son válidas cuando para cada combinación de variables independientes tenemos un número suficientemente alto de observaciones. Si los parámetros estimados en el modelo son anormalmente grandes, posiblemente esta condición sea violada. Tal vez se solucione el problema agrupando categorías (donde tenga sentido).</p></li>
+<li><p>No debemos introducir variables innecesarias. Ver el punto anterior.</p></li>
+<li><p>Ninguna variable relevante debe ser excluida. Si identificamos variables confusoras, tengámoslas en cuenta introduciéndolas en el modelo o estratificando el estudio en submuestras.</p></li>
+<li><p>La colinealidad es un problema como ocurría en la regresión lineal múltiple. Si los errores típicos en la estimación de los coeficientes, o los intervalos de confianza son anormalmente grandes, es posible que esta situación se esté dando.</p></li>
+</ul>
+</div>
+<div id="interpretación-del-modelo" class="section level3" number="8.2.3">
+<h3>
+<span class="header-section-number">8.2.3</span> Interpretación del modelo<a class="anchor" aria-label="anchor" href="#interpretaci%C3%B3n-del-modelo"><i class="fas fa-link"></i></a>
+</h3>
+<p>El modelo de regresión logística puede escribirse como:</p>
+<p><span class="math display">\[\log(\frac{p}{1-p})=b_0 + b_1 x_1 +b_2 x_2+\dots\]</span>
+donde <span class="math inline">\(p\)</span> es la probabilidad (riesgo) de que ocurra el evento de interés, las variables independientes están representadas con la letra <span class="math inline">\(x\)</span>, y los coeficientes asociados a cada variable con la letra $b4. Tal vez con esa expresión el modelo no resulte muy elocuente, pero tras unas transformaciones, que nos mostramos para ahorrar espacio mostramos lo que resulta de mayor interés:</p>
+<p><span class="math display">\[
+p=\frac{e^{suma}}{1+e^{suma}}, \mbox{ siendo } suma=b_0 + b_1 x_1 +b_2 x_2+\dots
+\]</span></p>
+<ul>
+<li><p>Dado el valor de las variables independientes, podemos calcular directamente la estimación del riesgo de que ocurra el evento de interés:</p></li>
+<li><p>La oportunidad (odds) para los individuos donde todos <span class="math inline">\(x_i\)</span> vale cero es <span class="math inline">\(e^{b_0}\)</span>. En estudios caso-control, estos suelen ser los controles.</p></li>
+<li><p>Si nos fijamos en cualquier otro coeficiente del modelo, la cantidad <span class="math inline">\(e*{b_i}\)</span> coincide con la <strong>OR</strong> del aumento del valor de <span class="math inline">\(x_i\)</span> en una unidad con respecto a aquellos individuos que presentan los valores de todas las demás variables iguales. Si hemos seguido el criterio de codificación recomendado, y la variable de la que hablamos es dicotómica, esto corresponde a la <strong>OR</strong> del factor de riesgo <span class="math inline">\(x_i\)</span>. Si la variable es numérica como el número de bypass coronarios, estima la OR del factor de riesgo “tener un bypass más”.</p></li>
+</ul>
+<p>Hay mucho que interpretar en una salida de ordenador en un cálculo de regresión logística. Aquí vamos a mencionar sólo algunas de las que consideramos más interesantes en una primera aproximación:</p>
+<p>-Significación de cada coeficiente del modelo (basada en el estadístico de Wald): Ofrece el equivalente a la significación de los coeficientes de regresión lineal múltiple. Si una variable independiente resulta no significativa podemos considerar eliminarla del modelo (a menos que esté confundida con otra variable independiente significativa, claro está).
+La significación del estadístico de Wald para el coeficiente bi es la que corresponde a contrastar la hipótesis nula de que éste vale cero. O lo que es lo mismo que la OR asociada, exp(bi)=1, es decir, que la variable xi no es factor de riesgo y por ello podemos olvidarnos de ella a menos que la encontremos confundida con otra que sí lo sea.</p>
+<ul>
+<li>
+<span class="math inline">\(e^{b_i}=OR\)</span> estimada para la variable <span class="math inline">\(x_i\)</span>, donde <span class="math inline">\(b_i\)</span> Aparecen en la columna “B” de la salida de SPSS. Más interesante aún son los intervalos de confianza para la <span class="math inline">\(Exp(bi)=OR\)</span> (si hemos marcado la opción para que los calcule). Si no contienen al valor uno, es señal de que la variable es de interés en el modelo. Estadísticamente es lo mismo que lo mencionado en el punto anterior, pero de este modo tiene más significado clínico.</li>
+</ul>
+<blockquote>
+<p>Para interpretar un modelo de regresión logística binaria, siga el enlace: <a href="https://www.bioestadistica.uma.es/analisis/logistica/">https://www.bioestadistica.uma.es/analisis/logistica/</a></p>
+</blockquote>
+<p>El análisis con SPSS de la base de datos que descargaremos de allí (datos/regresionLogistica.sav)[datos/regresionLogistica.sav] lo haremos en el menú de SPSS: “Analizar - Regresión - Logística binaria”, colocando en el campo “Dependiente” la variable <em>Enfermedad</em>, y en las demás en el campo “Covariables”. Es conveniente pedir que se muestren los intervalos de confianza para Odds Ratios. Para ello en el botón “Opciones” marcamos “CI para exp(B)”. Los valores <em>Exp(B)</em> y sus intervalos de confianza en la tabla nos muestran las <em>OR</em>. También conviene marcar la casilla de cálculo de <em>Bondad de ajuste de Hosmer-Lemeshow</em>. Esta es una prueba que cuanto más alejado esté de la significación mejor indicador es de que el modelo de regresión logística no es es inadecuado para los datos.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="regresi%C3%B3n-lineal-m%C3%BAltiple.html"><span class="header-section-number">7</span> Regresión lineal múltiple</a></div>
+<div class="next"><a href="taller-de-regresi%C3%B3n-lineal.html">Taller de regresión lineal</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#regresi%C3%B3n-log%C3%ADstica-binaria"><span class="header-section-number">8</span> Regresión logística binaria</a></li>
+<li><a class="nav-link" href="#riesgo-oportunidad-riesgo-relativo-y-odds-ratio"><span class="header-section-number">8.1</span> Riesgo, Oportunidad, Riesgo Relativo y Odds Ratio</a></li>
+<li>
+<a class="nav-link" href="#el-modelo-de-regresi%C3%B3n-log%C3%ADstica-binaria"><span class="header-section-number">8.2</span> El modelo de regresión logística binaria</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#codificaci%C3%B3n-de-las-variables"><span class="header-section-number">8.2.1</span> Codificación de las variables</a></li>
+<li><a class="nav-link" href="#requisitos-y-limitaciones-1"><span class="header-section-number">8.2.2</span> Requisitos y limitaciones</a></li>
+<li><a class="nav-link" href="#interpretaci%C3%B3n-del-modelo"><span class="header-section-number">8.2.3</span> Interpretación del modelo</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/fjbaron/apuntesMaster/blob/master/08-regresionLogistica.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/fjbaron/apuntesMaster/edit/master/08-regresionLogistica.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Apuntes de estadística</strong>" was written by Francisco Javier Barón López. It was last built on 2022-11-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

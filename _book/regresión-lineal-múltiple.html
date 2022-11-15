@@ -1,0 +1,3036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 7 Regresión lineal múltiple | Apuntes de estadística</title>
+<meta name="author" content="Francisco Javier Barón López">
+<meta name="description" content="Utilizamos regresión lineal múltiple cuando estudiamos la posible relación entre varias variables independientes (predictoras o explicativas) y otra variable dependiente (criterio, explicada,...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Capítulo 7 Regresión lineal múltiple | Apuntes de estadística">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Utilizamos regresión lineal múltiple cuando estudiamos la posible relación entre varias variables independientes (predictoras o explicativas) y otra variable dependiente (criterio, explicada,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 7 Regresión lineal múltiple | Apuntes de estadística">
+<meta name="twitter:description" content="Utilizamos regresión lineal múltiple cuando estudiamos la posible relación entre varias variables independientes (predictoras o explicativas) y otra variable dependiente (criterio, explicada,...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Apuntes de estadística</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introducción</a></li>
+<li class="book-part">Curso estadística básica</li>
+<li><a class="" href="exploraci%C3%B3n-de-los-datos.html"><span class="header-section-number">1</span> Exploración de los datos</a></li>
+<li><a class="" href="estimaci%C3%B3n.html"><span class="header-section-number">2</span> Estimación</a></li>
+<li><a class="" href="contrastes-de-hip%C3%B3tesis.html"><span class="header-section-number">3</span> Contrastes de hipótesis</a></li>
+<li><a class="" href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-dos-grupos.html"><span class="header-section-number">4</span> Diferencias que presenta una variable numérica entre dos grupos</a></li>
+<li><a class="" href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-varios-grupos.html"><span class="header-section-number">5</span> Diferencias que presenta una variable numérica entre varios grupos</a></li>
+<li><a class="" href="independencia-de-variables-categ%C3%B3ricas.html"><span class="header-section-number">6</span> Independencia de variables categóricas</a></li>
+<li class="book-part">Curso estadística avanzada</li>
+<li><a class="active" href="regresi%C3%B3n-lineal-m%C3%BAltiple.html"><span class="header-section-number">7</span> Regresión lineal múltiple</a></li>
+<li><a class="" href="regresi%C3%B3n-log%C3%ADstica-binaria.html"><span class="header-section-number">8</span> Regresión logística binaria</a></li>
+<li><a class="" href="taller-de-regresi%C3%B3n-lineal.html">Taller de regresión lineal</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/fjbaron/apuntesMaster">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="regresión-lineal-múltiple" class="section level1" number="7">
+<h1>
+<span class="header-section-number">Capítulo 7</span> Regresión lineal múltiple<a class="anchor" aria-label="anchor" href="#regresi%C3%B3n-lineal-m%C3%BAltiple"><i class="fas fa-link"></i></a>
+</h1>
+<p>Utilizamos regresión lineal múltiple cuando estudiamos la posible relación entre varias variables independientes (predictoras o explicativas) y otra variable dependiente (criterio, explicada, respuesta).</p>
+<p>Por ejemplo, podemos estar interesados en saber cómo influyen en la presión arterial sistólica de un paciente el peso, la edad y el sexo, donde la variable sexo es una variable dicotómica (o indicadora), codificada como 0 para las mujeres y 1 para los hombres.</p>
+<p>La técnica de regresión múltiple se usa frecuentemente en investigación. Se aplica al caso en que la variable respuesta es de tipo numérico. Cuando la respuesta es de tipo dicotómico (muere/vive, enferma/no enferma), usamos otra técnica denominada regresión logística y que tratamos en un capítulo posterior.</p>
+<div id="ejemplo-2" class="section level4 unnumbered">
+<h4>Ejemplo<a class="anchor" aria-label="anchor" href="#ejemplo-2"><i class="fas fa-link"></i></a>
+</h4>
+<p>Descargamos la base de datos que hemos usado en ocasiones anteriores <a href="datos/centroSalud-transversal.sav">centroSalud-transversal.sav</a> y exploramos algunas las primeras líneas de las variables <em>sexo, edad, peso y pas</em>:</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/centroSalud-transversal.sav"</span>, user_na<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">sexo</span>,<span class="va">edad</span>,<span class="va">peso</span>,<span class="va">pas</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+sexo
+</th>
+<th style="text-align:right;">
+edad
+</th>
+<th style="text-align:right;">
+peso
+</th>
+<th style="text-align:right;">
+pas
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Hombre
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+130
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hombre
+</td>
+<td style="text-align:right;">
+69
+</td>
+<td style="text-align:right;">
+77
+</td>
+<td style="text-align:right;">
+155
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hombre
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+96
+</td>
+<td style="text-align:right;">
+158
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+82
+</td>
+<td style="text-align:right;">
+134
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:right;">
+72
+</td>
+<td style="text-align:right;">
+87
+</td>
+<td style="text-align:right;">
+150
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hombre
+</td>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:right;">
+92
+</td>
+<td style="text-align:right;">
+144
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Estudiamos el modelo de regresión lineal donde intentamos estudiar la inflencia de <em>sexo, edad, peso</em> en <em>pas</em>:</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">pas</span> <span class="op">~</span> <span class="va">sexo</span><span class="op">+</span><span class="va">edad</span><span class="op">+</span><span class="va">peso</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">model_parameters</span><span class="op">(</span>show.se <span class="op">=</span> <span class="cn">TRUE</span>,summary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">print_html</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="eziaqroyfj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#eziaqroyfj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#eziaqroyfj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#eziaqroyfj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#eziaqroyfj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#eziaqroyfj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eziaqroyfj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#eziaqroyfj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#eziaqroyfj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#eziaqroyfj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#eziaqroyfj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#eziaqroyfj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#eziaqroyfj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#eziaqroyfj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#eziaqroyfj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#eziaqroyfj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#eziaqroyfj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#eziaqroyfj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eziaqroyfj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#eziaqroyfj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#eziaqroyfj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eziaqroyfj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#eziaqroyfj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#eziaqroyfj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eziaqroyfj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eziaqroyfj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#eziaqroyfj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#eziaqroyfj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eziaqroyfj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#eziaqroyfj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eziaqroyfj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#eziaqroyfj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eziaqroyfj .gt_left {
+  text-align: left;
+}
+
+#eziaqroyfj .gt_center {
+  text-align: center;
+}
+
+#eziaqroyfj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#eziaqroyfj .gt_font_normal {
+  font-weight: normal;
+}
+
+#eziaqroyfj .gt_font_bold {
+  font-weight: bold;
+}
+
+#eziaqroyfj .gt_font_italic {
+  font-style: italic;
+}
+
+#eziaqroyfj .gt_super {
+  font-size: 65%;
+}
+
+#eziaqroyfj .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#eziaqroyfj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#eziaqroyfj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#eziaqroyfj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#eziaqroyfj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#eziaqroyfj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#eziaqroyfj .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<div class="inline-table"><table class="gt_table">
+<thead class="gt_col_headings"><tr>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Parameter</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Coefficient</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">SE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">95% CI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">t(348)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">p</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td class="gt_row gt_left">(Intercept)</td>
+<td class="gt_row gt_center">96.10</td>
+<td class="gt_row gt_center">10.19</td>
+<td class="gt_row gt_center">(76.06, 116.13)</td>
+<td class="gt_row gt_center">9.43</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">sexo (Mujer)</td>
+<td class="gt_row gt_center">5.38</td>
+<td class="gt_row gt_center">2.13</td>
+<td class="gt_row gt_center">(1.19, 9.58)</td>
+<td class="gt_row gt_center">2.52</td>
+<td class="gt_row gt_center">0.012 </td>
+</tr>
+<tr>
+<td class="gt_row gt_left">edad</td>
+<td class="gt_row gt_center">0.45</td>
+<td class="gt_row gt_center">0.10</td>
+<td class="gt_row gt_center">(0.26, 0.65)</td>
+<td class="gt_row gt_center">4.54</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">peso</td>
+<td class="gt_row gt_center">0.18</td>
+<td class="gt_row gt_center">0.08</td>
+<td class="gt_row gt_center">(0.03, 0.33)</td>
+<td class="gt_row gt_center">2.30</td>
+<td class="gt_row gt_center">0.022 </td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="6">Model: pas ~ sexo + edad + peso (352 Observations)<br>Residual standard deviation: 18.791 (df = 348)<br>R2: 0.077; adjusted R2: 0.069</td>
+    </tr></tfoot>
+</table></div>
+</div>
+<p>Esta salida de se puede interpretar como que el mejor modelo lineal para explicar la <em>pas</em> a partir de las variables elegidas es:</p>
+<p><span class="math display">\[ pas = 100.5 +4.9 sexoMujer + 0.41 * edad + 0.13*peso \]</span>
+O como resulta normalmente más interesante de interpretar:</p>
+<ul>
+<li><p>A igualdad de peso y edad, una mujer suele tener una pas 4.9 mmHG más alta que un hombre.</p></li>
+<li><p>A igualdad de sexo y peso, los individuos aumentan 0.41 mmHg de pas cada año que cumplen.</p></li>
+<li><p>A igualdad de sexo y edad, la pas sube 0.13 mmHg por cada kg de peso que aumentan.</p></li>
+</ul>
+<p>Cada una de esas estimaciones se muestra con su respectivo error estándar y significación. La significación del sexo por ejemplo, se interpreta como que a igualdad de peso y edad, las mujeres muestran unos valores medios de pas que son significativamente diferentes de cero.</p>
+<p>También es habitual el mostrar, además de los coeficientes ajustados (multivariable), los coeficientes crudos (univariable), que son los que se obtendrían al analizar de forma separada la variable dependiente con cada una de las independientes. Presentar las tablas así permite identificar variables confusoras.</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tabla</span><span class="op">=</span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu">finalfit</span><span class="op">(</span>dependent <span class="op">=</span> <span class="st">"pas"</span>, explanatory<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sexo"</span>,<span class="st">"edad"</span>,<span class="st">"peso"</span><span class="op">)</span>,metrics <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>  </span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Dependent: Presión arterial sistólica medida en mmHg
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+unit
+</th>
+<th style="text-align:left;">
+value
+</th>
+<th style="text-align:left;">
+OR (univariable)
+</th>
+<th style="text-align:left;">
+OR (multivariable)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sexo del paciente
+</td>
+<td style="text-align:left;">
+Hombre
+</td>
+<td style="text-align:left;">
+Mean (sd)
+</td>
+<td style="text-align:left;">
+139.6 (20.7)
+</td>
+<td style="text-align:left;">
+<ul><li></ul>
+</td>
+<td style="text-align:left;">
+<ul><li></ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:left;">
+Mean (sd)
+</td>
+<td style="text-align:left;">
+145.1 (18.5)
+</td>
+<td style="text-align:left;">
+5.49 (1.30 to 9.69, p=0.010)
+</td>
+<td style="text-align:left;">
+5.38 (1.19 to 9.58, p=0.012)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Edad del paciente en años
+</td>
+<td style="text-align:left;">
+[31.0,92.0]
+</td>
+<td style="text-align:left;">
+Mean (sd)
+</td>
+<td style="text-align:left;">
+143.1 (19.5)
+</td>
+<td style="text-align:left;">
+0.42 (0.23 to 0.61, p&lt;0.001)
+</td>
+<td style="text-align:left;">
+0.45 (0.26 to 0.65, p&lt;0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Peso del paciente
+</td>
+<td style="text-align:left;">
+[46.5,150.0]
+</td>
+<td style="text-align:left;">
+Mean (sd)
+</td>
+<td style="text-align:left;">
+143.1 (19.5)
+</td>
+<td style="text-align:left;">
+0.04 (-0.11 to 0.19, p=0.592)
+</td>
+<td style="text-align:left;">
+0.18 (0.03 to 0.33, p=0.022)
+</td>
+</tr>
+</tbody>
+</table></div>
+<div class="inline-table"><table class="table table-sm"><tbody><tr>
+<td style="text-align:left;">
+Number in dataframe = 352, Number in model = 352, Missing = 0, Log-likelihood = -1530, AIC = 3070, R-squared = 0.077, Adjusted R-squared = 0.069
+</td>
+</tr></tbody></table></div>
+<p>Para obtener los resultados anteriores en SPSS usaríamos el menú <em>-Analizar - Regresión - Lineales</em>,
+colocaríamos en <em>dependientes</em> las variable pas, y en independientes el resto.</p>
+</div>
+<div id="aplicaciones-de-la-regresión-múltiple" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Aplicaciones de la regresión múltiple<a class="anchor" aria-label="anchor" href="#aplicaciones-de-la-regresi%C3%B3n-m%C3%BAltiple"><i class="fas fa-link"></i></a>
+</h2>
+<p>Es cierto que la regresión múltiple se utiliza para la predicción de respuestas a partir de variables explicativas. Pero no es ésta realmente la aplicación que se le suele dar en investigación. Los usos que con mayor frecuencia encontraremos en las publicaciones son los siguientes:</p>
+<ul>
+<li><p>Identificación de variables explicativas. Nos ayuda a crear un modelo donde se seleccionen las variables que puedan influir en la respuesta, descartando aquellas que no aporten información.</p></li>
+<li><p>Detección de interacciones entre variables independientes que afectan a la variable respuesta. Un ejemplo de interacción clásico es el de estudiar la respuesta de un paciente al alcohol y a un barbitúrico, y observar que cuando se ingieren ambos, el efecto es mucho mayor del esperado como suma de los dos.</p></li>
+<li><p>Identificación de variables confusoras. Es un problema difícil el de su detección, pero de interés en investigación no experimental, ya que el investigador frecuentemente no tiene control sobre las variables independientes.</p></li>
+</ul>
+</div>
+<div id="requisitos-y-limitaciones" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Requisitos y limitaciones<a class="anchor" aria-label="anchor" href="#requisitos-y-limitaciones"><i class="fas fa-link"></i></a>
+</h2>
+<p>Hay ciertos requerimientos necesarios para poder utilizar la técnica de regresión múltiple:</p>
+<ul>
+<li><p>Linealidad: Se supone que la variable respuesta depende linealmente de las variables explicativas. Si la respuesta no aparenta ser lineal, debemos introducir en el modelo componentes no lineales (como incluir transformaciones no lineales de las variables independientes en el modelo). Otro tipo de respuesta no lineal es la interacción. Para ello se ha de incluir en el modelo términos de interacción, que equivalen a introducir nuevas variables explicativas que en realidad son el producto de dos o más de las independientes.</p></li>
+<li><p>Normalidad y equidistribución de los residuos: Se llaman residuos las diferencias entre los valores calculados por el modelo y los realmente observados en la variable dependiente. Para tener un buen modelo de regresión no es suficiente con que los residuos sean pequeños. La validez del modelo requiere, en teoríam que los mismos se distribuyan de modo normal y con la misma dispersión para cada combinación de valores de las variables independientes. Por supuesto, esta condición en la práctica es inverificable, puesto que para cada combinación de variables independientes tendremos normalmente ninguna o una respuesta. Lo que se suele hacer es examinar una serie de gráficos de residuos que nos hagan sospechar. Por ejemplo si los residuos aumentan al aumentar la respuesta, o vemos que aparecen tendencias,… Es decir, hay una serie de reglas heurísticas que nos ayudan a decidir si aceptar o no el modelo de regresión, pero no están basadas en contrastes de hipótesis como hemos usado hasta ahora. Es la experiencia del investigador observando residuos la que le decide a usarlo o no.</p></li>
+<li><p>Número de variables independientes: Podemos estar tentados en incluir en el modelo cualquier cosa que tengamos en una base de datos, con la esperanza de que cuantas más variables incluyamos, más posibilidades hay de que “suene la flauta”. Si nos aborda esta tentación, hemos de recordar que corremos el riesgo de cometer error de tipo I. Otra razón es que si esperamos ajustar unas pocas observaciones usando muchas variables, muy probablemente consigamos una aproximación muy artificial, y además muy sensible a los valores observados. La inclusión de una nueva observación puede cambiar completamente el valor de los coeficientes del modelo. Una regla que se suele recomendar es la de incluir <em>al menos 20 observaciones por cada variable independiente</em> que estimemos a priori interesantes en el modelo.</p></li>
+<li><p>Colinealidad: Si dos variables independientes están estrechamente relacionadas (consumo de refrescos y temperatura ambiente por ejemplo) y ambas son incluidas en un modelo, muy posiblemente ninguna de las dos sea considerada significativa, aunque si hubiésemos incluido sólo una de ellas, sí. Hay diferentes técnicas para detectar la colinealidad pero que requieren profundizar en documentos más sofisticados. Aquí vamos a indicar una técnica muy simple: examinar los coeficientes del modelo para ver si se vuelven inestables al introducir una nueva variable. Si es así posiblemente hay colinealidad entre la nueva variable y las anteriores.</p></li>
+<li><p>Observaciones anómalas: Está muy relacionada con la cuestión de los residuos, pero merece destacarlo aparte. Debemos poner especial cuidado en identificarlas (y descartarlas si procede), pues tienen gran influencia en el resultado. A veces, son sólo errores en la entrada de datos, pero de gran consecuencia en el análisis. Hay técnicas de regresión robustas que permiten minimizar su efecto.</p></li>
+</ul>
+</div>
+<div id="variables-numéricas-e-indicadoras-dummy" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Variables numéricas e indicadoras (dummy)<a class="anchor" aria-label="anchor" href="#variables-num%C3%A9ricas-e-indicadoras-dummy"><i class="fas fa-link"></i></a>
+</h2>
+<p>Un modelo de regresión lineal tiene el aspecto:</p>
+<p><span class="math display">\[ Y = b_0 +b_1 X_1 + b_2 X_2+...+b_n X_n \]</span>
+donde:</p>
+<ul>
+<li><p>Y es la variable dependiente</p></li>
+<li><p>Los términos <span class="math inline">\(X_i\)</span> representan las variables independientes o explicativas</p></li>
+<li><p>Los coeficientes del modelo, <span class="math inline">\(b_i\)</span> son calculados por el programa estadístico, de mode que se minimicen los residuos.</p></li>
+</ul>
+<p>Esencialmente cuando obtengamos para los coeficientes valores “compatibles” con cero (no significativos), la variable asociada se elimina del modelo, y en otro caso se considera a la variable asociada de interés. Esta regla no hay que aplicarla ciegamente. Si por ejemplo la variable con coeficiente no significativo se observa que es confusora o laliteratura nos indica que debe ser tenida en cuenta en el análisis, debemos considerarla como parte del modelo, bien explícitamente o estratificando la muestra según los diferentes valores de la misma.</p>
+<p>Está claro que para ajustar el modelo la variable respuesta debe ser numérica. Sin embargo, aunque pueda parecer extraño no tienen por qué serlo las variables explicativas. Aunque requiere un artificio, podemos utilizar predictores categóricos mediante la introducción de variables indicadoras (también denominadas mudas o dummy)</p>
+<p>Si una variable es dicotómica, puede ser codificada como 0 ó 1. Así si estudiamos la explicación del peso de una persona como función de su altura y su sexo, un modelo como:
+<span class="math display">\[Peso =-100 + 1 \times Altura - 5\times Sexo\]</span></p>
+<p>donde se ha codificado con Sexo=0 a los hombres y Sexo=1 a las mujeres, puede ser interpretado como que las mujeres, a igualdad de altura, pesan de media 5 Kg menos que los hombres. El coeficiente 1 de la altura, se interpreta como que por cada diferencia de altura de un centímetro en personas que tienen el resto de variables independientes iguales (mismo sexo), el peso aumenta, por término medio, en <strong>1</strong> kg.</p>
+<div id="ejemplo-3" class="section level4" number="7.3.0.1">
+<h4>
+<span class="header-section-number">7.3.0.1</span> Ejemplo<a class="anchor" aria-label="anchor" href="#ejemplo-3"><i class="fas fa-link"></i></a>
+</h4>
+<p>La base de datos <a href="datos/peso_altura_sexo.sav">peso_altura_sexo.sav</a> contiene datos simulados que han sido contruidos para dar un modelo de regresión similar al descrito anteriormente. Una analisis de regresión nos ofrecería por resultado:</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/peso_altura_sexo.sav"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Peso</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">+</span> <span class="va">Altura</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">model_parameters</span><span class="op">(</span>show.se <span class="op">=</span> <span class="cn">TRUE</span>,summary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">print_html</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="xcifrbuwah" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#xcifrbuwah .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xcifrbuwah .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xcifrbuwah .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xcifrbuwah .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xcifrbuwah .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xcifrbuwah .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xcifrbuwah .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xcifrbuwah .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xcifrbuwah .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xcifrbuwah .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xcifrbuwah .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xcifrbuwah .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xcifrbuwah .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xcifrbuwah .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xcifrbuwah .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xcifrbuwah .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xcifrbuwah .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xcifrbuwah .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xcifrbuwah .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xcifrbuwah .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xcifrbuwah .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xcifrbuwah .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xcifrbuwah .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xcifrbuwah .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xcifrbuwah .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xcifrbuwah .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xcifrbuwah .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xcifrbuwah .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xcifrbuwah .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xcifrbuwah .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xcifrbuwah .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xcifrbuwah .gt_left {
+  text-align: left;
+}
+
+#xcifrbuwah .gt_center {
+  text-align: center;
+}
+
+#xcifrbuwah .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xcifrbuwah .gt_font_normal {
+  font-weight: normal;
+}
+
+#xcifrbuwah .gt_font_bold {
+  font-weight: bold;
+}
+
+#xcifrbuwah .gt_font_italic {
+  font-style: italic;
+}
+
+#xcifrbuwah .gt_super {
+  font-size: 65%;
+}
+
+#xcifrbuwah .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#xcifrbuwah .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xcifrbuwah .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xcifrbuwah .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xcifrbuwah .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xcifrbuwah .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xcifrbuwah .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<div class="inline-table"><table class="gt_table">
+<thead class="gt_col_headings"><tr>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Parameter</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Coefficient</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">SE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">95% CI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">t(197)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">p</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td class="gt_row gt_left">(Intercept)</td>
+<td class="gt_row gt_center">-94.62</td>
+<td class="gt_row gt_center">8.03</td>
+<td class="gt_row gt_center">(-110.45, -78.78)</td>
+<td class="gt_row gt_center">-11.78</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">Sexo (Mujer)</td>
+<td class="gt_row gt_center">-4.92</td>
+<td class="gt_row gt_center">0.68</td>
+<td class="gt_row gt_center">(-6.26, -3.58)</td>
+<td class="gt_row gt_center">-7.24</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">Altura</td>
+<td class="gt_row gt_center">0.97</td>
+<td class="gt_row gt_center">0.05</td>
+<td class="gt_row gt_center">(0.88, 1.06)</td>
+<td class="gt_row gt_center">20.62</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="6">Model: Peso ~ Sexo + Altura (200 Observations)<br>Residual standard deviation: 4.564 (df = 197)<br>R2: 0.749; adjusted R2: 0.746</td>
+    </tr></tfoot>
+</table></div>
+</div>
+</div>
+<div id="ejemplo-regresión-lineal-generaliza-a-las-pruebas-t-student-para-dos-muestras-y-anova-de-un-factor" class="section level3 unnumbered">
+<h3>Ejemplo: Regresión lineal generaliza a las pruebas t-student para dos muestras, y ANOVA de un factor<a class="anchor" aria-label="anchor" href="#ejemplo-regresi%C3%B3n-lineal-generaliza-a-las-pruebas-t-student-para-dos-muestras-y-anova-de-un-factor"><i class="fas fa-link"></i></a>
+</h3>
+<p>Observe que el modelo de regresión múltiple generaliza a otras técnicas estadísticas que conocemos a estas alturas como el modelo t-student para 2 muestras independientes o ANOVA de un factor. Un contraste de dos medias independientes puede resolverse con una regresión de la variable respuesta en función de una variable indicadora que identifica sendas muestras. Un modelo ANOVA de un factor se puede expresar usando variables indicadoras suficientes para codificar el grupo. Para poder interpretar cómodamente los resultados es importante que los grupos sean equilibrados (cada muestra debe tener un número similar de elementos).</p>
+</div>
+</div>
+<div id="bondad-de-ajuste" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Bondad de ajuste<a class="anchor" aria-label="anchor" href="#bondad-de-ajuste"><i class="fas fa-link"></i></a>
+</h2>
+<p>Al ajustar un modelo de regresión es necesario mostar un término denominado <span class="math inline">\(R^2\)</span>, <strong>bondad de ajuste</strong>, o <strong>porcentaje de variabilidad exolicado por el modelo</strong> o bien, <strong>coeficiente de determinación</strong>. Se interpreta del siguiente modo: La variable respuesta presenta cierta variabilidad (incertidumbre), pero cuando se conoce el valor de las variables independientes, dicha incertidumbre disminuye. El término R cuadrado es una cantidad que puede interpretarse como un factor (porcentaje) de reducción de la incertidumbre cuando son conocidas las variables independientes. Cuanto más se acerque a uno, más poder explicativo tendrá el modelo. Pero esto esconde una trampa. Cada vez que introducimos una nueva variable independiente en el modelo, R cuadrado no puede hacer otra cosa que aumentar. Si introducimos un número artificialmente grande de ellas, podremos llegar a acercarla a uno tanto como queramos.</p>
+<blockquote>
+<p>Para practicar con <span class="math inline">\(R^2\)</span>, en un modelo de regresión <a href="https://www.bioestadistica.uma.es/analisis/correlacion/">siga este enlace</a>:</p>
+</blockquote>
+<p>Los programas estadísticos nos muestran un término R cuadrado corregida, que puede interpretarse como una corrección de honestidad. Nos castigará disminuyendo cuando introduzcamos variables innecesarias. Si al ir complicando el modelo este término aumenta una cantidad “razonable”, podemos considerarlo posiblemente una variable de interés, pero si disminuye, deberíamos pensar dos veces si nos merece la pena la complejidad del modelo para tan poco beneficio.</p>
+</div>
+<div id="matriz-de-correlaciones" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> Matriz de correlaciones<a class="anchor" aria-label="anchor" href="#matriz-de-correlaciones"><i class="fas fa-link"></i></a>
+</h2>
+<p>La matriz de correlaciones nos ayuda a identificar correlaciones lineales entre pares de variables. Encontrar correlaciones lineales entre la variable dependiente y cualquiera de las independientes es siempre de interés. Pero es una mala señal la alta correlación entre variables independientes y tal vez nos haga excluir alguna del modelo, por contener información muy similar.</p>
+<p>La matriz de correlaciones está formada por todos los coeficientes de correlación lineal de Pearson para cada par de variables. Los mismos son cantidades que pueden tomar valores comprendidos entre -1 y +1. Cuanto más extremo sea el coeficiente, mejor asociación lineal existe entre el par de variables. Cuando es cercano a cero, no. El signo positivo del coeficiente nos indica que la asociación es directa (cuando una variable crece la otra también). Un valor negativo indica que la relación es inversa (cuando una crece, la otra decrece).</p>
+</div>
+<div id="variables-confusoras" class="section level2" number="7.6">
+<h2>
+<span class="header-section-number">7.6</span> Variables confusoras<a class="anchor" aria-label="anchor" href="#variables-confusoras"><i class="fas fa-link"></i></a>
+</h2>
+<p>Dos variables o más variables están confundidas cuando sus efectos sobre la variable dependiente no pueden ser separados. Dicho de otra forma, una variable es confusora cuando estando relacionada con alguna variable independiente, a su vez afecta a la dependiente.</p>
+<p>Cuando se identifica una variable que está confundida con alguna de las variables independientes significativa, es necesario dejarla formar parte del modelo, tenga o no mucha significación. Las variables confusoras no pueden ser ignoradas.</p>
+<p>Puede ayudarnos a identificar una variable confusora el encontrarnos con un modelo en el que una variable independiente parece tener cierta influencia significativa del signo que sea en la variable respuesta, pero al incluir una nueva variable previamente ignorada (variable confusora) se observa que la primera tiene una influencia claramente diferente (incluso con el signo cambiado y aún significativa). El simple hecho de que lo anteriormente mencionado ocurra, no es la prueba de que ambas variables estén confundidas, pero nos invita a reflexionar.</p>
+<p>###Ejemplo {-}</p>
+<p>Vamos a retomar un ejemplo que desarrollamos en el capítulo donde tratábamos la técnica ANOVA, para usar con él un modelo de regresión múltiple: <a href="datos/lectura-anova.sav">lectura-anova.sav</a>.</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/lectura-anova.sav"</span>, user_na<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Grupo
+</th>
+<th style="text-align:right;">
+Antes
+</th>
+<th style="text-align:right;">
+Despues
+</th>
+<th style="text-align:right;">
+Diferencia
+</th>
+<th style="text-align:right;">
+gr1
+</th>
+<th style="text-align:right;">
+gr2
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+10.0
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+9.3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+13.0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica I
+</td>
+<td style="text-align:right;">
+6.5
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+16.2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica I
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+8.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica II
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Recordamos que se realizó un experimento para comparar tres métodos de aprendizaje de lectura. Se asignó aleatoriamente los estudiantes a cada uno de los tres métodos. Cada método fue probado con 22 estudiantes. Se evaluó mediante diferentes pruebas la capacidad de comprensión de los estudiantes, antes y después de recibir la instrucción. Por tanto tenemos 3 variables numéricas que son la capacidad al inicio del experimento, al final, y la que resulta más interesante, la diferencia.</p>
+<p>Podemos usar la pareja de variables <em>gr1 y gr2</em> como indicadoras de pertenencia al <em>Grupo</em>. Un análisis de regresión lineal nos ofrece el mismo resultado que la prueba ANOVA. Compruebe la diferencia existente entre la salida del modelo de regresión lineal con las variables indicadoras:</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Diferencia</span> <span class="op">~</span> <span class="va">gr1</span> <span class="op">+</span> <span class="va">gr2</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">model_parameters</span><span class="op">(</span>show.se <span class="op">=</span> <span class="cn">TRUE</span>,summary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">print_html</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="whpvbnmpdh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#whpvbnmpdh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#whpvbnmpdh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#whpvbnmpdh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#whpvbnmpdh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#whpvbnmpdh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#whpvbnmpdh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#whpvbnmpdh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#whpvbnmpdh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#whpvbnmpdh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#whpvbnmpdh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#whpvbnmpdh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#whpvbnmpdh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#whpvbnmpdh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#whpvbnmpdh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#whpvbnmpdh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#whpvbnmpdh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#whpvbnmpdh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#whpvbnmpdh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#whpvbnmpdh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#whpvbnmpdh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#whpvbnmpdh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#whpvbnmpdh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#whpvbnmpdh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#whpvbnmpdh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#whpvbnmpdh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#whpvbnmpdh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#whpvbnmpdh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#whpvbnmpdh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#whpvbnmpdh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#whpvbnmpdh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#whpvbnmpdh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#whpvbnmpdh .gt_left {
+  text-align: left;
+}
+
+#whpvbnmpdh .gt_center {
+  text-align: center;
+}
+
+#whpvbnmpdh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#whpvbnmpdh .gt_font_normal {
+  font-weight: normal;
+}
+
+#whpvbnmpdh .gt_font_bold {
+  font-weight: bold;
+}
+
+#whpvbnmpdh .gt_font_italic {
+  font-style: italic;
+}
+
+#whpvbnmpdh .gt_super {
+  font-size: 65%;
+}
+
+#whpvbnmpdh .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#whpvbnmpdh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#whpvbnmpdh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#whpvbnmpdh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#whpvbnmpdh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#whpvbnmpdh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#whpvbnmpdh .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<div class="inline-table"><table class="gt_table">
+<thead class="gt_col_headings"><tr>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Parameter</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Coefficient</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">SE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">95% CI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">t(63)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">p</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td class="gt_row gt_left">(Intercept)</td>
+<td class="gt_row gt_center">9.87</td>
+<td class="gt_row gt_center">0.58</td>
+<td class="gt_row gt_center">(8.71, 11.03)</td>
+<td class="gt_row gt_center">17.04</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">gr1</td>
+<td class="gt_row gt_center">3.63</td>
+<td class="gt_row gt_center">0.82</td>
+<td class="gt_row gt_center">(1.99, 5.27)</td>
+<td class="gt_row gt_center">4.43</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">gr2</td>
+<td class="gt_row gt_center">3.22</td>
+<td class="gt_row gt_center">0.82</td>
+<td class="gt_row gt_center">(1.58, 4.86)</td>
+<td class="gt_row gt_center">3.93</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="6">Model: Diferencia ~ gr1 + gr2 (66 Observations)<br>Residual standard deviation: 2.717 (df = 63)<br>R2: 0.272; adjusted R2: 0.249</td>
+    </tr></tfoot>
+</table></div>
+</div>
+<p>y la salida del modelo ANOVA de un factor:</p>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modelo1</span><span class="op">=</span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Diferencia</span> <span class="op">~</span> <span class="va">Grupo</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span> </span>
+<span><span class="va">modelo1</span> <span class="op">%&gt;%</span> <span class="fu">model_parameters</span><span class="op">(</span>show.se <span class="op">=</span> <span class="cn">TRUE</span>,summary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">print_html</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="vpciiigrta" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#vpciiigrta .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vpciiigrta .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vpciiigrta .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vpciiigrta .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vpciiigrta .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vpciiigrta .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vpciiigrta .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vpciiigrta .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vpciiigrta .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vpciiigrta .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vpciiigrta .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vpciiigrta .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vpciiigrta .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vpciiigrta .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vpciiigrta .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vpciiigrta .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vpciiigrta .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vpciiigrta .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vpciiigrta .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vpciiigrta .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vpciiigrta .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vpciiigrta .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vpciiigrta .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vpciiigrta .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vpciiigrta .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vpciiigrta .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vpciiigrta .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vpciiigrta .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vpciiigrta .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vpciiigrta .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vpciiigrta .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vpciiigrta .gt_left {
+  text-align: left;
+}
+
+#vpciiigrta .gt_center {
+  text-align: center;
+}
+
+#vpciiigrta .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vpciiigrta .gt_font_normal {
+  font-weight: normal;
+}
+
+#vpciiigrta .gt_font_bold {
+  font-weight: bold;
+}
+
+#vpciiigrta .gt_font_italic {
+  font-style: italic;
+}
+
+#vpciiigrta .gt_super {
+  font-size: 65%;
+}
+
+#vpciiigrta .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#vpciiigrta .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vpciiigrta .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vpciiigrta .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vpciiigrta .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vpciiigrta .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vpciiigrta .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<div class="inline-table"><table class="gt_table">
+<thead class="gt_col_headings"><tr>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Parameter</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Coefficient</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">SE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">95% CI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">t(63)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">p</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td class="gt_row gt_left">(Intercept)</td>
+<td class="gt_row gt_center">9.87</td>
+<td class="gt_row gt_center">0.58</td>
+<td class="gt_row gt_center">(8.71, 11.03)</td>
+<td class="gt_row gt_center">17.04</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">Grupo (Técnica I)</td>
+<td class="gt_row gt_center">3.63</td>
+<td class="gt_row gt_center">0.82</td>
+<td class="gt_row gt_center">(1.99, 5.27)</td>
+<td class="gt_row gt_center">4.43</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">Grupo (Técnica II)</td>
+<td class="gt_row gt_center">3.22</td>
+<td class="gt_row gt_center">0.82</td>
+<td class="gt_row gt_center">(1.58, 4.86)</td>
+<td class="gt_row gt_center">3.93</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="6">Model: Diferencia ~ Grupo (66 Observations)<br>Residual standard deviation: 2.717 (df = 63)<br>R2: 0.272; adjusted R2: 0.249</td>
+    </tr></tfoot>
+</table></div>
+</div>
+<p>Realmente las dos formas de escribir el análisis han hecho exactamente lo mismo internamente.</p>
+<p>Podemos refinar el estudio del siguiente modo:</p>
+<ul>
+<li><p>Variable dependiente: La diferencia entre la capacidad “después” y “antes”.</p></li>
+<li><p>Variables explicativas:</p></li>
+<li><p>La capacidad al inicio del experimento. Posiblemente los estudiantes con mejor capacidad inicial sacaron menos provecho que el resto.</p></li>
+<li><p>La técnica utilizada. Como es una variable categórica que se utiliza para identificar la muestra y tiene tres categorías podemos codificarla usando dos variables indicadoras (<strong>gr1 y gr2</strong>, o lo que será equivalente, considerar solo la variable <em>Grupo</em>).</p></li>
+</ul>
+<p>El resultado del análisis sería:</p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modelo2</span><span class="op">=</span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Diferencia</span> <span class="op">~</span> <span class="va">Grupo</span><span class="op">+</span><span class="va">Antes</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">modelo2</span><span class="op">%&gt;%</span> <span class="fu">model_parameters</span><span class="op">(</span>show.se <span class="op">=</span> <span class="cn">TRUE</span>,summary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">print_html</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="nqcarpqvyv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#nqcarpqvyv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#nqcarpqvyv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nqcarpqvyv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#nqcarpqvyv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nqcarpqvyv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nqcarpqvyv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nqcarpqvyv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nqcarpqvyv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nqcarpqvyv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nqcarpqvyv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nqcarpqvyv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nqcarpqvyv .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nqcarpqvyv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nqcarpqvyv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nqcarpqvyv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nqcarpqvyv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nqcarpqvyv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nqcarpqvyv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#nqcarpqvyv .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#nqcarpqvyv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nqcarpqvyv .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#nqcarpqvyv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#nqcarpqvyv .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nqcarpqvyv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nqcarpqvyv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nqcarpqvyv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nqcarpqvyv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nqcarpqvyv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nqcarpqvyv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nqcarpqvyv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nqcarpqvyv .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nqcarpqvyv .gt_left {
+  text-align: left;
+}
+
+#nqcarpqvyv .gt_center {
+  text-align: center;
+}
+
+#nqcarpqvyv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nqcarpqvyv .gt_font_normal {
+  font-weight: normal;
+}
+
+#nqcarpqvyv .gt_font_bold {
+  font-weight: bold;
+}
+
+#nqcarpqvyv .gt_font_italic {
+  font-style: italic;
+}
+
+#nqcarpqvyv .gt_super {
+  font-size: 65%;
+}
+
+#nqcarpqvyv .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#nqcarpqvyv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#nqcarpqvyv .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#nqcarpqvyv .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#nqcarpqvyv .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#nqcarpqvyv .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#nqcarpqvyv .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<div class="inline-table"><table class="gt_table">
+<thead class="gt_col_headings"><tr>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Parameter</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Coefficient</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">SE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">95% CI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">t(62)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">p</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td class="gt_row gt_left">(Intercept)</td>
+<td class="gt_row gt_center">13.56</td>
+<td class="gt_row gt_center">1.29</td>
+<td class="gt_row gt_center">(10.97, 16.14)</td>
+<td class="gt_row gt_center">10.49</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">Grupo (Técnica I)</td>
+<td class="gt_row gt_center">3.41</td>
+<td class="gt_row gt_center">0.77</td>
+<td class="gt_row gt_center">(1.87, 4.95)</td>
+<td class="gt_row gt_center">4.42</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">Grupo (Técnica II)</td>
+<td class="gt_row gt_center">2.83</td>
+<td class="gt_row gt_center">0.78</td>
+<td class="gt_row gt_center">(1.27, 4.38)</td>
+<td class="gt_row gt_center">3.64</td>
+<td class="gt_row gt_center">&lt; .001</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">Antes</td>
+<td class="gt_row gt_center">-0.47</td>
+<td class="gt_row gt_center">0.15</td>
+<td class="gt_row gt_center">(-0.76, -0.17)</td>
+<td class="gt_row gt_center">-3.14</td>
+<td class="gt_row gt_center">0.003 </td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="6">Model: Diferencia ~ Grupo + Antes (66 Observations)<br>Residual standard deviation: 2.544 (df = 62)<br>R2: 0.372; adjusted R2: 0.342</td>
+    </tr></tfoot>
+</table></div>
+</div>
+<p>Obsérvese que al mejorar <span class="math inline">\(R^2\)</span> hemos obtenido un mejor modelo explicativo, independientemente de que nos interese o no la significación de la nueva variable introducida. En ocasiones es útil mostrar una comparativa entre varios modelos. La forma que se suele dar a la tabla para compararlos es la siguiente:</p>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modelo1</span>, <span class="va">modelo2</span>,show.se <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Diferencia
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Diferencia
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+CI
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+CI
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+9.87
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+8.71 – 11.03
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+13.56
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+10.97 – 16.14
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Grupo: Técnica I
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.63
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.99 – 5.27
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.41
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.87 – 4.95
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Grupo: Técnica II
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.22
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.58 – 4.86
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.83
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.27 – 4.38
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Antes
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-0.47
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-0.76 – -0.17
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>0.003</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+66
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+66
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.272 / 0.249
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.372 / 0.342
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+324.178
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+316.416
+</td>
+</tr>
+</table></div>
+<p>Podríamos interpretar que el segundo modelo es preferible al primero. Tiene no solo mejor <span class="math inline">\(R^2\)</span> (cuanto más alto, mejor), si no que otro indicador, <strong>AIC</strong> (<em>Akaike Information Criteria</em>), tiene un valor más bajo (cuanto más bajo, mejor a la hora de decidir entre múltiples modelos).</p>
+<p>Para hacer lo mismo en SPSS, no se puede utilizar como hemos hecho aquí la variable <em>Grupo</em>, pero sí las dos indicadoras (<em>gr1 y gr2</em>) que contienen la misma información. Para ello vamos a la opción de menú “Analizar – Regresión - Lineales”, y situamos en su lugar las variables independientes y la dependiente.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="independencia-de-variables-categ%C3%B3ricas.html"><span class="header-section-number">6</span> Independencia de variables categóricas</a></div>
+<div class="next"><a href="regresi%C3%B3n-log%C3%ADstica-binaria.html"><span class="header-section-number">8</span> Regresión logística binaria</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#regresi%C3%B3n-lineal-m%C3%BAltiple"><span class="header-section-number">7</span> Regresión lineal múltiple</a></li>
+<li><a class="nav-link" href="#aplicaciones-de-la-regresi%C3%B3n-m%C3%BAltiple"><span class="header-section-number">7.1</span> Aplicaciones de la regresión múltiple</a></li>
+<li><a class="nav-link" href="#requisitos-y-limitaciones"><span class="header-section-number">7.2</span> Requisitos y limitaciones</a></li>
+<li>
+<a class="nav-link" href="#variables-num%C3%A9ricas-e-indicadoras-dummy"><span class="header-section-number">7.3</span> Variables numéricas e indicadoras (dummy)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#ejemplo-regresi%C3%B3n-lineal-generaliza-a-las-pruebas-t-student-para-dos-muestras-y-anova-de-un-factor">Ejemplo: Regresión lineal generaliza a las pruebas t-student para dos muestras, y ANOVA de un factor</a></li></ul>
+</li>
+<li><a class="nav-link" href="#bondad-de-ajuste"><span class="header-section-number">7.4</span> Bondad de ajuste</a></li>
+<li><a class="nav-link" href="#matriz-de-correlaciones"><span class="header-section-number">7.5</span> Matriz de correlaciones</a></li>
+<li><a class="nav-link" href="#variables-confusoras"><span class="header-section-number">7.6</span> Variables confusoras</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/fjbaron/apuntesMaster/blob/master/07-regresionLineal.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/fjbaron/apuntesMaster/edit/master/07-regresionLineal.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Apuntes de estadística</strong>" was written by Francisco Javier Barón López. It was last built on 2022-11-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

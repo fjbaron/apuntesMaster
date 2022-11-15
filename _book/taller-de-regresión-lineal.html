@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Taller de regresión lineal | Apuntes de estadística</title>
+<meta name="author" content="Francisco Javier Barón López">
+<meta name="description" content="En los siguientes problemas vamos a utilizar unas bases de datos simuladas, donde en cada base ocurre algo especial que debemos intentar visualizar y modelar de forma convenienteusando regresión...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Taller de regresión lineal | Apuntes de estadística">
+<meta property="og:type" content="book">
+<meta property="og:description" content="En los siguientes problemas vamos a utilizar unas bases de datos simuladas, donde en cada base ocurre algo especial que debemos intentar visualizar y modelar de forma convenienteusando regresión...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Taller de regresión lineal | Apuntes de estadística">
+<meta name="twitter:description" content="En los siguientes problemas vamos a utilizar unas bases de datos simuladas, donde en cada base ocurre algo especial que debemos intentar visualizar y modelar de forma convenienteusando regresión...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Apuntes de estadística</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introducción</a></li>
+<li class="book-part">Curso estadística básica</li>
+<li><a class="" href="exploraci%C3%B3n-de-los-datos.html"><span class="header-section-number">1</span> Exploración de los datos</a></li>
+<li><a class="" href="estimaci%C3%B3n.html"><span class="header-section-number">2</span> Estimación</a></li>
+<li><a class="" href="contrastes-de-hip%C3%B3tesis.html"><span class="header-section-number">3</span> Contrastes de hipótesis</a></li>
+<li><a class="" href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-dos-grupos.html"><span class="header-section-number">4</span> Diferencias que presenta una variable numérica entre dos grupos</a></li>
+<li><a class="" href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-varios-grupos.html"><span class="header-section-number">5</span> Diferencias que presenta una variable numérica entre varios grupos</a></li>
+<li><a class="" href="independencia-de-variables-categ%C3%B3ricas.html"><span class="header-section-number">6</span> Independencia de variables categóricas</a></li>
+<li class="book-part">Curso estadística avanzada</li>
+<li><a class="" href="regresi%C3%B3n-lineal-m%C3%BAltiple.html"><span class="header-section-number">7</span> Regresión lineal múltiple</a></li>
+<li><a class="" href="regresi%C3%B3n-log%C3%ADstica-binaria.html"><span class="header-section-number">8</span> Regresión logística binaria</a></li>
+<li><a class="active" href="taller-de-regresi%C3%B3n-lineal.html">Taller de regresión lineal</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/fjbaron/apuntesMaster">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="taller-de-regresión-lineal" class="section level1 unnumbered">
+<h1>Taller de regresión lineal<a class="anchor" aria-label="anchor" href="#taller-de-regresi%C3%B3n-lineal"><i class="fas fa-link"></i></a>
+</h1>
+<p>En los siguientes problemas vamos a utilizar unas bases de datos simuladas, donde en cada base ocurre algo especial que debemos intentar visualizar y modelar de forma convenienteusando <strong>regresión lineal múltiple</strong>. En todos los casos suponemos que tenemos una base de datos de niños, donde se ha recogido el sexo con una variable que indica con el valor 1 a las mujeres (0 para los Hombres), <em>Edad</em> y <em>Talla</em>. Nuestra intención es ver como el sexo y la edad explican la talla.</p>
+<div id="ejemplo-1-1" class="section level4 unnumbered">
+<h4>Ejemplo 1<a class="anchor" aria-label="anchor" href="#ejemplo-1-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Descargue la base de datos
+<a href="datos/regresion-030-1.sav">regresion-030-1.sav</a> y exploramos las primeras líneas:</p>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/regresion-030-1.sav"</span>, user_na<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Sexo<span class="op">=</span><span class="va">Mujer</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">Sexo</span>,<span class="va">Edad</span>,<span class="va">Talla</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Sexo
+</th>
+<th style="text-align:right;">
+Edad
+</th>
+<th style="text-align:right;">
+Talla
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+142
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:right;">
+8.3
+</td>
+<td style="text-align:right;">
+123
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hombre
+</td>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:right;">
+121
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:right;">
+5.6
+</td>
+<td style="text-align:right;">
+127
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hombre
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+<td style="text-align:right;">
+122
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mujer
+</td>
+<td style="text-align:right;">
+7.1
+</td>
+<td style="text-align:right;">
+129
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Antes de comenzar a analizar los datos hacemos una representación gráfica del contenido de la base de datos:</p>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="09-tallerRegresion_files/figure-html/unnamed-chunk-3-1.png" width="672">
+A simple vista, los individuos parecen tener mas talla con la edad sin importar el sexo, aunque por otro lado se observa que los varones son más jóvenes y pequeños, y las mujeres son de más edad y altas. Tenemos que hay confusión entre el sexo y la edad para explicar la talla. Si estudiamos de forma simple como el sexo explica la talla, tendríamos que las mujeres, sin tener en cuenta otra cosa son más altas que los hombres:</div>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Sexo</span>, y<span class="op">=</span><span class="va">Talla</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="09-tallerRegresion_files/figure-html/unnamed-chunk-4-1.png" width="672">
+La causa de este resultado es no haber tenido en cuenta el ajuste por Edad en el analisis. ¿Cuál de los siguientes modelos le parece más interesante para describir la Altura de los niños?</div>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dfAumentado</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span><span class="op">+</span><span class="va">Sexo</span>,data<span class="op">=</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloSexo</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span>,formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(1) Talla ~ Sexo"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(2) Talla ~ Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SexoEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dfAumentado</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">.fitted</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(3) Talla ~ Sexo+Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_Interaccion</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(4) Talla ~ Sexo+Edad+ Sexo:Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">grid.arrange</span><span class="op">(</span><span class="va">plot_SoloSexo</span>,<span class="va">plot_SoloEdad</span>,<span class="va">plot_SexoEdad</span>,<span class="va">plot_Interaccion</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="09-tallerRegresion_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<p>Los cuatro modelos de regresión respectivos son:</p>
+<ul>
+<li><p><strong>Modelo 1:</strong> La talla sólo depende del sexo.</p></li>
+<li><p><strong>Modelo 2:</strong> La talla sólo depende de la altura (mi favorito, por su simplicidad).</p></li>
+<li><p><strong>Modelo 3</strong> La talla depende de la altura, y hay un pequeño efecto debido al sexo. las dos líneas son paralelas, siendo la distancia vertical entre ambas el efecto estimado atribuible al sexo.</p></li>
+<li><p><strong>Modelo 4</strong> La talla depende de la altura para cada sexo, con rectas que no tienen por qué ser paralelas. Se ajusta la recta dentro de cada grupo. Esto es equivalente a considerar que hay un término de interacción que permite que cada recta tenga pendientes diferentes. Este modelo parece demasiado complicado.</p></li>
+</ul>
+<p>El análisis de estos modelos lo encontramos en la siguiente tabla:</p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modeloSexo</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloSexoEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">+</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloInteraccion</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">*</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexo</span>, <span class="va">modeloEdad</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+107.55
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.75
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+54.88
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+9.49
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+26.68
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+5.49
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+9.66
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.37
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+30
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.458 / 0.438
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.640 / 0.627
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+251.555
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+239.247
+</td>
+</tr>
+</table></div>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexoEdad</span>,<span class="va">modeloInteraccion</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+63.15
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+11.49
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+54.73
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+16.70
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>0.003</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+8.04
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+6.42
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.222
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+26.80
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+27.58
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+0.340
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+7.88
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.97
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+9.37
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.91
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>0.003</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+SexoMujer:Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-2.79
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.98
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+0.490
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+30
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.660 / 0.635
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.666 / 0.628
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+239.556
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+240.996
+</td>
+</tr>
+</table></div>
+<p>El primer modelo, es el menos adecuado. Es el de menor <span class="math inline">\(R^2\)</span>, y atribuye un efecto significativo poramente al sexo, cuando en todos los demás modelos en que se incluye la edad, el sexo no tiene efecto significativo. Lo que vemos es debido al efecto confusor de la edad, que no ha sido tenido en cuenta.</p>
+<p>El segundo modelo es el que tomaría como más adecuado por su parsimonia. Es simple y parece una buena simplificación de las observaciones. La bondad de ajuste <span class="math inline">\(R^2\)</span> es prácticamente tan buena como se puede conseguir, y tiene el menor AIC. La única variable de la que depende (edad) el modelo tiene un efecto estadísticamente significativo.</p>
+<p>El tercer modelo posee el mayor <span class="math inline">\(R2\)</span> ajustado. Nos indica que la edad tiene efecto significativo en la talla, y que el sexo no tiene efecto significativo en la talla. Si queremos estudiar qué efecto tiene la edad en la talla, <em>descontando/ajustando/teniendo en cuenta</em> el sexo, es el modelo a utilizar.</p>
+<p>El cuarto modelo es demasiado complicado. Atendiendo al criterio de <span class="math inline">\(R^2\)</span>, parece el mejor, pero eso es lógico ya que contiene a todas las variables explicativas y además su interacción. La reducción de <span class="math inline">\(R^2\)</span> ajustado con respecto al tercer modelo, así como el aumento en AIC, y la falta de significación del término de interacción de Sexo con Edad, nos invitan a abandonarlo. En caso de querer un modelo complejo, el tercero es lo suficientemente complejo.</p>
+</div>
+<div id="ejemplo-2-1" class="section level4 unnumbered">
+<h4>Ejemplo 2<a class="anchor" aria-label="anchor" href="#ejemplo-2-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Descargue la base de datos
+<a href="datos/regresion-200-1.sav">regresion-200-1.sav</a>, que contiene datos similares al anterior, pero ahora la muestra está formada por 200 individuos. ¿No cree que el segundo modelo es el más adecuado?</p>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/regresion-200-1.sav"</span>, user_na<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Sexo<span class="op">=</span><span class="va">Mujer</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">Sexo</span>,<span class="va">Edad</span>,<span class="va">Talla</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dfAumentado</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span><span class="op">+</span><span class="va">Sexo</span>,data<span class="op">=</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloSexo</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span>,formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(1) Talla ~ Sexo"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(2) Talla ~ Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SexoEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dfAumentado</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">.fitted</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(3) Talla ~ Sexo+Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_Interaccion</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(4) Talla ~ Sexo+Edad+ Sexo:Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">grid.arrange</span><span class="op">(</span><span class="va">plot_SoloSexo</span>,<span class="va">plot_SoloEdad</span>,<span class="va">plot_SexoEdad</span>,<span class="va">plot_Interaccion</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="09-tallerRegresion_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modeloSexo</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloSexoEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">+</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloInteraccion</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">*</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexo</span>, <span class="va">modeloEdad</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+110.52
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.88
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+53.76
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.63
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+17.56
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.56
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+9.41
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.192 / 0.188
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.640 / 0.638
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+1728.169
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+1566.659
+</td>
+</tr>
+</table></div>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexoEdad</span>,<span class="va">modeloInteraccion</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+52.66
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+50.74
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+5.62
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-1.66
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.431
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.40
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+8.80
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+0.785
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+9.70
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.62
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+10.02
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.92
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+SexoMujer:Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-0.59
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.24
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+0.635
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.641 / 0.637
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.641 / 0.636
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+1568.027
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+1569.797
+</td>
+</tr>
+</table></div>
+</div>
+<div id="ejemplo-3-1" class="section level4 unnumbered">
+<h4>Ejemplo 3<a class="anchor" aria-label="anchor" href="#ejemplo-3-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Descargue la base de datos
+<a href="datos/regresion-030-2.sav">regresion-030-2.sav</a>. En este caso tenemos niños que a igualdad de edad suelen ser más altos que las niñas. En ambos sexos, se crece con la edad a un ritmo similar. ¿Qué modelo cree que es más adecuado utilizar?</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/regresion-030-2.sav"</span>, user_na<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Sexo<span class="op">=</span><span class="va">Mujer</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">Sexo</span>,<span class="va">Edad</span>,<span class="va">Talla</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dfAumentado</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span><span class="op">+</span><span class="va">Sexo</span>,data<span class="op">=</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloSexo</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span>,formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(1) Talla ~ Sexo"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(2) Talla ~ Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SexoEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dfAumentado</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">.fitted</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(3) Talla ~ Sexo+Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_Interaccion</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(4) Talla ~ Sexo+Edad+ Sexo:Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">grid.arrange</span><span class="op">(</span><span class="va">plot_SoloSexo</span>,<span class="va">plot_SoloEdad</span>,<span class="va">plot_SexoEdad</span>,<span class="va">plot_Interaccion</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="09-tallerRegresion_files/figure-html/unnamed-chunk-13-1.png" width="672"></div>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modeloSexo</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloSexoEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">+</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloInteraccion</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">*</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexo</span>, <span class="va">modeloEdad</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+161.98
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.15
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+130.31
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+6.99
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.99
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.04
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.746
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.36
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.51
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+30
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.004 / -0.032
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.437 / 0.417
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+216.149
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+199.024
+</td>
+</tr>
+</table></div>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexoEdad</span>,<span class="va">modeloInteraccion</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+119.32
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+6.71
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+114.55
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+9.31
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-8.39
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.41
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>0.002</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.63
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+14.96
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+0.862
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.47
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.53
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.86
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.75
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+SexoMujer:Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-0.80
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.08
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+0.462
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+30
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.611 / 0.582
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.619 / 0.575
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+189.919
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+191.283
+</td>
+</tr>
+</table></div>
+</div>
+<div id="ejemplo-4" class="section level4 unnumbered">
+<h4>Ejemplo 4<a class="anchor" aria-label="anchor" href="#ejemplo-4"><i class="fas fa-link"></i></a>
+</h4>
+<p>Descargue la base de datos
+<a href="datos/regresion-200-2.sav">regresion-200-2.sav</a>. Es como el anterior, pero con una muestra mucho mayor. Observe como con el aumento del tamaño de muestra se reducen los errores estándar/típicos de estimación de los parámetros, lo que puede ofrecer unos <em>p</em> más pequeños eventualmente, pero nada más cambia notablemente.</p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/regresion-200-2.sav"</span>, user_na<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Sexo<span class="op">=</span><span class="va">Mujer</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">Sexo</span>,<span class="va">Edad</span>,<span class="va">Talla</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dfAumentado</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span><span class="op">+</span><span class="va">Sexo</span>,data<span class="op">=</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloSexo</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span>,formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(1) Talla ~ Sexo"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(2) Talla ~ Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SexoEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dfAumentado</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">.fitted</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(3) Talla ~ Sexo+Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_Interaccion</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(4) Talla ~ Sexo+Edad+ Sexo:Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">grid.arrange</span><span class="op">(</span><span class="va">plot_SoloSexo</span>,<span class="va">plot_SoloEdad</span>,<span class="va">plot_SexoEdad</span>,<span class="va">plot_Interaccion</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="09-tallerRegresion_files/figure-html/unnamed-chunk-17-1.png" width="672"></div>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modeloSexo</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloSexoEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">+</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloInteraccion</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">*</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexo</span>, <span class="va">modeloEdad</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+165.89
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.94
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+132.61
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-2.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.109
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.27
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.24
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.013 / 0.008
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.304 / 0.301
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+1459.562
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+1389.670
+</td>
+</tr>
+</table></div>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexoEdad</span>,<span class="va">modeloInteraccion</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+116.80
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.03
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+115.06
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+4.06
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-12.04
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.04
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-7.76
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+6.72
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+0.249
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.83
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.23
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.97
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.31
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+SexoMujer:Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-0.30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.47
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+0.520
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.587 / 0.582
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.587 / 0.581
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+1287.533
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+1289.111
+</td>
+</tr>
+</table></div>
+</div>
+<div id="ejemplo-5" class="section level4 unnumbered">
+<h4>Ejemplo 5<a class="anchor" aria-label="anchor" href="#ejemplo-5"><i class="fas fa-link"></i></a>
+</h4>
+<p>Descargue la base de datos
+<a href="datos/regresion-020-3.sav">regresion-020-3.sav</a>. En este caso tenemos niños y niñas que hacia los 10 años tienen la misma talla, pero de ahí en adelante, los niños crecen a un ritmo mayor que las niñas (aunque es dificil apreciar dicho efecto con muestras pequeñas) ¿Qué modelo cree que lo refleja mejor?</p>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/regresion-020-3.sav"</span>, user_na<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Sexo<span class="op">=</span><span class="va">Mujer</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">Sexo</span>,<span class="va">Edad</span>,<span class="va">Talla</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dfAumentado</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span><span class="op">+</span><span class="va">Sexo</span>,data<span class="op">=</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloSexo</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span>,formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(1) Talla ~ Sexo"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(2) Talla ~ Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SexoEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dfAumentado</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">.fitted</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(3) Talla ~ Sexo+Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_Interaccion</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(4) Talla ~ Sexo+Edad+ Sexo:Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">grid.arrange</span><span class="op">(</span><span class="va">plot_SoloSexo</span>,<span class="va">plot_SoloEdad</span>,<span class="va">plot_SexoEdad</span>,<span class="va">plot_Interaccion</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="09-tallerRegresion_files/figure-html/unnamed-chunk-21-1.png" width="672"></div>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modeloSexo</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloSexoEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">+</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloInteraccion</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">*</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexo</span>, <span class="va">modeloEdad</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+156.33
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.01
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+107.74
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.21
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+8.96
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.89
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>0.033</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.96
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.16
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+20
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+20
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.227 / 0.185
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.971 / 0.970
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+146.374
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+80.389
+</td>
+</tr>
+</table></div>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexoEdad</span>,<span class="va">modeloInteraccion</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+106.26
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+2.24
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+101.63
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.05
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-1.51
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.84
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.089
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+7.47
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+4.45
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+0.113
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+4.13
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.18
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+4.51
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.25
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+SexoMujer:Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-0.68
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.33
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+0.057
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+20
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+20
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.976 / 0.973
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.981 / 0.977
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+78.882
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+76.218
+</td>
+</tr>
+</table></div>
+</div>
+<div id="ejemplo-6" class="section level4 unnumbered">
+<h4>Ejemplo 6<a class="anchor" aria-label="anchor" href="#ejemplo-6"><i class="fas fa-link"></i></a>
+</h4>
+<p>Descargue la base de datos
+<a href="datos/regresion-200-3.sav">regresion-200-3.sav</a>. Como el ejemplo anterior, pero usando muestras grandes, donde es más fácil apreciar las interacciones. ¿Que ve que haya cambiado con respecto al ejemplo anterior?</p>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/regresion-200-3.sav"</span>, user_na<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Sexo<span class="op">=</span><span class="va">Mujer</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">Sexo</span>,<span class="va">Edad</span>,<span class="va">Talla</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dfAumentado</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span><span class="op">+</span><span class="va">Sexo</span>,data<span class="op">=</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloSexo</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span>,formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(1) Talla ~ Sexo"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SoloEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(2) Talla ~ Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_SexoEdad</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dfAumentado</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">.fitted</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(3) Talla ~ Sexo+Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plot_Interaccion</span><span class="op">=</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Edad</span>,y<span class="op">=</span><span class="va">Talla</span>,shape<span class="op">=</span><span class="va">Sexo</span>,color<span class="op">=</span><span class="va">Sexo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"(4) Talla ~ Sexo+Edad+ Sexo:Edad"</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>color<span class="op">=</span><span class="cn">FALSE</span>,shape<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">grid.arrange</span><span class="op">(</span><span class="va">plot_SoloSexo</span>,<span class="va">plot_SoloEdad</span>,<span class="va">plot_SexoEdad</span>,<span class="va">plot_Interaccion</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="09-tallerRegresion_files/figure-html/unnamed-chunk-25-1.png" width="672"></div>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modeloSexo</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloSexoEdad</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">+</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">modeloInteraccion</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Talla</span> <span class="op">~</span> <span class="va">Sexo</span><span class="op">*</span><span class="va">Edad</span>, data<span class="op">=</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexo</span>, <span class="va">modeloEdad</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+157.72
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+101.57
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+8.32
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.35
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+4.37
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.07
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.160 / 0.156
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.949 / 0.948
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+1472.594
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+913.558
+</td>
+</tr>
+</table></div>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tab_model</span><span class="op">(</span><span class="va">modeloSexoEdad</span>,<span class="va">modeloInteraccion</span>,show.se <span class="op">=</span> <span class="cn">TRUE</span>,show.ci <span class="op">=</span> <span class="cn">FALSE</span>,show.aic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"knitr"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">asis_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+ 
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Talla
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+p
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+std. Error
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">
+p
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+97.15
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.81
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+91.26
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Sexo: Mujer
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-3.81
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.29
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+10.46
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.48
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+4.82
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.06
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+<strong>&lt;0.001</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+5.29
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.07
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+SexoMujer:Edad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-1.02
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+<strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
+200
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+R<sup>2</sup> / R<sup>2</sup> adjusted
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.972 / 0.972
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+0.981 / 0.981
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+AIC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+792.170
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
+714.491
+</td>
+</tr>
+</table></div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="regresi%C3%B3n-log%C3%ADstica-binaria.html"><span class="header-section-number">8</span> Regresión logística binaria</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#taller-de-regresi%C3%B3n-lineal">Taller de regresión lineal</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/fjbaron/apuntesMaster/blob/master/09-tallerRegresion.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/fjbaron/apuntesMaster/edit/master/09-tallerRegresion.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Apuntes de estadística</strong>" was written by Francisco Javier Barón López. It was last built on 2022-11-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

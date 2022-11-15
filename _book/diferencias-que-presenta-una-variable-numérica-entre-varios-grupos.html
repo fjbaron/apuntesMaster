@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 5 Diferencias que presenta una variable numérica entre varios grupos | Apuntes de estadística</title>
+<meta name="author" content="Francisco Javier Barón López">
+<meta name="description" content="En este capítulo vamos a generalizar las ideas del anterior, donde comparábamos las diferencias observadas en una variable en dos grupos, al caso de más grupos. De hecho, si aplicamos algunas de...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Capítulo 5 Diferencias que presenta una variable numérica entre varios grupos | Apuntes de estadística">
+<meta property="og:type" content="book">
+<meta property="og:description" content="En este capítulo vamos a generalizar las ideas del anterior, donde comparábamos las diferencias observadas en una variable en dos grupos, al caso de más grupos. De hecho, si aplicamos algunas de...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 5 Diferencias que presenta una variable numérica entre varios grupos | Apuntes de estadística">
+<meta name="twitter:description" content="En este capítulo vamos a generalizar las ideas del anterior, donde comparábamos las diferencias observadas en una variable en dos grupos, al caso de más grupos. De hecho, si aplicamos algunas de...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Apuntes de estadística</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introducción</a></li>
+<li class="book-part">Curso estadística básica</li>
+<li><a class="" href="exploraci%C3%B3n-de-los-datos.html"><span class="header-section-number">1</span> Exploración de los datos</a></li>
+<li><a class="" href="estimaci%C3%B3n.html"><span class="header-section-number">2</span> Estimación</a></li>
+<li><a class="" href="contrastes-de-hip%C3%B3tesis.html"><span class="header-section-number">3</span> Contrastes de hipótesis</a></li>
+<li><a class="" href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-dos-grupos.html"><span class="header-section-number">4</span> Diferencias que presenta una variable numérica entre dos grupos</a></li>
+<li><a class="active" href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-varios-grupos.html"><span class="header-section-number">5</span> Diferencias que presenta una variable numérica entre varios grupos</a></li>
+<li><a class="" href="independencia-de-variables-categ%C3%B3ricas.html"><span class="header-section-number">6</span> Independencia de variables categóricas</a></li>
+<li class="book-part">Curso estadística avanzada</li>
+<li><a class="" href="regresi%C3%B3n-lineal-m%C3%BAltiple.html"><span class="header-section-number">7</span> Regresión lineal múltiple</a></li>
+<li><a class="" href="regresi%C3%B3n-log%C3%ADstica-binaria.html"><span class="header-section-number">8</span> Regresión logística binaria</a></li>
+<li><a class="" href="taller-de-regresi%C3%B3n-lineal.html">Taller de regresión lineal</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/fjbaron/apuntesMaster">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="diferencias-que-presenta-una-variable-numérica-entre-varios-grupos" class="section level1" number="5">
+<h1>
+<span class="header-section-number">Capítulo 5</span> Diferencias que presenta una variable numérica entre varios grupos<a class="anchor" aria-label="anchor" href="#diferencias-que-presenta-una-variable-num%C3%A9rica-entre-varios-grupos"><i class="fas fa-link"></i></a>
+</h1>
+<p>En este capítulo vamos a generalizar las ideas del anterior, donde comparábamos las diferencias observadas en una variable en dos grupos, al caso de más grupos. De hecho, si aplicamos algunas de las técnicas que aquí veremos a sólo dos grupos, darían los mismos resultados que técnicas tratadas con anterioridad.</p>
+<p>Como ilustración del tipo de problemas que podemos tratar, está el de comparar los resultados de 4 tratamientos. Uno podría ser un placebo aplicado a un grupo de control, y los otros tres podrían corresponder a sendas dosis de un medicamento. La variable respuesta sería una variable numérica.</p>
+<p>Al igual que en el capítulo anterior consideraremos dos tipos de técnicas:</p>
+<ul>
+<li><p>Paramétricas: Cuando suponemos que las distribución de los datos de cada muestra tienen cierta distribución particular. La técnica que mostraremos se denomina ANOVA de una vía.</p></li>
+<li><p>No paramétricas: No es necesario suponer nada sobre la distribución de los datos. Interpretaremos la prueba de Kruskal-Wallis, que puede extenderse a variables ordinales.</p></li>
+</ul>
+<p>Sea cual sea el contraste que utilicemos, la <strong>hipótesis nula</strong> traducirá la idea de que <em>en los diferentes grupos se obtienen resultados similares (“no efecto”)</em>, y la <em>hipótesis alternativa</em> lo negará. La significación del contraste nos dará una idea de si las diferencias observadas en los diferentes grupos son imputables al azar (significación grande) o hay una diferencia intrínseca entre algunos grupos (significación pequeña).</p>
+<div id="anova-de-un-factor-o-una-vía" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Anova de un factor o una vía<a class="anchor" aria-label="anchor" href="#anova-de-un-factor-o-una-v%C3%ADa"><i class="fas fa-link"></i></a>
+</h2>
+<p>Para usar el modelo ANOVA debe poder suponerse que son válidas una serie de condiciones:</p>
+<ul>
+<li><p>La variabilidad de todas las muestras debe ser similar. Ésta es la condición más importante.</p></li>
+<li><p>Las muestras deben tener una distribución aproximadamente normal. Cierto alejamiento de esta hipótesis no es muy problemático.</p></li>
+<li><p>Los tamaños de las muestras no deben ser muy dispares. Esta condición en realidad no es estrictamente necesaria, y además es controlable al realizar un experimento. Pero, si se sospecha una cierta heterogeneidad en la variabilidad en los diferentes grupos (como es razonable esperar en la práctica), el tener grupos desequilibrados en tamaño sólo puede empeorar las cosas. Esta condición simplifica el poder interpretar los resultados.</p></li>
+</ul>
+<p>Si se dan las dos primeras condiciones, el modelo ANOVA contrasta la hipótesis nula de que en todos los grupos se obtienen valores similares de las variables por una condición equivalente: Que las medias (como parámetros) en los diferentes grupos son iguales.</p>
+<div id="en-qué-se-basa-el-contraste-anova" class="section level3" number="5.1.1">
+<h3>
+<span class="header-section-number">5.1.1</span> En qué se basa el contraste ANOVA<a class="anchor" aria-label="anchor" href="#en-qu%C3%A9-se-basa-el-contraste-anova"><i class="fas fa-link"></i></a>
+</h3>
+<p>Si suponemos que la hipótesis nula de la igualdad de medias en los diferentes grupos es cierta, podríamos decir que todas las observaciones pueden considerarse que provienen de un único grupo cuya media y variabilidad es la misma que la de cualquiera de los grupos por separado. Por tanto observamos que hay diferentes maneras de estimar la variabilidad en la población. De las discrepancias entre diferentes estimaciones de la variabilidad surge toda una familia de técnicas conocidas como análisis de la varianza, de las cuales el ANOVA de una vía no es más que el representante más simple.</p>
+<p>La cuestión es que si alguno de los grupos presenta unos valores que en media se alejan del resto, esto se apreciará en el contraste como una fuente extra de variabilidad no explicable por el azar. La significación del contraste se calcula evaluando si esta variabilidad extra es muy grande con respecto una variabilidad que sería de esperar si la hipótesis nula fuese cierta. Es por ello, que al realizar un contraste ANOVA siempre veremos varias fuentes de variabilidad. Los detalles son engorrosos, y en esta explicación resumida de la técnica nos limitaremos a tomar la decisión de rechazar o aceptar la hipótesis nula en función de la significación del contraste (que es fácilmente identificable).</p>
+<p>Suele llevar a confusión el nombre, pues hace pensar que estamos contrastando igualdad de varianzas, pero en realidad esto es algo que se supone. Lo que contrastamos es la igualdad de medias.</p>
+</div>
+<div id="cómo-se-interpreta-anova" class="section level3" number="5.1.2">
+<h3>
+<span class="header-section-number">5.1.2</span> Cómo se interpreta ANOVA<a class="anchor" aria-label="anchor" href="#c%C3%B3mo-se-interpreta-anova"><i class="fas fa-link"></i></a>
+</h3>
+<p>Si al realizar la prueba ANOVA se obtiene una significación baja (por ejemplo <strong>p&lt; 0.05</strong>) rechazaremos la hipótesis de que en todos los grupos las medias son iguales. La siguiente cuestión que aparece de modo natural en esta situación es la de identificar en qué grupos se han producido las diferencias. Básicamente tenemos las siguientes aproximaciones para abordar la cuestión:</p>
+<ul>
+<li><p>Cuando no tenemos una idea previa de en qué grupos eran de esperar las mayores diferencias, utilizamos los contrastes no planeados o contrastes post-hoc.</p></li>
+<li><p>Antes de recoger datos es posible que tengamos algunas sospechas de dónde se deberían producir las diferencias. A esto se le denomina comparaciones planeadas. En SPSS lo encontramos pulsando el botón “contrastes” en la ventana para realizar el contraste ANOVA.</p></li>
+</ul>
+<div id="contrastes-no-planeados-o-post-hoc" class="section level4" number="5.1.2.1">
+<h4>
+<span class="header-section-number">5.1.2.1</span> Contrastes no planeados o post-hoc<a class="anchor" aria-label="anchor" href="#contrastes-no-planeados-o-post-hoc"><i class="fas fa-link"></i></a>
+</h4>
+<p>Bajo ese nombre encontramos múltiples técnicas. Éstas se consideran bastante conservadoras, en el sentido de que intentan reducir la posibilidad de errores de tipo I, a costa de aumentar la posibilidad de errores de tipo II. Dicho de otro modo, es probable que en situaciones donde realmente haya diferencias entre grupos, las pruebas post-hoc no lo detecten. Tienen que ser las diferencias entre grupos realmente grandes para poder ser reconocidas por estas pruebas.</p>
+<p>Como hemos mencionado, dentro de la categoría de contrastes no planeados, hay muchas técnicas disponibles. Debe ser por algo. A continuación presentamos unas indicaciones que nos pueden ayudar a decidir cuál se adecua mejor a un estudio si estamos usando SPSS. Sólo indicaremos las más populares.</p>
+<p>Una primera división entre estas pruebas es:</p>
+<ul>
+<li><p>Tests de rangos: Son aquellas que buscan identificar grupos homogéneos (medias parecidas).</p></li>
+<li><p>Comparaciones múltiples: Buscan establecer diferencias entre grupos basándose en diferencias dos a dos.</p></li>
+</ul>
+<p>Esta división no es estricta pues hay técnicas que se pueden incluir en esas dos categorías a la vez.</p>
+<ul>
+<li><p>Grupos equilibrados y varianzas similares: Cuando todos los grupos tienen el mismo número de individuos, y podemos asumir que están igualmente dispersos.
+o Diferencia Honestamente Significativa de Tukey (HSD de Tukey). Se puede considerar a la vez como una técnica de comparaciones múltiples y a la vez de rangos. Es un test que se suele utilizar cuando se quiere comparar cada grupo con todos los demás y el número de grupos es alto (6 o más). Es una prueba conservadora (mantiene bajo el error de tipo I, sacrificando la capacidad de detectar diferencias existentes).
+o Test de Scheffé: Hace todas las comparaciones posibles. Por ejemplo, el primer grupo con respecto a cada uno de los restantes, pero también el primero con respecto al grupo formado por la unión de dos de los restantes, etc. Si sólo se desea comparar grupos dos a dos es preferible la prueba HSD de Tukey, pero si las comparaciones que buscamos son más complejas, preferimos esta prueba.</p></li>
+<li><p>Grupos desequilibrados: Cuando tenemos un número diferente de individuos en cada grupo puede interesarnos elegir alguna de las siguientes pruebas:</p></li>
+<li><p>LSD de Fisher (sólo si hay 3 grupos),</p></li>
+<li><p>T3 de Dunnett,</p></li>
+<li><p>C de Dunnett,</p></li>
+<li><p>Scheffé,</p></li>
+<li><p>Games-Howell.</p></li>
+<li><p>Varianzas desiguales: Cuando la prueba de igualdad de varianzas (por ejemplo Levene) nos hace sospechar que las varianzas no son similares en todos los grupos, podemos considerar alguna de estas pruebas:</p></li>
+<li><p>T2 de Tamhane</p></li>
+<li><p>T3 de Dunnett,</p></li>
+<li><p>C de Dunnett,</p></li>
+<li><p>Scheffé,</p></li>
+<li><p>Games-Howell.</p></li>
+</ul>
+</div>
+<div id="comparaciones-planeadas" class="section level4" number="5.1.2.2">
+<h4>
+<span class="header-section-number">5.1.2.2</span> Comparaciones planeadas<a class="anchor" aria-label="anchor" href="#comparaciones-planeadas"><i class="fas fa-link"></i></a>
+</h4>
+<p>Son las que deberíamos hacer cuando honestamente tenemos una sospecha sobre el posible resultado del análisis, es decir entre qué grupos esperamos encontrar diferencias, y estas sospechas han sido formuladas con anterioridad a la recogida de datos.</p>
+<p>Esto ocurre por ejemplo cuando a un grupo de control se le aplica un placebo, al segundo cierta cantidad de un medicamento experimental, y al tercero una cantidad mayor, pero que no esperamos en principio que mejore en mucho los resultados del segundo grupo. Posiblemente sospechemos que el grupo control va a obtener resultados muy diferentes al segundo y al tercero. No pensamos encontrar diferencias entre el segundo y el tercero. Este es el tipo de cuestiones que podemos resolver con las comparaciones planeadas.
+Estas pruebas se realizan de la siguiente manera usando SPSS:</p>
+<ul>
+<li><p>En la ventana donde se realiza el contraste ANOVA (“Analizar – Comparar medias – ANOVA de un factor…”) pulsamos en el botón etiquetado “contrastes”. Allí marcamos la casilla “polinómicos”.</p></li>
+<li><p>Tomamos nota de un grupo (o más si pensamos que pueden ofrecer resultados parecidos) para compararlos con otro grupo (o más) que pensamos que ofrecerán resultados diferentes.</p></li>
+<li><p>A cada uno de los primeros les asociamos unos coeficientes positivos que reflejen la importancia de ese grupo, y a los grupos con los que queremos contrastarlos les asociamos unos coeficientes negativos. Esto se hace de modo que al sumarlos todos los coeficientes obtengamos un total de cero.</p></li>
+<li><p>Pulsando en “siguiente” podemos ir añadiendo todas las hipótesis que queramos.</p></li>
+</ul>
+<p>Por ejemplo si pensamos que el primer grupo es diferente del segundo y el tercero, podemos asociarle al primer grupo un coeficiente 1 y -0.5 a cada uno de los otros dos; Así indicamos que queremos contrastar el primer grupo frente al conjunto formado por los dos restantes.</p>
+</div>
+</div>
+<div id="qué-hacer-si-no-se-verifican-las-premisas-del-modelo-anova" class="section level3" number="5.1.3">
+<h3>
+<span class="header-section-number">5.1.3</span> ¿Qué hacer si no se verifican las premisas del modelo ANOVA?<a class="anchor" aria-label="anchor" href="#qu%C3%A9-hacer-si-no-se-verifican-las-premisas-del-modelo-anova"><i class="fas fa-link"></i></a>
+</h3>
+<p>Hemos mencionado que para que el contraste ANOVA sea válido es necesario que podamos suponer una serie de propiedades sobre la distribución de la variable en los diferentes grupos.</p>
+<p>La más importante es la de igualdad de las varianzas. Para ello podemos prestar atención al resultado de la prueba de Levene. Dado lo sensible que es el contraste ANOVA a la falta de este requisito, se acostumbra a rechazar la igualdad de varianzas con un nivel de significación superior al habitual (el 0.15=15% por ejemplo). En caso de que no se pueda admitir la igualdad de varianzas podemos usar las pruebas de Welch o de Brown-Forsythe para decidir sobre la igualdad de medias. En SPSS estas últimas, junto a la prueba de Levene, las encontramos al pulsar el botón “opciones…” que aparece en la misma ventana en la que se hace la prueba ANOVA.</p>
+<p>Otra condición que necesitamos para la validez de la prueba ANOVA es la de la normalidad en cada uno de los grupos, aunque indicábamos que esta condición no es tán crítica como la de la igualdad de varianzas. Si la variable que medimos es un parámetro biológico, con frecuencia tiene sentido hacer un cambio de variable logarítmico, que habitualmente normaliza las observaciones e iguala varianzas.</p>
+</div>
+<div id="ejemplo-paramétrico" class="section level3 unnumbered">
+<h3>Ejemplo paramétrico<a class="anchor" aria-label="anchor" href="#ejemplo-param%C3%A9trico"><i class="fas fa-link"></i></a>
+</h3>
+<p>Se realizó un experimento para comparar tres métodos de aprendizaje de lectura. Se asignó aleatoriamente los estudiantes a cada uno de los tres métodos. Cada método fue probado con 22 estudiantes (experimento equilibrado). Se evaluó mediante diferentes pruebas la capacidad de comprensión de los estudiantes, antes y después de recibir la instrucción. Los resultados se recogen en la base de datos <a href="datos/lectura-anova.sav">lectura-anova.sav</a>, de la que exploramos las primeras líneas:</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/lectura-anova.sav"</span>, user_na<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Grupo
+</th>
+<th style="text-align:right;">
+Antes
+</th>
+<th style="text-align:right;">
+Despues
+</th>
+<th style="text-align:right;">
+Diferencia
+</th>
+<th style="text-align:right;">
+gr1
+</th>
+<th style="text-align:right;">
+gr2
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+10.0
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+9.3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+13.0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica I
+</td>
+<td style="text-align:right;">
+6.5
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+16.2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica I
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+8.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica II
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Queremos contrastar la hipótesis nula de que las tres técnicas ofrecen resultados medios similares, frente a la hipótesis alternativa de que esto no es así. Para ello podríamos considerar el resultado obtenido “después”. Pero esto estaría sin duda influido por la habilidad previa de cada estudiante. Para eliminar esta fuente de variabilidad podríamos considerar a cada estudiante como su propio control, y considerar una nueva variable que sería la diferencia entre “después” y “antes”. Ahora la hipótesis nula es que la variable “diferencia”, posee medias similares, frente a la hipótesis alternativa de que esto es falso. Un análisis descriptivo exploratorio muestra que aparentemente el grupo control tiene resultados peores que los que siguieron la técnica I y II.</p>
+<p>La siguiente tabla muestra los resultados de la prueba ANOVA para las 3 variables, en morma de media y error estándar, así como las comparaciones paramétricas (ANOVA) y no paramétricas (Kruskal-Wallis, que veremos posteriormente):</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">generaTablaANOVA1F</span><span class="op">(</span><span class="va">df</span>,<span class="st">"Grupo"</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Antes"</span>,<span class="st">"Despues"</span>,<span class="st">"Diferencia"</span><span class="op">)</span>,columnas <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mediaet"</span>,<span class="st">"p.F"</span>,<span class="st">"p.kw"</span><span class="op">)</span><span class="op">)</span>  <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span> booktabs <span class="op">=</span> <span class="cn">T</span>, </span>
+<span>                col.names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>,</span>
+<span>                         <span class="st">"Control"</span>, </span>
+<span>                        <span class="st">"Técnica I"</span>,</span>
+<span>                        <span class="st">"Técnica II"</span>,</span>
+<span>                        <span class="st">"p (parám.)"</span>, <span class="st">"P (no parám)."</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in omega_sq(modelo, ci.lvl = 0.95) : </span></span>
+<span><span class="co">#&gt;   could not find function "omega_sq"</span></span>
+<span><span class="co">#&gt; Error in omega_sq(modelo, ci.lvl = 0.95) : </span></span>
+<span><span class="co">#&gt;   could not find function "omega_sq"</span></span>
+<span><span class="co">#&gt; Error in omega_sq(modelo, ci.lvl = 0.95) : </span></span>
+<span><span class="co">#&gt;   could not find function "omega_sq"</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Control
+</th>
+<th style="text-align:left;">
+Técnica I
+</th>
+<th style="text-align:left;">
+Técnica II
+</th>
+<th style="text-align:left;">
+p (parám.)
+</th>
+<th style="text-align:left;">
+P (no parám).
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Antes
+</td>
+<td style="text-align:left;">
+7.89±0.51
+</td>
+<td style="text-align:left;">
+7.41±0.44
+</td>
+<td style="text-align:left;">
+7.05±0.45
+</td>
+<td style="text-align:left;">
+<ul><li></ul>
+</td>
+<td style="text-align:left;">
+<ul><li></ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Despues
+</td>
+<td style="text-align:left;">
+17.76±0.56
+</td>
+<td style="text-align:left;">
+20.91±0.63
+</td>
+<td style="text-align:left;">
+20.14±0.63
+</td>
+<td style="text-align:left;">
+<ul><li></ul>
+</td>
+<td style="text-align:left;">
+<ul><li></ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Diferencia
+</td>
+<td style="text-align:left;">
+9.87±0.58
+</td>
+<td style="text-align:left;">
+13.50±0.67
+</td>
+<td style="text-align:left;">
+13.09±0.52
+</td>
+<td style="text-align:left;">
+<ul><li></ul>
+</td>
+<td style="text-align:left;">
+<ul><li></ul>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Las puntuaciones antes de recibir la enseñanza eran de media muy similares. La prueba ANOVA con dichas puntuaciones no mostró diferencia estadísticamente significativa (p=0.45) como sería de esperar en una asignación aleatoria al grupo. Al observar la variable <em>Después</em>, La prueba ANOVA sí resulta significativa, es decir, los 3 grupos no presentan el mismo cambio medio.</p>
+<p>El análisis posthoc lo podemos hacer con la prueba <em>HSD (Diferencia Honestamente Significativa) de Tukey</em>,</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modeloLineal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Diferencia</span> <span class="op">~</span> <span class="va">Grupo</span>,data<span class="op">=</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="va">modeloLineal</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"Grupo"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+diff
+</th>
+<th style="text-align:right;">
+lwr
+</th>
+<th style="text-align:right;">
+upr
+</th>
+<th style="text-align:right;">
+p adj
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Técnica I-Control
+</td>
+<td style="text-align:right;">
+3.63
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+5.6
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica II-Control
+</td>
+<td style="text-align:right;">
+3.22
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+5.2
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica II-Técnica I
+</td>
+<td style="text-align:right;">
+-0.41
+</td>
+<td style="text-align:right;">
+-2.4
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+0.87
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Donde vemos para cada par de variables, la diferencia entre las medias, un intervalo de confianza (con extremos inferior y superior para la diferencia de medias), y la significación de la diferencia. En él vemos que el grupo de Control presenta diferencias significativas con respecto a los demás grupos, que no presentan diferencias significativas entre sí.</p>
+<p>Observe que en todos los intervalos de confianza donde se ha obtenido diferencias estadísticamente significativas para parejas de grupos, se obtienen intervalos de confianza que no contienen el valor cero para la diferencia de medias. Esto es otra manera de leer un contraste de hipótesis que permite obtener una interpretación clínica de los resultados de un experimento más interesante que la más abstracta significación.</p>
+<p>El análisis post-hoc viene reflejado en el siguiente gráfico en el que se usa la prueba HSD para contrastar las diferencias entre pares de grupos, usando una flecha roja dentro del intervalo de confianza en cada grupo. Si las líneas rojas se superponen, la diferencia no es significativa.</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modeloLineal</span> <span class="op">%&gt;%</span> <span class="fu">emmeans</span><span class="op">(</span><span class="st">"Grupo"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>                <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>comparisons<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">+</span><span class="fu">xlab</span><span class="op">(</span><span class="st">"Diferencia"</span><span class="op">)</span><span class="op">+</span><span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span><span class="op">+</span><span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-anova_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<p>En cuanto a las condiciones de validez de la prueba ANOVA, veamos como podemos explorarlo:</p>
+<ul>
+<li>
+<strong>Normalidad:</strong> Podemos estudiar la normalidad en cada una de los grupos:</li>
+</ul>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">grid.arrange</span><span class="op">(</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">Grupo</span><span class="op">==</span><span class="st">"Control"</span><span class="op">)</span>,<span class="fu">aes</span><span class="op">(</span>sample<span class="op">=</span><span class="va">Diferencia</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">stat_qq</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">stat_qq_line</span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Controles"</span><span class="op">)</span>,</span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">Grupo</span><span class="op">==</span><span class="st">"Técnica I"</span><span class="op">)</span>,<span class="fu">aes</span><span class="op">(</span>sample<span class="op">=</span><span class="va">Diferencia</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">stat_qq</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">stat_qq_line</span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Técnica I"</span><span class="op">)</span>,</span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">Grupo</span><span class="op">==</span><span class="st">"Técnica II"</span><span class="op">)</span>,<span class="fu">aes</span><span class="op">(</span>sample<span class="op">=</span><span class="va">Diferencia</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">stat_qq</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">stat_qq_line</span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Técnica II"</span><span class="op">)</span>,</span>
+<span>ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-anova_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<p>Al estudiar muchos gráficos a la vez, es posible que en algunos encontremos desviaciones de la normalidad que nos hagan dudar. Es normal por la abundancia de comparaciones múltiples. Es más conveniente es tratar a todos los datos juntos estudiando todos los residuos del ajuste ANOVA (desviación de cada dato con respecto a la media de su propio grupo), en un solo gráfico QQ:</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">qqPlot</span><span class="op">(</span><span class="va">modeloLineal</span>, main<span class="op">=</span><span class="st">"QQ Plot"</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="05-anova_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+<pre><code>#&gt; [1] 12 65</code></pre>
+<p>No se aprecia una notable desviación de la normalidad.</p>
+<ul>
+<li>En cuanto a la <strong>homogeneidad de varianzas (heterocedasticidad)</strong>, podemos usar la prueba de Levene:</li>
+</ul>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">leveneTest</span><span class="op">(</span><span class="va">modeloLineal</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Levene's Test for Homogeneity of Variance (center = median)</span></span>
+<span><span class="co">#&gt;       Df F value Pr(&gt;F)</span></span>
+<span><span class="co">#&gt; group  2    1.27   0.29</span></span>
+<span><span class="co">#&gt;       63</span></span></code></pre></div>
+<p>Al haber obtenido <em>p bastante grande</em> para la prueba de homogeneidad de varianzas, podemos asumir que las tres muestras presentan similar dispersión.</p>
+<p>Como se aprecia es algo pesado ir comprobando todas las cuestiones de validez una a una. La librería de R <strong>gvlma</strong> hace una buena cantidad de comprobaciones de una forma muy simple:</p>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">modeloLineal</span> <span class="op">%&gt;%</span> <span class="fu">gvlma</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm(formula = Diferencia ~ Grupo, data = df)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residuals:</span></span>
+<span><span class="co">#&gt;    Min     1Q Median     3Q    Max </span></span>
+<span><span class="co">#&gt; -5.371 -1.996  0.121  2.098  6.129 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;                 Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)        9.871      0.579   17.04  &lt; 2e-16 ***</span></span>
+<span><span class="co">#&gt; GrupoTécnica I     3.629      0.819    4.43  3.8e-05 ***</span></span>
+<span><span class="co">#&gt; GrupoTécnica II    3.220      0.819    3.93  0.00021 ***</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  </span></span>
+<span><span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual standard error: 2.7 on 63 degrees of freedom</span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.272,  Adjusted R-squared:  0.249 </span></span>
+<span><span class="co">#&gt; F-statistic: 11.8 on 2 and 63 DF,  p-value: 4.54e-05</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS</span></span>
+<span><span class="co">#&gt; USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:</span></span>
+<span><span class="co">#&gt; Level of Significance =  0.05 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt;  gvlma(x = .) </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;                       Value p-value                Decision</span></span>
+<span><span class="co">#&gt; Global Stat        1.89e+00   0.756 Assumptions acceptable.</span></span>
+<span><span class="co">#&gt; Skewness           1.11e-02   0.916 Assumptions acceptable.</span></span>
+<span><span class="co">#&gt; Kurtosis           1.87e+00   0.171 Assumptions acceptable.</span></span>
+<span><span class="co">#&gt; Link Function      3.13e-15   1.000 Assumptions acceptable.</span></span>
+<span><span class="co">#&gt; Heteroscedasticity 6.81e-03   0.934 Assumptions acceptable.</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Value
+</th>
+<th style="text-align:right;">
+p-value
+</th>
+<th style="text-align:left;">
+Decision
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Global Stat
+</td>
+<td style="text-align:right;">
+1.89
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+<td style="text-align:left;">
+Assumptions acceptable.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Skewness
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.92
+</td>
+<td style="text-align:left;">
+Assumptions acceptable.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kurtosis
+</td>
+<td style="text-align:right;">
+1.87
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:left;">
+Assumptions acceptable.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Link Function
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:left;">
+Assumptions acceptable.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Heteroscedasticity
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.93
+</td>
+<td style="text-align:left;">
+Assumptions acceptable.
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Para hacer algo similar en SPSS tenemos el menú: * Analizar -Comparar medias - ANOVA de un factor<em>. Las variables dependientes son </em>Antes* y <em>Diferencia</em>. El factor es <em>Grupo</em>. En pruebas posthoc, podemos seleccionar <em>Tukey</em>. En el botón <em>Opciones</em>, podemos marcar la prueba de <em>homogeneidad de varianzas</em>. La normalidad en cada muestra puede ser comprobada como hicimos en ocasiones anteriores en el menú, <em>Analizar - Estadísticos descriptivos - Explorar</em>, eligiendo como gráfico el histograma y añadiéndole las <em>pruebas de normalidad</em>.</p>
+</div>
+</div>
+<div id="contraste-no-paramétrico-de-kruskal-wallis" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Contraste no paramétrico de Kruskal-Wallis<a class="anchor" aria-label="anchor" href="#contraste-no-param%C3%A9trico-de-kruskal-wallis"><i class="fas fa-link"></i></a>
+</h2>
+<p>Si tenemos dudas sobre la validez de las condiciones del ANOVA, o incluso si la variable respuesta es ordinal, la prueba no paramétrica de Kruskal-Wallis contrasta unas hipótesis análogas a la prueba ANOVA de un factor. No requiere condiciones de validez especiales.</p>
+<p>El contraste de Kruskal-Wallis no contrasta que las medias sean iguales, sino simplemente si los valores obtenidos en los diferentes grupos son similares. Esto lo realiza de un modo sorprendentemente simple. Se ordenan todas las observaciones, de menor a mayor de todos los grupos. Si al ordenarse de esta manera se da la circunstancia de que muchas de las observaciones más pequeñas (o más grandes) pertenecen a un grupo sería una indicación de que los grupos no presentan valores similares. Es decir, si al ordenar las observaciones de menor a mayor, aparecen muy poco “mezcladas”, se rechaza la hipótesis nula. Como demostración, vamos a hacerlo en el caso del ejemplo anterior:</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu">arrange</span><span class="op">(</span><span class="va">Diferencia</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">.</span><span class="op">[[</span><span class="st">"Grupo"</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "Control"    "Control"    "Control"    "Control"   </span></span>
+<span><span class="co">#&gt;  [5] "Control"    "Control"    "Control"    "Control"   </span></span>
+<span><span class="co">#&gt;  [9] "Técnica I"  "Control"    "Técnica I"  "Control"   </span></span>
+<span><span class="co">#&gt; [13] "Técnica II" "Control"    "Técnica I"  "Técnica II"</span></span>
+<span><span class="co">#&gt; [17] "Control"    "Control"    "Técnica II" "Técnica I" </span></span>
+<span><span class="co">#&gt; [21] "Técnica I"  "Técnica II" "Técnica II" "Técnica I" </span></span>
+<span><span class="co">#&gt; [25] "Control"    "Técnica II" "Control"    "Técnica I" </span></span>
+<span><span class="co">#&gt; [29] "Control"    "Técnica I"  "Técnica II" "Técnica II"</span></span>
+<span><span class="co">#&gt; [33] "Control"    "Técnica I"  "Control"    "Control"   </span></span>
+<span><span class="co">#&gt; [37] "Control"    "Técnica II" "Técnica II" "Control"   </span></span>
+<span><span class="co">#&gt; [41] "Técnica II" "Técnica I"  "Técnica I"  "Técnica II"</span></span>
+<span><span class="co">#&gt; [45] "Técnica II" "Técnica I"  "Técnica II" "Técnica II"</span></span>
+<span><span class="co">#&gt; [49] "Técnica II" "Técnica II" "Técnica II" "Técnica I" </span></span>
+<span><span class="co">#&gt; [53] "Técnica I"  "Técnica I"  "Técnica II" "Técnica II"</span></span>
+<span><span class="co">#&gt; [57] "Control"    "Técnica I"  "Técnica I"  "Técnica I" </span></span>
+<span><span class="co">#&gt; [61] "Técnica II" "Técnica I"  "Técnica I"  "Técnica II"</span></span>
+<span><span class="co">#&gt; [65] "Técnica I"  "Técnica I"</span></span></code></pre></div>
+<p>O si se prefiere de modo más visual:</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu">arrange</span><span class="op">(</span><span class="va">Diferencia</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>Rango<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="va">Diferencia</span><span class="op">)</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Rango</span>, y<span class="op">=</span><span class="va">Grupo</span>,fill<span class="op">=</span><span class="va">Grupo</span>,col<span class="op">=</span><span class="va">Grupo</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-anova_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
+<p>Aparentemente tras ordenar por la variable <em>Diferencia</em> de menor a mayor, abundan en las primeras posiciones (rangos bajos) los individuos del grupo de Control. Es decir, estos son los que menor <em>Diferencia</em> han experimentado, por tanto nos hace pensar que ese grupo es diferente a los otros dos. Eso es lo que obteníamos en la primera tabla del ejemplo, en la columna <strong>“P no paramétrica”</strong></p>
+<p>El equivalente a la prueba posthoc de ANOVa para el test de Kruskal Wallis es el test de Dunn:</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">FSA</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/FSA/man/dunnTest.html">dunnTest</a></span><span class="op">(</span><span class="va">Diferencia</span> <span class="op">~</span> <span class="va">Grupo</span>, data<span class="op">=</span><span class="va">df</span>, method<span class="op">=</span><span class="st">"bh"</span><span class="op">)</span> </span>
+<span><span class="co">#&gt;               Comparison     Z P.unadj   P.adj</span></span>
+<span><span class="co">#&gt; 1    Control - Técnica I -3.84 0.00012 0.00037</span></span>
+<span><span class="co">#&gt; 2   Control - Técnica II -3.48 0.00050 0.00075</span></span>
+<span><span class="co">#&gt; 3 Técnica I - Técnica II  0.36 0.72079 0.72079</span></span></code></pre></div>
+<p>La prueba de no paramétrica de Kruskal-Wallis la encontramos en SPSS en el menú “Analizar - Pruebas no paramétricas - k muestras independientes”.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-dos-grupos.html"><span class="header-section-number">4</span> Diferencias que presenta una variable numérica entre dos grupos</a></div>
+<div class="next"><a href="independencia-de-variables-categ%C3%B3ricas.html"><span class="header-section-number">6</span> Independencia de variables categóricas</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#diferencias-que-presenta-una-variable-num%C3%A9rica-entre-varios-grupos"><span class="header-section-number">5</span> Diferencias que presenta una variable numérica entre varios grupos</a></li>
+<li>
+<a class="nav-link" href="#anova-de-un-factor-o-una-v%C3%ADa"><span class="header-section-number">5.1</span> Anova de un factor o una vía</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#en-qu%C3%A9-se-basa-el-contraste-anova"><span class="header-section-number">5.1.1</span> En qué se basa el contraste ANOVA</a></li>
+<li><a class="nav-link" href="#c%C3%B3mo-se-interpreta-anova"><span class="header-section-number">5.1.2</span> Cómo se interpreta ANOVA</a></li>
+<li><a class="nav-link" href="#qu%C3%A9-hacer-si-no-se-verifican-las-premisas-del-modelo-anova"><span class="header-section-number">5.1.3</span> ¿Qué hacer si no se verifican las premisas del modelo ANOVA?</a></li>
+<li><a class="nav-link" href="#ejemplo-param%C3%A9trico">Ejemplo paramétrico</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#contraste-no-param%C3%A9trico-de-kruskal-wallis"><span class="header-section-number">5.2</span> Contraste no paramétrico de Kruskal-Wallis</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/fjbaron/apuntesMaster/blob/master/05-anova.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/fjbaron/apuntesMaster/edit/master/05-anova.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Apuntes de estadística</strong>" was written by Francisco Javier Barón López. It was last built on 2022-11-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 --- 
 title: "Apuntes de estadística"
 author: "Francisco Javier Barón López"
-date: "`r Sys.Date()`"
+date: "2022-11-15"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [packages.bib]
@@ -19,10 +19,4 @@ csl: chicago-fullnote-bibliography.csl
 
 Apuntes para las asignatura de Estadística básica y avanzada del Máster en Nuevas Tendencias en Ciencias de la Salud.
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), "tidyverse", "ggplot2", "haven", "bookdown", "knitr", "kableExtra","stargazer",
-               "tableone","sjPlot","sjlabelled","sjmisc","gridExtra", "car", "gvlma", "FSA", "ggmosaic", "finalfit", "emmeans","parameters"
-), 'packages.bib')
-```
+

@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 4 Diferencias que presenta una variable numérica entre dos grupos | Apuntes de estadística</title>
+<meta name="author" content="Francisco Javier Barón López">
+<meta name="description" content="En este capítulo veremos procedimientos para contrastar si las diferencias numéricas obtenidas al comparar dos tratamientos (o dos poblaciones) son lo suficientemente grandes como para que su...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Capítulo 4 Diferencias que presenta una variable numérica entre dos grupos | Apuntes de estadística">
+<meta property="og:type" content="book">
+<meta property="og:description" content="En este capítulo veremos procedimientos para contrastar si las diferencias numéricas obtenidas al comparar dos tratamientos (o dos poblaciones) son lo suficientemente grandes como para que su...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 4 Diferencias que presenta una variable numérica entre dos grupos | Apuntes de estadística">
+<meta name="twitter:description" content="En este capítulo veremos procedimientos para contrastar si las diferencias numéricas obtenidas al comparar dos tratamientos (o dos poblaciones) son lo suficientemente grandes como para que su...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Apuntes de estadística</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introducción</a></li>
+<li class="book-part">Curso estadística básica</li>
+<li><a class="" href="exploraci%C3%B3n-de-los-datos.html"><span class="header-section-number">1</span> Exploración de los datos</a></li>
+<li><a class="" href="estimaci%C3%B3n.html"><span class="header-section-number">2</span> Estimación</a></li>
+<li><a class="" href="contrastes-de-hip%C3%B3tesis.html"><span class="header-section-number">3</span> Contrastes de hipótesis</a></li>
+<li><a class="active" href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-dos-grupos.html"><span class="header-section-number">4</span> Diferencias que presenta una variable numérica entre dos grupos</a></li>
+<li><a class="" href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-varios-grupos.html"><span class="header-section-number">5</span> Diferencias que presenta una variable numérica entre varios grupos</a></li>
+<li><a class="" href="independencia-de-variables-categ%C3%B3ricas.html"><span class="header-section-number">6</span> Independencia de variables categóricas</a></li>
+<li class="book-part">Curso estadística avanzada</li>
+<li><a class="" href="regresi%C3%B3n-lineal-m%C3%BAltiple.html"><span class="header-section-number">7</span> Regresión lineal múltiple</a></li>
+<li><a class="" href="regresi%C3%B3n-log%C3%ADstica-binaria.html"><span class="header-section-number">8</span> Regresión logística binaria</a></li>
+<li><a class="" href="taller-de-regresi%C3%B3n-lineal.html">Taller de regresión lineal</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/fjbaron/apuntesMaster">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="diferencias-que-presenta-una-variable-numérica-entre-dos-grupos" class="section level1" number="4">
+<h1>
+<span class="header-section-number">Capítulo 4</span> Diferencias que presenta una variable numérica entre dos grupos<a class="anchor" aria-label="anchor" href="#diferencias-que-presenta-una-variable-num%C3%A9rica-entre-dos-grupos"><i class="fas fa-link"></i></a>
+</h1>
+<p>En este capítulo veremos procedimientos para contrastar si las diferencias numéricas obtenidas al comparar dos tratamientos (o dos poblaciones) son lo suficientemente grandes como para que su única causa sea atribuible al azar.</p>
+<p>Este tipo de pruebas se suelen usar cuando se elige una muestra de individuos que han seguido cierto tratamiento (por ejemplo, un placebo), y otra muestra que ha recibido otro tratamiento (por ejemplo, un fármaco de pruebas).</p>
+<p>Dependiendo de cómo se construyan ambas muestras, clasificamos el experimento en dos clases:</p>
+<ul>
+<li><p>Muestras apareadas: Cuando en realidad no hay dos grupos de pacientes, si no que solo hay un grupo de ellos, pero de cada individuo se tienen dos medidas. Esto puede ser debido por ejemplo a que se ha medido cada uno en dos oacasiones (antes y después de un tratamiento) o se ha medido al pacientes con dos aparatos que deberían haber dado un resultado similar.</p></li>
+<li><p>Muestras independientes: Este es el caso más común, en el que realmente si hay dos grupos diferentes de individuos, cada uno con una medición numérica. Se supone que los individuos de un grupo de tratamiento han sido extraídos independientemente de los del otro.</p></li>
+</ul>
+<div id="muestras-apareadas-o-relacionadas" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Muestras apareadas o relacionadas<a class="anchor" aria-label="anchor" href="#muestras-apareadas-o-relacionadas"><i class="fas fa-link"></i></a>
+</h2>
+<p>Aparecen por ejemplo en los estudios de pacientes “antes y después”, es decir, cuando en un una base de datos de de pacientes tenemos dos columnas de datos numéricos, una correspondientes a los valores antes del tratamiento y otra correspondientes al valor después. En este caso también decimos que <em>cada individuo es su propio control</em>.</p>
+<div id="hay-otros-ejemplos-de-estudios-con-apareamiento" class="section level4 unnumbered">
+<h4>Hay otros ejemplos de estudios con apareamiento<a class="anchor" aria-label="anchor" href="#hay-otros-ejemplos-de-estudios-con-apareamiento"><i class="fas fa-link"></i></a>
+</h4>
+<p>Se deben realizar de modo apareados los estudios en que al medir una variable sospechamos de más fuentes de variabilidad además del tratamiento. Por ejemplo, si creemos que el sexo de los individuos puede influir notablemente en la variable que medimos y queremos anular el efecto tenemos varias posibilidades:</p>
+<ul>
+<li><p>Hacer un estudio con todos los individuos del mismo sexo en cada muestra, y otro con todos los individuos del otro sexo. A esto se le denomina estratificar por sexos. En este caso lo que tenemos son dos estudios con muestras independientes.</p></li>
+<li><p>Asociar a cada individuo del primer grupo, un individuo “que se parezca” del segundo. Por ejemplo, si pensamos que conjuntamente el sexo y la edad pueden influir en el resultado, podemos hacer que por cada individuo del primer grupo, se elija un individuo del segundo, del mismo sexo y de edad similar. A pesar de las dificultades que comporta hacer un estudio con esas características, habremos reducido la posibilidad de que las variables sexo y edad hayan influido mucho en las diferencias observadas entre tratamientos.</p></li>
+</ul>
+</div>
+<div id="hipótesis-nula-en-estudios-apareados" class="section level3" number="4.1.1">
+<h3>
+<span class="header-section-number">4.1.1</span> Hipótesis nula en estudios apareados<a class="anchor" aria-label="anchor" href="#hip%C3%B3tesis-nula-en-estudios-apareados"><i class="fas fa-link"></i></a>
+</h3>
+<p>En los contrastes con muestras apareadas, la hipótesis nula es que no la distribución de los valores en una y otra medición son similares. Como en todo contraste de hipótesis, se declara que el efecto es estadísticamente significativo si la significación calculada es inferior a cierta cantidad pequeña (5% o 1% típicamente).</p>
+<p>Los contrastes se realizan calculando las diferencias existentes entre cada observación de un grupo y la observación asociada en el segundo. Si las mencionadas diferencias tienen una distribución aproximadamente normal o bien la muestra es grande, la prueba que se suele usar es la <strong>t-student para muestras apareadas</strong>. Esta prueba funciona del siguiente modo. Si se dan las condiciones de validez (<em>las diferencias son normales</em>), las diferencias deberían ser aproximadamente normales de media cero. Si al calcular la media de las diferencias, el valor obtenido en la muestra no es consistente con una posible media de cero, se rechaza la hipótesis nula. Es decir, si la diferencia entre lo observado y la hipótesis nula no es atribuible al puro azar, aceptamos que hay diferencias entre los grupos.</p>
+<p>Una prueba menos exigente es el contraste no paramétrico de Wilcoxon. Este último considera las diferencias entre cada observación y su control. Si la hipótesis nula fuese cierta, las diferencias negativas serían similares en cantidad y tamaño a las diferencias positivas. La prueba de Wilcoxon examina la discrepancia existente entre los resultados observados y la predicción de la hipótesis nula.</p>
+</div>
+<div id="ejemplo" class="section level3 unnumbered">
+<h3>Ejemplo<a class="anchor" aria-label="anchor" href="#ejemplo"><i class="fas fa-link"></i></a>
+</h3>
+<p>Se estudia si mejoran unos niños su velocidad de lectura en palabras por minuto. Para ellos se les mide al inicio de un estudio, se les vuelve a medir tras una intervención. Se toma nota de la diferencia entre la velocidad final y la inicial. Puede descargar los datos del experimento en la base de datos <a href="datos/lectura-anova.sav">lectura-anova.sav</a>. La exploración de los primeros casos, ordenados de menor a mayor diferencia nos ofrece:</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/lectura-anova.sav"</span>, user_na<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Grupo
+</th>
+<th style="text-align:right;">
+Antes
+</th>
+<th style="text-align:right;">
+Despues
+</th>
+<th style="text-align:right;">
+Diferencia
+</th>
+<th style="text-align:right;">
+gr1
+</th>
+<th style="text-align:right;">
+gr2
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+10.0
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+9.3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+13.0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica I
+</td>
+<td style="text-align:right;">
+6.5
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+16.2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica I
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+8.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Técnica II
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ya que los datos están ordenados de forma que los peores resultados se muestran primero, y estos han experimentado mejoría, parece que evidentemente vamos a encontrar gran diferencia en contra de la hipótesis nula. Veamos qué distribución presentan las diferencias:</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Diferencia</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_histogram</span><span class="op">(</span>fill<span class="op">=</span><span class="st">"lightblue"</span><span class="op">)</span><span class="op">+</span> <span class="fu">geom_rug</span><span class="op">(</span>sides <span class="op">=</span> <span class="st">"b"</span>, <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, position <span class="op">=</span> <span class="st">"jitter"</span>, colour <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">+</span><span class="fu">coord_cartesian</span><span class="op">(</span>xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">20</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>,lty<span class="op">=</span><span class="fl">2</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<p>Se ve que todos los individuos han mejorado. la evidencia contra la hipótesis nula la encontramos en esta tabla</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu">desc1vn</span><span class="op">(</span>vNum <span class="op">=</span> <span class="st">"Diferencia"</span>,columnas <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mediaet"</span>,<span class="st">"p.intra"</span>,<span class="st">"ic1"</span>,<span class="st">"ic2"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Variable<span class="op">=</span><span class="st">"Diferencia"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">Variable</span>,<span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs<span class="op">=</span><span class="cn">T</span>,</span>
+<span>                col.names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>,<span class="st">"media±et"</span>, <span class="st">"p (signif.)"</span>, <span class="st">"ic95%(min)"</span>, <span class="st">"ic95%(max)"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+media±et
+</th>
+<th style="text-align:left;">
+p (signif.)
+</th>
+<th style="text-align:right;">
+ic95%(min)
+</th>
+<th style="text-align:right;">
+ic95%(max)
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;">
+Diferencia
+</td>
+<td style="text-align:left;">
+12.15±0.39
+</td>
+<td style="text-align:left;">
+&lt;0.001*
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr></tbody>
+</table></div>
+<p>La diferencia observada en los niños representa una mejoría de más de 12 palabras por minuto. Sea cual sea la mejoría media si se aplicase en toda la población de niños similares a estos, los datos observados están <em>en contra de la hipótesis nula</em> de no mejoría (p&lt;0.001). Tenemos una confianza del 95% de que sea cual sea la mejoría media, el valor real está en algún lugar entre 11 y 13 palabras por minuto (redondeando).</p>
+<p>En SPSS podemos realizar este calculo seleccionando el menú: “_Analizar - Comparar medias - prueba T para muestras apareadas”. Allí marcamos el par de variables <em>Antes y Después</em>. También podríamos haber elegido el menú”_Analizar - Comparar medias - prueba T para una muestra” y haber trabajado con la variable <em>Dferencia</em>. El resultado es el mismo.</p>
+</div>
+</div>
+<div id="dos-muestras-independientes" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Dos Muestras independientes<a class="anchor" aria-label="anchor" href="#dos-muestras-independientes"><i class="fas fa-link"></i></a>
+</h2>
+<p>Sirven para tratar problemas como el de si el nivel de hierro es similar en los individuos que padecen determinada enfermedad frente a los individuos sanos. Para ello podríamos elegir una muestra de individuos enfermos y otra de sanos, y comparar si los valores de una muestra tienen tendencia a ser mayores que los de la otra.</p>
+<p>En los contrastes con muestras independientes, la hipótesis nula es que los valores obtenidos en una y otra muestra son similares, frente a la hipótesis alternativa de que son diferentes. El valor obtenido en la significación nos permite decidir si se rechaza o no la hipótesis nula.</p>
+<p>Hay varias maneras de realizar este tipo de contrastes:</p>
+<ul>
+<li><p>Prueba t-student para dos medias: Se basa en contrastar si las medias de cada grupo son similares. Este tipo de contrastes es válido cuando se da alguna de las siguientes condiciones:</p></li>
+<li><p>Las desviaciones típicas/varianzas son similares y las observaciones de cada muestra son normales.</p></li>
+<li><p>Las desviaciones típicas/varianzas son similares y los tamaños muestrales son grandes.</p></li>
+<li><p>Hay diferencia notable entre las varianzas de cada grupo, pero los tamaños de cada muestra son similares y además las muestras son grandes o aproximadamente normales.</p></li>
+<li><p>Pruebas no paramétricas para muestras independientes: No requieren ningún tipo de suposición sobre la distribución de las muestras. Esto permite que se puedan usar con variables discretas u ordinales. Pruebas populares son las de <strong>Mann-Whitney</strong>, <strong>Wilcoxon</strong> o la prueba de <strong>Kolmogorov-Smirnov</strong> de dos muestras.</p></li>
+</ul>
+<p>En el caso de que queramos aplicar la prueba <strong>t-student</strong>, debemos tener en cuenta que esta se ve muy afectada en caso de que las muestras no estén similarmente dispersas, y es necesario hacer una corrección. Debemos comprobar que no existan observaciones anómalas. Disponemos del contraste de Levene para la igualdad de varianzas. De hecho, SPSS lo realiza automáticamente siempre que se desea realizar la prueba t-student, y muestra los resultados para la prueba t-student, tanto en el caso de que el usuario desee admitir la igualdad de varianzas, como rechazarla. Se suele recomendar al usuario elegir un nivel de significación alto para esta prueba (hasta el 15%).</p>
+<div id="ejemplo-1" class="section level3 unnumbered">
+<h3>Ejemplo<a class="anchor" aria-label="anchor" href="#ejemplo-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Se cree que la ingesta de calcio reduce la presión sanguínea. Para contrastarlo se decidió elegir a 21 individuos de características similares para participar en un estudio. A 10 de ellos elegidos al azar, se les asignó un tratamiento consistente en un suplemento de calcio durante 3 meses y se observó la diferencia producida en la presión arterial (la que había “antes” menos la que había “después”). A los 11 individuos restantes se les suministró un placebo y se midió también la diferencia. Los datos podemos encontrarlos en la base de datos [calcio.sav]{datos/calcio.sav}, de la que exploramos las primeras líneas:</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">=</span><span class="fu">read_sav</span><span class="op">(</span><span class="st">"datos/calcio.sav"</span>, user_na<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Grupo
+</th>
+<th style="text-align:right;">
+Antes
+</th>
+<th style="text-align:right;">
+Despues
+</th>
+<th style="text-align:right;">
+Diferencia
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Placebo
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+121
+</td>
+<td style="text-align:right;">
+-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Calcio
+</td>
+<td style="text-align:right;">
+111
+</td>
+<td style="text-align:right;">
+116
+</td>
+<td style="text-align:right;">
+-5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Placebo
+</td>
+<td style="text-align:right;">
+114
+</td>
+<td style="text-align:right;">
+119
+</td>
+<td style="text-align:right;">
+-5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Calcio
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+114
+</td>
+<td style="text-align:right;">
+-4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Calcio
+</td>
+<td style="text-align:right;">
+112
+</td>
+<td style="text-align:right;">
+115
+</td>
+<td style="text-align:right;">
+-3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Placebo
+</td>
+<td style="text-align:right;">
+102
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:right;">
+-3
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>solo nos interesa la variable <em>Diferencia</em> comprarada entre ambos grupos, pero de todas formas vamos a examinar las mediciones <em>Antes</em>. La razón es que al realizar un experimento, repartimos a los individuos en dos grupos, y estamos muy interesados en que los dos grupos sean muy similares en el punto de partida (medición <em>basal</em>):</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">grid.arrange</span><span class="op">(</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>,<span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Grupo</span>,y<span class="op">=</span><span class="va">Antes</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_boxplot</span><span class="op">(</span>fill<span class="op">=</span><span class="st">"lightblue"</span><span class="op">)</span>,</span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>,<span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Grupo</span>,y<span class="op">=</span><span class="va">Diferencia</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_boxplot</span><span class="op">(</span>fill<span class="op">=</span><span class="st">"lightblue"</span><span class="op">)</span>,</span>
+<span>ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-6-1.png" width="672">
+Se aprecia que los dos grupos eran similares al iniciarse el experimento. Sin embargo el grupo de que tomo el Placebo practicamente se quedó igual, y el que tomó <em>Calcio</em> experimentó una mejoría. Nos queda por saber si esta mejoría es explicable por el azar o va más allá (diferencia estadísticamente significativa entre grupos).</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu">generaTablatTestPorGrupo</span><span class="op">(</span><span class="st">"Grupo"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Antes"</span>,<span class="st">"Diferencia"</span><span class="op">)</span>,</span>
+<span>                                columnas <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n"</span>,<span class="st">"mediaet"</span>,<span class="st">"p.t"</span>,<span class="st">"ci95"</span>, <span class="st">"p.w"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span> booktabs <span class="op">=</span> <span class="cn">T</span>, </span>
+<span>                col.names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>,</span>
+<span>                        <span class="st">"n"</span>,<span class="st">"media±et"</span>, </span>
+<span>                        <span class="st">"n"</span>,<span class="st">"media±et"</span>,</span>
+<span>                        <span class="st">"p (parám.)"</span>,<span class="st">"ic95% dif."</span>, <span class="st">"P (no parám)."</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">add_header_above</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">" "</span> <span class="op">=</span> <span class="fl">1</span>, <span class="st">"Placebo"</span> <span class="op">=</span> <span class="fl">2</span>, <span class="st">"Calcio"</span> <span class="op">=</span> <span class="fl">2</span>, <span class="st">" "</span><span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Placebo
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Calcio
+</div>
+</th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="3">
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:left;">
+media±et
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:left;">
+media±et
+</th>
+<th style="text-align:left;">
+p (parám.)
+</th>
+<th style="text-align:left;">
+ic95% dif.
+</th>
+<th style="text-align:left;">
+P (no parám).
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Antes
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+113.27±2.85
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+114.90±3.61
+</td>
+<td style="text-align:left;">
+0.714
+</td>
+<td style="text-align:left;">
+1.63[-7.58,10.83]
+</td>
+<td style="text-align:left;">
+0.944
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Diferencia
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+-0.27±1.87
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+5.00±2.91
+</td>
+<td style="text-align:left;">
+0.129
+</td>
+<td style="text-align:left;">
+5.27[-1.71,12.26]
+</td>
+<td style="text-align:left;">
+0.323
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>A la vista de los resultados, entre el grupo <em>Calcio</em> y el <em>Placebo</em> no hay diferencias estadísticamente significativas, no solo al inicio del experimento, si no que el cambio producido en los individuos también es compatible con la hipótesis nula de que obtienen resultados similares. Las significaciones obtenidas se han realizado tanto con la prueba paramétrica de la t-student como con una prueba no paramétrica. Ambas obtienen conclusiones similares.</p>
+<p>Podemos realizar la prueba paramétrica en SPSS en el menú: “<em>Analizar - Comparar medias -Prueba t para muestras independientes</em>”. En la variable Grupo hemos de indicar que comparamos los grupos 0 (Placebo), con el grupo 1 (Calcio), pues así es como se han codificado numéricamente las variables. El el campo de <em>Variables de prueba</em> situamos las variables <em>Antes</em> y <em>Diferencia</em>.</p>
+<p>La prueba no paramétrica está en un diálogo análogo que obtenemos en el menú “_Analizar - Pruebas no paramétricas - Cuadros de dialogo antiguos - 2 muestras independientes”</p>
+<p>Una representación gráfica de los intervalos de confianza muestra que ambos tienen el común el valor cero. Es decir, ninguno de ellos puede decirse que presente una mejoría significativa. ¿Podría interpretarse como que entre ellos no hay diferencia? Esto es algo que no se deduce directamente mirando a los intervalos de confianza, aunque nuestra intuición nos indique que no deben haber mucha diferencia entre ellas.</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resumen</span><span class="op">=</span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu">gather</span><span class="op">(</span><span class="va">Variable</span>,<span class="va">Valor</span>,<span class="op">-</span><span class="va">Grupo</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Grupo</span>,<span class="va">Variable</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>Media<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Valor</span><span class="op">)</span>,</span>
+<span>                n<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">Valor</span><span class="op">)</span>,</span>
+<span>               IC<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Valor</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">0.975</span>,<span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">resumen</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">Variable</span><span class="op">==</span><span class="st">"Diferencia"</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Grupo</span>,y<span class="op">=</span><span class="va">Media</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_errorbar</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>ymin<span class="op">=</span><span class="va">Media</span><span class="op">-</span><span class="va">IC</span>,ymax<span class="op">=</span><span class="va">Media</span><span class="op">+</span><span class="va">IC</span><span class="op">)</span>,width<span class="op">=</span><span class="fl">0.2</span>, size<span class="op">=</span><span class="fl">1</span>, color<span class="op">=</span><span class="st">"navyblue"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span> size<span class="op">=</span><span class="fl">4</span>, shape<span class="op">=</span><span class="fl">21</span>, fill<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span><span class="fu">ylab</span><span class="op">(</span><span class="st">"Diferencia"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept<span class="op">=</span><span class="fl">0</span>,lty<span class="op">=</span><span class="fl">2</span>,color<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
+</div>
+<div id="es-lo-mismo-que-la-diferencia-entre-dos-grupos-sea-significativa-que-el-que-sus-respectivos-intervalos-de-confianza-para-la-media-no-se-toquen" class="section level3 unnumbered">
+<h3>¿Es lo mismo que la diferencia entre dos grupos sea significativa que el que sus respectivos intervalos de confianza para la media no se toquen?<a class="anchor" aria-label="anchor" href="#es-lo-mismo-que-la-diferencia-entre-dos-grupos-sea-significativa-que-el-que-sus-respectivos-intervalos-de-confianza-para-la-media-no-se-toquen"><i class="fas fa-link"></i></a>
+</h3>
+<p>Parecería que es lo mismo, pero no es así. La realidad es que si hay diferencia significativa entre la media de dos grupos, entonces los intervalos de confianza se tocan nada o <em>muy poco.</em> Vamos a ilustrarlo retomando la base de datos <a href="datos/2poblaciones-Mismotrabajo-DiferenteNutricion.sav">2poblaciones-Mismotrabajo-DiferenteNutricion.sav</a>.</p>
+<p>Vamos a usar tanto las pruebas t-student como las no paramétricas para estudiar las diferencias entre los individuos de <em>Málaga</em> y <em>Tanger</em> en todas las variables numéricas.</p>
+<p>Normalmente en una publicación científica pondríamos como tabla de resultados algo similar a esto:</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vNumericas</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="st">"Grupo"</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu">generaTablatTestPorGrupo</span><span class="op">(</span><span class="st">"Grupo"</span>, <span class="va">vNumericas</span>,</span>
+<span>                                columnas <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n"</span>,<span class="st">"mediaet"</span>,<span class="st">"p.t"</span>,<span class="st">"ci95"</span>,<span class="st">"p.w"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span> booktabs <span class="op">=</span> <span class="cn">T</span>, </span>
+<span>                col.names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>,</span>
+<span>                        <span class="st">"n"</span>,<span class="st">"media±et"</span>, </span>
+<span>                        <span class="st">"n"</span>,<span class="st">"media±et"</span>,</span>
+<span>                        <span class="st">"p dif."</span>,<span class="st">"IC95% dif."</span>, <span class="st">"p"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">add_header_above</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">" "</span> <span class="op">=</span> <span class="fl">1</span>, <span class="st">"Tanger"</span> <span class="op">=</span> <span class="fl">2</span>, <span class="st">"Málaga"</span> <span class="op">=</span> <span class="fl">2</span>,<span class="st">"t-test"</span><span class="op">=</span><span class="fl">2</span>, <span class="st">"No normal"</span><span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kable_styling</span><span class="op">(</span>font_size<span class="op">=</span><span class="fl">12</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table" style="font-size: 12px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Tanger
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Málaga
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+t-test
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+No normal
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:left;">
+media±et
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:left;">
+media±et
+</th>
+<th style="text-align:left;">
+p dif.
+</th>
+<th style="text-align:left;">
+IC95% dif.
+</th>
+<th style="text-align:left;">
+p
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Colesterol
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+162.67±8.32
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+209.12±6.06
+</td>
+<td style="text-align:left;">
+&lt;0.001*
+</td>
+<td style="text-align:left;">
+46.45[26.15,66.76]
+</td>
+<td style="text-align:left;">
+&lt;0.001*
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Trigliceridos
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+82.13±8.39
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+113.22±9.98
+</td>
+<td style="text-align:left;">
+0.018*
+</td>
+<td style="text-align:left;">
+31.09[5.45,56.72]
+</td>
+<td style="text-align:left;">
+0.018*
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Glucemia
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+78.03±2.09
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+88.18±2.72
+</td>
+<td style="text-align:left;">
+0.004*
+</td>
+<td style="text-align:left;">
+10.15[3.40,16.89]
+</td>
+<td style="text-align:left;">
+&lt;0.001*
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PAS
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+119.83±1.86
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+121.70±1.83
+</td>
+<td style="text-align:left;">
+0.472
+</td>
+<td style="text-align:left;">
+1.87[-3.28,7.01]
+</td>
+<td style="text-align:left;">
+0.596
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PAD
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+72.50±1.80
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+70.30±1.37
+</td>
+<td style="text-align:left;">
+0.329
+</td>
+<td style="text-align:left;">
+-2.20[-6.67,2.27]
+</td>
+<td style="text-align:left;">
+0.322
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Peso
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+72.67±1.46
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+81.38±1.25
+</td>
+<td style="text-align:left;">
+&lt;0.001*
+</td>
+<td style="text-align:left;">
+8.71[4.94,12.49]
+</td>
+<td style="text-align:left;">
+&lt;0.001*
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Talla
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+170.33±0.86
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+169.48±0.67
+</td>
+<td style="text-align:left;">
+0.431
+</td>
+<td style="text-align:left;">
+-0.85[-3.01,1.30]
+</td>
+<td style="text-align:left;">
+0.611
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Consumo
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+1909.17±87.23
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+3528.04±78.71
+</td>
+<td style="text-align:left;">
+&lt;0.001*
+</td>
+<td style="text-align:left;">
+1618.87[1387.71,1850.04]
+</td>
+<td style="text-align:left;">
+&lt;0.001*
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gasto
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+1894.20±34.52
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+1880.30±62.59
+</td>
+<td style="text-align:left;">
+0.845
+</td>
+<td style="text-align:left;">
+-13.90[-154.73,126.93]
+</td>
+<td style="text-align:left;">
+0.972
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Normalmente no mostraríamos los dos tipos de significación si no que haríamos la elección de usar pruebas paramétricas o no paramétricas según se den las condiciones de validez. Obsérvese que cuando las muestras no son pequeñas y las desviaciones de la normalidad no son grandes, ambos tipos de prueba suelen ofrecer significaciones similares.</p>
+<p>Veamos para varias de estas variables como son los ic95% para las medias en cada grupo, y para las diferencias entre ambos grupos. La diferencia entre ambos grupos será significativa cuando el IC)%% para la diferencia no contiene al cero. En ese caso observaremos que los IC95% para cada grupo se tocan <em>nada o muy poco.</em></p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">dfResumen</span><span class="op">=</span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu">generaTablatTestPorGrupo</span><span class="op">(</span><span class="st">"Grupo"</span>, <span class="va">vNumericas</span>,</span>
+<span>                                columnas <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ic1"</span>,<span class="st">"ic2"</span>, <span class="st">"ci_min"</span>,<span class="st">"ci_max"</span><span class="op">)</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">dfResumenTidy</span> <span class="op">=</span> <span class="va">dfResumen</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">ci_min</span>,<span class="op">-</span><span class="va">ci_max</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">gather</span><span class="op">(</span><span class="va">Clave</span>,<span class="va">Valor</span>,<span class="op">-</span><span class="va">Variable</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">separate</span><span class="op">(</span><span class="va">Clave</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Concepto"</span>,<span class="st">"Grupo"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">spread</span><span class="op">(</span><span class="va">Concepto</span>,<span class="va">Valor</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">dfResumen</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs<span class="op">=</span><span class="cn">T</span>, </span>
+<span>                col.names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Variable"</span>,</span>
+<span>                        <span class="st">"ic(min)"</span>,<span class="st">"ic(max)"</span> ,</span>
+<span>                        <span class="st">"ic(min)"</span>,<span class="st">"ic(max)"</span>,  </span>
+<span>                         <span class="st">"ic.dif.(min)"</span>, <span class="st">"ic.dif.(max)"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">add_header_above</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">" "</span> <span class="op">=</span> <span class="fl">1</span>, <span class="st">"Tanger"</span> <span class="op">=</span> <span class="fl">2</span>, <span class="st">"Málaga"</span> <span class="op">=</span> <span class="fl">2</span>,<span class="st">"Málaga-Tanger"</span><span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Tanger
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Málaga
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Málaga-Tanger
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:right;">
+ic(min)
+</th>
+<th style="text-align:right;">
+ic(max)
+</th>
+<th style="text-align:right;">
+ic(min)
+</th>
+<th style="text-align:right;">
+ic(max)
+</th>
+<th style="text-align:right;">
+ic.dif.(min)
+</th>
+<th style="text-align:right;">
+ic.dif.(max)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Colesterol
+</td>
+<td style="text-align:right;">
+146
+</td>
+<td style="text-align:right;">
+180
+</td>
+<td style="text-align:right;">
+197
+</td>
+<td style="text-align:right;">
+221
+</td>
+<td style="text-align:right;">
+26.1
+</td>
+<td style="text-align:right;">
+66.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Trigliceridos
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+99
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+133
+</td>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+56.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Glucemia
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+82
+</td>
+<td style="text-align:right;">
+83
+</td>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+16.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PAS
+</td>
+<td style="text-align:right;">
+116
+</td>
+<td style="text-align:right;">
+124
+</td>
+<td style="text-align:right;">
+118
+</td>
+<td style="text-align:right;">
+125
+</td>
+<td style="text-align:right;">
+-3.3
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PAD
+</td>
+<td style="text-align:right;">
+69
+</td>
+<td style="text-align:right;">
+76
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+-6.7
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Peso
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+76
+</td>
+<td style="text-align:right;">
+79
+</td>
+<td style="text-align:right;">
+84
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+12.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Talla
+</td>
+<td style="text-align:right;">
+169
+</td>
+<td style="text-align:right;">
+172
+</td>
+<td style="text-align:right;">
+168
+</td>
+<td style="text-align:right;">
+171
+</td>
+<td style="text-align:right;">
+-3.0
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Consumo
+</td>
+<td style="text-align:right;">
+1731
+</td>
+<td style="text-align:right;">
+2088
+</td>
+<td style="text-align:right;">
+3370
+</td>
+<td style="text-align:right;">
+3686
+</td>
+<td style="text-align:right;">
+1387.7
+</td>
+<td style="text-align:right;">
+1850.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gasto
+</td>
+<td style="text-align:right;">
+1824
+</td>
+<td style="text-align:right;">
+1965
+</td>
+<td style="text-align:right;">
+1755
+</td>
+<td style="text-align:right;">
+2006
+</td>
+<td style="text-align:right;">
+-154.7
+</td>
+<td style="text-align:right;">
+126.9
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Para el colesterol se ve que el IC95% para la diferencia no contiene al valor cero, es decir, tenemos evidencia estadísticamente significativa en contra de que las medias en ambos grupos sean iguales. Por otro lado, vemos que los IC95% para las medias de colesterol en ambos grupos no se cruzan. Hasta ahora todo coincide con la intuición.</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">laVariable</span><span class="op">=</span><span class="st">"Colesterol"</span></span>
+<span><span class="fu">grid.arrange</span><span class="op">(</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dfResumenTidy</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span> <span class="op">(</span><span class="va">Variable</span><span class="op">==</span><span class="va">laVariable</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Grupo</span>, y<span class="op">=</span><span class="op">(</span><span class="va">ic1</span><span class="op">+</span><span class="va">ic2</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_errorbar</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>ymin<span class="op">=</span><span class="va">ic1</span>,ymax<span class="op">=</span><span class="va">ic2</span><span class="op">)</span>,width<span class="op">=</span><span class="fl">0.2</span>, size<span class="op">=</span><span class="fl">1</span>, color<span class="op">=</span><span class="st">"navyblue"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span> size<span class="op">=</span><span class="fl">4</span>, shape<span class="op">=</span><span class="fl">21</span>, fill<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span><span class="fu">ylab</span><span class="op">(</span><span class="va">laVariable</span><span class="op">)</span><span class="op">+</span><span class="fu">xlab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span>,</span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dfResumen</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span> <span class="op">(</span><span class="va">Variable</span><span class="op">==</span><span class="va">laVariable</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="st">"Málaga-Tanger"</span>, y<span class="op">=</span><span class="op">(</span><span class="va">ci_max</span><span class="op">+</span><span class="va">ci_min</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_errorbar</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>ymin<span class="op">=</span><span class="va">ci_min</span>,ymax<span class="op">=</span><span class="va">ci_max</span><span class="op">)</span>,width<span class="op">=</span><span class="fl">0.2</span>, size<span class="op">=</span><span class="fl">1</span>, color<span class="op">=</span><span class="st">"navyblue"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span> size<span class="op">=</span><span class="fl">4</span>, shape<span class="op">=</span><span class="fl">21</span>, fill<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span><span class="fu">ylab</span><span class="op">(</span><span class="fu">str_c</span><span class="op">(</span><span class="st">"Diferencia de "</span>, <span class="va">laVariable</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_hline</span><span class="op">(</span>yintercept<span class="op">=</span><span class="fl">0</span>,lty<span class="op">=</span><span class="fl">2</span>,color<span class="op">=</span><span class="st">"red"</span><span class="op">)</span>,</span>
+<span>ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-12-1.png" width="672"></div>
+<p>En cuanto a la siguiente variable, <em>Triglicéridos</em> y <em>Glucemia</em> nos encontramos la sorpresa: observamos que el IC95% para la diferencia de medias no contiene (por poco) al cero, es decir, la diferencia de medias es apenas significativamente diferente de cero, sin embargo los intervalos de confianza dentro de cada grupo se cruzan (por poco).</p>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-13-1.png" width="672"></div>
+<p>Estudie lo que ocurre en el resto de variables y compruebe si gráficamente es cierto lo de que:</p>
+<blockquote>
+<p>Cuando la diferencia entre dos grupos es estadísticamente significativa, los IC95% de cada grupo se tocan <em>nada o muy poc.o</em></p>
+</blockquote>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-15-1.png" width="672"></div>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-16-1.png" width="672"></div>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-17-1.png" width="672"></div>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-19-1.png" width="672"></div>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-20-1.png" width="672"></div>
+<p>En las publicaciones suele verse un tipo de gráfico u otro: El que muestra los intervalos de confianza en cada grupo, o el que sirve para estudiar las diferencias entre dos grupos. Existe una tercera posibilidad, usando la libreria <em>emmeans</em> de R, donde además de observarse los intervalos de confianza para la media en cada grupo, una flecha interior indica cuando las comparaciones entre dos grupos son significativas: Ocurre justo cuando no tienen intersección común. Este tipo de gráficos será muy útil cuando haya muchas comparaciones a realizar entre grupos (análisis posthoc de <em>ANOVA</em>).</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">listaGraficos</span><span class="op">=</span><span class="va">vNumericas</span> <span class="op">%&gt;%</span> <span class="fu">map</span><span class="op">(</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/formula.html">formula</a></span><span class="op">(</span><span class="fu">str_c</span><span class="op">(</span><span class="va">.</span>,<span class="st">" ~ Grupo"</span><span class="op">)</span><span class="op">)</span>,data<span class="op">=</span><span class="va">df</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>              <span class="fu">emmeans</span><span class="op">(</span><span class="st">"Grupo"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>comparisons<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">+</span><span class="fu">xlab</span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">+</span><span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span><span class="op">+</span><span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">listaGraficos</span>, ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04-numerica2Grupos_files/figure-html/unnamed-chunk-21-1.png" width="768"></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="contrastes-de-hip%C3%B3tesis.html"><span class="header-section-number">3</span> Contrastes de hipótesis</a></div>
+<div class="next"><a href="diferencias-que-presenta-una-variable-num%C3%A9rica-entre-varios-grupos.html"><span class="header-section-number">5</span> Diferencias que presenta una variable numérica entre varios grupos</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#diferencias-que-presenta-una-variable-num%C3%A9rica-entre-dos-grupos"><span class="header-section-number">4</span> Diferencias que presenta una variable numérica entre dos grupos</a></li>
+<li>
+<a class="nav-link" href="#muestras-apareadas-o-relacionadas"><span class="header-section-number">4.1</span> Muestras apareadas o relacionadas</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hip%C3%B3tesis-nula-en-estudios-apareados"><span class="header-section-number">4.1.1</span> Hipótesis nula en estudios apareados</a></li>
+<li><a class="nav-link" href="#ejemplo">Ejemplo</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#dos-muestras-independientes"><span class="header-section-number">4.2</span> Dos Muestras independientes</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ejemplo-1">Ejemplo</a></li>
+<li><a class="nav-link" href="#es-lo-mismo-que-la-diferencia-entre-dos-grupos-sea-significativa-que-el-que-sus-respectivos-intervalos-de-confianza-para-la-media-no-se-toquen">¿Es lo mismo que la diferencia entre dos grupos sea significativa que el que sus respectivos intervalos de confianza para la media no se toquen?</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/fjbaron/apuntesMaster/blob/master/04-numerica2Grupos.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/fjbaron/apuntesMaster/edit/master/04-numerica2Grupos.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Apuntes de estadística</strong>" was written by Francisco Javier Barón López. It was last built on 2022-11-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,3 +1,5 @@
+# (PART) Curso estadística avanzada {-}
+
 # Regresión lineal múltiple
 Utilizamos regresión lineal múltiple cuando estudiamos la posible relación entre varias variables independientes (predictoras o explicativas) y otra variable dependiente (criterio, explicada, respuesta).
 
